@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Learn Python lists the fun way! 6 beginner-friendly examples to help you add, remove, loop, and sort items like a pro. Perfect starting point for new coders.">
-  <title>Python Lists for Beginners – 6 Easy Examples + Tips</title>
+  <meta name="description" content="Learn how to use input() in Python with beginner-friendly examples. Understand how to take user input, convert data types, and build interactive programs.">
+  <title>User Input in Python – Beginner Guide with Examples</title>
+  <link rel="canonical" href="https://kiddoedu.org/python/user-input.html">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -242,7 +243,7 @@
       white-space: pre; tab-size: 2;
     }
 
-    /* ── Callout ── */
+    /* ── Callout / note ── */
     .callout {
       background: var(--surface); border: 1px solid var(--border);
       border-left: 3px solid var(--accent); border-radius: var(--radius-sm);
@@ -250,6 +251,12 @@
     }
     .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
     .callout a:hover { text-decoration: underline; }
+
+    .note-box {
+      background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15);
+      border-radius: var(--radius-sm); padding: 14px 18px;
+      margin: 20px 0; font-size: 0.9rem; color: var(--text); line-height: 1.6;
+    }
 
     /* ── Footer ── */
     footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
@@ -317,8 +324,8 @@
     <aside>
       <div class="aside-label">Python Topics</div>
       <ul>
-        <li><a href=""><span class="dot"></span>User Input</a></li>
-        <li><a href="../python/list.html" class="active"><span class="dot"></span>Lists</a></li>
+        <li><a href="../python/user-input.html" class="active"><span class="dot"></span>User Input</a></li>
+        <li><a href="../python/list.html"><span class="dot"></span>Lists</a></li>
         <li><a href="../python/list-comp.html"><span class="dot"></span>List Comprehension</a></li>
         <li><a href=""><span class="dot"></span>Lambda Functions</a></li>
         <li><a href=""><span class="dot"></span>Dictionaries</a></li>
@@ -341,101 +348,117 @@
         <span>›</span>
         <a href="../python/list.html">Python</a>
         <span>›</span>
-        Lists
+        User Input
       </div>
 
-      <h1>Python Lists Explained with 6 Beginner Examples</h1>
+      <h1>User Input in Python – Talk to Your Program!</h1>
 
       <div class="meta-row">
-        <span class="meta-pill">⏱ 6 min read</span>
+        <span class="meta-pill">⏱ 5 min read</span>
         <span class="meta-pill green">Beginner</span>
         <span class="meta-pill">Last updated: Sep 2025</span>
       </div>
 
-      <p>Ever wanted to store multiple things — like your top 5 snacks — in one place? That's exactly what Python lists do. Think of them like boxes that can hold anything: numbers, text, even other boxes!</p>
+      <p>What if your Python program could ask you a question and actually use your answer? That's exactly what <code>input()</code> does. It lets your program pause, wait for the user to type something, and then use that data however you want. This is how real interactive programs work!</p>
 
-      <h2>What's a List in Python?</h2>
-      <p>Lists are ordered collections. You can change them, grow them, shrink them, sort them — super flexible. And they're written using square brackets like <code>[ ]</code>.</p>
+      <h2>What is <code>input()</code>?</h2>
+      <p><code>input()</code> is a built-in Python function that reads a line of text typed by the user. Whatever they type gets returned as a <strong>string</strong> — every single time, no exceptions. That's the one big rule to remember.</p>
 
-      <h2>Example 1: Creating a List</h2>
+      <h2>Example 1: Basic Input</h2>
       <div class="code-container">
         <div class="code-header">
           <span class="lang-tag">Python</span>
           <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
         </div>
-        <pre><code>fruits = ["apple", "banana", "mango"]
-print(fruits)</code></pre>
+        <pre><code>name = input("What's your name? ")
+print("Hey", name, "! Welcome to Kiddo.")</code></pre>
       </div>
-      <p>🔹 This creates a list of fruits. Pretty straightforward, right?</p>
+      <p>🔹 The text inside <code>input()</code> is the prompt — it shows up in the terminal asking the user what to type. The answer gets stored in <code>name</code>.</p>
 
-      <h2>Example 2: Accessing Items</h2>
+      <h2>Example 2: Input is Always a String</h2>
       <div class="code-container">
         <div class="code-header">
           <span class="lang-tag">Python</span>
           <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
         </div>
-        <pre><code>print(fruits[0])   # apple
-print(fruits[-1])  # mango</code></pre>
+        <pre><code>age = input("How old are you? ")
+print(type(age))  # &lt;class 'str'&gt;</code></pre>
       </div>
-      <p>🔹 Use indexes to grab specific items. Index <code>0</code> is the first item, and <code>-1</code> gives you the last one.</p>
+      <p>🔹 Even if the user types <code>18</code>, Python stores it as the string <code>"18"</code>, not the number <code>18</code>. This is the most common beginner mistake!</p>
 
-      <h2>Example 3: Adding to the List</h2>
+      <div class="note-box">
+        <strong>Remember:</strong> <code>input()</code> always returns a string. If you need a number, you have to convert it manually using <code>int()</code> or <code>float()</code>.
+      </div>
+
+      <h2>Example 3: Converting Input to a Number</h2>
       <div class="code-container">
         <div class="code-header">
           <span class="lang-tag">Python</span>
           <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
         </div>
-        <pre><code>fruits.append("orange")
-print(fruits)</code></pre>
+        <pre><code>age = int(input("Enter your age: "))
+print("In 10 years, you'll be", age + 10)</code></pre>
       </div>
-      <p>🔹 <code>append()</code> sticks something at the end. There's also <code>insert()</code> if you want to sneak it in somewhere specific.</p>
+      <p>🔹 Wrapping <code>input()</code> with <code>int()</code> converts the string to an integer on the spot. Use <code>float()</code> if you expect decimal numbers.</p>
 
-      <h2>Example 4: Removing Items</h2>
+      <h2>Example 4: Using Input in an If Statement</h2>
       <div class="code-container">
         <div class="code-header">
           <span class="lang-tag">Python</span>
           <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
         </div>
-        <pre><code>fruits.remove("banana")
-print(fruits)</code></pre>
-      </div>
-      <p>🔹 Say goodbye to "banana"! You can also use <code>pop()</code> or <code>del</code> depending on what you're trying to do.</p>
+        <pre><code>password = input("Enter the secret password: ")
 
-      <h2>Example 5: Looping Through a List</h2>
+if password == "kiddo123":
+    print("Access granted!")
+else:
+    print("Wrong password. Try again.")</code></pre>
+      </div>
+      <p>🔹 You can compare user input directly in conditions — no conversion needed when comparing strings.</p>
+
+      <h2>Example 5: Taking Multiple Inputs</h2>
       <div class="code-container">
         <div class="code-header">
           <span class="lang-tag">Python</span>
           <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
         </div>
-        <pre><code>for fruit in fruits:
-    print(fruit)</code></pre>
-      </div>
-      <p>🔹 This will print each fruit one at a time. Perfect for when you want to do something with every item.</p>
+        <pre><code>first = input("First number: ")
+second = input("Second number: ")
 
-      <h2>Example 6: Sorting the List</h2>
+total = int(first) + int(second)
+print("Sum:", total)</code></pre>
+      </div>
+      <p>🔹 You can call <code>input()</code> as many times as you need. Each call waits for a separate line of input from the user.</p>
+
+      <h2>Example 6: Input Inside a Loop</h2>
       <div class="code-container">
         <div class="code-header">
           <span class="lang-tag">Python</span>
           <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
         </div>
-        <pre><code>numbers = [4, 1, 9, 3]
-numbers.sort()
-print(numbers)  # [1, 3, 4, 9]</code></pre>
+        <pre><code>for i in range(3):
+    guess = input(f"Attempt {i + 1} — Guess the number: ")
+    if guess == "7":
+        print("Correct! You got it.")
+        break
+else:
+    print("Out of attempts. The number was 7.")</code></pre>
       </div>
-      <p>🔹 <code>sort()</code> organizes things in-place. Use <code>sorted()</code> if you don't want to mess with the original list.</p>
+      <p>🔹 Combining <code>input()</code> with loops lets you build retry logic — like a guessing game or login system with limited attempts.</p>
 
-      <h2>Why Should You Learn Lists?</h2>
+      <h2>Common Mistakes</h2>
       <ul>
-        <li>They're everywhere — in websites, games, apps, data science… you name it.</li>
-        <li>They keep your code clean and organized instead of creating 100 separate variables.</li>
-        <li>You'll need lists in literally every real-world Python project.</li>
+        <li>Forgetting to convert <code>input()</code> to <code>int</code> or <code>float</code> before doing math — you'll get a <code>TypeError</code>.</li>
+        <li>Trying to add a number directly to an input string — always convert first.</li>
+        <li>Comparing <code>input()</code> to an integer like <code>if age == 18</code> — this will always be <code>False</code> because input returns a string.</li>
       </ul>
 
-      <h2>Ready to Practice?</h2>
-      <p>Try this mini challenge: create a list of your favorite movies, add two more, remove one, then print them all with a <code>for</code> loop. You'll be surprised how easy it gets!</p>
+      <h2>Practice Time!</h2>
+      <p>Build a simple calculator: ask the user for two numbers and an operator (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>), then print the result. It's a great way to combine input, type conversion, and conditionals all at once!</p>
 
       <div class="callout">
         <strong>Ready to level up? →</strong><br><br>
+        <a href="../python/list.html">Lists</a> ·
         <a href="../python/for_loop.html">For Loops</a> ·
         <a href="../python/while_loop.html">While Loops</a> ·
         <a href="../python/list-comp.html">List Comprehensions</a> ·
