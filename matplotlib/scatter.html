@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="icon" type="image/png" href="../assests/icon.png">
-<meta name="description" content="Learn how to create scatter plots in Python using Matplotlib. Beginner-friendly tutorial with step-by-step code, clear visuals, and a fun mini project to practice." />  <title>Scatter plots in Python – Matplotlib Tutorial for Beginners + Mini Project</title>
+  <link rel="icon" type="image/png" href="../assests/icon.png">
+<meta name="description" content="Learn how to create scatter plots in Python using Matplotlib with beginner-friendly examples, customization tips, real-world datasets, and a hands-on mini project. Master Python data visualization step by step." />
+  <title>Scatter Plots in Python – Matplotlib Tutorial for Beginners + Mini Project</title>
   <link rel="canonical" href="https://kiddoedu.org/matplotlib/scatter.html">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>
@@ -188,6 +189,10 @@
       font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem;
       letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px;
     }
+    main h3 {
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.0rem;
+      margin-top: 24px; margin-bottom: 10px;
+    }
     main h4 {
       font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem;
       margin-top: 20px; margin-bottom: 10px; color: var(--text-muted);
@@ -211,7 +216,7 @@
       max-width: 100%; height: auto; border-radius: var(--radius-sm);
       border: 1px solid var(--border); margin: 16px 0; display: block;
     }
-    main i { color: var(--text-muted); font-size: 0.85rem; }
+    main strong { font-weight: 600; }
 
     /* ── Code blocks ── */
     .code-container {
@@ -246,7 +251,7 @@
       white-space: pre; tab-size: 2;
     }
 
-    /* ── Callout ── */
+    /* ── Callout / note ── */
     .callout {
       background: var(--surface); border: 1px solid var(--border);
       border-left: 3px solid var(--accent); border-radius: var(--radius-sm);
@@ -254,6 +259,12 @@
     }
     .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
     .callout a:hover { text-decoration: underline; }
+
+    .note-box {
+      background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15);
+      border-radius: var(--radius-sm); padding: 14px 18px;
+      margin: 20px 0; font-size: 0.9rem; color: var(--text); line-height: 1.6;
+    }
 
     .section-divider { height: 1px; background: var(--border); margin: 40px 0; }
 
@@ -328,7 +339,7 @@
         <li><a href="../matplotlib/customise.html"><span class="dot"></span>Customize Graphs</a></li>
         <li><a href="../matplotlib/bar.html"><span class="dot"></span>Bar Graphs</a></li>
         <li><a href="../matplotlib/scatter.html" class="active"><span class="dot"></span>Scatter Plots</a></li>
-        <li><a href="../matplotlib/histogram.html" ><span class="dot"></span>Histogram</a></li>
+        <li><a href="../matplotlib/histogram.html"><span class="dot"></span>Histogram</a></li>
         <li><a href="../matplotlib/pie.html"><span class="dot"></span>Pie Charts</a></li>
         <li><a href="../matplotlib/subplots.html"><span class="dot"></span>Subplots</a></li>
         <li><a href=""><span class="dot"></span>Legends & Annotations</a></li>
@@ -342,142 +353,148 @@
         <span>›</span>
         <a href="../matplotlib/line-g.html">Matplotlib</a>
         <span>›</span>
-        Scatter graphs
+        Scatter Plots
       </div>
 
-      <h1>Scatter Plot in Python with Matplotlib – Tutorial and Mini Project</h1>
+      <h1>Scatter Plots in Python — Does cramming actually work?</h1>
 
       <div class="meta-row">
         <span class="meta-pill">📊 Data Viz</span>
         <span class="meta-pill green">Beginner</span>
       </div>
 
-<p>
-  A scatter plot is your quick “does X relate to Y?” detector. Each dot is one data point,
-  plotted by two values (like <em>hours studied</em> vs <em>exam score</em>). If the dots form a
-  pattern (slanting up, clustering, curving), there’s a story worth exploring.</p>
+      <p>You know that one friend who swears they studied for 8 hours straight and still bombed the exam? Or the other one who crammed for 2 hours and somehow aced it? A scatter plot is literally built to answer "does X actually affect Y" — no guessing, no vibes, just data.</p>
 
+      <p>Each dot on a scatter plot is one person, one day, one event — plotted by two values. If the dots slope upward together, there's a connection. If they're all over the place, the relationship is cooked.</p>
 
-  <h2 style="margin-bottom: 5px;">When should you use a scatter plot?</h2>
-  <ul style="line-height:1.8;">
-    <li>You have <strong>two numeric variables</strong> and want to check if they move together.</li>
-    <li>You suspect a <strong>trend, cluster, or outliers</strong> (the oddballs) in your data.</li>
-    <li>You want to compare groups by color/shape without making 3 different charts.</li>
-  </ul>
-
-
-<h2 style="margin-bottom: 5px;">Real-Life Examples of Scatter plots</h2>
-<ul style="line-height: 1.8;">
-  <li><strong>Study habits:</strong> Hours studied vs exam score — does more time actually help?</li>
-    <li><strong>Fitness:</strong> Daily steps vs sleep duration — do active days sleep better?</li>
-    <li><strong>Apps:</strong> Session length vs in-app purchases — where’s the sweet spot?</li>
-    <li><strong>Business:</strong> Ad spend vs conversions — are you spending smart or just spending?</li>
-</ul>
-
-
-
-<h2>Quick Start: Your first scatter plot</h2>
-<p>Let’s plot hours studied vs scores.</p>
-
-      <div class="code-container" aria-label="Code example for Pandas groupby method">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn" aria-label="Copy code snippet">Copy</button>
-          <div class="tooltip" role="alert" aria-live="assertive">Copied!</div>
-        </div>
-        <pre><code>
-          import matplotlib.pyplot as plt
-          import numpy as np
-          
-          # Sample data
-          hours = [1, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6, 7, 8]
-          scores = [40, 42, 48, 52, 55, 60, 64, 70, 78, 85, 90]
-          
-          plt.figure(figsize=(7,4))
-          
-          # Scatter plot
-          plt.scatter(hours, scores, s=75, alpha=0.85)
-          
-          # Labels & title
-          plt.title("Do More Study Hours Lead to Better Scores?")
-          plt.xlabel("Hours Studied")
-          plt.ylabel("Score (%)")
-          plt.grid(True, linestyle="--", alpha=0.35)
-          
-          plt.tight_layout()
-          plt.show()
-
-        </code></pre>
-      </div>
-
-
-
-      <h2 style="margin-bottom: 5px;">Explanation</h2>
-      <ul style="line-height: 1.8;">
-          <li><code style="font-size: 16px;">plt.scatter()</code> creates the scatter plot.</li>
-          <li><b>hours</b> → x-axis values (study hours).</li>
-          <li><b>scores</b> → y-axis values (exam scores).</li>
-          <li><code style="font-size: 16px;">s=75</code> sets the size of each point.</li>
-          <li><code style="font-size: 16px;">alpha=0.85</code> controls point transparency.</li>
-          <li><code style="font-size: 16px;">plt.grid()</code> adds dashed grid lines for better readability.</li>
+      <h2>When should you use a scatter plot?</h2>
+      <ul>
+        <li>You have <strong>two numbers</strong> and want to see if they move together (or don't).</li>
+        <li>You want to spot <strong>outliers</strong> — that one person who studied 1 hour and got 95%.</li>
+        <li>You want to compare groups without making three separate charts.</li>
       </ul>
 
+      <h2>Real-life examples that actually slap</h2>
+      <ul>
+        <li><strong>Study grind vs exam score</strong> — does the all-nighter actually pay off?</li>
+        <li><strong>Instagram time vs sleep</strong> — how bad is the doomscroll damage, really?</li>
+        <li><strong>Gym sessions vs energy levels</strong> — does working out give you more energy or just make you tired?</li>
+        <li><strong>Money spent on ads vs sales</strong> — are brands just burning cash, or does it work?</li>
+      </ul>
 
+      <div class="section-divider"></div>
 
-<h4 style="text-align: center;"><i>Output of the above code : </i></h4><br>
-<img src="../matplotlib/scatter.png" alt="Output">
-<br><br><br>
-<h2 style="margin-bottom: 5px;">Make it pop: easy customizations</h2>
-<ul style="line-height:1.8;">
-  <li><strong>Color by category:</strong> Use different colors for groups (e.g., class A vs B).</li>
-  <li><strong>Size encodes a third variable:</strong> Pass a list to <code style="font-size: 16px;">s=[...]</code> (e.g., study breaks taken).</li>
-  <li><strong>Transparency:</strong> <code style="font-size: 16px;">alpha=0.5</code> helps when many points overlap.</li>
-  <li><strong>Markers:</strong> Try <code style="font-size: 16px;">marker='x'</code>, <code>'^'</code>, or <code>'s'</code> for different vibes.</li>
-  <li><strong>Annotations:</strong> Highlight outliers with <code style="font-size: 16px;">plt.annotate()</code>.</li>
-</ul>
+      <h2>Quick Start: Plot hours studied vs exam score</h2>
+      <p>Classic debate, let's settle it with data:</p>
 
-<br><br>
-<h2>Mini Project: Weekly Temperature Tracker</h2>
-<p>
-    In this mini project, we’ll track the daily temperature for a week using a Python list and then plot it visually with Matplotlib.
-    The twist? We’ll automatically find the hottest day of the week and highlight it in a different color on the chart.
-</p>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="lang-tag">Python</span>
+          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+        </div>
+        <pre><code>import matplotlib.pyplot as plt
 
-<p>
-    This project will help you practice:
-</p>
-<ul>
-    <li>Storing and managing data in Python lists</li>
-    <li>Finding the maximum value and its index</li>
-    <li>Customizing scatter plots with different colors and sizes</li>
-    <li>Adding labels, titles, and legends in Matplotlib</li>
-</ul>
+# Hours studied vs exam score for 11 students
+hours  = [1, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6, 7, 8]
+scores = [40, 42, 48, 52, 55, 60, 64, 70, 78, 85, 90]
 
-<p>
-    <strong>Challenge:</strong> Try modifying the project so that it highlights both the hottest and coldest days with different colors, 
-    and experiment with more than one week of data.
-</p>
+plt.figure(figsize=(7, 4))
 
-<p>
-    <em>Hint:</em> You’ll need to use <code>max()</code>, <code>min()</code>, list indexing, and multiple <code>plt.scatter()</code> calls.
-</p>
+plt.scatter(hours, scores, s=75, alpha=0.85, color='#e86c2f')
 
+plt.title("Does Studying More Actually Help?")
+plt.xlabel("Hours Studied")
+plt.ylabel("Score (%)")
+plt.grid(True, linestyle="--", alpha=0.35)
 
-<br>
-<div class="callout">
-        Bonus points if you highlight best & worst games with annotations, or use a title like <code>"Battle of the GOATs: 2025 Season Stats"</code>
+plt.tight_layout()
+plt.show()</code></pre>
+      </div>
+
+      <h2>Breaking it down</h2>
+      <ul>
+        <li><code>plt.scatter(hours, scores)</code> — first argument goes on X, second on Y. That's it.</li>
+        <li><code>s=75</code> — size of each dot. Make it bigger, make it pop.</li>
+        <li><code>alpha=0.85</code> — transparency. Useful when dots overlap and you can't see what's underneath.</li>
+        <li><code>color='#e86c2f'</code> — custom color. Use any hex code you want.</li>
+        <li><code>plt.grid()</code> — adds faint grid lines so you can actually read the values.</li>
+      </ul>
+
+      <h4>Output:</h4>
+      <img src="../matplotlib/scatter.png" alt="Scatter plot output — hours studied vs score" />
+      <i>Clear upward slope — more hours = higher score. The data said what it said.</i>
+
+      <div class="section-divider"></div>
+
+      <h2>Make it more interesting</h2>
+
+      <h3>Color by group</h3>
+      <p>Plot two groups — say, students who slept 8 hours vs those who pulled all-nighters — in different colors on the same chart:</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span class="lang-tag">Python</span>
+          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+        </div>
+        <pre><code>import matplotlib.pyplot as plt
+
+# Well-rested students
+hours_rested  = [3, 4, 5, 6, 7, 8]
+scores_rested = [60, 68, 75, 80, 86, 92]
+
+# All-nighter crew
+hours_tired  = [3, 4, 5, 6, 7, 8]
+scores_tired = [45, 50, 55, 58, 62, 65]
+
+plt.figure(figsize=(7, 4))
+
+plt.scatter(hours_rested, scores_rested, s=80, color='#00b894', label='Well rested', alpha=0.9)
+plt.scatter(hours_tired,  scores_tired,  s=80, color='#e86c2f', label='All-nighter', alpha=0.9)
+
+plt.title("Sleep vs No Sleep — Who Actually Wins?")
+plt.xlabel("Hours Studied")
+plt.ylabel("Score (%)")
+plt.legend()
+plt.grid(True, linestyle="--", alpha=0.35)
+
+plt.tight_layout()
+plt.show()</code></pre>
+      </div>
+      <p>🔹 Two <code>plt.scatter()</code> calls, different colors, one legend. The gap between those two lines? That's the cost of skipping sleep.</p>
+
+      <h3>Quick customization tips</h3>
+      <ul>
+        <li><strong>Change dot size dynamically:</strong> pass a list to <code>s=[...]</code> to make some dots bigger based on a third variable.</li>
+        <li><strong>Markers:</strong> try <code>marker='x'</code>, <code>'^'</code>, or <code>'s'</code> for different shapes.</li>
+        <li><strong>Annotate outliers:</strong> use <code>plt.annotate("that one guy", (7, 40))</code> to call out weird data points.</li>
+      </ul>
+
+      <div class="section-divider"></div>
+
+      <h2>Mini Project: Weekly Temperature Tracker</h2>
+      <p>Track the temperature every day for a week, plot it, and automatically highlight the hottest day with a different color. It sounds simple — but it teaches you list indexing, conditional logic, and scatter customization all at once.</p>
+
+      <ul>
+        <li>Store 7 days of temperature data in a Python list.</li>
+        <li>Use <code>max()</code> to find the hottest day.</li>
+        <li>Plot all days in one color, hottest day in a standout color.</li>
+        <li>Add a label so the viewer instantly knows which day it was.</li>
+      </ul>
+
+      <div class="note-box">
+        <strong>Bonus challenge:</strong> Highlight both the hottest <em>and</em> coldest days in different colors — like a heatmap but scrappy. Use <code>min()</code>, <code>.index()</code>, and multiple <code>plt.scatter()</code> calls.
       </div>
 
       <div class="callout">
         <strong>More to explore →</strong><br><br>
         <a href="../matplotlib/bar.html">Bar Graphs</a> ·
-        <a href="../matplotlib/customise.html">Customize Graphs</a> ·
         <a href="../matplotlib/pie.html">Pie Charts</a> ·
         <a href="../matplotlib/histogram.html">Histogram</a> ·
         <a href="../matplotlib/line-g.html">Line Graphs</a> ·
-        <a href="../matplotlib/scatter.html">Multiple line graphs</a>
+        <a href="../matplotlib/multi-line-g.html">Multiple Line Graphs</a> ·
+        <a href="../matplotlib/subplots.html">Subplots</a>
       </div>
-   </main>
+    </main>
 
   </div>
 

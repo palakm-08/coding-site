@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="icon" type="image/png" href="../assests/icon.png">
-  <meta name="description" content="Create multiple line graphs in Python using Matplotlib. Step-by-step guide with code, visuals, beginner-friendly explanations, and a fun mini project to practice.">
+<meta name="description" content="Learn how to create multiple line graphs in Python using Matplotlib. Compare datasets, customize colors and markers, add legends, and build real-world visualizations with beginner-friendly examples." />
   <title>Multiple Line Graphs in Python – Matplotlib Tutorial for Beginners + Mini Project</title>
   <link rel="canonical" href="https://kiddoedu.org/matplotlib/multi-line-g.html">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
@@ -331,7 +330,7 @@
         <li><a href="../matplotlib/scatter.html"><span class="dot"></span>Scatter Plots</a></li>
         <li><a href="../matplotlib/histogram.html"><span class="dot"></span>Histogram</a></li>
         <li><a href="../matplotlib/pie.html"><span class="dot"></span>Pie Charts</a></li>
-        <li><a href="../matplotlib/subplots.html"><span class="dot"></span>Subplots</a></li>
+        <li><a href=""><span class="dot"></span>Subplots</a></li>
         <li><a href=""><span class="dot"></span>Legends & Annotations</a></li>
       </ul>
     </aside>
@@ -346,31 +345,31 @@
         Multiple Line Graphs
       </div>
 
-      <h1>Visualizing with Multiple Line Graphs in Matplotlib</h1>
+      <h1>Multiple Line Graphs — Who's Actually the GOAT?</h1>
 
       <div class="meta-row">
         <span class="meta-pill">📊 Data Viz</span>
         <span class="meta-pill green">Beginner</span>
       </div>
 
-      <p>Line graphs are a go-to for showing trends over time — but what if you have more than one set of data to compare? That's where multiple line graphs come in. In this tutorial, we'll walk you through how to create and customize multiple lines on a single graph using Python's Matplotlib library.</p>
+      <p>One line graph tells a story. Two lines on the same graph start an argument. That's the whole vibe of multiple line graphs — you put two (or more) datasets side by side and let the chart do the talking. Who's been more consistent? Who peaked and then fell off? The graph will tell you.</p>
 
-      <h2>Why Use Multiple Line Graphs?</h2>
-      <p>Multiple line graphs are perfect when you want to compare different data series over the same time period. For example, tracking temperatures in several cities, comparing website traffic across different sources, or seeing how various stocks are performing. Displaying them on the same graph makes it easier to spot patterns, differences, and trends.</p>
+      <h2>Why bother with multiple lines?</h2>
+      <p>Because comparing stuff is way more interesting than just looking at one thing. Imagine plotting Virat's runs vs Rohit's runs across 30 matches — suddenly you've got context. Or compare your screen time this week vs last week. Or two stocks. Or two playlists' skip rates. Anything where you've got the same X-axis and want to see how different Ys behave — this is your chart.</p>
 
       <h2>What You'll Learn</h2>
       <ul>
-        <li>Plot multiple line graphs on the same chart to compare different data sets</li>
-        <li>Use color, labels, and legends to make each line clear and distinguishable</li>
-        <li>Avoid messy overlaps with smart styling and layout tricks</li>
-        <li>Understand real-world uses like comparing cricket scores across matches</li>
-        <li>Master <code>plt.plot()</code> with multiple lines — one graph, many stories</li>
+        <li>Plot multiple lines on one chart without making it a mess</li>
+        <li>Use colors, markers, and legends so each line is instantly readable</li>
+        <li>Call <code>plt.plot()</code> multiple times — yes, it's really that simple</li>
+        <li>Position the legend so it doesn't cover your actual data</li>
+        <li>Tell a visual story — comebacks, crossover points, and consistent dominance</li>
       </ul>
 
       <div class="section-divider"></div>
 
-      <h2>Step-by-Step Code Example</h2>
-      <p>Here's how to create a multiple line graph in Matplotlib — we're comparing match scores for Joe Root and Steve Smith across 30 games:</p>
+      <h2>Code: Joe Root vs Steve Smith across 30 matches</h2>
+      <p>Classic debate fuel. Let's settle it visually — dummy data, but the code is 100% real:</p>
 
       <div class="code-container">
         <div class="code-header">
@@ -403,48 +402,46 @@ plt.grid(True, alpha=0.7, linestyle='--')
 plt.show()</code></pre>
       </div>
 
-      <p>We've used two arrays — <code>Steve_Smith</code> and <code>Joe_Root</code> — with 30 match scores each (dummy data, don't take it too seriously).</p>
+      <p>Two arrays, 30 scores each. The data is made up but the technique is real — this is exactly how you'd compare any two players, products, or people over time.</p>
 
-      <h2>Understanding the Code</h2>
+      <h2>What each line of code is doing</h2>
       <ul>
-        <li><b>Import libraries:</b> <code>matplotlib.pyplot</code> for plotting and <code>numpy</code> for handling numerical data.</li>
-        <li><b>Define the data:</b> Two arrays with 30 scores each — one per player.</li>
-        <li><b>Set up the X-axis:</b> <code>np.arange(1, 31)</code> gives match numbers 1 to 30.</li>
-        <li><b>Plot the lines:</b> <code>plt.plot()</code> is called twice — once per player — with different colors and markers.</li>
-        <li><b>Labels & title:</b> <code>plt.xlabel()</code>, <code>plt.ylabel()</code>, and <code>plt.title()</code> give the graph context.</li>
-        <li><b>Legend:</b> <code>plt.legend()</code> places a key outside the graph area so it doesn't overlap the lines.</li>
-        <li><b>Grid:</b> <code>plt.grid()</code> adds light dashed lines — makes values easier to read.</li>
-        <li><b>Display:</b> <code>plt.show()</code> renders everything on screen.</li>
+        <li><b>Two <code>plt.plot()</code> calls</b> — that's it. One for each player. Matplotlib stacks them on the same chart automatically.</li>
+        <li><b><code>np.arange(1, 31)</code></b> — creates match numbers 1 to 30 for the X-axis. No manual typing needed.</li>
+        <li><b>Different colors</b> — <code>'#184452'</code> (dark navy) for Root, <code>'#77cce6'</code> (light blue) for Smith. Make them contrast enough that you can actually tell them apart.</li>
+        <li><b><code>marker='o'</code></b> — puts a dot at every data point so you can see exactly where each match score lands.</li>
+        <li><b><code>bbox_to_anchor=(1.05, 1)</code></b> — pushes the legend outside the chart so it doesn't sit on top of your lines.</li>
+        <li><b><code>plt.grid(alpha=0.7)</code></b> — faint grid lines. Makes the chart readable without being distracting.</li>
       </ul>
 
       <h4>Output:</h4>
-      <img src="../matplotlib/multi-line-g.png" alt="Multiple line graph output" />
-      <i>Two lines, two players, one clean comparison.</i>
+      <img src="../matplotlib/multi-line-g.png" alt="Multiple line graph output — Root vs Smith" />
+      <i>Two lines, two players. You can instantly see who had the more consistent season and who had the wilder swings.</i>
 
       <div class="section-divider"></div>
 
-      <h2>When to Use Multiple Line Graphs</h2>
+      <h2>When does this chart actually shine?</h2>
       <ul>
-        <li><b>Compare multiple subjects:</b> Two or more individuals, groups, or entities across the same timeline.</li>
-        <li><b>Track changes over time:</b> Different variables changing in parallel over days, months, or years.</li>
-        <li><b>Spot trends and patterns:</b> Identify common trends, divergences, or anomalies between datasets.</li>
-        <li><b>Analyze performance gaps:</b> Show who's leading, catching up, or falling behind.</li>
-        <li><b>Tell a visual story:</b> Show narrative moments — a comeback, a crossover point, or consistent dominance.</li>
+        <li><b>Sports rivalries:</b> Player A vs Player B across a season — who's actually performing?</li>
+        <li><b>Personal stats:</b> Your screen time this week vs last week. The dip on Wednesday hits different visually.</li>
+        <li><b>Finance:</b> Two stocks, one chart — see when they diverge and when they move together.</li>
+        <li><b>School grind:</b> Your marks in two subjects over the year — are you consistently better at one, or did they flip?</li>
+        <li><b>Any "A vs B over time" question</b> — if it has a timeline and two things to compare, this chart fits.</li>
       </ul>
 
       <div class="section-divider"></div>
 
-      <h2>Mini Project: Track Your Favorite Players This Season</h2>
-      <p>Ready to flex your Matplotlib skills and your sports obsession? Pick 2–3 of your favorite players from cricket, football, or basketball and track how they performed match by match.</p>
+      <h2>Mini Project: Battle of the GOATs</h2>
+      <p>Pick 2–3 of your favorite players — cricket, football, basketball, whatever you follow — and track their performance match by match this season. Use real stats or make up data to practice the code.</p>
       <ul>
-        <li><b>X-axis:</b> Match number or match dates</li>
-        <li><b>Y-axis:</b> Performance metric — goals, runs, assists, wickets, etc.</li>
-        <li>Each player gets a different colored line so you can easily compare their season.</li>
+        <li><b>X-axis:</b> Match number or date</li>
+        <li><b>Y-axis:</b> Goals, runs, assists, wickets — whatever metric matters</li>
+        <li>Give each player a distinct color so it reads instantly</li>
       </ul>
-      <p>This gives you a cool visual of who's been consistent, who had a comeback, and who's been ghosting.</p>
+      <p>The graph will tell you who's been consistent, who had a hot streak, and who's been completely ghosting this season.</p>
 
       <div class="callout">
-        Bonus points if you highlight best & worst games with annotations, or use a title like <code>"Battle of the GOATs: 2025 Season Stats"</code>
+        <strong>Level it up:</strong> Use <code>plt.annotate()</code> to call out their best and worst games directly on the chart, and title it <code>"Battle of the GOATs: 2025 Season Stats"</code> — because why not.
       </div>
 
       <div class="callout">
