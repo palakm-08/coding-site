@@ -3,10 +3,92 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="icon" type="image/png" href="../assests/icon.png">
-  <meta name="description" content="Master line graphs in Python with Matplotlib using fun examples, clear visuals, and a screen time mini project! Perfect for beginners in data science and coding.">
-  <title>Line Graphs in Python with Matplotlib — Beginner Guide + Mini Project</title>
-  <link rel="canonical" href="https://kiddoedu.org/matplotlib/line-g.html">
+  <link rel="icon" type="image/png" href="../assests/icon.png" />
+
+  <meta name="description" content="Learn how to plot line graphs in Python using Matplotlib — with real examples, markers, colors, and a screen time mini project. Actually beginner-friendly, no cap." />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="How to Plot Line Graphs in Python with Matplotlib (Beginner's Guide)" />
+  <meta property="og:description" content="Plot your first line graph in Python with Matplotlib. Markers, colors, linestyles — all explained without the boring textbook energy. Includes a mini project." />
+  <meta property="og:url" content="https://kiddoedu.org/matplotlib/line-g.html" />
+  <meta property="og:site_name" content="Kiddo" />
+  <meta property="og:image" content="https://kiddoedu.org/matplotlib/line-g.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How to Plot Line Graphs in Python with Matplotlib" />
+  <meta name="twitter:description" content="Plot your first line graph in Python — markers, colors, linestyles — explained like a friend, not a textbook." />
+  <meta name="twitter:image" content="https://kiddoedu.org/matplotlib/line-g.png" />
+
+  <title>How to Plot Line Graphs in Python with Matplotlib — Beginner's Guide</title>
+  <link rel="canonical" href="https://kiddoedu.org/matplotlib/line-g.html" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "How to Plot Line Graphs in Python with Matplotlib — Beginner's Guide",
+    "description": "Learn how to plot line graphs in Python using Matplotlib with real examples, markers, colors, and a screen time mini project.",
+    "url": "https://kiddoedu.org/matplotlib/line-g.html",
+    "datePublished": "2025-01-01",
+    "dateModified": "2025-05-01",
+    "author": { "@type": "Organization", "name": "Kiddo", "url": "https://kiddoedu.org" },
+    "publisher": { "@type": "Organization", "name": "Kiddo", "url": "https://kiddoedu.org" },
+    "image": "https://kiddoedu.org/matplotlib/line-g.png",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://kiddoedu.org/matplotlib/line-g.html" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to create a line graph in Python with Matplotlib",
+    "description": "Step-by-step guide to plotting a line graph in Python using Matplotlib.",
+    "step": [
+      { "@type": "HowToStep", "name": "Install Matplotlib", "text": "Run pip install matplotlib in your terminal." },
+      { "@type": "HowToStep", "name": "Import the library", "text": "Add import matplotlib.pyplot as plt at the top of your file." },
+      { "@type": "HowToStep", "name": "Define your data", "text": "Create two lists — one for X values, one for Y values." },
+      { "@type": "HowToStep", "name": "Call plt.plot()", "text": "Use plt.plot(x, y) and pass in color, marker, and linestyle if you want." },
+      { "@type": "HowToStep", "name": "Label it", "text": "Use plt.xlabel(), plt.ylabel(), and plt.title() so people know what they're looking at." },
+      { "@type": "HowToStep", "name": "Show it", "text": "Call plt.show() and boom — your graph pops up." }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do you plot a line graph in Python?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Import matplotlib.pyplot as plt, define your x and y data as lists, call plt.plot(x, y), add labels with plt.xlabel() and plt.ylabel(), then call plt.show() to display it." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Matplotlib in Python?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Matplotlib is a Python library for making charts and visualizations — line graphs, bar charts, scatter plots, histograms, and more. It's one of the most popular data viz tools in Python." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does linestyle do in Matplotlib?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Linestyle controls how the line looks between data points. Use '-' for solid, '--' for dashed, ':' for dotted, and '-.' for dash-dot." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I add markers to a line graph in Matplotlib?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Pass marker='o' for circles, marker='s' for squares, or marker='^' for triangles inside plt.plot()." }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I use a line graph?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Use a line graph when you want to show how something changes over time — temperatures, screen time, stock prices, website traffic. Anything with a time-based X-axis." }
+      }
+    ]
+  }
+  </script>
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -14,446 +96,142 @@
     gtag('js', new Date());
     gtag('config', 'G-ESNWS8F9HE');
   </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg: #f5f3ee;
-      --surface: #ffffff;
-      --surface2: #eceae4;
-      --text: #1a1814;
-      --text-muted: #6b6760;
-      --accent: #e86c2f;
-      --accent2: #3d5afe;
-      --accent3: #00b894;
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
       --border: rgba(0,0,0,0.08);
       --shadow: 0 4px 24px rgba(0,0,0,0.07);
       --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
-      --radius: 16px;
-      --radius-sm: 10px;
-      --header-h: 70px;
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
       --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
     }
     body.dark {
-      --bg: #0f0e0c;
-      --surface: #1c1a17;
-      --surface2: #252320;
-      --text: #f0ede6;
-      --text-muted: #918e87;
-      --accent: #ff7d3e;
-      --accent2: #7986cb;
-      --accent3: #55efc4;
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
       --border: rgba(255,255,255,0.07);
       --shadow: 0 4px 24px rgba(0,0,0,0.4);
       --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      transition: background var(--transition), color var(--transition);
-      overflow-x: hidden;
+      font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text);
+      transition: background var(--transition), color var(--transition); overflow-x: hidden;
     }
-
-    /* Progress bar */
     .progress-bar {
-      position: fixed;
-      top: 0; left: 0;
-      height: 2px;
+      position: fixed; top: 0; left: 0; height: 2px;
       background: linear-gradient(90deg, var(--accent), var(--accent2));
-      z-index: 999;
-      width: 0%;
-      transition: width 0.1s linear;
+      z-index: 999; width: 0%; transition: width 0.1s linear;
     }
-
-    /* ── Header ── */
     header {
-      height: var(--header-h);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      background: rgba(245,243,238,0.82);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: background var(--transition);
+      height: var(--header-h); display: flex; align-items: center;
+      justify-content: space-between; padding: 0 40px;
+      background: rgba(245,243,238,0.82); backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100; transition: background var(--transition);
     }
     body.dark header { background: rgba(15,14,12,0.82); }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
-    .logo span {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.4rem;
-      letter-spacing: -0.02em;
-      color: var(--text);
-    }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
     .logo span em { font-style: normal; color: var(--accent); }
-
     nav { display: flex; align-items: center; gap: 8px; }
-    nav a {
-      font-weight: 500;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 6px 14px;
-      border-radius: 8px;
-      transition: color var(--transition), background var(--transition);
-    }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
     nav a:hover { color: var(--text); background: var(--surface2); }
-
     .theme-btn {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      width: 38px; height: 38px;
-      cursor: pointer;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background var(--transition), transform var(--transition);
-      margin-left: 8px;
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 50%;
+      width: 38px; height: 38px; cursor: pointer; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition), transform var(--transition); margin-left: 8px;
     }
     .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
-
-    /* ── Mobile Header ── */
     .mobile-header {
-      display: none;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      height: var(--header-h);
-      background: rgba(245,243,238,0.82);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: background var(--transition);
+      display: none; align-items: center; justify-content: space-between;
+      padding: 0 20px; height: var(--header-h);
+      background: rgba(245,243,238,0.82); backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100; transition: background var(--transition);
     }
     body.dark .mobile-header { background: rgba(15,14,12,0.82); }
     .mobile-right { display: flex; align-items: center; gap: 8px; }
-
     .hamburger {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      width: 38px; height: 38px;
-      cursor: pointer;
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center; position: relative;
     }
     .menu-dropdown {
-      display: none;
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      box-shadow: var(--shadow-lg);
-      padding: 8px;
-      min-width: 160px;
-      flex-direction: column;
-      gap: 2px;
+      display: none; position: absolute; top: calc(100% + 8px); right: 0;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); box-shadow: var(--shadow-lg);
+      padding: 8px; min-width: 160px; flex-direction: column; gap: 2px;
     }
     .menu-dropdown.open { display: flex; }
-    .menu-dropdown a {
-      display: block;
-      font-weight: 500;
-      font-size: 0.95rem;
-      color: var(--text);
-      text-decoration: none;
-      padding: 9px 14px;
-      border-radius: 8px;
-      transition: background var(--transition);
-    }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
     .menu-dropdown a:hover { background: var(--surface2); }
-
-    /* ── Layout ── */
     .page-wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 40px 80px;
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 40px;
-      align-items: start;
+      max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px;
+      display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start;
     }
-
-    /* ── Sidebar ── */
     aside {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      position: sticky;
-      top: calc(var(--header-h) + 20px);
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px);
     }
-    .aside-label {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-    }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
     aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
-    aside ul li a {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 8px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: background var(--transition), color var(--transition);
-      line-height: 1.3;
-    }
+    aside ul li a { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.3; }
     aside ul li a:hover { background: var(--surface2); color: var(--text); }
     aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
-    aside ul li a .dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: currentColor;
-      flex-shrink: 0;
-      opacity: 0.5;
-    }
-
-    /* ── Main ── */
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; }
     main { min-width: 0; }
-
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
     .breadcrumb a { color: var(--text-muted); text-decoration: none; }
     .breadcrumb a:hover { color: var(--accent); }
     .breadcrumb span { opacity: 0.4; }
-
-    main h1 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(1.7rem, 3vw, 2.4rem);
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      margin-bottom: 16px;
-    }
-
-    .meta-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-    .meta-pill {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 5px 12px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
+    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
     .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
-
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.4rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; margin-top: 22px; margin-bottom: 8px; }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; margin-top: 20px; margin-bottom: 10px; color: var(--text-muted); }
     main p { font-size: 0.95rem; line-height: 1.75; color: var(--text); margin-bottom: 14px; }
-    main h2 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.2rem;
-      letter-spacing: -0.01em;
-      margin-top: 36px;
-      margin-bottom: 14px;
-    }
-    main h4 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-top: 20px;
-      margin-bottom: 10px;
-      color: var(--text-muted);
-    }
-    main code {
-      font-family: 'Courier New', monospace;
-      font-size: 0.88em;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 2px 6px;
-      color: var(--accent);
-    }
-    main ul {
-      padding-left: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    main ul li {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      padding-left: 20px;
-      position: relative;
-      color: var(--text);
-    }
-    main ul li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-weight: 600;
-    }
+    main code { font-family: 'Courier New', monospace; font-size: 0.88em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
+    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
     main b { font-weight: 600; }
-    main img {
-      max-width: 100%;
-      height: auto;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      margin: 16px 0;
-      display: block;
-    }
-
-    /* ── Code blocks ── */
-    .code-container {
-      background: #1e1e1e;
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      margin: 16px 0 26px;
-      border: 1px solid var(--border);
-    }
-    .code-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .lang-tag {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.3);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .copy-btn {
-      background: none;
-      border: none;
-      color: rgba(255,255,255,0.35);
-      padding: 2px 0;
-      cursor: pointer;
-      font-size: 0.75rem;
-      font-family: 'DM Sans', sans-serif;
-      transition: color var(--transition);
-      position: relative;
-    }
+    main img { max-width: 100%; height: auto; border-radius: var(--radius-sm); border: 1px solid var(--border); margin: 16px 0; display: block; }
+    main i { color: var(--text-muted); font-size: 0.85rem; }
+    .section-divider { height: 1px; background: var(--border); margin: 40px 0; }
+    .code-container { background: #1e1e1e; border-radius: var(--radius-sm); overflow: hidden; margin: 16px 0 26px; border: 1px solid var(--border); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; text-transform: uppercase; }
+    .copy-btn { background: none; border: none; color: rgba(255,255,255,0.35); padding: 2px 0; cursor: pointer; font-size: 0.75rem; font-family: 'DM Sans', sans-serif; transition: color var(--transition); position: relative; }
     .copy-btn:hover { color: rgba(255,255,255,0.75); }
-    .tooltip {
-      position: absolute;
-      top: -28px;
-      right: 0;
-      background: var(--surface2);
-      color: var(--text);
-      padding: 3px 8px;
-      font-size: 0.7rem;
-      border-radius: 4px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
-      white-space: nowrap;
-    }
+    .tooltip { position: absolute; top: -28px; right: 0; background: var(--surface2); color: var(--text); padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
     .tooltip.show { opacity: 1; }
-    pre {
-      margin: 0;
-      padding: 18px;
-      overflow-x: auto;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.875rem;
-      line-height: 1.65;
-      color: #d4d4d4;
-      background: transparent;
-      white-space: pre;
-      tab-size: 2;
-    }
-
-    /* ── Callout boxes ── */
-    .callout {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
-      border-radius: var(--radius-sm);
-      padding: 16px 20px;
-      margin: 24px 0;
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
+    pre { margin: 0; padding: 18px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.875rem; line-height: 1.65; color: #d4d4d4; background: transparent; white-space: pre; tab-size: 2; }
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 24px 0; font-size: 0.9rem; line-height: 1.6; }
     .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
     .callout a:hover { text-decoration: underline; }
-
-    /* ── Footer ── */
-    footer {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 28px 40px;
-    }
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
     .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
     .footer-links { display: flex; gap: 20px; }
-    .footer-links a {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color var(--transition);
-    }
+    .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
     .footer-links a:hover { color: var(--accent); }
-
-    /* ── Responsive ── */
     @media (max-width: 768px) {
       header { display: none; }
       .mobile-header { display: flex; }
       .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
-      aside {
-        position: static;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0 16px;
-      }
+      aside { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
       .aside-label { grid-column: 1 / -1; }
       footer { padding: 20px; }
       .footer-container { flex-direction: column; align-items: flex-start; }
@@ -468,7 +246,6 @@
 
   <div class="progress-bar" id="progressBar"></div>
 
-  <!-- Desktop Header -->
   <header>
     <a class="logo" href="../index.html">
       <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
@@ -482,7 +259,6 @@
     </nav>
   </header>
 
-  <!-- Mobile Header -->
   <div class="mobile-header">
     <a class="logo" href="../index.html">
       <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
@@ -501,8 +277,6 @@
   </div>
 
   <div class="page-wrap">
-
-    <!-- Sidebar -->
     <aside>
       <div class="aside-label">Matplotlib Topics</div>
       <ul>
@@ -518,7 +292,6 @@
       </ul>
     </aside>
 
-    <!-- Main -->
     <main>
       <div class="breadcrumb">
         <a href="../index.html">Home</a>
@@ -528,41 +301,41 @@
         Line Graphs
       </div>
 
-      <h1>Line Graphs in Matplotlib (Python)</h1>
+      <h1>Line Graphs in Python — Your Data Finally Looks Good</h1>
 
       <div class="meta-row">
         <span class="meta-pill">📊 Data Viz</span>
         <span class="meta-pill green">Beginner</span>
+        <span class="date-badge">Updated May 2025</span>
       </div>
 
-      <p>Hey coder! Ever wanted to plot how your progress, your followers, or even your mood changes over time? Line graphs are your best buds for that — smooth, simple, and so visual.</p>
+      <p>You've got data. It's just sitting there in a list looking boring. A line graph fixes that — slap it on a chart, and suddenly you can actually see what's going on. Going up? Going down? Some chaotic spike in the middle? The graph will tell you what the numbers never could.</p>
 
-      <p>In this guide, we're gonna chill with <b>Matplotlib</b> — a super handy Python library — and learn how to draw clean, easy-to-understand line charts. Perfect if you're just starting out or want to spice up your data game.</p>
+      <p>We're using <b>Matplotlib</b> — the most popular Python library for this stuff — and by the end you'll have a working line graph, know how to style it, and have a mini project to flex.</p>
 
-      <h2>When Should You Use a Line Graph?</h2>
-      <p>Use a line graph when you want to show change over time — like how something increases, decreases, or trends. Think of it as a time-traveling chart: you're looking at what happened yesterday, today, and where things might be going tomorrow.</p>
-      <p>Here are some classic examples:</p>
+      <h2>So when do you actually use a line graph?</h2>
+      <p>Any time something changes over time. That's it. That's the rule. Some examples that actually make sense:</p>
       <ul>
-        <li>Tracking daily temperatures</li>
-        <li>Watching your website traffic grow (hopefully)</li>
-        <li>Showing how COVID cases went up or down</li>
-        <li>Plotting stock prices or your monthly expenses</li>
-        <li>Visualizing your study hours over the week</li>
+        <li>Your screen time going absolutely feral on weekends</li>
+        <li>Daily temperatures across a month</li>
+        <li>How your website traffic grows (or doesn't, and that's fine)</li>
+        <li>Stock prices doing whatever they want</li>
+        <li>Study hours across the week — the honest version</li>
       </ul>
-      <p>Basically, anytime you have something that moves through time — a line graph can help you make sense of it.</p>
+      <p>If your X-axis is time and your Y-axis is literally anything, a line graph belongs there.</p>
 
-      <h2>What You'll Learn</h2>
-      <p>By the end of this quick and cozy tutorial, you'll know how to:</p>
+      <h2>What you'll actually learn here</h2>
       <ul>
-        <li>Create your first line graph using <code>matplotlib</code></li>
-        <li>Label your axes and add a neat title</li>
-        <li>Customize your lines with different colors, markers, and styles</li>
-        <li>Show your graph like a pro using <code>plt.show()</code></li>
-        <li>And feel super proud when it finally works (that feeling hits different)</li>
+        <li>Plot your first line graph in Python without breaking anything</li>
+        <li>Add axis labels and a title so the graph isn't just vibes</li>
+        <li>Customize the line — color, thickness, style, markers</li>
+        <li>Use <code>plt.show()</code> to make it actually appear on screen</li>
       </ul>
 
-      <h2>Step-by-Step Code Example</h2>
-      <p>Here's a simple example of how to create a line graph in Matplotlib:</p>
+      <div class="section-divider"></div>
+
+      <h2>The code — copy it, run it, tweak it</h2>
+      <p>Here's a clean working example. Run this and you'll get a proper line graph in under 10 seconds:</p>
 
       <div class="code-container">
         <div class="code-header">
@@ -571,11 +344,11 @@
         </div>
         <pre><code>import matplotlib.pyplot as plt
 
-# Sample data
+# Your data
 Category = ['A', 'B', 'C', 'D', 'E', 'F']
 Values = [10, 20, 15, 25, 10, 30]
 
-# Create the plot
+# Draw the graph
 plt.figure(figsize=(8, 5))
 plt.plot(Category, Values,
          color='#1f77b4',
@@ -584,67 +357,100 @@ plt.plot(Category, Values,
          linewidth=2,
          markersize=8)
 
-# Add labels and title
+# Labels and title
 plt.xlabel("Category", fontsize=12)
 plt.ylabel("Values", fontsize=12)
 plt.title("Basic Line Graph Example", fontsize=14, fontweight='bold')
 
-# Add grid for better readability
+# Grid makes it readable
 plt.grid(True, linestyle='--', alpha=0.5)
 
 plt.tight_layout()
 plt.show()</code></pre>
       </div>
 
-      <h2>Understanding the Code Step-by-Step</h2>
+      <h2>What's actually happening in each line</h2>
       <ul>
-        <li><b>Import library:</b> <code>matplotlib.pyplot</code> is used to create visualizations.</li>
-        <li><b>Define data:</b> Categories (X-axis) and their corresponding values (Y-axis).</li>
-        <li><b>Plot:</b> <code>plt.plot()</code> draws the line graph with markers, color, and style.</li>
-        <li><b>Labels & Title:</b> <code>xlabel</code>, <code>ylabel</code>, and <code>title</code> describe the graph.</li>
-        <li><b>Grid:</b> Adds dashed grid lines for better readability.</li>
-        <li><b>Display:</b> <code>plt.show()</code> renders the graph on the screen.</li>
+        <li><b><code>import matplotlib.pyplot as plt</code></b> — loads the library. <code>plt</code> is just a shorthand everyone uses.</li>
+        <li><b>Category and Values</b> — your X and Y data. Swap these out for whatever you're actually tracking.</li>
+        <li><b><code>plt.plot()</code></b> — this is where the magic happens. All your styling options go in here.</li>
+        <li><b><code>plt.xlabel()</code> / <code>plt.ylabel()</code> / <code>plt.title()</code></b> — labels so your graph isn't a mystery to whoever reads it.</li>
+        <li><b><code>plt.grid(alpha=0.5)</code></b> — faint background grid. Makes values way easier to read.</li>
+        <li><b><code>plt.show()</code></b> — renders the chart. Don't forget this or nothing shows up.</li>
       </ul>
 
-      <h2>What is Linestyle?</h2>
-      <p><b>Linestyle</b> controls how the line appears between data points — solid, dashed, or dotted.</p>
+      <h4>Output:</h4>
+      <img
+        src="../matplotlib/line-g.png"
+        alt="Line graph in Python made with Matplotlib — categories A to F on the X-axis, values 10 to 30 on the Y-axis, blue solid line with circular markers at each data point"
+        width="700"
+        height="437"
+        loading="lazy"
+      />
+      <i>There it is. Clean, readable, yours.</i>
+
+      <div class="section-divider"></div>
+
+      <h2>Linestyle — change how the line looks</h2>
+      <p>The line between your points doesn't have to be plain. Four options:</p>
       <ul>
-        <li><code>'-'</code> → Solid line</li>
-        <li><code>'--'</code> → Dashed line</li>
-        <li><code>':'</code> → Dotted line</li>
-        <li><code>'-.'</code> → Dash-dot line</li>
+        <li><code>'-'</code> — solid (default, clean)</li>
+        <li><code>'--'</code> — dashed (good for projections or "estimated" data)</li>
+        <li><code>':'</code> — dotted (subtle, works well on grids)</li>
+        <li><code>'-.'</code> — dash-dot (a bit retro but it exists)</li>
       </ul>
 
-      <h2>What is a Marker?</h2>
-      <p><b>Marker</b> highlights each data point on the graph — like dots, stars, or squares.</p>
+      <h2>Markers — dots on each data point</h2>
+      <p>Markers show exactly where each value sits. Without them, the line just flows past. With them, you can see every individual data point.</p>
       <ul>
-        <li><code>'o'</code> → Circle</li>
-        <li><code>'.'</code> → Point</li>
-        <li><code>'*'</code> → Star</li>
-        <li><code>'s'</code> → Square</li>
-        <li><code>'^'</code> → Triangle up</li>
-        <li><code>'+'</code> → Plus</li>
+        <li><code>'o'</code> — circle (most common)</li>
+        <li><code>'.'</code> — tiny dot</li>
+        <li><code>'*'</code> — star (a bit dramatic, kinda love it)</li>
+        <li><code>'s'</code> — square</li>
+        <li><code>'^'</code> — triangle pointing up</li>
+        <li><code>'+'</code> — plus sign</li>
       </ul>
 
-      <h2>Marker Size & Line Width</h2>
-      <p>Want to make your graph pop a bit more? That's where <b>markersize</b> and <b>linewidth</b> come in!</p>
+      <h2>Markersize and linewidth</h2>
+      <p>Two parameters that go a long way:</p>
       <ul>
-        <li><b>markersize</b>: Controls how big or small each marker appears on the graph.</li>
-        <li><b>linewidth</b>: Adjusts how thick or thin the line is that connects your data points.</li>
+        <li><b>markersize</b> — how big each dot is. Default is fine, bump it up if the graph is large.</li>
+        <li><b>linewidth</b> — how thick the connecting line is. <code>2</code> is a solid default.</li>
       </ul>
-      <p>Just add them like this: <code>plt.plot(x, y, marker='o', markersize=10, linewidth=2)</code></p>
+      <p>Usage: <code>plt.plot(x, y, marker='o', markersize=10, linewidth=2)</code></p>
 
-      <h4>Here's the output:</h4>
-      <img src="../matplotlib/line-g.png" alt="Line graph output" />
+      <div class="section-divider"></div>
 
-      <h2>🔹 Mini Project: Track Your Screen Time!</h2>
-      <p>Wanna try out your new matplotlib skills? Here's a chill project idea:</p>
-      <p>Track your screen time for a week (be honest), then plot it using a line graph!</p>
+      <h2>Mini project: plot your screen time</h2>
+      <p>Genuinely the most relatable dataset you have access to right now. Track your screen time for a week, then plot it. The graph will say things about you that you're not ready to hear.</p>
       <ul>
-        <li>X-axis: Days of the week (Mon, Tue, Wed...)</li>
-        <li>Y-axis: Hours you spent on your phone/tablet</li>
+        <li><b>X-axis:</b> Mon, Tue, Wed, Thu, Fri, Sat, Sun</li>
+        <li><b>Y-axis:</b> Hours on screen</li>
       </ul>
-      <p>This is a cool way to visualize your habits — and maybe get that little reality check we all need. Bonus points if you color-code it or add a title like "How Much I Scrolled This Week".</p>
+      <p>Title it "This Week's Damage" and you're done. Bonus round: add a horizontal red line at your daily goal and see how many days you actually hit it.</p>
+
+      <div class="callout">
+        <strong>The bonus line:</strong> <code>plt.axhline(y=4, color='red', linestyle='--', label='Daily goal')</code> — drops a flat reference line across the whole chart. Pair it with a legend and it goes hard.
+      </div>
+
+      <div class="section-divider"></div>
+
+      <h2>Frequently asked questions</h2>
+
+      <h3>How do you plot a line graph in Python?</h3>
+      <p>Import <code>matplotlib.pyplot as plt</code>, put your data in two lists, call <code>plt.plot(x, y)</code>, add labels, then <code>plt.show()</code>. That's the whole thing.</p>
+
+      <h3>What is Matplotlib in Python?</h3>
+      <p>Matplotlib is a Python library for creating charts — line graphs, bar charts, scatter plots, histograms, pie charts. It's been around forever and basically every data science tutorial uses it.</p>
+
+      <h3>What does linestyle do in Matplotlib?</h3>
+      <p>It controls how the connecting line between data points looks. <code>'-'</code> is solid, <code>'--'</code> is dashed, <code>':'</code> is dotted, <code>'-.'</code> is dash-dot. Pass it directly into <code>plt.plot()</code>.</p>
+
+      <h3>How do I add markers to a line graph in Matplotlib?</h3>
+      <p>Add <code>marker='o'</code> inside <code>plt.plot()</code> for circles, <code>marker='s'</code> for squares, <code>marker='^'</code> for triangles. Size them with <code>markersize</code>.</p>
+
+      <h3>When should I use a line graph?</h3>
+      <p>When your X-axis is time and you want to see how something changes — screen time, temperatures, prices, scores. If there's no time component, a bar chart probably fits better.</p>
 
       <div class="callout">
         <strong>More to explore →</strong><br><br>
@@ -652,13 +458,12 @@ plt.show()</code></pre>
         <a href="../matplotlib/customise.html">Customize Graphs</a> ·
         <a href="../matplotlib/pie.html">Pie Charts</a> ·
         <a href="../matplotlib/histogram.html">Histogram</a> ·
-        <a href="../matplotlib/scatter.html">Scatter Plots</a>
+        <a href="../matplotlib/scatter.html">Scatter Plots</a> ·
+        <a href="../matplotlib/bar.html">Bar Graphs</a>
       </div>
     </main>
-
   </div>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-container">
       <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
@@ -671,7 +476,6 @@ plt.show()</code></pre>
   </footer>
 
   <script>
-    /* ── Theme ── */
     const desktopToggle = document.getElementById('desktopToggleTheme');
     const mobileToggle  = document.getElementById('mobileToggleTheme');
     const applyTheme = (dark) => {
@@ -689,7 +493,6 @@ plt.show()</code></pre>
     if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
     if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
 
-    /* ── Mobile menu ── */
     const hamburger    = document.getElementById('hamburgerBtn');
     const menuDropdown = document.getElementById('menuDropdown');
     hamburger?.addEventListener('click', (e) => {
@@ -698,14 +501,12 @@ plt.show()</code></pre>
     });
     document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
 
-    /* ── Scroll progress ── */
     const progressBar = document.getElementById('progressBar');
     window.addEventListener('scroll', () => {
       const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
       progressBar.style.width = Math.min(pct, 100) + '%';
     });
 
-    /* ── Copy buttons ── */
     document.querySelectorAll('.code-container').forEach(container => {
       const btn     = container.querySelector('.copy-btn');
       const tooltip = container.querySelector('.tooltip');

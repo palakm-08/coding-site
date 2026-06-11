@@ -5,7 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="../assests/icon.png">
 <meta name="description" content="Learn how to create scatter plots in Python using Matplotlib with beginner-friendly examples, customization tips, real-world datasets, and a hands-on mini project. Master Python data visualization step by step." />
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Scatter Plots in Python using Matplotlib (Beginner Guide)" />
+<meta property="og:description" content="Learn scatter plots in Python with Matplotlib using beginner-friendly examples, customization tips, and a hands-on mini project." />
+<meta property="og:url" content="https://kiddoedu.org/matplotlib/scatter.html" />
+<meta property="og:site_name" content="Kiddo" />
+<meta property="og:image" content="https://kiddoedu.org/matplotlib/scatter.png" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Scatter Plots in Python using Matplotlib" />
+<meta name="twitter:description" content="Learn scatter plots in Python with practical examples, customization tips, and a fun mini project." />
+<meta name="twitter:image" content="https://kiddoedu.org/matplotlib/scatter.png" />
+
   <title>Scatter Plots in Python – Matplotlib Tutorial for Beginners + Mini Project</title>
+
+  <script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"TechArticle",
+ "headline":"Scatter Plots in Python using Matplotlib",
+ "author":{
+   "@type":"Person",
+   "name":"Palak Mishra"
+ },
+ "publisher":{
+   "@type":"Organization",
+   "name":"Kiddo"
+ }
+}
+</script>
+
   <link rel="canonical" href="https://kiddoedu.org/matplotlib/scatter.html">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>
@@ -356,7 +386,12 @@
         Scatter Plots
       </div>
 
-      <h1>Scatter Plots in Python — Does cramming actually work?</h1>
+      <h1>Scatter Plots in Python using Matplotlib (Beginner Guide)</h1>
+      <p>
+Does cramming actually work? Let's use a scatter plot and find out.
+Scatter plots help us visualize relationships between two variables,
+making them one of the most useful charts in data analysis.
+</p>
 
       <div class="meta-row">
         <span class="meta-pill">📊 Data Viz</span>
@@ -368,11 +403,13 @@
       <p>Each dot on a scatter plot is one person, one day, one event — plotted by two values. If the dots slope upward together, there's a connection. If they're all over the place, the relationship is cooked.</p>
 
       <h2>When should you use a scatter plot?</h2>
-      <ul>
-        <li>You have <strong>two numbers</strong> and want to see if they move together (or don't).</li>
-        <li>You want to spot <strong>outliers</strong> — that one person who studied 1 hour and got 95%.</li>
-        <li>You want to compare groups without making three separate charts.</li>
-      </ul>
+      <p>
+Scatter plots are one of the most commonly used charts in Python data visualization.
+Using Matplotlib's <code>plt.scatter()</code> function, you can quickly identify trends,
+correlations, clusters, and outliers in datasets. Whether you're analyzing student
+scores, sales data, weather patterns, or machine learning datasets, scatter plots
+provide a simple way to explore relationships between variables.
+</p>
 
       <h2>Real-life examples that actually slap</h2>
       <ul>
@@ -484,6 +521,56 @@ plt.show()</code></pre>
       <div class="note-box">
         <strong>Bonus challenge:</strong> Highlight both the hottest <em>and</em> coldest days in different colors — like a heatmap but scrappy. Use <code>min()</code>, <code>.index()</code>, and multiple <code>plt.scatter()</code> calls.
       </div>
+
+
+      <h2>Frequently Asked Questions</h2>
+
+<details>
+  <summary>What is a scatter plot in Python?</summary>
+  <p>
+    A scatter plot is a chart that displays the relationship between two numerical variables using dots. In Python, you can create scatter plots easily using Matplotlib's <code>plt.scatter()</code> function.
+  </p>
+</details>
+
+<details>
+  <summary>How do I create a scatter plot using Matplotlib?</summary>
+  <p>
+    Import Matplotlib, prepare your X and Y values, and use <code>plt.scatter(x, y)</code>. Then add labels, a title, and call <code>plt.show()</code> to display the chart.
+  </p>
+</details>
+
+<details>
+  <summary>When should I use a scatter plot instead of a line graph?</summary>
+  <p>
+    Use a scatter plot when you want to examine the relationship or correlation between two variables. Use a line graph when you want to show changes or trends over time.
+  </p>
+</details>
+
+<details>
+  <summary>What does plt.scatter() do in Matplotlib?</summary>
+  <p>
+    The <code>plt.scatter()</code> function creates a scatter plot by plotting individual data points on a graph. It allows you to customize colors, sizes, markers, transparency, and more.
+  </p>
+</details>
+
+<details>
+  <summary>Can scatter plots show correlation?</summary>
+  <p>
+    Yes. Scatter plots are commonly used to identify positive correlation, negative correlation, or no correlation between variables. Patterns in the dots help reveal these relationships.
+  </p>
+</details>
+
+<details>
+  <summary>How can I customize scatter plots in Matplotlib?</summary>
+  <p>
+    You can customize scatter plots using parameters such as <code>color</code>, <code>s</code> (size), <code>marker</code>, <code>alpha</code> (transparency), labels, legends, and grid lines.
+  </p>
+</details>
+
+      <div class="note-box">
+  <strong>About the Author</strong><br>
+  Hi, I'm Palak Mishra. I build backend applications with Python and create beginner-friendly programming tutorials for Kiddo. My goal is to make coding feel less intimidating and more fun for students who are just getting started.
+</div>
 
       <div class="callout">
         <strong>More to explore →</strong><br><br>

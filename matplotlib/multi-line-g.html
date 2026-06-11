@@ -3,9 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Learn how to create multiple line graphs in Python using Matplotlib. Compare datasets, customize colors and markers, add legends, and build real-world visualizations with beginner-friendly examples." />
+  <meta name="description" content="Learn how to create multiple line graphs in Python using Matplotlib. Compare datasets, customize colors and markers, add legends, and build real-world visualizations with beginner-friendly examples." />
+
+  <!-- Open Graph / Social sharing -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Multiple Line Graphs in Python – Matplotlib Tutorial for Beginners" />
+  <meta property="og:description" content="Plot multiple lines on one chart, compare datasets, customize colors and markers, and build real-world visualizations. Beginner-friendly with a mini project." />
+  <meta property="og:url" content="https://kiddoedu.org/matplotlib/multi-line-g.html" />
+  <meta property="og:site_name" content="Kiddo" />
+  <meta property="og:image" content="https://kiddoedu.org/matplotlib/multi-line-g.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Multiple Line Graphs in Python – Matplotlib Tutorial" />
+  <meta name="twitter:description" content="Compare two datasets on one chart — Joe Root vs Steve Smith, stocks, screen time, anything. Step-by-step Matplotlib tutorial for beginners." />
+  <meta name="twitter:image" content="https://kiddoedu.org/matplotlib/multi-line-g.png" />
+
   <title>Multiple Line Graphs in Python – Matplotlib Tutorial for Beginners + Mini Project</title>
-  <link rel="canonical" href="https://kiddoedu.org/matplotlib/multi-line-g.html">
+  <link rel="canonical" href="https://kiddoedu.org/matplotlib/multi-line-g.html" />
+
+  <!-- Article structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Multiple Line Graphs in Python – Matplotlib Tutorial for Beginners",
+    "description": "Learn how to create multiple line graphs in Python using Matplotlib. Compare datasets, customize colors and markers, add legends, and build real-world visualizations.",
+    "url": "https://kiddoedu.org/matplotlib/multi-line-g.html",
+    "datePublished": "2025-01-01",
+    "dateModified": "2025-05-01",
+    "author": { "@type": "Organization", "name": "Kiddo", "url": "https://kiddoedu.org" },
+    "publisher": { "@type": "Organization", "name": "Kiddo", "url": "https://kiddoedu.org" },
+    "image": "https://kiddoedu.org/matplotlib/multi-line-g.png",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://kiddoedu.org/matplotlib/multi-line-g.html" }
+  }
+  </script>
+
+  <!-- HowTo structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to plot multiple line graphs in Python with Matplotlib",
+    "description": "Step-by-step guide to plotting multiple lines on one chart using Matplotlib in Python.",
+    "step": [
+      { "@type": "HowToStep", "name": "Import libraries", "text": "Import matplotlib.pyplot and numpy at the top of your script." },
+      { "@type": "HowToStep", "name": "Create your datasets", "text": "Store each dataset in a numpy array or Python list." },
+      { "@type": "HowToStep", "name": "Call plt.plot() for each line", "text": "Call plt.plot() once per dataset, passing a label and color for each." },
+      { "@type": "HowToStep", "name": "Add a legend", "text": "Use plt.legend() or bbox_to_anchor to position the legend outside the chart area." },
+      { "@type": "HowToStep", "name": "Display the chart", "text": "Call plt.show() to render the final multi-line graph." }
+    ]
+  }
+  </script>
+
+  <!-- FAQ structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a multiple line graph?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A multiple line graph displays two or more datasets on the same graph for comparison." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you plot multiple lines in Matplotlib?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Call plt.plot() separately for each dataset before using plt.show()." }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I use a multiple line graph?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Use it when comparing trends over time such as player performance, stock prices, or website traffic." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use different colors for each line in Matplotlib?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use the color parameter inside plt.plot() to set a distinct color for each line." }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google Analytics — async to avoid blocking render -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -13,6 +94,7 @@
     gtag('js', new Date());
     gtag('config', 'G-ESNWS8F9HE');
   </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
@@ -188,6 +270,10 @@
       font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem;
       letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px;
     }
+    main h3 {
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+      letter-spacing: -0.01em; margin-top: 22px; margin-bottom: 8px; color: var(--text);
+    }
     main h4 {
       font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem;
       margin-top: 20px; margin-bottom: 10px; color: var(--text-muted);
@@ -256,6 +342,11 @@
     .callout a:hover { text-decoration: underline; }
 
     .section-divider { height: 1px; background: var(--border); margin: 40px 0; }
+
+    /* ── Date badge ── */
+    .date-badge {
+      font-size: 0.78rem; color: var(--text-muted);
+    }
 
     /* ── Footer ── */
     footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
@@ -350,6 +441,7 @@
       <div class="meta-row">
         <span class="meta-pill">📊 Data Viz</span>
         <span class="meta-pill green">Beginner</span>
+        <span class="date-badge">Updated June 2026</span>
       </div>
 
       <p>One line graph tells a story. Two lines on the same graph start an argument. That's the whole vibe of multiple line graphs — you put two (or more) datasets side by side and let the chart do the talking. Who's been more consistent? Who peaked and then fell off? The graph will tell you.</p>
@@ -357,7 +449,15 @@
       <h2>Why bother with multiple lines?</h2>
       <p>Because comparing stuff is way more interesting than just looking at one thing. Imagine plotting Virat's runs vs Rohit's runs across 30 matches — suddenly you've got context. Or compare your screen time this week vs last week. Or two stocks. Or two playlists' skip rates. Anything where you've got the same X-axis and want to see how different Ys behave — this is your chart.</p>
 
-      <h2>What You'll Learn</h2>
+      <h2>What is a multiple line graph in Python?</h2>
+      <p>
+        A multiple line graph is a chart that displays two or more lines on the same graph.
+        It is commonly used to compare trends, performance, or changes over time.
+        In Python, multiple line graphs are created using Matplotlib by calling
+        <code>plt.plot()</code> multiple times.
+      </p>
+
+      <h2>What you'll learn</h2>
       <ul>
         <li>Plot multiple lines on one chart without making it a mess</li>
         <li>Use colors, markers, and legends so each line is instantly readable</li>
@@ -415,12 +515,18 @@ plt.show()</code></pre>
       </ul>
 
       <h4>Output:</h4>
-      <img src="../matplotlib/multi-line-g.png" alt="Multiple line graph output — Root vs Smith" />
+      <img
+        src="../matplotlib/multi-line-g.png"
+        alt="Multiple line graph in Python showing Joe Root (dark navy) vs Steve Smith (light blue) scores across 30 cricket matches, created with Matplotlib"
+        width="700"
+        height="350"
+        loading="lazy"
+      />
       <i>Two lines, two players. You can instantly see who had the more consistent season and who had the wilder swings.</i>
 
       <div class="section-divider"></div>
 
-      <h2>When does this chart actually shine?</h2>
+      <h2>Real-world applications of multiple line graphs</h2>
       <ul>
         <li><b>Sports rivalries:</b> Player A vs Player B across a season — who's actually performing?</li>
         <li><b>Personal stats:</b> Your screen time this week vs last week. The dip on Wednesday hits different visually.</li>
@@ -431,7 +537,7 @@ plt.show()</code></pre>
 
       <div class="section-divider"></div>
 
-      <h2>Mini Project: Battle of the GOATs</h2>
+      <h2>Mini project: Battle of the GOATs</h2>
       <p>Pick 2–3 of your favorite players — cricket, football, basketball, whatever you follow — and track their performance match by match this season. Use real stats or make up data to practice the code.</p>
       <ul>
         <li><b>X-axis:</b> Match number or date</li>
@@ -443,6 +549,20 @@ plt.show()</code></pre>
       <div class="callout">
         <strong>Level it up:</strong> Use <code>plt.annotate()</code> to call out their best and worst games directly on the chart, and title it <code>"Battle of the GOATs: 2025 Season Stats"</code> — because why not.
       </div>
+
+      <h2>Frequently asked questions</h2>
+
+      <h3>What is a multiple line graph?</h3>
+      <p>A multiple line graph displays two or more datasets on the same graph for comparison. Each dataset is drawn as a separate line, making it easy to spot differences in trend, pace, or consistency.</p>
+
+      <h3>How do you plot multiple lines in Matplotlib?</h3>
+      <p>Call <code>plt.plot()</code> separately for each dataset before using <code>plt.show()</code>. Each call adds a new line to the same chart — no extra setup needed.</p>
+
+      <h3>When should I use a multiple line graph?</h3>
+      <p>Use it when comparing trends over time — player performance, stock prices, website traffic, or really anything where the same time axis applies to more than one thing.</p>
+
+      <h3>Can I use different colors for each line?</h3>
+      <p>Yes. Pass a <code>color</code> parameter inside each <code>plt.plot()</code> call. Hex codes like <code>'#184452'</code> work, and so do named colors like <code>'red'</code> or <code>'steelblue'</code>.</p>
 
       <div class="callout">
         <strong>More to explore →</strong><br><br>
