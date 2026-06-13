@@ -3,327 +3,250 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="icon" type="image/png" href="../assests/icon.png">
-  <meta name="description" content="Master pie charts in Python using Matplotlib with this beginner-friendly guide! Includes simple code, colorful charts, and a fun social media usage mini project.">
+  <link rel="icon" type="image/png" href="../assests/icon.png" />
+
+  <meta name="description" content="Learn how to create pie charts in Python using Matplotlib — with custom colors, explode effects, legends, donut charts, and a hands-on mini project. Beginner-friendly with real code." />
 
   <meta property="og:type" content="article" />
-<meta property="og:title" content="Pie Charts in Python (Matplotlib) – Beginner Guide + Fun Mini Project" />
-<meta property="og:description" content="Learn pie charts in Python using Matplotlib with beginner-friendly examples, custom colors, explode effects, donut charts, and a fun social media mini project." />
-<meta property="og:url" content="https://kiddoedu.org/matplotlib/pie.html" />
-<meta property="og:site_name" content="Kiddo" />
-<meta property="og:image" content="https://kiddoedu.org/matplotlib/pie.png" />
+  <meta property="og:title" content="Pie Charts in Python (Matplotlib) – Complete Beginner Guide" />
+  <meta property="og:description" content="Create pie charts in Python with Matplotlib. Custom colors, explode effects, legends, donut charts — step-by-step with real code and a mini project." />
+  <meta property="og:url" content="https://kiddoedu.org/matplotlib/pie.html" />
+  <meta property="og:site_name" content="Kiddo" />
+  <meta property="og:image" content="https://kiddoedu.org/matplotlib/pie.png" />
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Pie Charts in Python with Matplotlib" />
-<meta name="twitter:description" content="Learn pie charts in Python using Matplotlib. Colors, labels, explode effects, donut charts, and a fun beginner-friendly mini project." />
-<meta name="twitter:image" content="https://kiddoedu.org/matplotlib/pie.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pie Charts in Python with Matplotlib — Beginner Guide" />
+  <meta name="twitter:description" content="Create pie charts in Python with Matplotlib. Colors, labels, explode effects, donut charts, and a mini project. Real code, beginner-friendly." />
+  <meta name="twitter:image" content="https://kiddoedu.org/matplotlib/pie.png" />
 
-<title>Pie Charts in Python Using Matplotlib (Beginner Guide + Examples)</title>
-  <link rel="canonical" href="https://kiddoedu.org/matplotlib/pie.html">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
+  <title>Pie Charts in Python Using Matplotlib — Beginner Guide + Examples</title>
+  <link rel="canonical" href="https://kiddoedu.org/matplotlib/pie.html" />
 
   <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"TechArticle",
-  "headline":"Pie Charts in Python with Matplotlib",
-  "description":"Learn how to create pie charts in Python using Matplotlib with beginner-friendly examples, customization techniques, and a practical mini project.",
-  "author":{
-    "@type":"Person",
-    "name":"Palak Mishra"
-  },
-  "publisher":{
-    "@type":"Organization",
-    "name":"Kiddo"
-  },
-  "mainEntityOfPage":{
-    "@type":"WebPage",
-    "@id":"https://kiddoedu.org/matplotlib/pie.html"
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Pie Charts in Python with Matplotlib — Beginner Guide",
+    "description": "Learn how to create pie charts in Python using Matplotlib with beginner-friendly examples, custom colors, explode effects, donut charts, and a practical mini project.",
+    "url": "https://kiddoedu.org/matplotlib/pie.html",
+    "datePublished": "2025-01-01",
+    "dateModified": "2025-05-01",
+    "author": { "@type": "Person", "name": "Palak Mishra" },
+    "publisher": { "@type": "Organization", "name": "Kiddo", "url": "https://kiddoedu.org" },
+    "image": "https://kiddoedu.org/matplotlib/pie.png",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://kiddoedu.org/matplotlib/pie.html" }
   }
-}
-</script>
+  </script>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to create a pie chart in Python with Matplotlib",
+    "description": "Step-by-step guide to plotting a pie chart in Python using Matplotlib.",
+    "step": [
+      { "@type": "HowToStep", "name": "Import Matplotlib", "text": "Add import matplotlib.pyplot as plt at the top of your script." },
+      { "@type": "HowToStep", "name": "Define your data", "text": "Create a list of values (sizes) and a list of labels for each slice." },
+      { "@type": "HowToStep", "name": "Call plt.pie()", "text": "Use plt.pie(sizes, labels=labels, autopct='%1.1f%%') to draw the chart." },
+      { "@type": "HowToStep", "name": "Add a title", "text": "Use plt.title() to label the chart." },
+      { "@type": "HowToStep", "name": "Show the chart", "text": "Call plt.show() to render it." }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "How do you create a pie chart in Python?", "acceptedAnswer": { "@type": "Answer", "text": "Import matplotlib.pyplot as plt, define your data as a list of values and labels, call plt.pie(sizes, labels=labels, autopct='%1.1f%%'), then plt.show()." } },
+      { "@type": "Question", "name": "What does autopct do in a Matplotlib pie chart?", "acceptedAnswer": { "@type": "Answer", "text": "autopct automatically calculates and shows the percentage for each slice. '%1.1f%%' displays one decimal place — e.g. 23.5%." } },
+      { "@type": "Question", "name": "How do you explode a slice in a Matplotlib pie chart?", "acceptedAnswer": { "@type": "Answer", "text": "Pass an explode list to plt.pie(). Set a non-zero value for the slice you want to pull out — e.g. explode=[0.1, 0, 0, 0] pulls the first slice out by 10% of the radius." } },
+      { "@type": "Question", "name": "How do you make a donut chart in Matplotlib?", "acceptedAnswer": { "@type": "Answer", "text": "Pass wedgeprops=dict(width=0.65) to plt.pie(). This hollows out the center to create a donut shape. Adjust width to control ring thickness." } },
+      { "@type": "Question", "name": "When should I use a pie chart?", "acceptedAnswer": { "@type": "Answer", "text": "Use pie charts when showing parts of a whole with fewer than 6-7 categories. Avoid them when values are very similar or you need to compare magnitudes — a bar chart works better there." } },
+      { "@type": "Question", "name": "How do I add a legend to a pie chart in Matplotlib?", "acceptedAnswer": { "@type": "Answer", "text": "Remove labels from plt.pie(), then call plt.legend(labels, title='Title', loc='upper left', bbox_to_anchor=(1, 1)). Add plt.tight_layout() so it doesn't get clipped." } }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-ESNWS8F9HE');
   </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg: #f5f3ee;
-      --surface: #ffffff;
-      --surface2: #eceae4;
-      --text: #1a1814;
-      --text-muted: #6b6760;
-      --accent: #e86c2f;
-      --accent2: #3d5afe;
-      --accent3: #00b894;
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
       --border: rgba(0,0,0,0.08);
       --shadow: 0 4px 24px rgba(0,0,0,0.07);
       --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
-      --radius: 16px;
-      --radius-sm: 10px;
-      --header-h: 70px;
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
       --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
     }
     body.dark {
-      --bg: #0f0e0c;
-      --surface: #1c1a17;
-      --surface2: #252320;
-      --text: #f0ede6;
-      --text-muted: #918e87;
-      --accent: #ff7d3e;
-      --accent2: #7986cb;
-      --accent3: #55efc4;
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
       --border: rgba(255,255,255,0.07);
       --shadow: 0 4px 24px rgba(0,0,0,0.4);
       --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      transition: background var(--transition), color var(--transition);
-      overflow-x: hidden;
-    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
 
-    .progress-bar {
-      position: fixed; top: 0; left: 0; height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      z-index: 999; width: 0%; transition: width 0.1s linear;
-    }
+    /* ── Progress bar ── */
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 999; width: 0%; transition: width 0.1s linear; }
 
     /* ── Header ── */
-    header {
-      height: var(--header-h); display: flex; align-items: center;
-      justify-content: space-between; padding: 0 40px;
-      background: rgba(245,243,238,0.82); backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; z-index: 100; transition: background var(--transition);
-    }
+    header { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
     body.dark header { background: rgba(15,14,12,0.82); }
-
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
-    .logo span {
-      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem;
-      letter-spacing: -0.02em; color: var(--text);
-    }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
     .logo span em { font-style: normal; color: var(--accent); }
-
     nav { display: flex; align-items: center; gap: 8px; }
-    nav a {
-      font-weight: 500; font-size: 0.9rem; color: var(--text-muted);
-      text-decoration: none; padding: 6px 14px; border-radius: 8px;
-      transition: color var(--transition), background var(--transition);
-    }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
     nav a:hover { color: var(--text); background: var(--surface2); }
-
-    .theme-btn {
-      background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 50%; width: 38px; height: 38px; cursor: pointer;
-      font-size: 1rem; display: flex; align-items: center; justify-content: center;
-      transition: background var(--transition), transform var(--transition); margin-left: 8px;
-    }
+    .theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background var(--transition), transform var(--transition); margin-left: 8px; }
     .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
 
-    /* ── Mobile Header ── */
-    .mobile-header {
-      display: none; align-items: center; justify-content: space-between;
-      padding: 0 20px; height: var(--header-h);
-      background: rgba(245,243,238,0.82); backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; z-index: 100; transition: background var(--transition);
-    }
+    /* ── Mobile header ── */
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 20px; height: var(--header-h); background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
     body.dark .mobile-header { background: rgba(15,14,12,0.82); }
     .mobile-right { display: flex; align-items: center; gap: 8px; }
-    .hamburger {
-      background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 8px; width: 38px; height: 38px; cursor: pointer;
-      font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
-      position: relative;
-    }
-    .menu-dropdown {
-      display: none; position: absolute; top: calc(100% + 8px); right: 0;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius-sm); box-shadow: var(--shadow-lg);
-      padding: 8px; min-width: 160px; flex-direction: column; gap: 2px;
-    }
+    .hamburger { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; position: relative; }
+    .menu-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); padding: 8px; min-width: 160px; flex-direction: column; gap: 2px; }
     .menu-dropdown.open { display: flex; }
-    .menu-dropdown a {
-      display: block; font-weight: 500; font-size: 0.95rem; color: var(--text);
-      text-decoration: none; padding: 9px 14px; border-radius: 8px;
-      transition: background var(--transition);
-    }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
     .menu-dropdown a:hover { background: var(--surface2); }
 
     /* ── Layout ── */
-    .page-wrap {
-      max-width: 1200px; margin: 0 auto;
-      padding: 40px 40px 80px;
-      display: grid; grid-template-columns: 220px 1fr;
-      gap: 40px; align-items: start;
-    }
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
 
     /* ── Sidebar ── */
-    aside {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow);
-      position: sticky; top: calc(var(--header-h) + 20px);
-    }
-    .aside-label {
-      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem;
-      letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted);
-      margin-bottom: 14px;
-    }
+    aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px); }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
     aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
-    aside ul li a {
-      display: flex; align-items: center; gap: 8px; padding: 8px 10px;
-      border-radius: 8px; font-size: 0.875rem; font-weight: 500;
-      color: var(--text-muted); text-decoration: none;
-      transition: background var(--transition), color var(--transition); line-height: 1.3;
-    }
+    aside ul li a { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.3; }
     aside ul li a:hover { background: var(--surface2); color: var(--text); }
     aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
-    aside ul li a .dot {
-      width: 5px; height: 5px; border-radius: 50%; background: currentColor;
-      flex-shrink: 0; opacity: 0.5;
-    }
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; }
 
     /* ── Main ── */
     main { min-width: 0; }
-
-    .breadcrumb {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px;
-    }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
     .breadcrumb a { color: var(--text-muted); text-decoration: none; }
     .breadcrumb a:hover { color: var(--accent); }
     .breadcrumb span { opacity: 0.4; }
-
-    main h1 {
-      font-family: 'Syne', sans-serif; font-weight: 800;
-      font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em;
-      line-height: 1.15; margin-bottom: 16px;
-    }
-    main h2 {
-      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem;
-      letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px;
-    }
-    main h3 {
-      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem;
-      margin-top: 28px; margin-bottom: 12px; color: var(--text-muted);
-    }
-    main h4 {
-      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem;
-      margin-top: 24px; margin-bottom: 10px;
-    }
-    main p { font-size: 0.95rem; line-height: 1.75; color: var(--text); margin-bottom: 14px; }
-    main code {
-      font-family: 'Courier New', monospace; font-size: 0.88em;
-      background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 5px; padding: 2px 6px; color: var(--accent);
-    }
-    main ul {
-      padding-left: 0; list-style: none;
-      display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;
-    }
-    main ul li {
-      font-size: 0.95rem; line-height: 1.6;
-      padding-left: 20px; position: relative; color: var(--text);
-    }
-    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
-    main ul li b { font-weight: 600; }
-    main img {
-      max-width: 100%; height: auto; border-radius: var(--radius-sm);
-      border: 1px solid var(--border); margin: 16px 0; display: block;
-    }
-    main i { color: var(--text-muted); font-size: 0.85rem; }
-
-    /* details/summary */
-    details {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius-sm); padding: 14px 18px; margin: 20px 0;
-      font-size: 0.9rem;
-    }
-    summary { cursor: pointer; font-weight: 600; color: var(--text); }
-    details p { margin-top: 10px; margin-bottom: 0; color: var(--text-muted); }
-
-    /* meta pills */
     .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
-    .meta-pill {
-      background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted);
-    }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
     .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
+
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-top: 24px; margin-bottom: 10px; color: var(--text); }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; margin-top: 16px; margin-bottom: 8px; color: var(--text-muted); }
+    main p { font-size: 0.95rem; line-height: 1.75; color: var(--text); margin-bottom: 14px; }
+    main code { font-family: 'Courier New', monospace; font-size: 0.88em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
+    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    main img { max-width: 100%; height: auto; border-radius: var(--radius-sm); border: 1px solid var(--border); margin: 16px 0; display: block; }
+    main i { color: var(--text-muted); font-size: 0.85rem; }
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
+
+    /* ── TOC ── */
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; }
+    .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 6px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
+    .toc-grid a:hover { background: var(--surface2); color: var(--text); }
+    .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
+
+    /* ── Param table ── */
+    .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 26px; font-size: 0.875rem; }
+    .param-table th { text-align: left; padding: 8px 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+    .param-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); line-height: 1.5; vertical-align: top; }
+    .param-table tr:last-child td { border-bottom: none; }
+    .param-table tr:hover td { background: var(--surface2); }
+    .param-table td:first-child code { font-size: 0.82em; }
+    .param-table td:last-child { color: var(--text-muted); font-size: 0.875rem; }
+
+    /* ── Use/avoid cards ── */
+    .use-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0 28px; }
+    .use-card { border-radius: var(--radius-sm); padding: 18px 20px; }
+    .use-card.yes { background: rgba(0,184,148,0.07); border: 1px solid rgba(0,184,148,0.2); }
+    .use-card.no  { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.18); }
+    .use-card-head { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 7px; }
+    .use-card.yes .use-card-head { color: var(--accent3); }
+    .use-card.no  .use-card-head { color: var(--accent); }
+    .use-card ul { margin: 0; }
+    .use-card ul li { font-size: 0.875rem; line-height: 1.55; color: var(--text); }
+    .use-card ul li::before { color: inherit; opacity: 0.6; }
+
+    /* ── Step cards ── */
+    .steps { display: flex; flex-direction: column; gap: 0; margin: 20px 0 28px; position: relative; }
+    .steps::before { content: ''; position: absolute; left: 19px; top: 20px; bottom: 20px; width: 1px; background: var(--border); }
+    .step { display: flex; gap: 16px; align-items: flex-start; padding: 6px 0 18px; position: relative; }
+    .step-num { width: 38px; height: 38px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.82rem; color: var(--accent); flex-shrink: 0; position: relative; z-index: 1; }
+    .step-body { padding-top: 8px; }
+    .step-body strong { font-family: 'Syne', sans-serif; font-weight: 700; display: block; margin-bottom: 4px; font-size: 0.95rem; }
+    .step-body p { font-size: 0.88rem; color: var(--text-muted); margin: 0; line-height: 1.6; }
 
     /* ── Code blocks ── */
-    .code-container {
-      background: #1e1e1e; border-radius: var(--radius-sm);
-      overflow: hidden; margin: 16px 0 26px; border: 1px solid var(--border);
-    }
-    .code-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .lang-tag {
-      font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.3);
-      letter-spacing: 0.08em; text-transform: uppercase;
-    }
-    .copy-btn {
-      background: none; border: none; color: rgba(255,255,255,0.35);
-      padding: 2px 0; cursor: pointer; font-size: 0.75rem;
-      font-family: 'DM Sans', sans-serif; transition: color var(--transition); position: relative;
-    }
+    .code-container { background: #1e1e1e; border-radius: var(--radius-sm); overflow: hidden; margin: 16px 0 26px; border: 1px solid var(--border); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; text-transform: uppercase; }
+    .copy-btn { background: none; border: none; color: rgba(255,255,255,0.35); padding: 2px 0; cursor: pointer; font-size: 0.75rem; font-family: 'DM Sans', sans-serif; transition: color var(--transition); position: relative; }
     .copy-btn:hover { color: rgba(255,255,255,0.75); }
-    .tooltip {
-      position: absolute; top: -28px; right: 0;
-      background: var(--surface2); color: var(--text);
-      padding: 3px 8px; font-size: 0.7rem; border-radius: 4px;
-      opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap;
-    }
+    .tooltip { position: absolute; top: -28px; right: 0; background: var(--surface2); color: var(--text); padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
     .tooltip.show { opacity: 1; }
-    pre {
-      margin: 0; padding: 18px; overflow-x: auto;
-      font-family: 'Courier New', Courier, monospace; font-size: 0.875rem;
-      line-height: 1.65; color: #d4d4d4; background: transparent;
-      white-space: pre; tab-size: 2;
-    }
+    pre { margin: 0; padding: 18px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.875rem; line-height: 1.65; color: #d4d4d4; background: transparent; white-space: pre; tab-size: 2; }
 
     /* ── Callout ── */
-    .callout {
-      background: var(--surface); border: 1px solid var(--border);
-      border-left: 3px solid var(--accent); border-radius: var(--radius-sm);
-      padding: 16px 20px; margin: 24px 0; font-size: 0.9rem; line-height: 1.6;
-    }
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 24px 0; font-size: 0.9rem; line-height: 1.6; }
     .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
     .callout a:hover { text-decoration: underline; }
 
     /* ── Note box ── */
-    .note-box {
-      background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15);
-      border-radius: var(--radius-sm); padding: 14px 18px;
-      margin: 20px 0; font-size: 0.9rem; color: var(--text); line-height: 1.6;
-    }
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 20px 0; font-size: 0.9rem; color: var(--text); line-height: 1.6; }
 
-    /* ── Divider ── */
-    .section-divider {
-      height: 1px; background: var(--border); margin: 40px 0;
-    }
+    /* ── FAQ accordion ── */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 20px 0; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; padding: 15px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.93rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; font-style: normal; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
+    .faq-a.open { max-height: 220px; padding: 2px 18px 16px; }
+    .faq-a code { font-family: 'Courier New', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* ── Project checklist ── */
+    .checklist { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+    .check-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; font-size: 0.9rem; line-height: 1.5; }
+    .check-item .ci { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .check-item strong { font-family: 'Syne', sans-serif; font-weight: 700; display: block; font-size: 0.87rem; margin-bottom: 2px; }
+
+    /* ── Author strip ── */
+    .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .author-info { font-size: 0.85rem; line-height: 1.5; }
+    .author-info strong { font-weight: 600; display: block; }
+    .author-info span { color: var(--text-muted); }
 
     /* ── Footer ── */
     footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
-    .footer-container {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 14px;
-    }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
     .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
     .footer-links { display: flex; gap: 20px; }
     .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
@@ -335,6 +258,8 @@
       .mobile-header { display: flex; }
       .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
       aside { position: static; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .use-grid { grid-template-columns: 1fr; }
       footer { padding: 20px; }
       .footer-container { flex-direction: column; align-items: flex-start; }
     }
@@ -343,105 +268,165 @@
 </head>
 <body>
 
-  <div class="progress-bar" id="progressBar"></div>
+<div class="progress-bar" id="progressBar"></div>
 
-  <!-- Desktop Header -->
-  <header>
-    <a class="logo" href="../index.html">
-      <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
-      <span>Kid<em>do</em></span>
-    </a>
-    <nav>
-      <a href="../index.html">Home</a>
-      <a href="../info/about.html">About</a>
-      <a href="../info/contact.html">Contact</a>
-      <button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button>
-    </nav>
-  </header>
+<header>
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../info/about.html">About</a>
+    <a href="../info/contact.html">Contact</a>
+    <button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button>
+  </nav>
+</header>
 
-  <!-- Mobile Header -->
-  <div class="mobile-header">
-    <a class="logo" href="../index.html">
-      <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
-      <span>Kid<em>do</em></span>
-    </a>
-    <div class="mobile-right">
-      <button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button>
-      <button class="hamburger" id="hamburgerBtn">☰
-        <div class="menu-dropdown" id="menuDropdown">
-          <a href="../index.html">Home</a>
-          <a href="../info/about.html">About</a>
-          <a href="../info/contact.html">Contact</a>
-        </div>
-      </button>
-    </div>
-  </div>
-
-  <div class="page-wrap">
-
-    <!-- Sidebar -->
-    <aside>
-      <div class="aside-label">Matplotlib Topics</div>
-      <ul>
-        <li><a href="../matplotlib/line-g.html"><span class="dot"></span>Line Graphs</a></li>
-        <li><a href="../matplotlib/multi-line-g.html"><span class="dot"></span>Multiple Line Graphs</a></li>
-        <li><a href="../matplotlib/customise.html"><span class="dot"></span>Customize Graphs</a></li>
-        <li><a href="../matplotlib/bar.html"><span class="dot"></span>Bar Graphs</a></li>
-        <li><a href="../matplotlib/scatter.html"><span class="dot"></span>Scatter Plots</a></li>
-        <li><a href="../matplotlib/histogram.html"><span class="dot"></span>Histogram</a></li>
-        <li><a href="../matplotlib/pie.html" class="active"><span class="dot"></span>Pie Charts</a></li>
-        <li><a href="../matplotlib/subplots.html"><span class="dot"></span>Subplots</a></li>
-        <li><a href=""><span class="dot"></span>Legends & Annotations</a></li>
-      </ul>
-    </aside>
-
-    <!-- Main -->
-    <main>
-      <div class="breadcrumb">
+<div class="mobile-header">
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <div class="mobile-right">
+    <button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button>
+    <button class="hamburger" id="hamburgerBtn">☰
+      <div class="menu-dropdown" id="menuDropdown">
         <a href="../index.html">Home</a>
-        <span>›</span>
-        <a href="../matplotlib/line-g.html">Matplotlib</a>
-        <span>›</span>
-        Pie Charts
+        <a href="../info/about.html">About</a>
+        <a href="../info/contact.html">Contact</a>
       </div>
+    </button>
+  </div>
+</div>
 
-      <h1>Plot Pie Charts in Python with Matplotlib</h1>
+<div class="page-wrap">
+  <aside>
+    <div class="aside-label">Matplotlib Topics</div>
+    <ul>
+      <li><a href="../matplotlib/line-g.html"><span class="dot"></span>Line Graphs</a></li>
+      <li><a href="../matplotlib/multi-line-g.html"><span class="dot"></span>Multiple Line Graphs</a></li>
+      <li><a href="../matplotlib/customise.html"><span class="dot"></span>Customize Graphs</a></li>
+      <li><a href="../matplotlib/bar.html"><span class="dot"></span>Bar Graphs</a></li>
+      <li><a href="../matplotlib/scatter.html"><span class="dot"></span>Scatter Plots</a></li>
+      <li><a href="../matplotlib/histogram.html"><span class="dot"></span>Histogram</a></li>
+      <li><a href="../matplotlib/pie.html" class="active"><span class="dot"></span>Pie Charts</a></li>
+      <li><a href="../matplotlib/subplots.html"><span class="dot"></span>Subplots</a></li>
+      <li><a href=""><span class="dot"></span>Legends & Annotations</a></li>
+    </ul>
+  </aside>
 
-      <div class="meta-row">
-        <span class="meta-pill">📊 Data Viz</span>
-        <span class="meta-pill green">Beginner</span>
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../matplotlib/line-g.html">Matplotlib</a><span>›</span>
+      Pie Charts
+    </div>
+
+    <h1>Pie Charts in Python with Matplotlib</h1>
+
+    <div class="meta-row">
+      <span class="meta-pill">📊 Data Viz</span>
+      <span class="meta-pill green">Beginner</span>
+      <span class="date-badge">Updated June 2026</span>
+    </div>
+
+    <p>
+Pie charts are great when you want to show how a whole is divided into smaller parts. Instead of comparing raw numbers, they help you quickly see which categories take up the biggest share.
+</p>
+
+<p>
+Whether you're analyzing screen time, monthly expenses, vote shares, market share, or programming language popularity, a pie chart makes percentage-based data much easier to understand at a glance.
+</p>
+
+<p>
+In this guide, you'll learn how to create pie charts in Python using Matplotlib, customize colors, add percentage labels, highlight important slices, and even turn a regular pie chart into a modern donut chart.
+</p>
+
+    <!-- TOC -->
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">In this guide</div>
+      <div class="toc-grid">
+        <a href="#basics"><span class="toc-num">01</span>Basic pie chart</a>
+        <a href="#params"><span class="toc-num">02</span>Key parameters</a>
+        <a href="#explode"><span class="toc-num">03</span>Explode a slice</a>
+        <a href="#legend"><span class="toc-num">04</span>Add a legend</a>
+        <a href="#donut"><span class="toc-num">05</span>Donut chart</a>
+        <a href="#when"><span class="toc-num">06</span>When to use</a>
+        <a href="#project"><span class="toc-num">07</span>Mini project</a>
+        <a href="#faq"><span class="toc-num">08</span>FAQs</a>
       </div>
+    </nav>
 
-      <p>Pie charts get a bad reputation for being boring, but with Matplotlib you can make them clean, colorful, and actually useful. We're serving some sweet plots with Matplotlib today. Whether you're a data newbie or just here to make things look good, this guide's got you covered.</p>
+    <div class="section-divider"></div>
 
-      <h2>Why Use Pie Charts?</h2>
-      <p>Because sometimes, you just want to show how the cake is divided. Pie charts make it super easy to visualize proportions — who got the biggest slice, who got none, and everything in between. They're quick, clean, and instantly understandable, especially when dealing with simple categorical data.</p>
+    <!-- How it works -->
+    <h2>How plt.pie() works — in 5 steps</h2>
 
-      <h2>What You'll Learn</h2>
-      <ul>
-        <li>How to plot pie charts with just a few lines of Python</li>
-        <li>Customize slices with colors, labels, and explode effects</li>
-        <li>When to use pie charts (and when not to)</li>
-        <li>Pro tips to make your visuals pop for presentations & projects</li>
-        <li>Master <code>plt.pie()</code> with multiple data slices — one chart, many stories</li>
-      </ul>
-
-      <details>
-        <summary>New to Python? Installing Matplotlib is easy</summary>
-        <p>Just open your terminal and run: <code>pip install matplotlib</code>. That's all you need to get started!</p>
-      </details>
-
-      <h2>Step-by-Step Code Example</h2>
-      <p>Here's a simple example of how to create a pie chart in Matplotlib:</p>
-
-      <div class="code-container">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Import Matplotlib</strong>
+          <p><code>import matplotlib.pyplot as plt</code> — that's your only import for a basic chart.</p>
         </div>
-        <pre><code>import matplotlib.pyplot as plt
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Define your data</strong>
+          <p>Two lists: one for values (the slice sizes), one for labels (the names). Values don't need to add to 100 — Matplotlib handles the percentage calculation.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Call plt.pie()</strong>
+          <p>Pass in your sizes, labels, and any styling parameters. One function call draws the whole chart.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Add a title</strong>
+          <p><code>plt.title("Your title here")</code> — straightforward.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <strong>Show it</strong>
+          <p><code>plt.show()</code> renders the chart. Don't skip this or nothing appears.</p>
+        </div>
+      </div>
+    </div>
 
-# Meme names
+    <div class="section-divider"></div>
+
+    <!-- Basic example -->
+    <h2 id="basics">Basic pie chart example</h2>
+    <p>
+Let's start with a simple example showing programming language popularity. This is one of the easiest ways to understand how Matplotlib converts raw values into slices and automatically calculates percentages for each category.
+</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>import matplotlib.pyplot as plt
+
+labels = ['Python', 'Java', 'C++', 'JavaScript']
+sizes  = [40, 25, 20, 15]
+
+plt.pie(sizes, labels=labels, autopct='%1.1f%%')
+plt.title('Programming Language Popularity')
+plt.show()</code></pre>
+    </div>
+
+    <p>Now a more interesting version — how long the top 6 internet memes have been famous:</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>import matplotlib.pyplot as plt
+
 memes = [
     "Pepe the Frog",
     "Doge",
@@ -450,190 +435,310 @@ memes = [
     "Woman Yelling at a Cat",
     "Grumpy Cat"
 ]
-
-# Years they've been famous (as of 2025)
 years_famous = [17, 12, 12, 8, 6, 13]
-
 colors = ['#9fcbf5', '#67a6e0', '#2b85d9', '#1862a8', '#1b4f80', '#073b6b']
 
-plt.pie(years_famous, labels=memes, autopct='%1.1f%%', startangle=140, colors=colors)
-plt.title("Top 6 Memes by Years of Popularity (as of 2025)",
-          fontdict={'fontsize': 16, 'fontname': 'Comic Sans MS'})
+plt.pie(years_famous, labels=memes, autopct='%1.1f%%',
+        startangle=140, colors=colors)
+plt.title("Top 6 Memes by Years of Popularity (2025)",
+          fontdict={'fontsize': 15})
 plt.show()</code></pre>
+    </div>
+
+    <h4>Output:</h4>
+    <img src="../matplotlib/pie.png" alt="Pie chart in Python using Matplotlib showing top 6 internet memes by years of popularity, created with plt.pie()" width="600" height="480" loading="lazy" />
+    <i>Each slice sized by how many years that meme has stayed relevant — Pepe the Frog takes the biggest cut at 17 years.</i>
+
+    <div class="section-divider"></div>
+
+    <!-- Params -->
+    <h2 id="params">Key parameters explained</h2>
+    <p>Everything you can drop inside <code>plt.pie()</code>:</p>
+
+    <table class="param-table">
+      <thead>
+        <tr><th>Parameter</th><th>What it does</th><th>Example</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>sizes</code></td><td>The data values — determines slice size. Doesn't need to sum to 100.</td><td><code>[40, 25, 20, 15]</code></td></tr>
+        <tr><td><code>labels</code></td><td>Text shown next to each slice.</td><td><code>['Python', 'Java']</code></td></tr>
+        <tr><td><code>autopct</code></td><td>Shows percentage inside each slice. <code>'%1.1f%%'</code> = 1 decimal place.</td><td><code>'%1.1f%%'</code></td></tr>
+        <tr><td><code>colors</code></td><td>List of colors, one per slice. Accepts hex codes or named colors.</td><td><code>['#e86c2f', '#3d5afe']</code></td></tr>
+        <tr><td><code>startangle</code></td><td>Rotates the starting position of the first slice. 90 = start at top.</td><td><code>startangle=90</code></td></tr>
+        <tr><td><code>explode</code></td><td>Pulls slices out from center. Value = fraction of radius.</td><td><code>[0.1, 0, 0, 0]</code></td></tr>
+        <tr><td><code>shadow</code></td><td>Adds a drop shadow under the chart.</td><td><code>shadow=True</code></td></tr>
+        <tr><td><code>wedgeprops</code></td><td>Styles the wedges — use <code>width</code> to create a donut.</td><td><code>dict(width=0.65)</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- Explode -->
+    <h2 id="explode">Explode a slice</h2>
+<p>
+Sometimes one category dominates the entire chart. Instead of letting it blend in with everything else, Matplotlib lets you pull that slice outward using the <code>explode</code> parameter.
+</p>
+
+<p>
+It's a simple effect, but it immediately draws attention to the most important part of your data. Think of it as putting a spotlight on the slice you want readers to notice first.
+</p>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>explode = [0.1, 0, 0, 0, 0, 0]  # pulls out Pepe the Frog
+
+plt.pie(years_famous, labels=memes, autopct='%1.1f%%',
+        startangle=140, colors=colors, explode=explode)
+plt.title("Pepe Leads — Explode Effect")
+plt.show()</code></pre>
+    </div>
+
+    <p>The value <code>0.1</code> means "pull this slice outward by 10% of the radius." Use <code>0.2</code> or <code>0.3</code> for a more dramatic separation. Every other slice stays at <code>0</code>.</p>
+
+    <img src="../matplotlib/explode.png" alt="Exploded pie chart in Python — one slice pulled out using the explode parameter in Matplotlib plt.pie()" width="600" height="480" loading="lazy" />
+
+    <div class="section-divider"></div>
+
+    <!-- Legend -->
+    <h2 id="legend">Move labels to a legend</h2>
+    <p>When slice labels are long, they overlap on the chart. The cleaner solution is to remove inline labels and use <code>plt.legend()</code> instead:</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># Remove labels= from plt.pie() — pass only sizes and styles
+plt.pie(years_famous, autopct='%1.1f%%',
+        startangle=140, colors=colors)
+
+# Add legend outside the chart
+plt.legend(memes,
+           title="Memes",
+           loc="upper left",
+           bbox_to_anchor=(1, 1))
+
+plt.tight_layout()  # prevents the legend from being clipped
+plt.show()</code></pre>
+    </div>
+
+    <ul>
+      <li><b>Remove <code>labels=memes</code> from <code>plt.pie()</code></b> — otherwise labels appear twice</li>
+      <li><b><code>bbox_to_anchor=(1, 1)</code></b> — anchors the legend box outside the chart area</li>
+      <li><b><code>plt.tight_layout()</code></b> — adjusts figure bounds so nothing gets cut off</li>
+    </ul>
+
+    <img src="../matplotlib/label.png" alt="Matplotlib pie chart with external legend — labels placed outside chart using plt.legend() and bbox_to_anchor" width="600" height="480" loading="lazy" />
+
+    <div class="section-divider"></div>
+
+    <!-- Donut -->
+    <h2 id="donut">Donut chart with wedgeprops</h2>
+<p>
+Regular pie charts work great, but donut charts often look cleaner and more modern. They show the same information while leaving extra space in the center for labels, totals, or additional insights.
+</p>
+
+<p>
+In Matplotlib, converting a pie chart into a donut chart only requires one extra parameter. The <code>wedgeprops</code> argument controls the appearance of each slice and can create the hollow center that gives donut charts their signature look.
+</p>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>plt.pie(years_famous, labels=memes, autopct='%1.1f%%',
+        startangle=140, colors=colors,
+        wedgeprops=dict(width=0.65))
+
+# Optional: add a label in the center hole
+plt.text(0, 0, "Memes", ha='center', va='center',
+         fontsize=13, fontweight='bold')
+
+plt.title("Meme Longevity — Donut Chart")
+plt.show()</code></pre>
+    </div>
+
+    <p><code>width=0.65</code> means each wedge is 65% of the full radius — leaving 35% hollow. Lower the number for a thinner ring. The optional <code>plt.text(0, 0, ...)</code> places a label right in the center hole.</p>
+
+    <img src="../matplotlib/wedgeprops.png" alt="Donut chart in Python using Matplotlib — pie chart with hollow center created using wedgeprops width parameter" width="600" height="480" loading="lazy" />
+
+    <div class="section-divider"></div>
+
+    <!-- When to use -->
+    <h2 id="when">When to use a pie chart</h2>
+
+    <div class="use-grid">
+      <div class="use-card yes">
+        <div class="use-card-head">✓ Use it when</div>
+        <ul>
+          <li>Showing parts of a whole — budget, votes, time split</li>
+          <li>Fewer than 6–7 categories</li>
+          <li>Values are visually distinct (not too close to each other)</li>
+          <li>You want a quick, high-level overview</li>
+        </ul>
       </div>
-
-      <p>This pie chart visualizes how long the top 6 legendary internet memes have been famous as of 2025.</p>
-
-      <h3>Quick Highlights</h3>
-      <ul>
-        <li><code>memes = [...]</code> — 6 legendary memes, each one a certified icon</li>
-        <li><code>years_famous = [...]</code> — how many years each meme has ruled the internet</li>
-        <li><code>colors = [...]</code> — custom shades to keep things clean and not chaotic</li>
-        <li><code>plt.pie(...)</code> — draws the pie with labels, % values, colors, and a starting angle</li>
-        <li><code>autopct='%1.1f%%'</code> — shows percentage with 1 decimal place</li>
-        <li><code>startangle=140</code> — rotates the pie for better visual balance</li>
-        <li><code>plt.title(...)</code> — adds a title in Comic Sans because memes deserve drama</li>
-        <li><code>plt.show()</code> — renders the final chart</li>
-      </ul>
-
-      <h4>Output:</h4>
-      <img src="../matplotlib/pie.png" alt="Pie chart output" />
-      <i>A clean blue-toned pie chart showing meme popularity.</i>
-
-      <div class="section-divider"></div>
-
-      <h2>Going Further</h2>
-
-      <h4>Exploding Slices: Making One Piece Pop</h4>
-      <div class="code-container">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-        </div>
-        <pre><code>explodes = [0, 0.1, 0, 0, 0, 0]</code></pre>
-      </div>
-      <p>Sometimes, you want a slice to stand out — maybe it's the most important, or you just want it to grab attention. The <code>explode</code> parameter pulls out specific slices for emphasis.</p>
-      <img src="../matplotlib/explode.png" alt="Exploded pie chart" />
-
-      <h4>Separate Legends, Clearer Vibes</h4>
-      <div class="code-container">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-        </div>
-        <pre><code>plt.legend(memes, title="Memes", loc="upper left", bbox_to_anchor=(1, 1))</code></pre>
-      </div>
-      <p>Instead of crowding the pie with labels inside slices, use <code>plt.legend()</code> to place them outside — neat and clean.</p>
-      <ul>
-        <li><code>memes</code> — the list of labels</li>
-        <li><code>title="Memes"</code> — adds a title to the legend box</li>
-        <li><code>loc="upper left"</code> — positions the legend near the top-left</li>
-        <li><code>bbox_to_anchor=(1, 1)</code> — pushes the legend outside the chart so it doesn't overlap</li>
-      </ul>
-      <img src="../matplotlib/label.png" alt="Pie chart with legend" />
-
-      <h4>Donut Vibes with <code>wedgeprops</code></h4>
-      <div class="code-container">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-        </div>
-        <pre><code>plt.pie(data, wedgeprops=dict(width=0.7))</code></pre>
-      </div>
-      <p>Want to turn your pie chart into a donut chart? <code>wedgeprops</code> lets you style the pie slices — setting <code>width=0.7</code> hollows out the center.</p>
-      <img src="../matplotlib/wedgeprops.png" alt="Donut chart using wedgeprops" />
-
-      <div class="section-divider"></div>
-
-      <h2>When to Use Pie Charts</h2>
-      <div class="note-box">
-        <strong>Use pie charts when</strong> you're showing parts of a whole (budget, votes, proportions), there are fewer categories (ideally under 6), and you want a quick visual idea of relative sizes.
-      </div>
-      <p>Avoid them when you have too many categories (it'll look like a pizza explosion), values are very close to each other (bar charts show differences better), or you need deep analytical insight.</p>
-
-      <div class="section-divider"></div>
-
-      <h2>Mini Project: Visualize Your Social Media Usage</h2>
-      <p>Ever wondered how much time you spend scrolling through Instagram or watching YouTube Shorts? In this mini project, create a Python pie chart showing how you spend time on different social media apps.</p>
-
-      <h3>Your Challenge</h3>
-      <p>Build the chart yourself! Use any sample data — maybe the time you spent on Instagram, WhatsApp, YouTube, Twitter, and Snapchat last week.</p>
-
-      <h3>Bonus Ideas</h3>
-      <ul>
-        <li>Use real data from your phone's screen time tracker</li>
-        <li>Add your own custom colors to the pie chart</li>
-        <li>Animate or export the chart as an image</li>
-      </ul>
-
-      <div class="callout">
-        Once you're done, try applying the same logic to other areas of life — study time, expenses, or hobbies. This is just the start.
-      </div>
-
-
-      <h2>Frequently Asked Questions</h2>
-
-<h3>What is a pie chart in Python?</h3>
-<p>A pie chart is a circular chart that shows how different categories contribute to a whole. In Python, pie charts are commonly created using Matplotlib's <code>plt.pie()</code> function.</p>
-
-<h3>When should I use a pie chart?</h3>
-<p>Use pie charts when you want to show proportions or percentages and the number of categories is small.</p>
-
-<h3>How do I show percentages in a pie chart?</h3>
-<p>Use the <code>autopct</code> parameter inside <code>plt.pie()</code> to display percentages automatically.</p>
-
-
-<div class="note-box">
-  <strong>About the Author</strong><br>
-  This tutorial was written by Palak Mishra, a software development intern and backend developer who enjoys turning technical concepts into beginner-friendly guides.
-</div>
-
-      <div class="callout">
-        <strong>More to explore →</strong><br><br>
-        <a href="../matplotlib/bar.html">Bar Graphs</a> ·
-        <a href="../matplotlib/scatter.html">Scatter Plots</a> ·
-        <a href="../matplotlib/multi-line-g.html">Multiple Line Graphs</a> ·
-        <a href="../matplotlib/line-g.html">Line Graphs</a> ·
-        <a href="../matplotlib/histogram.html">Histogram</a>
-      </div>
-    </main>
-
-  </div>
-
-  <footer>
-    <div class="footer-container">
-      <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
-      <div class="footer-links">
-        <a href="../info/privacy.html">Privacy</a>
-        <a href="../info/terms.html">Terms</a>
-        <a href="../info/contact.html">Contact</a>
+      <div class="use-card no">
+        <div class="use-card-head">✗ Avoid it when</div>
+        <ul>
+          <li>More than 7 categories — becomes unreadable</li>
+          <li>Values are very similar — bar chart shows differences better</li>
+          <li>You need precise comparisons</li>
+          <li>Your data doesn't represent parts of a whole</li>
+        </ul>
       </div>
     </div>
-  </footer>
 
-  <script>
-    const desktopToggle = document.getElementById('desktopToggleTheme');
-    const mobileToggle  = document.getElementById('mobileToggleTheme');
-    const applyTheme = (dark) => {
-      document.body.classList.toggle('dark', dark);
-      const icon = dark ? '☀️' : '🌙';
-      if (desktopToggle) desktopToggle.textContent = icon;
-      if (mobileToggle)  mobileToggle.textContent  = icon;
-    };
-    applyTheme(localStorage.getItem('theme') === 'dark');
-    const toggleTheme = () => {
-      const isDark = !document.body.classList.contains('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      applyTheme(isDark);
-    };
-    if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
-    if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+    <div class="callout">
+      <strong>Rule of thumb:</strong> if you're comparing values to each other, use a bar chart. If you're showing how something divides into parts, use a pie chart.
+    </div>
 
-    const hamburger    = document.getElementById('hamburgerBtn');
-    const menuDropdown = document.getElementById('menuDropdown');
-    hamburger?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      menuDropdown.classList.toggle('open');
-    });
-    document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+    <div class="section-divider"></div>
 
-    const progressBar = document.getElementById('progressBar');
-    window.addEventListener('scroll', () => {
-      const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-      progressBar.style.width = Math.min(pct, 100) + '%';
-    });
+    <!-- Mini project -->
+    <h2 id="project">Mini project — visualize your screen time</h2>
+    <p>Your phone already has the data. Open your screen time or digital wellbeing settings, pull last week's numbers, and build a pie chart that shows exactly where your hours went.</p>
 
-    document.querySelectorAll('.code-container').forEach(container => {
-      const btn     = container.querySelector('.copy-btn');
-      const tooltip = container.querySelector('.tooltip');
-      const code    = container.querySelector('pre code');
-      btn.addEventListener('click', () => {
-        navigator.clipboard.writeText(code.innerText.trim()).then(() => {
-          tooltip.classList.add('show');
-          setTimeout(() => tooltip.classList.remove('show'), 2000);
-        });
+    <div class="checklist">
+      <div class="check-item"><span class="ci"></span><div><strong>Get your data</strong> Open Screen Time (iOS) or Digital Wellbeing (Android) and note hours spent on your top 5–6 apps.</div></div>
+      <div class="check-item"><span class="ci"></span><div><strong>Build the basic chart</strong> Use <code>plt.pie()</code> with your apps as labels and hours as sizes.</div></div>
+      <div class="check-item"><span class="ci"></span><div><strong>Style it</strong> Pick a color palette, add <code>autopct</code>, and rotate with <code>startangle</code> for balance.</div></div>
+      <div class="check-item"><span class="ci"></span><div><strong>Explode the worst offender</strong> Use <code>explode</code> to pull out whichever app has the embarrassingly high number.</div></div>
+      <div class="check-item"><span class="ci"></span><div><strong>Bonus: convert to donut</strong> Add <code>wedgeprops=dict(width=0.65)</code> and put total hours in the center with <code>plt.text()</code>.</div></div>
+    </div>
+
+    <div class="callout">
+      <strong>Level up:</strong> save the chart as an image file with <code>plt.savefig('screen_time.png', bbox_inches='tight', dpi=150)</code> instead of <code>plt.show()</code>. You'll have a shareable graphic ready to go.
+    </div>
+
+    <div class="section-divider"></div>
+<h2>Common pie chart mistakes beginners make</h2>
+
+<p>
+Pie charts are easy to create, but a few common mistakes can make them harder to read than they need to be.
+</p>
+
+<ul>
+<li>Using too many categories and creating tiny unreadable slices.</li>
+<li>Comparing values that are almost identical.</li>
+<li>Using similar colors that blend together.</li>
+<li>Exploding multiple slices at once.</li>
+<li>Forgetting percentage labels with <code>autopct</code>.</li>
+<li>Using a pie chart when a bar chart would communicate the data more clearly.</li>
+</ul>
+
+<p>
+As a general rule, keep pie charts under seven categories and use them only when your data represents parts of a whole.
+</p>
+    <div class="section-divider"></div>
+
+    <!-- FAQ -->
+    <h2 id="faq">Frequently asked questions</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do you create a pie chart in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Import matplotlib.pyplot as plt, define a list of values and labels, call <code>plt.pie(sizes, labels=labels, autopct='%1.1f%%')</code>, then <code>plt.show()</code>. That's the core of it — everything else is optional styling.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What does autopct do in Matplotlib? <span class="faq-icon">+</span></button>
+        <div class="faq-a">It automatically calculates and displays the percentage for each slice inside the chart. <code>'%1.1f%%'</code> shows one decimal place — so values like 23.5%. Remove it entirely if you only want labels without numbers.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do you explode a slice in Matplotlib? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Pass an <code>explode</code> list to <code>plt.pie()</code> with a non-zero value for the slice you want to pull out. Example: <code>explode=[0.1, 0, 0, 0]</code> pulls the first slice out by 10% of the chart radius. Increase the value for a bigger separation.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do you make a donut chart in Matplotlib? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Add <code>wedgeprops=dict(width=0.65)</code> inside <code>plt.pie()</code>. This sets each wedge to 65% of the radius, hollowing out the center. Adjust <code>width</code> between 0.3 (thin ring) and 0.9 (thick ring) to control the look.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">When should I use a pie chart vs a bar chart? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Use a pie chart when showing proportions that add to a whole — budget splits, vote shares, time allocation. Use a bar chart when comparing values to each other, especially when differences are small or you have many categories. Bar charts are almost always clearer for analytical work.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do I add a legend to a pie chart in Matplotlib? <span class="faq-icon">+</span></button>
+        <div class="faq-a">First remove <code>labels=</code> from <code>plt.pie()</code>, then call <code>plt.legend(labels, title='Title', loc='upper left', bbox_to_anchor=(1, 1))</code>. Finish with <code>plt.tight_layout()</code> so the legend doesn't get clipped outside the figure bounds.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- Author -->
+    <div class="author-strip">
+      <div class="author-avatar">PM</div>
+      <div class="author-info">
+        <strong>Palak Mishra</strong>
+        <span>Backend developer · Writes beginner-friendly Python and data viz guides on Kiddo</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>More to explore →</strong><br><br>
+      <a href="../matplotlib/bar.html">Bar Graphs</a> ·
+      <a href="../matplotlib/scatter.html">Scatter Plots</a> ·
+      <a href="../matplotlib/multi-line-g.html">Multiple Line Graphs</a> ·
+      <a href="../matplotlib/line-g.html">Line Graphs</a> ·
+      <a href="../matplotlib/histogram.html">Histogram</a> ·
+      <a href="../matplotlib/subplots.html">Subplots</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
+    <div class="footer-links">
+      <a href="../info/privacy.html">Privacy</a>
+      <a href="../info/terms.html">Terms</a>
+      <a href="../info/contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const desktopToggle = document.getElementById('desktopToggleTheme');
+  const mobileToggle  = document.getElementById('mobileToggleTheme');
+  const applyTheme = (dark) => {
+    document.body.classList.toggle('dark', dark);
+    const icon = dark ? '☀️' : '🌙';
+    if (desktopToggle) desktopToggle.textContent = icon;
+    if (mobileToggle)  mobileToggle.textContent  = icon;
+  };
+  applyTheme(localStorage.getItem('theme') === 'dark');
+  const toggleTheme = () => {
+    const isDark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  };
+  if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+  if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+
+  const hamburger    = document.getElementById('hamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  hamburger?.addEventListener('click', (e) => { e.stopPropagation(); menuDropdown.classList.toggle('open'); });
+  document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.querySelectorAll('.code-container').forEach(container => {
+    const btn  = container.querySelector('.copy-btn');
+    const tip  = container.querySelector('.tooltip');
+    const code = container.querySelector('pre code');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(code.innerText.trim()).then(() => {
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
       });
     });
-  </script>
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans    = btn.nextElementSibling;
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+</script>
 </body>
 </html>
