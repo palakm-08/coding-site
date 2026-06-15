@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="../assests/icon.png" />
+
+<meta name="description" content="Learn Python Dictionary Documentation (Python Docs 5.5) with beginner-friendly explanations, key-value pairs, dictionary methods, get(), KeyError, list(d), sorted(d), nested dictionaries, comprehensions, examples, interview questions, and common mistakes." />
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Python Dictionary Documentation Explained (Python Docs 5.5)" />
+<meta property="og:description" content="The official Python dictionary documentation explained in simple language. Learn key-value pairs, methods, comprehensions, examples, interview questions, and common mistakes." />
+<meta property="og:url" content="https://kiddoedu.org/python/dictionary.html" />
+<meta property="og:site_name" content="Kiddo" />
+<meta property="og:image" content="https://kiddoedu.org/python/dictionary.png" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Python Dictionary Documentation Explained (Python Docs 5.5)" />
+<meta name="twitter:description" content="Beginner-friendly explanation of Python dictionary documentation. Learn get(), KeyError, methods, comprehensions, examples, and interview questions." />
+<meta name="twitter:image" content="https://kiddoedu.org/python/dictionary.png" />
+
+<title>Python Dictionary Documentation Explained (Python Docs 5.5) | Dictionary Methods, Examples & Beginner Guide</title>
+<link rel="canonical" href="https://kiddoedu.org/python/dictionary.html" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Python Dictionary Documentation Explained (Python Docs 5.5)",
+  "description": "Beginner-friendly explanation of Python dictionary documentation section 5.5 with examples, dictionary methods, comprehensions, nested dictionaries, interview questions, and common mistakes.",
+  "keywords": [
+    "Python Dictionary",
+    "Python Docs 5.5",
+    "Python Dictionary Documentation",
+    "Python Dictionary Tutorial",
+    "Python Dictionary Examples",
+    "Dictionary Comprehension",
+    "Python Dictionary Methods",
+    "Nested Dictionary Python",
+    "Python Interview Questions",
+    "Python Docs Explained"
+  ],
+  "url": "https://kiddoedu.org/python/dictionary.html",
+  "datePublished": "2025-01-01",
+  "dateModified": "2026-06-15",
+  "author": {
+    "@type": "Person",
+    "name": "Palak Mishra"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kiddo",
+    "url": "https://kiddoedu.org"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://kiddoedu.org/python/dictionary.html"
+  }
+}
+</script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ESNWS8F9HE');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 4px 24px rgba(0,0,0,0.07);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    body.dark {
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
+      --border: rgba(255,255,255,0.07);
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 999; width: 0%; transition: width 0.1s linear; }
+
+    header { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark header { background: rgba(15,14,12,0.82); }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
+    .logo span em { font-style: normal; color: var(--accent); }
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
+    nav a:hover { color: var(--text); background: var(--surface2); }
+    .theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background var(--transition), transform var(--transition); margin-left: 8px; }
+    .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
+
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 20px; height: var(--header-h); background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark .mobile-header { background: rgba(15,14,12,0.82); }
+    .mobile-right { display: flex; align-items: center; gap: 8px; }
+    .hamburger { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; position: relative; }
+    .menu-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); padding: 8px; min-width: 160px; flex-direction: column; gap: 2px; }
+    .menu-dropdown.open { display: flex; }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
+    .menu-dropdown a:hover { background: var(--surface2); }
+
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+
+    aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px); }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    aside ul li a { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.4; }
+    aside ul li a:hover { background: var(--surface2); color: var(--text); }
+    aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; margin-top: 6px; }
+
+    main { min-width: 0; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { opacity: 0.4; }
+    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
+    .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
+    .meta-pill.blue { background: rgba(61,90,254,0.08); color: var(--accent2); border-color: rgba(61,90,254,0.2); }
+    .meta-pill.orange { background: rgba(232,108,47,0.08); color: var(--accent); border-color: rgba(232,108,47,0.2); }
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
+
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+    .doc-ref { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; }
+    .doc-ref a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .doc-ref a:hover { text-decoration: underline; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-top: 24px; margin-bottom: 10px; color: var(--text); }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 18px; margin-bottom: 8px; color: var(--text-muted); }
+    main p { font-size: 0.95rem; line-height: 1.78; color: var(--text); margin-bottom: 14px; }
+    main code { font-family: 'Courier New', monospace; font-size: 0.88em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
+    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
+
+    /* TOC */
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
+    .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
+    .toc-grid a:hover { background: var(--surface2); color: var(--text); }
+    .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
+
+    /* Dict anatomy */
+    .dict-anatomy { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 20px 0 24px; font-family: 'Courier New', monospace; font-size: 0.95rem; line-height: 2.1; overflow-x: auto; }
+    .da-brace { color: var(--text-muted); }
+    .da-key { color: var(--accent2); font-weight: 600; }
+    .da-colon { color: var(--text-muted); }
+    .da-val { color: var(--accent3); font-weight: 600; }
+    .da-label { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-left: 14px; vertical-align: middle; }
+
+    /* Prop grid */
+    .prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0 24px; }
+    .prop-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
+    .prop-icon { font-size: 1.25rem; margin-bottom: 8px; display: block; }
+    .prop-card strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 4px; }
+    .prop-card span { font-size: 0.81rem; color: var(--text-muted); line-height: 1.45; display: block; }
+
+    /* Official doc highlight */
+    .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
+    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
+    .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
+    .doc-block code { font-family: 'Courier New', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+
+    /* Method table */
+    .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 26px; font-size: 0.875rem; }
+    .param-table th { text-align: left; padding: 8px 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+    .param-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); line-height: 1.5; vertical-align: top; }
+    .param-table tr:last-child td { border-bottom: none; }
+    .param-table tr:hover td { background: var(--surface2); }
+    .param-table td:last-child { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* Code blocks */
+    .code-container { background: #1e1e1e; border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid var(--border); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; text-transform: uppercase; }
+    .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
+    .copy-btn { background: none; border: none; color: rgba(255,255,255,0.35); padding: 2px 0; cursor: pointer; font-size: 0.75rem; font-family: 'DM Sans', sans-serif; transition: color var(--transition); position: relative; margin-left: auto; }
+    .copy-btn:hover { color: rgba(255,255,255,0.75); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: var(--surface2); color: var(--text); padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .tooltip.show { opacity: 1; }
+    pre { margin: 0; padding: 18px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.875rem; line-height: 1.65; color: #d4d4d4; background: transparent; white-space: pre; tab-size: 2; }
+
+    /* Callout */
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
+    .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .callout a:hover { text-decoration: underline; }
+
+    /* Note box */
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+
+    /* vs grid */
+    .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 26px; }
+    .vs-card { border-radius: var(--radius-sm); padding: 18px 20px; }
+    .vs-card.yes { background: rgba(0,184,148,0.07); border: 1px solid rgba(0,184,148,0.2); }
+    .vs-card.no  { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.18); }
+    .vs-head { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+    .vs-card.yes .vs-head { color: var(--accent3); }
+    .vs-card.no  .vs-head { color: var(--accent); }
+    .vs-card ul { margin: 0; }
+    .vs-card ul li { font-size: 0.875rem; line-height: 1.55; color: var(--text); }
+    .vs-card ul li::before { color: inherit; opacity: 0.6; }
+
+    /* Interview Q cards */
+    .iq-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+    .iq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .iq-q { padding: 14px 18px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
+    .iq-badge { background: rgba(232,108,47,0.1); color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; padding: 2px 8px; flex-shrink: 0; margin-top: 2px; }
+    .iq-a { padding: 0 18px 14px 18px; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+    .iq-a code { font-family: 'Courier New', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Mistake cards */
+    .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 26px; }
+    .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
+    .mi-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .mi-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
+    .mi-body p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+    .mi-body code { font-family: 'Courier New', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Checklist */
+    .checklist { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+    .check-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; }
+    .check-item .ci { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+    .check-item div strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.87rem; display: block; margin-bottom: 2px; }
+    .check-item div p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+
+    /* FAQ accordion */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 18px 0; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; padding: 14px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
+    .faq-a.open { max-height: 280px; padding: 2px 18px 15px; }
+    .faq-a code { font-family: 'Courier New', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Author strip */
+    .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .author-info { font-size: 0.85rem; line-height: 1.5; }
+    .author-info strong { font-weight: 600; display: block; }
+    .author-info span { color: var(--text-muted); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+    .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      header { display: none; }
+      .mobile-header { display: flex; }
+      .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
+      aside { position: static; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .vs-grid { grid-template-columns: 1fr; }
+      .prop-grid { grid-template-columns: 1fr 1fr; }
+      footer { padding: 20px; }
+      .footer-container { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) { main h1 { font-size: 1.6rem; } .prop-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../info/about.html">About</a>
+    <a href="../info/contact.html">Contact</a>
+    <button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button>
+  </nav>
+</header>
+
+<div class="mobile-header">
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <div class="mobile-right">
+    <button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button>
+    <button class="hamburger" id="hamburgerBtn">☰
+      <div class="menu-dropdown" id="menuDropdown">
+        <a href="../index.html">Home</a>
+        <a href="../info/about.html">About</a>
+        <a href="../info/contact.html">Contact</a>
+      </div>
+    </button>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <aside>
+    <div class="aside-label">Python Topics</div>
+    <ul>
+      <li><a href="../python/variables.html"><span class="dot"></span>Variables</a></li>
+      <li><a href="../python/lists.html"><span class="dot"></span>Lists</a></li>
+      <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
+      <li><a href="../python/dictionary.html" class="active"><span class="dot"></span>Dictionaries</a></li>
+      <li><a href="../python/sets.html"><span class="dot"></span>Sets</a></li>
+      <li><a href="../python/functions.html"><span class="dot"></span>Functions</a></li>
+      <li><a href="../python/loops.html"><span class="dot"></span>Loops</a></li>
+      <li><a href="../python/list-comp"><span class="dot"></span>List Comprehension</a></li>
+      <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../python/lists.html">Python</a><span>›</span>
+      5.5 Dictionaries
+    </div>
+
+<h1>Python Dictionary Documentation Explained (Python Docs 5.5) — dict(), get(), Comprehensions & Examples</h1>
+
+    <div class="doc-ref">
+      📖 Based on <a href="https://docs.python.org/3/tutorial/datastructures.html" target="_blank" rel="noopener">Python 3 official docs 5.5</a> — explained like a friend, with extra examples added
+    </div>
+
+    <div class="meta-row">
+      <span class="meta-pill">Python</span>
+      <span class="meta-pill green">Beginner</span>
+      <span class="meta-pill blue">Data Structures</span>
+      <span class="meta-pill orange">Official Docs</span>
+      <span class="date-badge">Updated June 2026</span>
+    </div>
+
+    <p>
+This page explains the official Python Dictionary documentation (Python Docs 5.5) in simple language. If the official Python documentation feels overwhelming, this guide breaks down dictionaries, key-value pairs, dict(), get(), list(d), sorted(d), dictionary comprehensions, and nested dictionaries with beginner-friendly explanations and practical examples.</p>
+
+<p>
+By the end of this guide, you'll understand key-value pairs, dictionary creation, accessing values, get(), del, dictionary methods, nested dictionaries, dictionary comprehensions, and when to use dictionaries in real Python projects.
+</p>
+
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">In this guide</div>
+      <div class="toc-grid">
+<a href="#what-is"><span class="toc-num">01</span>What is a Python dictionary?</a>
+        <a href="#create"><span class="toc-num">02</span>Creating a dict</a>
+        <a href="#access"><span class="toc-num">03</span>Accessing values</a>
+        <a href="#modify"><span class="toc-num">04</span>Add, update, delete</a>
+        <a href="#list-sorted"><span class="toc-num">05</span>list(d) and sorted(d)</a>
+        <a href="#in-keyword"><span class="toc-num">06</span>in and not in</a>
+        <a href="#methods"><span class="toc-num">07</span>Dictionary methods</a>
+        <a href="#looping"><span class="toc-num">08</span>Looping</a>
+        <a href="#comprehensions"><span class="toc-num">09</span>Dict comprehensions</a>
+        <a href="#nested"><span class="toc-num">10</span>Nested dicts</a>
+        <a href="#mistakes"><span class="toc-num">11</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">12</span>Python dictionary interview questions</a>
+        <a href="#project"><span class="toc-num">13</span>Mini project</a>
+        <a href="#faq"><span class="toc-num">14</span>FAQs</a>
+      </div>
+    </nav>
+
+    <div class="section-divider"></div>
+
+    <!-- 01 -->
+    <h2 id="what-is"><h2>What is a Python Dictionary? (Python Docs 5.5 Explained)</h2></h2>
+    <p>Think of it as a labeled storage system. Instead of looking things up by position (index 0, 1, 2...) like a list, you look them up by a meaningful label — a <em>key</em>.</p>
+
+    <div class="dict-anatomy">
+      <div><span class="da-brace">person = {</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="da-key">"name"</span><span class="da-colon"> : </span><span class="da-val">"Joe"</span><span class="da-label">← key (immutable) : value (any type)</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="da-key">"age"</span><span class="da-colon"> : </span><span class="da-val">37</span><span class="da-label">← keys must be unique within a dict</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="da-key">"city"</span><span class="da-colon"> : </span><span class="da-val">"England"</span><span class="da-label">← values can be any Python type</span></div>
+      <div><span class="da-brace">}</span><span class="da-label">← curly braces wrap the whole thing</span></div>
+    </div>
+
+    <div class="prop-grid">
+      <div class="prop-card">
+        <strong>Indexed by keys</strong>
+        <span>Look up values by their key — not by position</span>
+      </div>
+      <div class="prop-card">
+        <strong>Mutable</strong>
+        <span>Add, update, and delete after creation</span>
+      </div>
+      <div class="prop-card">
+        <strong>Keys are unique</strong>
+        <span>Same key twice? Second value silently overwrites first</span>
+      </div>
+      <div class="prop-card">
+        <strong>Ordered</strong>
+        <span>Python 3.7+ preserves insertion order</span>
+      </div>
+    </div>
+
+    <div class="doc-block">
+      <span class="doc-block-label">📘 From the Python docs</span>
+      <p>Keys can be any immutable type — strings and numbers can always be keys. Tuples can be used as keys if they contain only strings, numbers, or tuples. You can't use lists as keys, since lists can be modified in place using index assignments, slice assignments, or methods like <code>append()</code> and <code>extend()</code>.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 -->
+    <h2 id="create">Creating a Python Dictionary (dict) — 3 Official Ways</h2>
+    <p>Three ways — the docs show all three, and each has its moment:</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo + Python docs</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># Method 1 — curly braces (most common)
+tel = {'jack': 4098, 'sape': 4139}
+print(tel)  # {'jack': 4098, 'sape': 4139}
+
+# Method 2 — dict() from a list of (key, value) tuples
+# This is straight from the Python docs §5.5
+tel2 = dict([('sape', 4139), ('guido', 4127), ('jack', 4098)])
+print(tel2)  # {'sape': 4139, 'guido': 4127, 'jack': 4098}
+
+# Method 3 — dict() with keyword arguments (keys become strings)
+# From the Python docs: "easier when keys are simple strings"
+tel3 = dict(sape=4139, guido=4127, jack=4098)
+print(tel3)  # {'sape': 4139, 'guido': 4127, 'jack': 4098}
+
+# Empty dictionary
+empty = {}
+empty2 = dict()  # same thing</code></pre>
+    </div>
+
+    <div class="callout">
+      <strong>When to use which:</strong> curly braces for most cases. <code>dict([tuples])</code> when your data is already in a list of pairs (e.g. from a CSV or API). <code>dict(keyword=val)</code> when keys are simple strings and you want it to look clean.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 -->
+    <h2 id="access">Accessing Dictionary Values — dict[key] vs get()</h2>
+    <p>The main operation on a dictionary is storing a value with a key and then extracting the value given the key. Two ways to read — and the difference matters:</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>tel = {'jack': 4098, 'sape': 4139}
+tel['guido'] = 4127
+
+# Direct access — fast, but crashes if key doesn't exist
+print(tel['jack'])    # 4098
+
+# This would crash:
+# print(tel['irv'])   # KeyError: 'irv'
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+# KeyError: 'irv'
+
+# .get() — safe access, returns None if key missing
+print(tel.get('irv'))           # None
+print(tel.get('irv', 'N/A'))    # N/A  ← custom default</code></pre>
+    </div>
+
+    <div class="note-box">
+      <strong>From the Python docs:</strong> extracting a value for a non-existent key by subscripting (<code>d[key]</code>) raises a <code>KeyError</code>. To avoid this, use the <code>get()</code> method instead — it returns <code>None</code> (or a specified default value) if the key is not in the dictionary.
+    </div>
+
+    <!-- Kiddo extra example -->
+    <h4>Kiddo extra — real-world version</h4>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>user = {"name": "Palak", "plan": "free", "verified": True}
+
+# Safe pattern before accessing
+if "email" in user:
+    print(user["email"])
+else:
+    print("Email not set")
+
+# Or just use .get() with a default
+email = user.get("email", "not provided")
+print(email)  # not provided</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <h2 id="modify">Add, Update, and Delete Dictionary Items</h2>
+    <p>Dictionaries are mutable — all three operations use simple syntax. If you store using a key that is already in use, the old value is forgotten.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>tel = {'jack': 4098, 'sape': 4139}
+tel['guido'] = 4127          # ADD new key
+print(tel)
+# {'jack': 4098, 'sape': 4139, 'guido': 4127}
+
+del tel['sape']              # DELETE with del
+tel['irv'] = 4127            # ADD after delete
+print(tel)
+# {'jack': 4098, 'guido': 4127, 'irv': 4127}
+
+# UPDATE — same syntax as ADD, just use existing key
+tel['jack'] = 9999           # old value 4098 is forgotten
+print(tel['jack'])           # 9999</code></pre>
+    </div>
+
+    <!-- Kiddo extra -->
+    <h4>Kiddo extra — .pop() and .update()</h4>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>person = {"name": "Palak", "age": 20, "city": "Delhi"}
+
+# .pop() removes AND returns the value
+removed = person.pop("city")
+print(removed)   # Delhi
+print(person)    # {"name": "Palak", "age": 20}
+
+# .update() merges multiple keys at once
+person.update({"age": 21, "city": "Mumbai", "course": "BCA"})
+print(person)
+# {'name': 'Palak', 'age': 21, 'city': 'Mumbai', 'course': 'BCA'}</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 -->
+    <h2 id="list-sorted">list(d) and sorted(d) Explained</h2>
+    <p>Two built-in functions that work directly on dictionaries — no method call, no <code>.keys()</code> needed:</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>tel = {'jack': 4098, 'guido': 4127, 'irv': 4127}
+
+# list(d) — all keys as a list, in insertion order
+list(tel)
+# ['jack', 'guido', 'irv']
+
+# sorted(d) — all keys sorted alphabetically
+sorted(tel)
+# ['guido', 'irv', 'jack']</code></pre>
+    </div>
+
+    <div class="doc-block">
+      <span class="doc-block-label">📘 From the Python docs</span>
+      <p>Performing <code>list(d)</code> on a dictionary returns a list of all the keys in insertion order. If you want them sorted, use <code>sorted(d)</code> instead.</p>
+    </div>
+
+    <!-- Kiddo extra -->
+    <h4>Kiddo extra — practical uses</h4>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>scores = {"Mehak": 98, "Palak": 95, "Rohan": 78, "Arjun": 65}
+
+# Print all names in alphabetical order
+for name in sorted(scores):
+    print(f"{name}: {scores[name]}")
+# Arjun: 65
+# Mehak: 98
+# Palak: 95
+# Rohan: 78
+
+# Count how many students
+print(f"Total students: {len(list(scores))}")  # 4
+
+# Get list of names to display in a dropdown
+student_names = list(scores)
+print(student_names)  # ['Mehak', 'Palak', 'Rohan', 'Arjun']</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 -->
+    <h2 id="in-keyword">Checking Dictionary Keys with in and not in</h2>
+    <p>Use the <code>in</code> keyword to check whether a single key is in the dictionary. It's fast — O(1) average time regardless of how big the dictionary is:</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>tel = {'jack': 4098, 'guido': 4127, 'irv': 4127}
+
+'guido' in tel       # True
+'jack' not in tel    # False  ← jack IS in tel, so not in = False</code></pre>
+    </div>
+
+    <!-- Kiddo extra -->
+    <h4>Kiddo extra — practical patterns</h4>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>config = {"debug": True, "port": 8080, "host": "localhost"}
+
+# Safe lookup before accessing
+if "timeout" in config:
+    print(config["timeout"])
+else:
+    print("No timeout set — using default 30s")
+
+# Check multiple keys
+required = ["port", "host", "api_key"]
+missing = [key for key in required if key not in config]
+print(f"Missing config: {missing}")   # Missing config: ['api_key']
+
+# in checks keys — not values
+print(8080 in config)             # False! (checks keys, not values)
+print(8080 in config.values())    # True  (checking values explicitly)</code></pre>
+    </div>
+
+    <div class="callout">
+      <strong>Remember:</strong> <code>in</code> checks keys by default. To check if a value exists, use <code>value in dict.values()</code>. Key lookups are O(1). Value lookups are O(n) — they scan the whole dictionary.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 -->
+    <h2 id="methods">Python Dictionary Methods Cheat Sheet</h2>
+
+    <table class="param-table">
+      <thead>
+        <tr><th>Method / Expression</th><th>What it does</th><th>Returns</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>d[key]</code></td><td>Get value by key — KeyError if missing</td><td>Value</td></tr>
+        <tr><td><code>d[key] = val</code></td><td>Add or update a key-value pair</td><td>—</td></tr>
+        <tr><td><code>del d[key]</code></td><td>Delete a key-value pair</td><td>—</td></tr>
+        <tr><td><code>d.get(key, default)</code></td><td>Safe access — returns default (None) if key missing</td><td>Value or default</td></tr>
+        <tr><td><code>d.keys()</code></td><td>Live view of all keys</td><td>dict_keys view</td></tr>
+        <tr><td><code>d.values()</code></td><td>Live view of all values</td><td>dict_values view</td></tr>
+        <tr><td><code>d.items()</code></td><td>Live view of all (key, value) pairs</td><td>dict_items view</td></tr>
+        <tr><td><code>d.update(other)</code></td><td>Merge another dict in — adds new, overwrites existing</td><td>None</td></tr>
+        <tr><td><code>d.pop(key)</code></td><td>Remove key and return its value. KeyError if missing</td><td>Removed value</td></tr>
+        <tr><td><code>d.popitem()</code></td><td>Remove and return the last inserted (key, value) pair</td><td>(key, value) tuple</td></tr>
+        <tr><td><code>d.setdefault(key, val)</code></td><td>Return value if key exists — else insert key=val and return val</td><td>Value</td></tr>
+        <tr><td><code>d.copy()</code></td><td>Shallow copy — nested dicts still share references</td><td>New dict</td></tr>
+        <tr><td><code>d.clear()</code></td><td>Remove all items</td><td>None</td></tr>
+        <tr><td><code>list(d)</code></td><td>All keys as a list in insertion order</td><td>list</td></tr>
+        <tr><td><code>sorted(d)</code></td><td>All keys sorted alphabetically</td><td>list</td></tr>
+        <tr><td><code>len(d)</code></td><td>Number of key-value pairs</td><td>int</td></tr>
+        <tr><td><code>key in d</code></td><td>True if key exists (O(1))</td><td>bool</td></tr>
+        <tr><td><code>key not in d</code></td><td>True if key does NOT exist</td><td>bool</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 -->
+    <h2 id="looping">Looping Through a Python Dictionary</h2>
+    <p>Three patterns — each gives you different access:</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>person = {"name": "Palak", "age": 20, "city": "Delhi"}
+
+# 1 — Keys only (default when you loop a dict)
+for key in person:
+    print(key)
+# name  age  city
+
+# 2 — Values only
+for value in person.values():
+    print(value)
+# Palak  20  Delhi
+
+# 3 — Both at once — USE THIS ONE most of the time
+for key, value in person.items():
+    print(f"{key}: {value}")
+# name: Palak
+# age: 20
+# city: Delhi
+
+# 4 — In sorted key order (using sorted from the docs)
+for key in sorted(person):
+    print(f"{key}: {person[key]}")
+# age: 20
+# city: Delhi
+# name: Palak</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 09 -->
+    <h2 id="comprehensions">Dictionary Comprehensions Explained</h2>
+    <p>Dict comprehensions create a dictionary from any key-value expression — in one line. They work exactly like list comprehensions but produce a dict instead.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># From the Python docs §5.5 — squares of specific numbers
+{x: x**2 for x in (2, 4, 6)}
+# {2: 4, 4: 16, 6: 36}</code></pre>
+    </div>
+
+    <h4>Kiddo extras — more comprehension patterns</h4>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># Basic syntax: {key_expr: value_expr for item in iterable}
+
+# 1 — Word lengths
+words = ["python", "dict", "comprehension"]
+word_len = {word: len(word) for word in words}
+# {'python': 6, 'dict': 4, 'comprehension': 13}
+
+# 2 — Uppercase version of each name
+names = ["palak", "rohan", "sneha"]
+upper = {name: name.upper() for name in names}
+# {'palak': 'PALAK', 'rohan': 'ROHAN', 'sneha': 'SNEHA'}
+
+# 3 — With a condition (only pass scores)
+scores = {"Palak": 92, "Arjun": 45, "Sneha": 88, "Rohan": 37}
+passing = {name: score for name, score in scores.items() if score >= 50}
+# {'Palak': 92, 'Sneha': 88}
+
+# 4 — Swap keys and values
+original = {"a": 1, "b": 2, "c": 3}
+swapped  = {v: k for k, v in original.items()}
+# {1: 'a', 2: 'b', 3: 'c'}
+
+# 5 — Squares of 1-5 (range version)
+squares = {n: n**2 for n in range(1, 6)}
+# {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}</code></pre>
+    </div>
+
+    <div class="doc-block">
+      <span class="doc-block-label">📘 From the Python docs</span>
+      <p>Dict comprehensions can be used to create dictionaries from arbitrary key and value expressions: <code>{x: x**2 for x in (2, 4, 6)}</code> → <code>{2: 4, 4: 16, 6: 36}</code>.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 10 -->
+    <h2 id="nested">Nested Dictionaries in Python</h2>
+    <p>Values in a dictionary can themselves be dictionaries. This is how you model structured records — API responses, student data, config files with sections:</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>students = {
+    "Palak": {
+        "grade": "A",
+        "score": 95,
+        "subjects": ["Python", "DSA", "DBMS"]
+    },
+    "Rohan": {
+        "grade": "B",
+        "score": 78,
+        "subjects": ["Java", "Web Dev"]
+    }
+}
+
+# Access nested values by chaining keys
+print(students["Palak"]["grade"])         # A
+print(students["Palak"]["score"])         # 95
+print(students["Rohan"]["subjects"][0])   # Java
+
+# Loop through nested dict
+for name, info in students.items():
+    print(f"{name}: {info['score']}% — Grade {info['grade']}")
+
+# Safe nested access
+score = students.get("Ananya", {}).get("score", "not found")
+print(score)   # not found  ← no KeyError even if "Ananya" missing</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 11 -->
+    <h2 id="mistakes">Common Python Dictionary Mistakes</h2>
+
+    <div class="mistake-list">
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Using dict[key] without checking — KeyError crash</strong>
+          <p><code>tel['irv']</code> crashes if <code>'irv'</code> isn't in the dict. Use <code>tel.get('irv')</code> or check <code>'irv' in tel</code> first.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Using a list as a key</strong>
+          <p><code>d[[1,2]] = "value"</code> throws a <code>TypeError</code>. Lists are mutable, so they can't be keys. Use a tuple instead: <code>d[(1,2)] = "value"</code>.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Expecting duplicate keys to keep both values</strong>
+          <p><code>{'a': 1, 'a': 2}</code> silently becomes <code>{'a': 2}</code>. The second value overwrites the first — no warning, no error.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Modifying a dict while looping over it</strong>
+          <p>Adding or deleting keys during a <code>for key in dict</code> loop raises <code>RuntimeError: dictionary changed size during iteration</code>. Loop over <code>list(dict.items())</code> if you need to modify while iterating.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Checking values with "in" (it checks keys)</strong>
+          <p><code>4098 in tel</code> is <code>False</code> — it checks keys, not values. Use <code>4098 in tel.values()</code> to check values.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Thinking .copy() gives a fully independent copy</strong>
+          <p><code>dict.copy()</code> is a shallow copy — nested dictionaries inside are still shared references. Use <code>copy.deepcopy(d)</code> for a completely independent clone.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>The safe access pattern</strong>
+          <p>When a key might or might not exist: <code>value = d.get('key', 'fallback')</code> — one line, no crash, no if-else needed.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 12 — INTERVIEW QUESTIONS -->
+    <h2 id="interview">Python Dictionary Interview Questions and Answers</h2>
+    <p>These come up regularly in Python interviews — from beginner screens to technical rounds:</p>
+
+    <div class="iq-list">
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q1</span> What is a Python dictionary and how is it different from a list?</div>
+        <div class="iq-a">A dictionary stores key-value pairs and is indexed by keys. A list stores values in order and is indexed by position (0, 1, 2...). Dict lookup by key is O(1). List lookup by value is O(n). Use a dict when data has a natural label; use a list when order and position matter.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q2</span> What types can be used as dictionary keys?</div>
+        <div class="iq-a">Only immutable types — strings, integers, floats, and tuples (containing only immutable items). Lists and dicts cannot be keys because they can be modified in place, which would break the hash-based lookup mechanism.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q3</span> What is the difference between dict.get() and dict[key]?</div>
+        <div class="iq-a"><code>dict[key]</code> raises a <code>KeyError</code> if the key doesn't exist — this will crash your program. <code>dict.get(key)</code> returns <code>None</code> instead. You can also provide a fallback: <code>dict.get(key, 'default')</code>. Always use <code>.get()</code> when the key might be missing.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q4</span> How do you merge two dictionaries in Python?</div>
+        <div class="iq-a">Three ways: <code>dict1.update(dict2)</code> modifies dict1 in place. <code>{**dict1, **dict2}</code> creates a new merged dict. In Python 3.9+: <code>dict1 | dict2</code> creates a new merged dict. If keys overlap, the second dict's values win.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q5</span> How would you count word frequency in a string using a dictionary?</div>
+        <div class="iq-a">Loop through the words and use <code>setdefault</code> or <code>get</code>: <code>freq[word] = freq.get(word, 0) + 1</code>. Or use <code>collections.Counter(words.split())</code> which does the same thing with less code.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q6</span> Are Python dictionaries ordered?</div>
+        <div class="iq-a">Yes — from Python 3.7 onwards, dictionaries maintain insertion order as part of the language spec (not just an implementation detail). In Python 3.6 it was an implementation detail of CPython. Before 3.6, no ordering guarantee existed.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q7</span> Write a dict comprehension that creates a dict of numbers and their cubes.</div>
+        <div class="iq-a"><code>{n: n**3 for n in range(1, 6)}</code> produces <code>{1: 1, 2: 8, 3: 27, 4: 64, 5: 125}</code>. Add a condition with: <code>{n: n**3 for n in range(1, 6) if n % 2 == 0}</code> for even numbers only.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 13 -->
+    <h2 id="project">Python Dictionary Project — Word Frequency Counter</h2>
+    <p>A classic dictionary use case — count how many times each word appears in a piece of text. This pattern shows up everywhere: search engines, text analysis, spam filters.</p>
+
+    <div class="checklist">
+      <div class="check-item"><div><strong>Take a string of text</strong><p>Split it into words and convert to lowercase so "Python" and "python" count as the same word.</p></div></div>
+      <div class="check-item"><div><strong>Count frequencies</strong><p>Use <code>dict.get(word, 0) + 1</code> to increment each word's count safely — no KeyError if the word hasn't been seen yet.</p></div></div>
+      <div class="check-item"><div><strong>Sort by frequency</strong><p>Use <code>sorted(freq.items(), key=lambda x: x[1], reverse=True)</code> to rank most common first.</p></div></div>
+      <div class="check-item"><div><strong>Print a report</strong><p>Show the top 5 words and their counts in a clean formatted output.</p></div></div>
+      <div class="check-item"><div><strong>Add a lookup</strong><p>Use <code>freq.get(word, 0)</code> to safely look up any word's count — 0 if it wasn't in the text.</p></div></div>
+    </div>
+
+
+
+    <div class="callout">
+      <strong>Level up:</strong> use <code>from collections import Counter; Counter(words)</code> — it does all of step 2 in one line. But writing it manually first is how you understand what Counter is doing under the hood.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 14 -->
+    <h2 id="faq">Python Dictionary FAQ</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is a Python dictionary? <span class="faq-icon">+</span></button>
+        <div class="faq-a">A Python dictionary is a collection of key-value pairs where every key is unique. Defined with curly braces <code>{}</code>, it is mutable, ordered (Python 3.7+), and sometimes called an "associative array" or "hash map" in other languages. Keys must be immutable; values can be anything.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do you create a dictionary in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Three ways from the Python docs: curly braces <code>{'jack': 4098}</code>, the dict() constructor with keyword args <code>dict(jack=4098)</code>, or dict() from a list of tuples <code>dict([('jack', 4098)])</code>. An empty dict is just <code>{}</code>.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is the difference between dict[key] and dict.get(key)? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><code>dict[key]</code> raises a <code>KeyError</code> if the key doesn't exist. <code>dict.get(key)</code> returns <code>None</code> instead — no crash. You can pass a custom default: <code>dict.get(key, 'fallback')</code>. Use <code>.get()</code> whenever the key might be missing.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is a dictionary comprehension in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">A dict comprehension creates a dictionary in one line. From the Python docs: <code>{x: x**2 for x in (2, 4, 6)}</code> produces <code>{2: 4, 4: 16, 6: 36}</code>. Syntax: <code>{key_expr: value_expr for item in iterable}</code>. Add <code>if condition</code> to filter.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do you get all keys from a Python dictionary? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Use <code>list(d)</code> for all keys in insertion order. Use <code>sorted(d)</code> for sorted keys. <code>dict.keys()</code> returns a live view object — wrap it in <code>list()</code> if you need an actual list you can index.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can Python dictionary keys be any type? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Keys must be immutable — strings, numbers, or tuples (containing only immutable items). You can't use lists as keys because lists can be modified in place (append, slice assignment, etc.), which would break the internal hash lookup.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do you check if a key exists in a dictionary? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Use the <code>in</code> operator: <code>'guido' in tel</code> returns <code>True</code> if the key exists. Use <code>not in</code> for the opposite. This checks keys only — use <code>value in d.values()</code> to check values. Key lookups are O(1) (instant).</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is a nested dictionary in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">A nested dictionary has another dictionary as one or more of its values. Example: <code>students = {'Palak': {'score': 95, 'grade': 'A'}}</code>. Access nested values by chaining keys: <code>students['Palak']['score']</code> returns 95. Use <code>.get()</code> chaining for safe access.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="author-strip">
+      <div class="author-avatar">PM</div>
+      <div class="author-info">
+        <strong>Palak Mishra</strong>
+        <span>Backend developer · Building beginner-friendly Python docs at Kiddo</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>More Python topics →</strong><br><br>
+      <a href="../python/lists.html">Lists</a> ·
+      <a href="../python/tuples.html">Tuples</a> ·
+      <a href="../python/sets.html">Sets</a> ·
+      <a href="../python/functions.html">Functions</a> ·
+      <a href="../python/list-comp">List Comprehension</a> ·
+      <a href="../python/while_loop.html">While Loop</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
+    <div class="footer-links">
+      <a href="../info/privacy.html">Privacy</a>
+      <a href="../info/terms.html">Terms</a>
+      <a href="../info/contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const desktopToggle = document.getElementById('desktopToggleTheme');
+  const mobileToggle  = document.getElementById('mobileToggleTheme');
+  const applyTheme = (dark) => {
+    document.body.classList.toggle('dark', dark);
+    const icon = dark ? '☀️' : '🌙';
+    if (desktopToggle) desktopToggle.textContent = icon;
+    if (mobileToggle)  mobileToggle.textContent  = icon;
+  };
+  applyTheme(localStorage.getItem('theme') === 'dark');
+  const toggleTheme = () => {
+    const isDark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  };
+  if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+  if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+
+  const hamburger    = document.getElementById('hamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  hamburger?.addEventListener('click', (e) => { e.stopPropagation(); menuDropdown.classList.toggle('open'); });
+  document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.querySelectorAll('.code-container').forEach(container => {
+    const btn  = container.querySelector('.copy-btn');
+    const tip  = container.querySelector('.tooltip');
+    const code = container.querySelector('pre code');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(code.innerText.trim()).then(() => {
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
+      });
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans    = btn.nextElementSibling;
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+</script>
+</body>
+</html>

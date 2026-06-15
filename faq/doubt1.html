@@ -3,11 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="icon" type="image/png" href="../assests/icon.png">
-  <meta name="description" content="Learn the difference between = and == in Python. Clear examples to understand assignment vs comparison operators — perfect for beginners.">
-  <meta name="keywords" content="Python = vs ==, Python assignment vs comparison, beginner Python FAQ, == operator, = operator">
-  <title>= vs == in Python: What's the Difference? (Beginner Guide)</title>
-  <link rel="canonical" href="https://kiddoedu.org/faq/doubt1.html">
+  <link rel="icon" type="image/png" href="../assests/icon.png" />
+
+  <meta name="description" content="What is the difference between = and == in Python? Clear explanation of assignment vs comparison operators with code examples, common mistakes, and a quick reference table." />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="= vs == in Python — Assignment vs Comparison Explained" />
+  <meta property="og:description" content="The most common beginner confusion in Python — explained clearly. = assigns values, == compares them. Real code examples, mistakes to avoid, and a quick reference table." />
+  <meta property="og:url" content="https://kiddoedu.org/faq/doubt1.html" />
+  <meta property="og:site_name" content="Kiddo" />
+  <meta property="og:image" content="https://kiddoedu.org/assests/og-faq.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="= vs == in Python — What's the Difference?" />
+  <meta name="twitter:description" content="= assigns values. == compares them. Here's exactly what that means, with code examples and common mistakes to avoid." />
+  <meta name="twitter:image" content="https://kiddoedu.org/assests/og-faq.png" />
+
+  <title>= vs == in Python: Assignment vs Comparison (Beginner Guide)</title>
+  <link rel="canonical" href="https://kiddoedu.org/faq/doubt1.html" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "= vs == in Python: What's the Difference?",
+  "description": "Clear explanation of the difference between = (assignment) and == (comparison) in Python, with code examples and common beginner mistakes.",
+  "url": "https://kiddoedu.org/faq/doubt1.html",
+  "datePublished": "2025-01-01",
+  "dateModified": "2026-06-14",
+  "author": {
+    "@type": "Person",
+    "name": "Palak Mishra"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kiddo",
+    "url": "https://kiddoedu.org"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://kiddoedu.org/faq/doubt1.html"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between = and == in Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "= is the assignment operator used to store values in variables, while == is the comparison operator used to check whether two values are equal. = assigns data, whereas == returns either True or False."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you use = inside an if statement in Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Using = inside an if condition causes a SyntaxError because Python does not allow assignment in conditional expressions. Use == when comparing values inside if statements."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does == return in Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The == operator returns a boolean value. It returns True when both values are equal and False when they are different."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is != in Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "!= is the not-equal operator in Python. It returns True if two values are different and False if they are the same."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the comparison operators in Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Python comparison operators include == (equal to), != (not equal to), > (greater than), < (less than), >= (greater than or equal to), and <= (less than or equal to). All comparison operators return either True or False."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between == and is in Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The == operator compares values, while the is operator compares object identity. Two variables can have equal values using == but still be different objects when checked with is."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does if x = 10 cause an error in Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The statement if x = 10 causes a SyntaxError because = is an assignment operator. Conditions require comparison operators such as == to evaluate whether something is True or False."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When should I use == in Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use == whenever you need to compare two values, such as inside if statements, while loops, or logical conditions. It checks equality and returns True or False."
+      }
+    }
+  ]
+}
+</script>
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -15,290 +127,172 @@
     gtag('js', new Date());
     gtag('config', 'G-ESNWS8F9HE');
   </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg: #f5f3ee;
-      --surface: #ffffff;
-      --surface2: #eceae4;
-      --text: #1a1814;
-      --text-muted: #6b6760;
-      --accent: #e86c2f;
-      --accent2: #3d5afe;
-      --accent3: #00b894;
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
       --border: rgba(0,0,0,0.08);
       --shadow: 0 4px 24px rgba(0,0,0,0.07);
       --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
-      --radius: 16px;
-      --radius-sm: 10px;
-      --header-h: 70px;
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
       --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
     }
     body.dark {
-      --bg: #0f0e0c;
-      --surface: #1c1a17;
-      --surface2: #252320;
-      --text: #f0ede6;
-      --text-muted: #918e87;
-      --accent: #ff7d3e;
-      --accent2: #7986cb;
-      --accent3: #55efc4;
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
       --border: rgba(255,255,255,0.07);
       --shadow: 0 4px 24px rgba(0,0,0,0.4);
       --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      transition: background var(--transition), color var(--transition);
-      overflow-x: hidden;
-    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 999; width: 0%; transition: width 0.1s linear; }
 
-    .progress-bar {
-      position: fixed;
-      top: 0; left: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      z-index: 999;
-      width: 0%;
-      transition: width 0.1s linear;
-    }
-
-    /* ── Header ── */
-    header {
-      height: var(--header-h);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      background: rgba(245,243,238,0.82);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: background var(--transition);
-    }
+    header { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
     body.dark header { background: rgba(15,14,12,0.82); }
-
-    .logo {
-      display: flex; align-items: center; gap: 10px; text-decoration: none;
-    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
-    .logo span {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: 1.4rem;
-      letter-spacing: -0.02em; color: var(--text);
-    }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
     .logo span em { font-style: normal; color: var(--accent); }
-
     nav { display: flex; align-items: center; gap: 8px; }
-    nav a {
-      font-weight: 500; font-size: 0.9rem; color: var(--text-muted);
-      text-decoration: none; padding: 6px 14px; border-radius: 8px;
-      transition: color var(--transition), background var(--transition);
-    }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
     nav a:hover { color: var(--text); background: var(--surface2); }
-
-    .theme-btn {
-      background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 50%; width: 38px; height: 38px; cursor: pointer;
-      font-size: 1rem; display: flex; align-items: center; justify-content: center;
-      transition: background var(--transition), transform var(--transition); margin-left: 8px;
-    }
+    .theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background var(--transition), transform var(--transition); margin-left: 8px; }
     .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
 
-    /* ── Mobile Header ── */
-    .mobile-header {
-      display: none; align-items: center; justify-content: space-between;
-      padding: 0 20px; height: var(--header-h);
-      background: rgba(245,243,238,0.82); backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; z-index: 100; transition: background var(--transition);
-    }
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 20px; height: var(--header-h); background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
     body.dark .mobile-header { background: rgba(15,14,12,0.82); }
     .mobile-right { display: flex; align-items: center; gap: 8px; }
-    .hamburger {
-      background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 8px; width: 38px; height: 38px; cursor: pointer;
-      font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
-      position: relative;
-    }
-    .menu-dropdown {
-      display: none; position: absolute; top: calc(100% + 8px); right: 0;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius-sm); box-shadow: var(--shadow-lg);
-      padding: 8px; min-width: 160px; flex-direction: column; gap: 2px;
-    }
+    .hamburger { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; position: relative; }
+    .menu-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); padding: 8px; min-width: 160px; flex-direction: column; gap: 2px; }
     .menu-dropdown.open { display: flex; }
-    .menu-dropdown a {
-      display: block; font-weight: 500; font-size: 0.95rem; color: var(--text);
-      text-decoration: none; padding: 9px 14px; border-radius: 8px;
-      transition: background var(--transition);
-    }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
     .menu-dropdown a:hover { background: var(--surface2); }
 
-    /* ── Layout ── */
-    .page-wrap {
-      max-width: 1200px; margin: 0 auto;
-      padding: 40px 40px 80px;
-      display: grid; grid-template-columns: 220px 1fr;
-      gap: 40px; align-items: start;
-    }
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
 
-    /* ── Sidebar ── */
-    aside {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow);
-      position: sticky; top: calc(var(--header-h) + 20px);
-    }
-    .aside-label {
-      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem;
-      letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted);
-      margin-bottom: 14px;
-    }
+    aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px); }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
     aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
-    aside ul li a {
-      display: flex; align-items: flex-start; gap: 8px;
-      padding: 8px 10px; border-radius: 8px; font-size: 0.85rem;
-      font-weight: 500; color: var(--text-muted); text-decoration: none;
-      transition: background var(--transition), color var(--transition); line-height: 1.4;
-    }
+    aside ul li a { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.4; }
     aside ul li a:hover { background: var(--surface2); color: var(--text); }
     aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
-    aside ul li a .dot {
-      width: 5px; height: 5px; border-radius: 50%; background: currentColor;
-      flex-shrink: 0; opacity: 0.5; margin-top: 6px;
-    }
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; margin-top: 6px; }
 
-    /* ── Main ── */
     main { min-width: 0; }
-
-    .breadcrumb {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px;
-    }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
     .breadcrumb a { color: var(--text-muted); text-decoration: none; }
     .breadcrumb a:hover { color: var(--accent); }
     .breadcrumb span { opacity: 0.4; }
+    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
+    .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
+    .meta-pill.blue { background: rgba(61,90,254,0.08); color: var(--accent2); border-color: rgba(61,90,254,0.2); }
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
 
-    .faq-zone {
-      font-size: 0.82rem; color: var(--text-muted); font-style: italic;
-      margin-bottom: 20px; text-align: center;
-      padding: 8px 16px; background: var(--surface2);
-      border-radius: 999px; display: inline-block;
-    }
-
-    main h1 {
-      font-family: 'Syne', sans-serif; font-weight: 800;
-      font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em;
-      line-height: 1.15; margin-bottom: 16px;
-    }
-    main h2 {
-      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem;
-      letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px;
-    }
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-top: 24px; margin-bottom: 10px; color: var(--text); }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; margin-top: 16px; margin-bottom: 8px; color: var(--text-muted); }
     main p { font-size: 0.95rem; line-height: 1.75; color: var(--text); margin-bottom: 14px; }
-    main code {
-      font-family: 'Courier New', monospace; font-size: 0.88em;
-      background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 5px; padding: 2px 6px; color: var(--accent);
-    }
-    main ul {
-      padding-left: 0; list-style: none;
-      display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;
-    }
-    main ul li {
-      font-size: 0.95rem; line-height: 1.6;
-      padding-left: 20px; position: relative; color: var(--text);
-    }
+    main code { font-family: 'Courier New', monospace; font-size: 0.88em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
     main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
 
-    /* ── Table ── */
-    .table-wrap {
-      overflow-x: auto; margin: 20px 0 28px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-    }
-    table {
-      width: 100%; border-collapse: collapse;
-      font-size: 0.9rem;
-    }
+    /* TOC */
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; }
+    .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 6px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
+    .toc-grid a:hover { background: var(--surface2); color: var(--text); }
+    .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
+
+    /* Operator split cards */
+    .op-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0 28px; }
+    .op-card { border-radius: var(--radius-sm); padding: 20px 22px; }
+    .op-card.assign { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.2); }
+    .op-card.compare { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.18); }
+    .op-symbol { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.6rem; margin-bottom: 6px; }
+    .op-card.assign .op-symbol { color: var(--accent); }
+    .op-card.compare .op-symbol { color: var(--accent2); }
+    .op-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; color: var(--text-muted); }
+    .op-desc { font-size: 0.875rem; line-height: 1.55; color: var(--text); }
+    .op-example { display: inline-block; margin-top: 10px; font-family: 'Courier New', monospace; font-size: 0.82rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 3px 8px; color: var(--text-muted); }
+
+    /* Comparison table */
+    .table-wrap { overflow-x: auto; margin: 20px 0 28px; border-radius: var(--radius-sm); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
     thead tr { background: var(--surface2); }
-    th, td {
-      padding: 12px 16px; text-align: left;
-      border-bottom: 1px solid var(--border); color: var(--text);
-    }
-    th { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.04em; }
+    th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); color: var(--text); }
+    th { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
     tbody tr:last-child td { border-bottom: none; }
-    tbody tr:hover { background: var(--surface2); }
+    tbody tr:hover td { background: var(--surface2); }
 
-    /* ── Code blocks ── */
-    .code-container {
-      background: #1e1e1e; border-radius: var(--radius-sm);
-      overflow: hidden; margin: 16px 0 26px; border: 1px solid var(--border);
-    }
-    .code-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .lang-tag {
-      font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.3);
-      letter-spacing: 0.08em; text-transform: uppercase;
-    }
-    .copy-btn {
-      background: none; border: none; color: rgba(255,255,255,0.35);
-      padding: 2px 0; cursor: pointer; font-size: 0.75rem;
-      font-family: 'DM Sans', sans-serif; transition: color var(--transition); position: relative;
-    }
+    /* Code blocks */
+    .code-container { background: #1e1e1e; border-radius: var(--radius-sm); overflow: hidden; margin: 16px 0 26px; border: 1px solid var(--border); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; text-transform: uppercase; }
+    .copy-btn { background: none; border: none; color: rgba(255,255,255,0.35); padding: 2px 0; cursor: pointer; font-size: 0.75rem; font-family: 'DM Sans', sans-serif; transition: color var(--transition); position: relative; }
     .copy-btn:hover { color: rgba(255,255,255,0.75); }
-    .tooltip {
-      position: absolute; top: -28px; right: 0;
-      background: var(--surface2); color: var(--text);
-      padding: 3px 8px; font-size: 0.7rem; border-radius: 4px;
-      opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap;
-    }
+    .tooltip { position: absolute; top: -28px; right: 0; background: var(--surface2); color: var(--text); padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
     .tooltip.show { opacity: 1; }
-    pre {
-      margin: 0; padding: 18px; overflow-x: auto;
-      font-family: 'Courier New', Courier, monospace; font-size: 0.875rem;
-      line-height: 1.65; color: #d4d4d4; background: transparent;
-      white-space: pre; tab-size: 2;
-    }
+    pre { margin: 0; padding: 18px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.875rem; line-height: 1.65; color: #d4d4d4; background: transparent; white-space: pre; tab-size: 2; }
 
-    /* ── Callout ── */
-    .callout {
-      background: var(--surface); border: 1px solid var(--border);
-      border-left: 3px solid var(--accent); border-radius: var(--radius-sm);
-      padding: 16px 20px; margin: 24px 0; font-size: 0.9rem; line-height: 1.6;
-    }
+    /* Callout */
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 24px 0; font-size: 0.9rem; line-height: 1.6; }
     .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
     .callout a:hover { text-decoration: underline; }
 
-    /* ── Footer ── */
+    /* Note box */
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 20px 0; font-size: 0.9rem; color: var(--text); line-height: 1.6; }
+
+    /* Mistake cards */
+    .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 28px; }
+    .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
+    .mistake-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .mistake-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 3px; }
+    .mistake-body p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+
+    /* FAQ accordion */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 20px 0; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; padding: 15px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.93rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; font-style: normal; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
+    .faq-a.open { max-height: 240px; padding: 2px 18px 16px; }
+    .faq-a code { font-family: 'Courier New', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Author strip */
+    .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .author-info { font-size: 0.85rem; line-height: 1.5; }
+    .author-info strong { font-weight: 600; display: block; }
+    .author-info span { color: var(--text-muted); }
+
     footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
-    .footer-container {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 14px;
-    }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
     .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
     .footer-links { display: flex; gap: 20px; }
     .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
     .footer-links a:hover { color: var(--accent); }
 
-    /* ── Responsive ── */
     @media (max-width: 768px) {
       header { display: none; }
       .mobile-header { display: flex; }
       .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
       aside { position: static; }
+      .op-grid { grid-template-columns: 1fr; }
+      .toc-grid { grid-template-columns: 1fr; }
       footer { padding: 20px; }
       .footer-container { flex-direction: column; align-items: flex-start; }
     }
@@ -307,240 +301,445 @@
 </head>
 <body>
 
-  <div class="progress-bar" id="progressBar"></div>
+<div class="progress-bar" id="progressBar"></div>
 
-  <!-- Desktop Header -->
-  <header>
-    <a class="logo" href="../index.html">
-      <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
-      <span>Kid<em>do</em></span>
-    </a>
-    <nav>
-      <a href="../index.html">Home</a>
-      <a href="../info/about.html">About</a>
-      <a href="../info/contact.html">Contact</a>
-      <button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button>
-    </nav>
-  </header>
+<header>
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../info/about.html">About</a>
+    <a href="../info/contact.html">Contact</a>
+    <button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button>
+  </nav>
+</header>
 
-  <!-- Mobile Header -->
-  <div class="mobile-header">
-    <a class="logo" href="../index.html">
-      <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
-      <span>Kid<em>do</em></span>
-    </a>
-    <div class="mobile-right">
-      <button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button>
-      <button class="hamburger" id="hamburgerBtn">☰
-        <div class="menu-dropdown" id="menuDropdown">
-          <a href="../index.html">Home</a>
-          <a href="../info/about.html">About</a>
-          <a href="../info/contact.html">Contact</a>
-        </div>
-      </button>
-    </div>
-  </div>
-
-  <div class="page-wrap">
-
-    <!-- Sidebar -->
-    <aside>
-      <div class="aside-label">FAQ Topics</div>
-      <ul>
-        <li><a href="../faq/doubt1.html" class="active"><span class="dot"></span>= vs == in Python</a></li>
-        <li><a href="../faq/doubt2.html"><span class="dot"></span>if __name__ == '__main__'</a></li>
-        <li><a href="../doubt3.html"><span class="dot"></span>List vs Tuple</a></li>
-        <li><a href="../faq/doubt3.html"><span class="dot"></span>Coding roadmap from scratch</a></li>
-        <li><a href="../faq/doubt4.html"><span class="dot"></span>Learn coding without CS degree?</a></li>
-        <li><a href="../doubt5.html"><span class="dot"></span>Why indentation matters</a></li>
-      </ul>
-    </aside>
-
-    <!-- Main -->
-    <main>
-      <div class="breadcrumb">
+<div class="mobile-header">
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <div class="mobile-right">
+    <button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button>
+    <button class="hamburger" id="hamburgerBtn">☰
+      <div class="menu-dropdown" id="menuDropdown">
         <a href="../index.html">Home</a>
-        <span>›</span>
-        <a href="../faq/doubt1.html">FAQ</a>
-        <span>›</span>
-        = vs ==
-      </div>
-
-      <div class="faq-zone">FAQ Zone — Got questions? We got receipts ✦</div>
-
-      <h1>= vs == in Python: What's the Difference?</h1>
-
-      <p>This is one of the <strong>most common beginner confusions</strong> in Python! Don't worry — by the end of this page, you'll never mix these two up again.</p>
-
-      <h2>Key Difference</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Operator</th>
-              <th>Name</th>
-              <th>Function</th>
-              <th>Example</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>=</code></td>
-              <td>Assignment</td>
-              <td>Gives a value to a variable</td>
-              <td><code>x = 10</code> → x becomes 10</td>
-            </tr>
-            <tr>
-              <td><code>==</code></td>
-              <td>Comparison</td>
-              <td>Checks if two values are equal</td>
-              <td><code>x == 10</code> → True if x is 10</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h2>= (Assignment Operator)</h2>
-      <p>The <code>=</code> symbol is used to <strong>assign a value</strong> to a variable. You're basically saying, "Hey Python, store this under that name."</p>
-
-      <div class="code-container">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-        </div>
-        <pre><code>x = 7
-name = "Kiddo"
-is_active = True</code></pre>
-      </div>
-      <p><strong>Think of it like</strong> labeling a jar — the jar is the variable and the content is the value.</p>
-
-      <h2>== (Equality Operator)</h2>
-      <p>The <code>==</code> operator is for <strong>comparison</strong>. It checks if two values are equal and gives you a <code>True</code> or <code>False</code> result.</p>
-
-      <div class="code-container">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-        </div>
-        <pre><code>x = 7
-
-print(x == 7)  # True
-print(x == 5)  # False</code></pre>
-      </div>
-      <p><strong>Think of it like:</strong> "Are these two things actually the same?"</p>
-
-      <h2>Common Mistakes</h2>
-      <ul>
-        <li>Using <code>=</code> inside <code>if</code> or <code>while</code> conditions — this throws a syntax error!</li>
-        <li>Using <code>==</code> when you meant to assign something.</li>
-      </ul>
-
-      <h2>Example: Let's Make It Real</h2>
-      <div class="code-container">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-        </div>
-        <pre><code>age = 18
-
-if age == 18:
-    print("You're officially an adult!")</code></pre>
-      </div>
-      <p><strong>Why this works?</strong> Because we're comparing the variable <code>age</code> with the number <code>18</code>. If they match, the message is printed!</p>
-
-      <h2>Also Meet: <code>!=</code> (Not Equal To)</h2>
-      <p>While we're at it, here's a sibling operator! <code>!=</code> checks if two values are <strong>not</strong> equal.</p>
-      <div class="code-container">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-        </div>
-        <pre><code>score = 45
-
-if score != 100:
-    print("Not perfect yet!")</code></pre>
-      </div>
-
-      <h2>Quick Breakdown</h2>
-      <ul>
-        <li><strong>=</strong> is for assigning values — <code>x = 10</code></li>
-        <li><strong>==</strong> is for comparing values — <code>x == 10</code></li>
-        <li><strong>!=</strong> means "not equal" — <code>x != 10</code></li>
-      </ul>
-
-      <h2>When to Use What?</h2>
-      <ul>
-        <li>Use <code>=</code> when you're setting or updating values.</li>
-        <li>Use <code>==</code> when checking conditions (like inside an <code>if</code>).</li>
-        <li>Use <code>!=</code> when you want to exclude a match.</li>
-      </ul>
-
-      <div class="callout">
-        <strong>Explore more FAQs →</strong><br><br>
-        <a href="../faq/doubt2.html">What does if __name__ == '__main__' mean?</a> ·
-        <a href="../faq/doubt3.html">Coding roadmap with no experience</a> ·
-        <a href="../faq/doubt4.html">Learn coding without a CS degree?</a>
-      </div>
-
-      <p style="text-align:center; color: var(--text-muted); font-size:0.9rem; font-style:italic;">Hope this cleared your doubt! More coming soon — keep learning with Kiddo 🎉</p>
-    </main>
-
-  </div>
-
-  <footer>
-    <div class="footer-container">
-      <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
-      <div class="footer-links">
-        <a href="../info/privacy.html">Privacy</a>
-        <a href="../info/terms.html">Terms</a>
+        <a href="../info/about.html">About</a>
         <a href="../info/contact.html">Contact</a>
       </div>
+    </button>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <aside>
+    <div class="aside-label">FAQ Topics</div>
+    <ul>
+      <li><a href="../faq/doubt1.html" class="active"><span class="dot"></span>= vs == in Python</a></li>
+      <li><a href="../faq/doubt2.html"><span class="dot"></span>if __name__ == '__main__'</a></li>
+      <li><a href="../faq/doubt3.html"><span class="dot"></span>List vs Tuple</a></li>
+      <li><a href="../faq/doubt3.html"><span class="dot"></span>Coding roadmap from scratch</a></li>
+      <li><a href="../faq/doubt4.html"><span class="dot"></span>Learn coding without CS degree?</a></li>
+      <li><a href="../doubt5.html"><span class="dot"></span>Why indentation matters</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../faq/doubt1.html">FAQ</a><span>›</span>
+      = vs ==
     </div>
-  </footer>
 
-  <script>
-    const desktopToggle = document.getElementById('desktopToggleTheme');
-    const mobileToggle  = document.getElementById('mobileToggleTheme');
-    const applyTheme = (dark) => {
-      document.body.classList.toggle('dark', dark);
-      const icon = dark ? '☀️' : '🌙';
-      if (desktopToggle) desktopToggle.textContent = icon;
-      if (mobileToggle)  mobileToggle.textContent  = icon;
-    };
-    applyTheme(localStorage.getItem('theme') === 'dark');
-    const toggleTheme = () => {
-      const isDark = !document.body.classList.contains('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      applyTheme(isDark);
-    };
-    if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
-    if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+    <h1>= vs == in Python — What's the Difference?</h1>
 
-    const hamburger    = document.getElementById('hamburgerBtn');
-    const menuDropdown = document.getElementById('menuDropdown');
-    hamburger?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      menuDropdown.classList.toggle('open');
-    });
-    document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+    <div class="meta-row">
+      <span class="meta-pill">Python</span>
+      <span class="meta-pill green">Beginner</span>
+      <span class="meta-pill blue">FAQ</span>
+      <span class="date-badge">Updated June 2026</span>
+    </div>
 
-    const progressBar = document.getElementById('progressBar');
-    window.addEventListener('scroll', () => {
-      const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-      progressBar.style.width = Math.min(pct, 100) + '%';
-    });
+<p>
+If you're learning Python, you've probably looked at <code>=</code> and <code>==</code> and thought:
+</p>
 
-    document.querySelectorAll('.code-container').forEach(container => {
-      const btn     = container.querySelector('.copy-btn');
-      const tooltip = container.querySelector('.tooltip');
-      const code    = container.querySelector('pre code');
-      btn.addEventListener('click', () => {
-        navigator.clipboard.writeText(code.innerText.trim()).then(() => {
-          tooltip.classList.add('show');
-          setTimeout(() => tooltip.classList.remove('show'), 2000);
-        });
+<p>
+"Wait... aren't these basically the same thing?"
+</p>
+
+<p>
+Not really.
+</p>
+
+<p>
+Even though they look almost identical, they do completely different jobs in Python. One is used to <strong>assign values to variables</strong>, while the other is used to <strong>compare values</strong> and check if they're equal.
+</p>
+
+<p>
+Understanding the difference between the <strong>assignment operator (=)</strong> and the <strong>comparison operator (==)</strong> is one of the first Python concepts every beginner should master.
+</p>
+
+<p>
+In this guide, you'll learn exactly how <code>=</code> and <code>==</code> work, when to use each one, common mistakes to avoid, and real Python examples that make the difference crystal clear.
+</p>
+
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">In this guide</div>
+      <div class="toc-grid">
+        <a href="#core-diff"><span class="toc-num">01</span>Core difference</a>
+        <a href="#assignment"><span class="toc-num">02</span>= assignment operator</a>
+        <a href="#comparison"><span class="toc-num">03</span>== comparison operator</a>
+        <a href="#real-example"><span class="toc-num">04</span>Real-world example</a>
+        <a href="#not-equal"><span class="toc-num">05</span>!= and other operators</a>
+        <a href="#mistakes"><span class="toc-num">06</span>Common mistakes</a>
+        <a href="#faq"><span class="toc-num">07</span>FAQs</a>
+      </div>
+    </nav>
+
+    <div class="section-divider"></div>
+
+    <h2 id="core-diff">The core difference</h2>
+    <p>One character, two completely different jobs:</p>
+
+    <div class="op-grid">
+      <div class="op-card assign">
+        <div class="op-symbol">=</div>
+        <div class="op-name">Assignment</div>
+        <div class="op-desc">Stores a value inside a variable. You're telling Python "put this value here."</div>
+        <span class="op-example">x = 10 &nbsp;→&nbsp; x now holds 10</span>
+      </div>
+      <div class="op-card compare">
+        <div class="op-symbol">==</div>
+        <div class="op-name">Comparison</div>
+        <div class="op-desc">Checks if two values are equal. Returns <code>True</code> or <code>False</code>.</div>
+        <span class="op-example">x == 10 &nbsp;→&nbsp; True or False</span>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Operator</th><th>Name</th><th>What it does</th><th>Returns</th><th>Example</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>=</code></td><td>Assignment</td><td>Stores a value in a variable</td><td>Nothing (no output)</td><td><code>x = 10</code></td></tr>
+          <tr><td><code>==</code></td><td>Equality</td><td>Checks if two values are equal</td><td><code>True</code> or <code>False</code></td><td><code>x == 10</code></td></tr>
+          <tr><td><code>!=</code></td><td>Not equal</td><td>Checks if two values are different</td><td><code>True</code> or <code>False</code></td><td><code>x != 5</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+        <div class="section-divider"></div>
+
+    <h2 id="why-confusing">Why do beginners confuse = and == in Python?</h2>
+
+<p>
+Many new Python learners assume that <code>=</code> and <code>==</code> mean the same thing because they look almost identical. In reality, they solve completely different problems.
+</p>
+
+<p>
+The assignment operator <code>=</code> stores data inside a variable, while the equality operator <code>==</code> checks whether two values are equal.
+</p>
+
+<p>
+This confusion often appears when writing <code>if</code> statements, <code>while</code> loops, login systems, form validation, and beginner coding exercises.
+</p>
+
+<p>
+If you've ever seen an error after writing something like <code>if age = 18:</code>, you're not alone. It's one of the most common Python mistakes beginners make.
+</p>
+    <div class="section-divider"></div>
+
+    <h2 id="assignment">= (assignment operator)</h2>
+    <p>Use <code>=</code> when you want to create or update a variable. You're putting a value into a named container so you can use it later.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>x = 7           # x now stores the number 7
+name = "Kiddo"  # name stores the string "Kiddo"
+is_active = True  # is_active stores a boolean
+
+# You can update a variable the same way
+x = 10          # x now stores 10, not 7 anymore</code></pre>
+    </div>
+
+    <p>Think of a variable as a labeled jar. <code>=</code> is the action of putting something inside it. The jar's name is on the left, the content goes on the right.</p>
+
+    <div class="note-box">
+      <strong>Key point:</strong> the assignment operator doesn't return anything — it just stores. <code>print(x = 10)</code> will throw an error because <code>=</code> isn't an expression, it's a statement.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="comparison">== (comparison operator)</h2>
+    <p>Use <code>==</code> when you want to check whether two things are the same. It evaluates the comparison and gives you back <code>True</code> or <code>False</code>.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>x = 7
+
+print(x == 7)   # True  — x is 7, so yes they match
+print(x == 5)   # False — x is 7, not 5
+
+print(7 == 7)   # True
+print("hi" == "hello")  # False — different strings</code></pre>
+    </div>
+
+    <p>The result is always a boolean — either <code>True</code> or <code>False</code>. This is what makes <code>==</code> useful inside <code>if</code> statements and loops, where Python needs a yes/no answer to decide what to do next.</p>
+
+        <div class="section-divider"></div>
+
+    <h2 id="where-used">Where is == used in real Python programs?</h2>
+
+<p>
+The comparison operator <code>==</code> appears everywhere in Python development.
+</p>
+
+<ul>
+<li>Checking login credentials</li>
+<li>Validating user input</li>
+<li>Comparing database values</li>
+<li>Filtering data in applications</li>
+<li>Game development conditions</li>
+<li>Machine learning decision logic</li>
+<li>Automation scripts</li>
+</ul>
+
+<p>
+Whenever your program needs a yes-or-no answer, you'll usually see comparison operators such as <code>==</code>, <code>!=</code>, <code>&gt;</code>, or <code>&lt;</code>.
+</p>
+    <div class="section-divider"></div>
+
+    <h2 id="real-example">Real-world example</h2>
+    <p>Here's where both operators work together. The <code>=</code> stores the value, the <code>==</code> checks it:</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>age = 18           # = stores the value 18 into age
+
+if age == 18:      # == checks: is age equal to 18?
+    print("You're officially an adult!")
+else:
+    print("Not 18 yet.")</code></pre>
+    </div>
+
+    <p>Line 1 uses <code>=</code> to set the value. Line 3 uses <code>==</code> to ask a question about it. Two separate jobs, one right after the other.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># Another example — login check
+password = "kiddo123"   # store the password
+
+user_input = "kiddo123" # what the user typed
+
+if user_input == password:  # compare the two
+    print("Access granted!")
+else:
+    print("Wrong password.")</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="not-equal">!= and the other comparison operators</h2>
+    <p>While you're here, meet the full family. Python has six comparison operators and they all return <code>True</code> or <code>False</code>:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Operator</th><th>Meaning</th><th>Example</th><th>Result</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>==</code></td><td>Equal to</td><td><code>5 == 5</code></td><td><code>True</code></td></tr>
+          <tr><td><code>!=</code></td><td>Not equal to</td><td><code>5 != 3</code></td><td><code>True</code></td></tr>
+          <tr><td><code>&gt;</code></td><td>Greater than</td><td><code>7 &gt; 3</code></td><td><code>True</code></td></tr>
+          <tr><td><code>&lt;</code></td><td>Less than</td><td><code>2 &lt; 9</code></td><td><code>True</code></td></tr>
+          <tr><td><code>&gt;=</code></td><td>Greater than or equal</td><td><code>5 &gt;= 5</code></td><td><code>True</code></td></tr>
+          <tr><td><code>&lt;=</code></td><td>Less than or equal</td><td><code>4 &lt;= 6</code></td><td><code>True</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>score = 45
+
+if score != 100:
+    print("Not perfect yet — keep going!")
+
+if score >= 40:
+    print("You passed!")</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="mistakes">Common mistakes to avoid</h2>
+
+    <div class="mistake-list">
+      <div class="mistake-item">
+        <div class="mistake-body">
+          <strong>Using = inside an if statement</strong>
+          <p><code>if x = 10:</code> throws a <code>SyntaxError</code>. Python does not allow assignment inside a condition. Always use <code>==</code> for comparisons.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-body">
+          <strong>Using == when you meant to assign</strong>
+          <p><code>x == 10</code> at the top level doesn't do anything useful — it evaluates to <code>True</code> or <code>False</code> and throws it away. If you mean to store 10 in x, write <code>x = 10</code>.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        
+        <div class="mistake-body">
+          <strong>Comparing with = in a while loop</strong>
+          <p><code>while count = 0:</code> is a syntax error. Use <code>while count == 0:</code> to keep looping while count equals zero.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-body">
+          <strong>The correct pattern</strong>
+          <p>Use <code>=</code> to set values, <code>==</code> to check them. If you're writing a condition — inside <code>if</code>, <code>while</code>, or <code>elif</code> — it's always <code>==</code>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Memory trick:</strong> one <code>=</code> means "becomes" (assignment). Two <code>==</code> means "equals?" (question). The more <code>=</code> signs, the more you're asking rather than telling.
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 id="interview-question">Python Interview Question: = vs ==</h2>
+
+<p>
+The difference between <code>=</code> and <code>==</code> is one of the most frequently asked Python interview questions for beginners.
+</p>
+
+<p>
+A simple way to remember it:
+</p>
+
+<ul>
+<li><code>=</code> → Store a value</li>
+<li><code>==</code> → Compare a value</li>
+</ul>
+
+<p>
+Interviewers ask this question because it tests whether you understand variables, conditions, and basic program flow.
+</p>
+
+<p>
+If you can clearly explain the difference between assignment and comparison operators, you're already ahead of many beginners.
+</p>
+    <div class="section-divider"></div>
+
+    <h2 id="faq">Frequently asked questions</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is the difference between = and == in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><code>=</code> is the assignment operator — it stores a value in a variable (e.g. <code>x = 10</code>). <code>==</code> is the comparison operator — it checks if two values are equal and returns <code>True</code> or <code>False</code> (e.g. <code>x == 10</code>).</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can you use = inside an if statement in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">No. Writing <code>if x = 10:</code> causes a <code>SyntaxError</code>. Python doesn't allow assignment inside a condition. Use <code>==</code> instead: <code>if x == 10:</code>.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What does == return in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><code>==</code> always returns a boolean — <code>True</code> if the two values are equal, <code>False</code> if they're not. That's what makes it useful inside conditions that need a yes/no answer.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is != in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><code>!=</code> is the "not equal" operator. It returns <code>True</code> if the two values are different, and <code>False</code> if they're the same. Example: <code>x != 10</code> returns <code>True</code> if x holds any value other than 10.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What are all the comparison operators in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Python has six: <code>==</code> (equal), <code>!=</code> (not equal), <code>&gt;</code> (greater than), <code>&lt;</code> (less than), <code>&gt;=</code> (greater than or equal), <code>&lt;=</code> (less than or equal). All of them return <code>True</code> or <code>False</code>.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="author-strip">
+      <div class="author-avatar">PM</div>
+      <div class="author-info">
+        <strong>Palak Mishra</strong>
+        <span>Backend developer · Writes beginner-friendly Python guides on Kiddo</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>More FAQs →</strong><br><br>
+      <a href="../faq/doubt2.html">What does if __name__ == '__main__' mean?</a> ·
+      <a href="../faq/doubt3.html">Coding roadmap with no experience</a> ·
+      <a href="../faq/doubt4.html">Learn coding without a CS degree?</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
+    <div class="footer-links">
+      <a href="../info/privacy.html">Privacy</a>
+      <a href="../info/terms.html">Terms</a>
+      <a href="../info/contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const desktopToggle = document.getElementById('desktopToggleTheme');
+  const mobileToggle  = document.getElementById('mobileToggleTheme');
+  const applyTheme = (dark) => {
+    document.body.classList.toggle('dark', dark);
+    const icon = dark ? '☀️' : '🌙';
+    if (desktopToggle) desktopToggle.textContent = icon;
+    if (mobileToggle)  mobileToggle.textContent  = icon;
+  };
+  applyTheme(localStorage.getItem('theme') === 'dark');
+  const toggleTheme = () => {
+    const isDark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  };
+  if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+  if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+
+  const hamburger    = document.getElementById('hamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  hamburger?.addEventListener('click', (e) => { e.stopPropagation(); menuDropdown.classList.toggle('open'); });
+  document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.querySelectorAll('.code-container').forEach(container => {
+    const btn  = container.querySelector('.copy-btn');
+    const tip  = container.querySelector('.tooltip');
+    const code = container.querySelector('pre code');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(code.innerText.trim()).then(() => {
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
       });
     });
-  </script>
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans    = btn.nextElementSibling;
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+</script>
 </body>
 </html>
