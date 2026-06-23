@@ -3,9 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" type="image/png" href="../assests/icon.png">
-  <meta name="description" content="Master Python's for loops with this easy, beginner-friendly guide! Learn how to loop through lists, strings, numbers, and more with 6+ real examples, tips, and challenges to boost your coding skills.">
-  <title>Python List Comprehension for Beginners – Easy Guide with 6+ Practical Examples</title>
+  <link rel="icon" type="image/png" href="../assests/icon.png" />
+
+  <meta name="description" content="Learn Python List Comprehensions (Python Docs 5.1.3 & 5.1.4) with beginner-friendly explanations — syntax, filtering, nested comprehensions, matrix transposition, and interview questions." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Python List Comprehensions Explained (Python Docs 5.1.3) | Kiddo" />
+  <meta property="og:description" content="The official Python list comprehension docs explained simply. Learn syntax, filtering with if, nested comprehensions, matrix transpose, and real-world examples." />
+  <meta property="og:url" content="https://kiddoedu.org/python/list-comp.html" />
+  <meta property="og:site_name" content="Kiddo" />
+  <meta property="og:image" content="https://kiddoedu.org/python/list-comp.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Python List Comprehensions Explained (Python Docs 5.1.3) | Kiddo" />
+  <meta name="twitter:description" content="Beginner-friendly explanation of Python list comprehensions. Syntax, filtering, nested comprehensions, matrix transpose, interview questions." />
+  <meta name="twitter:image" content="https://kiddoedu.org/python/list-comp.png" />
+  <link rel="canonical" href="https://kiddoedu.org/python/list-comp.html" />
+  <title>Python List Comprehensions Explained (Python Docs 5.1.3) | Syntax, Filtering & Nested Comprehensions</title>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Python List Comprehensions Explained (Python Docs 5.1.3)",
+    "description": "Beginner-friendly explanation of Python list comprehensions (5.1.3 & 5.1.4) with syntax, filtering, nested comprehensions, matrix transposition, real-world examples, and interview questions.",
+    "keywords": ["Python List Comprehension","Python Docs 5.1.3","List Comprehension Syntax","Nested List Comprehension","Python Filter List","Python One-liner","Matrix Transpose Python","Python Interview Questions"],
+    "url": "https://kiddoedu.org/python/list-comp.html",
+    "datePublished": "2025-01-01",
+    "dateModified": "2026-06-15",
+    "author": { "@type": "Person", "name": "Palak Mishra" },
+    "publisher": { "@type": "Organization", "name": "Kiddo", "url": "https://kiddoedu.org" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://kiddoedu.org/python/list-comp.html" }
+  }
+  </script>
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -13,773 +42,788 @@
     gtag('js', new Date());
     gtag('config', 'G-ESNWS8F9HE');
   </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg: #f5f3ee;
-      --surface: #ffffff;
-      --surface2: #eceae4;
-      --text: #1a1814;
-      --text-muted: #6b6760;
-      --accent: #e86c2f;
-      --accent2: #3d5afe;
-      --accent3: #00b894;
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
       --border: rgba(0,0,0,0.08);
       --shadow: 0 4px 24px rgba(0,0,0,0.07);
       --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
-      --radius: 16px;
-      --radius-sm: 10px;
-      --header-h: 70px;
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
       --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
     }
     body.dark {
-      --bg: #0f0e0c;
-      --surface: #1c1a17;
-      --surface2: #252320;
-      --text: #f0ede6;
-      --text-muted: #918e87;
-      --accent: #ff7d3e;
-      --accent2: #7986cb;
-      --accent3: #55efc4;
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
       --border: rgba(255,255,255,0.07);
       --shadow: 0 4px 24px rgba(0,0,0,0.4);
       --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      transition: background var(--transition), color var(--transition);
-      overflow-x: hidden;
-    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 999; width: 0%; transition: width 0.1s linear; }
 
-    /* Progress bar */
-    .progress-bar {
-      position: fixed;
-      top: 0; left: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      z-index: 999;
-      width: 0%;
-      transition: width 0.1s linear;
-    }
-
-    /* ── Header ── */
-    header {
-      height: var(--header-h);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      background: rgba(245,243,238,0.82);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: background var(--transition);
-    }
+    header { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
     body.dark header { background: rgba(15,14,12,0.82); }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
-    .logo span {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.4rem;
-      letter-spacing: -0.02em;
-      color: var(--text);
-    }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
     .logo span em { font-style: normal; color: var(--accent); }
-
     nav { display: flex; align-items: center; gap: 8px; }
-    nav a {
-      font-weight: 500;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 6px 14px;
-      border-radius: 8px;
-      transition: color var(--transition), background var(--transition);
-    }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
     nav a:hover { color: var(--text); background: var(--surface2); }
-
-    .theme-btn {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      width: 38px; height: 38px;
-      cursor: pointer;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background var(--transition), transform var(--transition);
-      margin-left: 8px;
-    }
+    .theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background var(--transition), transform var(--transition); margin-left: 8px; }
     .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
 
-    /* ── Mobile Header ── */
-    .mobile-header {
-      display: none;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      height: var(--header-h);
-      background: rgba(245,243,238,0.82);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: background var(--transition);
-    }
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 20px; height: var(--header-h); background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
     body.dark .mobile-header { background: rgba(15,14,12,0.82); }
     .mobile-right { display: flex; align-items: center; gap: 8px; }
-
-    .hamburger {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      width: 38px; height: 38px;
-      cursor: pointer;
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    .menu-dropdown {
-      display: none;
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      box-shadow: var(--shadow-lg);
-      padding: 8px;
-      min-width: 160px;
-      flex-direction: column;
-      gap: 2px;
-    }
+    .hamburger { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; position: relative; }
+    .menu-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); padding: 8px; min-width: 160px; flex-direction: column; gap: 2px; }
     .menu-dropdown.open { display: flex; }
-    .menu-dropdown a {
-      display: block;
-      font-weight: 500;
-      font-size: 0.95rem;
-      color: var(--text);
-      text-decoration: none;
-      padding: 9px 14px;
-      border-radius: 8px;
-      transition: background var(--transition);
-    }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
     .menu-dropdown a:hover { background: var(--surface2); }
 
-    /* ── Layout ── */
-    .page-wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 40px 80px;
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 40px;
-      align-items: start;
-    }
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
 
-    /* ── Sidebar ── */
-    aside {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      position: sticky;
-      top: calc(var(--header-h) + 20px);
-    }
-    .aside-label {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-    }
+    aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px); }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
     aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
-    aside ul li a {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 8px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: background var(--transition), color var(--transition);
-      line-height: 1.3;
-    }
+    aside ul li a { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.4; }
     aside ul li a:hover { background: var(--surface2); color: var(--text); }
     aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
-    aside ul li a .dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: currentColor;
-      flex-shrink: 0;
-      opacity: 0.5;
-    }
-    .aside-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 14px 0;
-    }
-    .aside-project-label {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; margin-top: 6px; }
 
-    /* ── Main content ── */
     main { min-width: 0; }
-
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
     .breadcrumb a { color: var(--text-muted); text-decoration: none; }
     .breadcrumb a:hover { color: var(--accent); }
     .breadcrumb span { opacity: 0.4; }
-
-    main h1 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(1.7rem, 3vw, 2.4rem);
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      margin-bottom: 16px;
-    }
-
-    .meta-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-    .meta-pill {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 5px 12px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
+    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
     .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
+    .meta-pill.blue { background: rgba(61,90,254,0.08); color: var(--accent2); border-color: rgba(61,90,254,0.2); }
+    .meta-pill.orange { background: rgba(232,108,47,0.08); color: var(--accent); border-color: rgba(232,108,47,0.2); }
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
 
-    main p { font-size: 0.95rem; line-height: 1.75; color: var(--text); margin-bottom: 14px; }
-    main h2 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.2rem;
-      letter-spacing: -0.01em;
-      margin-top: 36px;
-      margin-bottom: 14px;
-    }
-    main code {
-      font-family: 'Courier New', monospace;
-      font-size: 0.88em;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 2px 6px;
-      color: var(--accent);
-    }
-    main ul {
-      padding-left: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    main ul li {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      padding-left: 20px;
-      position: relative;
-      color: var(--text);
-    }
-    main ul li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-weight: 600;
-    }
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+    .doc-ref { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; }
+    .doc-ref a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .doc-ref a:hover { text-decoration: underline; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 18px; margin-bottom: 8px; color: var(--text-muted); }
+    main p { font-size: 0.95rem; line-height: 1.78; color: var(--text); margin-bottom: 14px; }
+    main code { font-family: 'Courier New', monospace; font-size: 0.88em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
+    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
 
-    /* ── Code blocks ── */
-    .code-container {
-      background: #1e1e1e;
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      margin: 16px 0 26px;
-      border: 1px solid var(--border);
-    }
-    .code-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .lang-tag {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.3);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .copy-btn {
-      background: none;
-      border: none;
-      color: rgba(255,255,255,0.35);
-      padding: 2px 0;
-      cursor: pointer;
-      font-size: 0.75rem;
-      font-family: 'DM Sans', sans-serif;
-      transition: color var(--transition);
-      position: relative;
-    }
-    .copy-btn:hover { color: rgba(255,255,255,0.75); }
-    .tooltip {
-      position: absolute;
-      top: -28px;
-      right: 0;
-      background: var(--surface2);
-      color: var(--text);
-      padding: 3px 8px;
-      font-size: 0.7rem;
-      border-radius: 4px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
-      white-space: nowrap;
-    }
-    .tooltip.show { opacity: 1; }
-    pre {
-      margin: 0;
-      padding: 18px;
-      overflow-x: auto;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.875rem;
-      line-height: 1.65;
-      color: #d4d4d4;
-      background: transparent;
-      white-space: pre;
-      tab-size: 2;
-    }
+    /* TOC */
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
+    .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
+    .toc-grid a:hover { background: var(--surface2); color: var(--text); }
+    .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
 
-    /* ── Callout / tip box ── */
-    .callout {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
-      border-radius: var(--radius-sm);
-      padding: 16px 20px;
-      margin: 24px 0;
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-    .callout strong { color: var(--accent); font-family: 'Syne', sans-serif; }
+    /* Syntax anatomy */
+    .syntax-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 20px 0 24px; font-family: 'Courier New', monospace; font-size: 1rem; line-height: 2.2; overflow-x: auto; }
+    .sy-bracket { color: var(--text-muted); }
+    .sy-expr { color: var(--accent); font-weight: 600; }
+    .sy-kw { color: var(--accent2); font-weight: 600; }
+    .sy-iter { color: var(--accent3); font-weight: 600; }
+    .sy-cond { color: #9c27b0; font-weight: 600; }
+    .sy-label { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-left: 14px; vertical-align: middle; }
+
+    /* Doc block */
+    .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
+    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
+    .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
+    .doc-block code { font-family: 'Courier New', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+
+    /* Note / warn */
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .note-box code { font-family: 'Courier New', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .warn-box { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.2); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .warn-box code { font-family: 'Courier New', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Callout */
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
     .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
     .callout a:hover { text-decoration: underline; }
 
-    .note-box {
-      background: rgba(61,90,254,0.07);
-      border: 1px solid rgba(61,90,254,0.18);
-      border-radius: var(--radius-sm);
-      padding: 14px 18px;
-      margin: 20px 0;
-      font-size: 0.88rem;
-      color: var(--text);
-      line-height: 1.6;
-    }
+    /* Code blocks */
+    .code-container { background: #1e1e1e; border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid var(--border); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; text-transform: uppercase; }
+    .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
+    .copy-btn { background: none; border: none; color: rgba(255,255,255,0.35); padding: 2px 0; cursor: pointer; font-size: 0.75rem; font-family: 'DM Sans', sans-serif; transition: color var(--transition); position: relative; margin-left: auto; }
+    .copy-btn:hover { color: rgba(255,255,255,0.75); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: var(--surface2); color: var(--text); padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .tooltip.show { opacity: 1; }
+    pre { margin: 0; padding: 18px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.875rem; line-height: 1.65; color: #d4d4d4; background: transparent; white-space: pre; tab-size: 2; }
 
-    /* ── Footer ── */
-    footer {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 28px 40px;
-    }
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
+    /* Mistake list */
+    .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 26px; }
+    .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
+    .mi-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
+    .mi-body p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+    .mi-body code { font-family: 'Courier New', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* IQ list */
+    .iq-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+    .iq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .iq-q { padding: 14px 18px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
+    .iq-badge { background: rgba(232,108,47,0.1); color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; padding: 2px 8px; flex-shrink: 0; margin-top: 2px; }
+    .iq-a { padding: 0 18px 14px 18px; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+    .iq-a code { font-family: 'Courier New', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* FAQ accordion */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 18px 0; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; padding: 14px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
+    .faq-a.open { max-height: 300px; padding: 2px 18px 15px; }
+    .faq-a code { font-family: 'Courier New', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Author strip */
+    .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .author-info { font-size: 0.85rem; line-height: 1.5; }
+    .author-info strong { font-weight: 600; display: block; }
+    .author-info span { color: var(--text-muted); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
     .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
     .footer-links { display: flex; gap: 20px; }
-    .footer-links a {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color var(--transition);
-    }
+    .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
     .footer-links a:hover { color: var(--accent); }
 
-    /* ── Responsive ── */
     @media (max-width: 768px) {
       header { display: none; }
       .mobile-header { display: flex; }
       .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
-      aside {
-        position: static;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0 16px;
-      }
-      .aside-label, .aside-divider, .aside-project-label { grid-column: 1 / -1; }
+      aside { position: static; }
+      .toc-grid { grid-template-columns: 1fr; }
       footer { padding: 20px; }
       .footer-container { flex-direction: column; align-items: flex-start; }
     }
-    @media (max-width: 480px) {
-      aside { grid-template-columns: 1fr; }
-      main h1 { font-size: 1.6rem; }
-    }
+    @media (max-width: 480px) { main h1 { font-size: 1.6rem; } }
   </style>
 </head>
 <body>
 
-  <div class="progress-bar" id="progressBar"></div>
+<div class="progress-bar" id="progressBar"></div>
 
-  <!-- Desktop Header -->
-  <header>
-    <a class="logo" href="../index.html">
-      <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
-      <span>Kid<em>do</em></span>
-    </a>
-    <nav>
-      <a href="../index.html">Home</a>
-      <a href="../info/about.html">About</a>
-      <a href="../info/contact.html">Contact</a>
-      <button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button>
-    </nav>
-  </header>
+<header>
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../info/about.html">About</a>
+    <a href="../info/contact.html">Contact</a>
+    <button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button>
+  </nav>
+</header>
 
-  <!-- Mobile Header -->
-  <div class="mobile-header">
-    <a class="logo" href="../index.html">
-      <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
-      <span>Kid<em>do</em></span>
-    </a>
-    <div class="mobile-right">
-      <button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button>
-      <button class="hamburger" id="hamburgerBtn">☰
-        <div class="menu-dropdown" id="menuDropdown">
-          <a href="../index.html">Home</a>
-          <a href="../info/about.html">About</a>
-          <a href="../info/contact.html">Contact</a>
-        </div>
-      </button>
-    </div>
-  </div>
-
-  <div class="page-wrap">
-
-    <!-- Sidebar -->
-    <aside>
-  <div class="aside-label">Python Topics</div>
-  <ul>
-    <li><a href="../python/user_input.html"><span class="dot"></span>User Input</a></li>
-    <li><a href="../python/list.html"><span class="dot"></span>Lists</a></li>
-    <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
-    <li><a href="../python/sets.html"><span class="dot"></span>Sets</a></li>
-    <li><a href="../python/for_loop.html"><span class="dot"></span>For Loop</a></li>
-    <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
-    <li><a href="../python/list-comp.html" class="active"><span class="dot"></span>List Comprehension</a></li>
-  </ul>
-
-  <div class="aside-label" style="margin-top:24px;">Mini Projects</div>
-  <ul>
-    <li><a href="../python/password.html"><span class="dot"></span>Password Generator</a></li>
-  </ul>
-</aside>
-
-    <!-- Main -->
-    <main>
-<div class="breadcrumb">
+<div class="mobile-header">
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <div class="mobile-right">
+    <button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button>
+    <button class="hamburger" id="hamburgerBtn">☰
+      <div class="menu-dropdown" id="menuDropdown">
         <a href="../index.html">Home</a>
-        <span>›</span>
-        <a href="../python/list-comp.html">Python</a>
-        <span>›</span>
-        List Comprehension
-      </div>
- 
-  <h1>Python List Comprehension Explained with 7 Real-Life Examples</h1><br>
-
-
- <div class="meta-row">
-        <span class="meta-pill">⏱ 5 min read</span>
-        <span class="meta-pill green">Beginner</span>
-        <span class="meta-pill">Last updated: April 2026</span>
-      </div> 
-
-    <p>
-      Ever seen something like <code>[x for x in items]</code> in Python and thought, “Wait, what sorcery is this?”  
-      Don’t worry — list comprehension isn’t scary. In fact, it’s one of the coolest Python tricks to write cleaner, shorter, and more readable code.
-    </p>
-
-    <h2>What is List Comprehension?</h2>
-    <p>
-      List comprehension is just a fancy way to build a list in one line. Instead of writing a full for loop, you can condense it into a single, readable expression.
-    </p>
-
-     <div class="code-container" aria-label="Code example for Pandas groupby method">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn" aria-label="Copy code snippet">Copy</button>
-          <div class="tooltip" role="alert" aria-live="assertive">Copied!</div>
-        </div>
-        <pre><code>
-[expression for item in iterable if condition]
- </code></pre>
-      </div>
-
-<p>Yeah, that’s the whole syntax. Simple once you see it in action.</p>
-
-<h2>7 Real-Life Examples</h2><br><br>
-<h3>1. Convert Names to Uppercase</h3>
-<div class="code-container" aria-label="Code example for Pandas groupby method">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn" aria-label="Copy code snippet">Copy</button>
-          <div class="tooltip" role="alert" aria-live="assertive">Copied!</div>
-        </div>
-        <pre><code>
-names = ["alice", "bob", "charlie"]
-upper_names = [name.upper() for name in names]
-print(upper_names)
- </code></pre>
-      </div>
-<p>🔹Output: <code>['ALICE', 'BOB', 'CHARLIE']</code></p>
-
-
-    <h3>2. Filter Even Numbers</h3>
-    <div class="code-container" aria-label="Code example for Pandas groupby method">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn" aria-label="Copy code snippet">Copy</button>
-          <div class="tooltip" role="alert" aria-live="assertive">Copied!</div>
-        </div>
-        <pre><code>
-nums = [1, 2, 3, 4, 5, 6]
-evens = [n for n in nums if n % 2 == 0]
-print(evens)
- </code></pre>
-    </div>
-     <p>🔹Output: <code>[2, 4, 6]</code></p>
-
-
-     <h3>3. Extract Domain Names from Emails</h3>
-<div class="code-container" aria-label="Code example for Pandas groupby method">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn" aria-label="Copy code snippet">Copy</button>
-          <div class="tooltip" role="alert" aria-live="assertive">Copied!</div>
-        </div>
-        <pre><code>
-emails = ["alice@gmail.com", "bob@yahoo.com"]
-domains = [email.split("@")[1] for email in emails]
-print(domains)
- </code></pre>
-    </div>
-    <p>🔹Output: <code>['gmail.com', 'yahoo.com']</code></p>
-
-
-    <h3>4. Flatten a Nested List</h3>
-    <div class="code-container" aria-label="Code example for Pandas groupby method">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn" aria-label="Copy code snippet">Copy</button>
-          <div class="tooltip" role="alert" aria-live="assertive">Copied!</div>
-        </div>
-        <pre><code>
-matrix = [[1, 2], [3, 4], [5, 6]]
-flat = [num for row in matrix for num in row]
-print(flat)
- </code></pre>
-    </div>
-    <p>🔹Output: <code>[1, 2, 3, 4, 5, 6]</code></p>
-
-
-    <h3>5. Create a List of Squares</h3>
-    <div class="code-container" aria-label="Code example for Pandas groupby method">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn" aria-label="Copy code snippet">Copy</button>
-          <div class="tooltip" role="alert" aria-live="assertive">Copied!</div>
-        </div>
-        <pre><code>
-squares = [n**2 for n in range(1, 6)]
-print(squares)
- </code></pre>
-    </div>
-    <p>🔹Output: <code>[1, 4, 9, 16, 25]</code></p>
-
-
-    <h3>6. Remove Punctuation from a Sentence</h3>
-    <div class="code-container" aria-label="Code example for Pandas groupby method">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn" aria-label="Copy code snippet">Copy</button>
-          <div class="tooltip" role="alert" aria-live="assertive">Copied!</div>
-        </div>
-        <pre><code>
-sentence = "Hello, world!"
-clean = [ch for ch in sentence if ch.isalnum() or ch.isspace()]
-print("".join(clean))
- </code></pre>
-    </div>
-    <p>🔹Output: <code>Hello world</code></p>
-
-
-    <h3>7. Filter Available Products</h3>
-    <div class="code-container">
-        <div class="code-header">
-          <span  class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-        </div>
-        <pre><code>
-products = {"pen": True, "pencil": False, "eraser": True}
-available = [item for item, in_stock in products.items() if in_stock]
-print(available)
- </code></pre>
-    </div>
-    <p>🔹Output: <code>['pen', 'eraser']</code></p><br>
-
-
-    <h2>When *Not* to Use List Comprehension</h2>
-    <p>
-      Just because you can, doesn’t mean you should!  
-      If your comprehension looks like a spaghetti mess of <code>for</code> and <code>if</code>, consider using a regular loop for readability. Clean code > short code.
-    </p>
-    <br><br>
-     <h2>🔹Bonus: Dictionary Comprehension</h2>
-    <p>You can do the same thing with dictionaries too!</p>
-    <div class="code-container" aria-label="Code example for Pandas groupby method">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn" aria-label="Copy code snippet">Copy</button>
-          <div class="tooltip" role="alert" aria-live="assertive">Copied!</div>
-        </div>
-        <pre><code>
-original = {"a": 1, "b": 2, "c": 3}
-squared = {k: v**2 for k, v in original.items()}
-print(squared)
- </code></pre>
-    </div>
-<p>🔹Output: <code>{'a': 1, 'b': 4, 'c': 9}</code></p>
-<br>
-
-<h2>Conclusion</h2>
-    <p>
-      List comprehension might look intimidating at first, but once you practice it a few times, it becomes second nature.
-      It's clean, powerful, and just a bit magical.
-    </p>
-
-    <div class="callout">
-    <strong>Ready to level up?</strong> Explore more Python tricks:
-    <a href="../python/for_loop.html" class="underline text-blue-600">Learn For Loops</a>,
-        <a href="../python/while_loop.html" class="underline text-blue-600">Learn While Loops</a> and 
-    <a href="../python/list.html" class="underline text-blue-600">Master Lists in python </a> with hands-on examples!
-</div>
-
-   </main>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-container">
-      <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
-      <div class="footer-links">
-        <a href="../info/privacy.html">Privacy</a>
-        <a href="../info/terms.html">Terms</a>
+        <a href="../info/about.html">About</a>
         <a href="../info/contact.html">Contact</a>
       </div>
+    </button>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <aside>
+    <div class="aside-label">Python Topics</div>
+    <ul>
+      <li><a href="../python/variables.html"><span class="dot"></span>Variables</a></li>
+      <li><a href="../python/lists.html"><span class="dot"></span>Lists</a></li>
+      <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
+      <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
+      <li><a href="../python/sets.html"><span class="dot"></span>Sets</a></li>
+      <li><a href="../python/functions.html"><span class="dot"></span>Functions</a></li>
+      <li><a href="../python/loops.html"><span class="dot"></span>Loops</a></li>
+      <li><a href="../python/list-comp" class="active"><span class="dot"></span>List Comprehension</a></li>
+      <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../python/lists.html">Python</a><span>›</span>
+      5.1.3 List Comprehensions
     </div>
-  </footer>
 
-  <script>
-    /* ── Theme ── */
-    const desktopToggle = document.getElementById('desktopToggleTheme');
-    const mobileToggle  = document.getElementById('mobileToggleTheme');
-    const applyTheme = (dark) => {
-      document.body.classList.toggle('dark', dark);
-      const icon = dark ? '☀️' : '🌙';
-      if (desktopToggle) desktopToggle.textContent = icon;
-      if (mobileToggle)  mobileToggle.textContent  = icon;
-    };
-    applyTheme(localStorage.getItem('theme') === 'dark');
-    const toggleTheme = () => {
-      const isDark = !document.body.classList.contains('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      applyTheme(isDark);
-    };
-    if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
-    if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+    <h1>Python List Comprehensions Explained (Python Docs 5.1.3) | Syntax, Filtering, Nested Comprehensions & Beginner Guide</h1>
 
-    /* ── Mobile menu ── */
-    const hamburger    = document.getElementById('hamburgerBtn');
-    const menuDropdown = document.getElementById('menuDropdown');
-    hamburger?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      menuDropdown.classList.toggle('open');
-    });
-    document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+    <div class="doc-ref">
+      📖 Based on <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions" target="_blank" rel="noopener">Python 3 official docs 5.1.3 & 5.1.4</a> — explained like a friend, with extra examples added
+    </div>
 
-    /* ── Scroll progress ── */
-    const progressBar = document.getElementById('progressBar');
-    window.addEventListener('scroll', () => {
-      const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-      progressBar.style.width = Math.min(pct, 100) + '%';
-    });
+    <div class="meta-row">
+      <span class="meta-pill">Python</span>
+      <span class="meta-pill green">Beginner</span>
+      <span class="meta-pill blue">Data Structures</span>
+      <span class="meta-pill orange">Official Docs</span>
+      <span class="date-badge">Updated June 2026</span>
+    </div>
 
-    /* ── Copy buttons ── */
-    document.querySelectorAll('.code-container').forEach(container => {
-      const btn     = container.querySelector('.copy-btn');
-      const tooltip = container.querySelector('.tooltip');
-      const code    = container.querySelector('pre code');
-      btn.addEventListener('click', () => {
-        navigator.clipboard.writeText(code.innerText.trim()).then(() => {
-          tooltip.classList.add('show');
-          setTimeout(() => tooltip.classList.remove('show'), 2000);
-        });
+    <p>This page explains the official Python List Comprehensions documentation (Python Docs 5.1.3 and 5.1.4) in simple language. Learn how Python list comprehensions work, understand the syntax, filtering, nested comprehensions, multiple for clauses, and real examples. If official Python documentation feels confusing, this guide breaks every concept into beginner-friendly explanations with practical code examples. This guide covers the syntax, filtering with <code>if</code>, multiple <code>for</code> clauses, nested comprehensions, and the classic matrix transpose example.</p>
+
+    <p>By the end of this guide, you'll know when to use a list comprehension instead of a loop, how to filter and transform data in one line, and how nested comprehensions work — plus the common mistakes that trip people up.</p>
+
+     <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">In this guide</div>
+      <div class="toc-grid">
+        <a href="#what-is"><span class="toc-num">01</span>What is a list comprehension?</a>
+        <a href="#syntax"><span class="toc-num">02</span>Syntax breakdown</a>
+        <a href="#vs-loop"><span class="toc-num">03</span>Comprehension vs for loop</a>
+        <a href="#filtering"><span class="toc-num">04</span>Filtering with if</a>
+        <a href="#multiple-for"><span class="toc-num">05</span>Multiple for clauses</a>
+        <a href="#examples"><span class="toc-num">06</span>All official doc examples</a>
+        <a href="#nested"><span class="toc-num">07</span>Nested list comprehensions</a>
+        <a href="#matrix"><span class="toc-num">08</span>Matrix transposition</a>
+        <a href="#mistakes"><span class="toc-num">9</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">10</span>Interview questions</a>
+        <a href="#project"><span class="toc-num">11</span>Mini project</a>
+        <a href="#faq"><span class="toc-num">12</span>FAQs</a>
+      </div>
+    </nav>
+
+    <div class="section-divider"></div>
+
+    <!-- 01 -->
+    <h2 id="what-is">What is a Python List Comprehension? (Python Docs 5.1.3 Explained)</h2>
+    <p>A list comprehension is a compact way to create a list — in one line, without writing a full <code>for</code> loop and <code>.append()</code>. It reads almost like English: "give me X for each Y in Z."</p>
+    <p>They're faster to write and can be slightly faster to run in many cases. When used correctly, they can also make code shorter and more readable than the equivalent loop. The Python docs describe them as "a concise way to create lists" and they're one of the features that makes Python feel genuinely elegant.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>List comprehensions provide a concise way to create lists. Common applications are to make new lists where each element is the result of some operations applied to each member of another sequence or iterable, or to create a subsequence of those elements that satisfy a certain condition.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 -->
+    <h2 id="syntax">List Comprehension Syntax — Broken Down</h2>
+    <p>The full syntax has four parts — only the first two are required:</p>
+
+    <div class="syntax-box">
+      <div>
+        <span class="sy-bracket">[</span>
+        <span class="sy-expr">expression</span>
+        <span class="sy-label">← what to put in the list</span>
+      </div>
+      <div>
+        &nbsp;&nbsp;<span class="sy-kw">for</span>
+        <span class="sy-iter"> item in iterable</span>
+        <span class="sy-label">← loop over this (required)</span>
+      </div>
+      <div>
+        &nbsp;&nbsp;<span class="sy-kw">if</span>
+        <span class="sy-cond"> condition</span>
+        <span class="sy-label">← optional filter</span>
+      </div>
+      <div><span class="sy-bracket">]</span></div>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># The long way — for loop + append
+squares = []
+for x in range(10):
+    squares.append(x**2)
+# [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+# Same thing with map() + lambda
+squares = list(map(lambda x: x**2, range(10)))
+
+# The concise way — list comprehension (most readable)
+squares = [x**2 for x in range(10)]
+# [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 -->
+    <h2 id="vs-loop">List Comprehension vs For Loop — When to Use Which</h2>
+    <p>Comprehensions are better when you're building a new list from an existing one and the logic fits in one line. Loops are better when the logic is complex, has side effects, or needs multiple statements.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># Use a comprehension — simple transformation
+doubled = [x * 2 for x in range(5)]
+# [0, 2, 4, 6, 8]
+
+# Use a loop — multiple operations, side effects
+results = []
+for x in range(5):
+    val = x * 2
+    print(f"Processing {x}")  # side effect
+    if val > 0:
+        results.append(val)
+
+# Use a comprehension — filter + transform in one line
+passing = [score for score in [45, 78, 32, 90, 55] if score >= 50]
+# [78, 90, 55]</code></pre>
+    </div>
+
+    <div class="callout">
+      <strong>Rule of thumb:</strong> if it reads naturally in one line and doesn't need side effects, use a comprehension. If you're squinting to understand it, write a loop — readability matters more than cleverness.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <h2 id="filtering">Filtering with if in Python List Comprehensions</h2>
+    <p>Add an <code>if</code> clause at the end to filter which items make it into the new list. The <code>if</code> acts as a guard — only items where the condition is <code>True</code> get processed.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>vec = [-4, -2, 0, 2, 4]
+
+# Filter: exclude negative numbers
+[x for x in vec if x >= 0]
+# [0, 2, 4]
+
+# Transform + filter together
+[x**2 for x in vec if x > 0]
+# [4, 16]</code></pre>
+    </div>
+
+    <h4>Kiddo extra — practical filtering patterns</h4>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># Keep only even numbers
+evens = [x for x in range(20) if x % 2 == 0]
+# [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+# Keep only strings longer than 3 chars
+words = ["hi", "python", "is", "cool", "ok"]
+long_words = [w for w in words if len(w) > 3]
+# ['python', 'cool']
+
+# Filter None values out
+data = [1, None, 2, None, 3, 4, None]
+clean = [x for x in data if x is not None]
+# [1, 2, 3, 4]
+
+# Keep passing scores and uppercase the names
+students = [("Palak", 92), ("Arjun", 45), ("Sneha", 78)]
+passed = [name.upper() for name, score in students if score >= 50]
+# ['PALAK', 'SNEHA']</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+<h2 id="if-else">If-Else Conditions in List Comprehensions</h2>
+
+<p>
+List comprehensions can also use if-else conditions when you want to choose between two values while creating a new list. 
+The placement is different from filtering — the if-else goes before the for loop.
+</p>
+
+<div class="code-container">
+<div class="code-header">
+<span class="lang-tag">Python</span>
+</div>
+
+<pre><code># Add grades based on scores
+
+scores = [92, 45, 78, 30]
+
+grades = [
+    "Pass" if score >= 50 else "Fail"
+    for score in scores
+]
+
+print(grades)
+
+# ['Pass', 'Fail', 'Pass', 'Fail']</code></pre>
+
+</div>
+
+<div class="note-box">
+<strong>Remember:</strong><br>
+Filtering uses:
+<code>[x for x in items if condition]</code><br><br>
+
+Conditional values use:
+<code>[value_if_true if condition else value_if_false for x in items]</code>
+</div>
+<div class="section-divider"></div>
+
+
+    <!-- 05 -->
+    <h2 id="multiple-for">Multiple for Clauses in One Comprehension</h2>
+    <p>You can chain multiple <code>for</code> clauses — they work just like nested loops. The leftmost <code>for</code> is the outer loop, the rightmost is the inner loop. The order matches the order you'd write them as nested loops.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># From the Python docs — combine two lists where elements are not equal
+[(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]
+# [(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]
+
+# This is exactly equivalent to:
+combs = []
+for x in [1,2,3]:
+    for y in [3,1,4]:
+        if x != y:
+            combs.append((x, y))
+# Same result</code></pre>
+    </div>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>Note how the order of the <code>for</code> and <code>if</code> statements is the same in both the comprehension and the equivalent nested loop. If the expression is a tuple (e.g. <code>(x, y)</code>), it must be parenthesized.</p>
+    </div>
+
+    <div class="warn-box">
+      <strong>The tuple parenthesis rule:</strong> when your expression is a tuple, you must wrap it in parentheses inside the comprehension. <code>[x, y for x in a for y in b]</code> raises a <code>SyntaxError</code>. The correct form is <code>[(x, y) for x in a for y in b]</code>.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 -->
+    <h2 id="examples">All Python Docs Examples Explained</h2>
+    <p>The Python docs §5.1.3 shows several patterns. Here's every one of them, with explanations:</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs §5.1.3 — all examples</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>vec = [-4, -2, 0, 2, 4]
+
+# Double each value
+[x*2 for x in vec]
+# [-8, -4, 0, 4, 8]
+
+# Filter: keep only non-negative
+[x for x in vec if x >= 0]
+# [0, 2, 4]
+
+# Apply abs() to every element
+[abs(x) for x in vec]
+# [4, 2, 0, 2, 4]
+
+# Call .strip() on each string — removes whitespace
+freshfruit = ['  banana', '  loganberry ', 'passion fruit  ']
+[weapon.strip() for weapon in freshfruit]
+# ['banana', 'loganberry', 'passion fruit']
+
+# Create (number, square) tuples — tuple MUST be parenthesized
+[(x, x**2) for x in range(6)]
+# [(0, 0), (1, 1), (2, 4), (3, 9), (4, 16), (5, 25)]
+
+# This raises SyntaxError — tuple not parenthesized:
+# [x, x**2 for x in range(6)]
+
+# Flatten a 2D list — nested for clauses
+vec = [[1,2,3], [4,5,6], [7,8,9]]
+[num for elem in vec for num in elem]
+# [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# Complex expressions and nested functions
+from math import pi
+[str(round(pi, i)) for i in range(1, 6)]
+# ['3.1', '3.14', '3.142', '3.1416', '3.14159']</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 -->
+    <h2 id="nested">Nested List Comprehensions (Python Docs 5.1.4)</h2>
+    <p>The initial expression in a list comprehension can itself be another list comprehension. This is called a nested list comprehension and is most commonly used for working with 2D data like matrices.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>The initial expression in a list comprehension can be any arbitrary expression, including another list comprehension.</p>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs §5.1.4 example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># A 3x4 matrix — list of 3 lists, each of length 4
+matrix = [
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12],
+]
+
+# Transpose rows and columns with a nested list comprehension
+[[row[i] for row in matrix] for i in range(4)]
+# [[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]</code></pre>
+    </div>
+
+    <div class="note-box">
+      <strong>How to read nested comprehensions:</strong> work from the outside in. The outer <code>for i in range(4)</code> runs first, giving <code>i = 0, 1, 2, 3</code>. For each <code>i</code>, the inner <code>[row[i] for row in matrix]</code> collects the i-th element from every row — which is a column.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 -->
+    <h2 id="matrix">Matrix Transposition — The Complete Picture</h2>
+    <p>The docs show three equivalent ways to transpose a matrix, from most manual to most Pythonic:</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs §5.1.4 — three approaches</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>matrix = [
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12],
+]
+
+# Approach 1 — nested list comprehension (from the docs)
+[[row[i] for row in matrix] for i in range(4)]
+# [[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
+
+# Approach 2 — equivalent nested for loop
+transposed = []
+for i in range(4):
+    transposed.append([row[i] for row in matrix])
+
+# Approach 3 — most Pythonic: zip() with unpacking (from the docs)
+list(zip(*matrix))
+# [(1, 5, 9), (2, 6, 10), (3, 7, 11), (4, 8, 12)]</code></pre>
+    </div>
+
+    <div class="callout">
+      <strong>From the Python docs:</strong> in the real world, you should prefer built-in functions to complex flow statements. <code>list(zip(*matrix))</code> does the same transpose in one line. The <code>*</code> unpacks the matrix into separate arguments that <code>zip()</code> then zips column-by-column.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 09 -->
+    <h2 id="mistakes">Common List Comprehension Mistakes</h2>
+
+    <div class="mistake-list">
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Forgetting parentheses around a tuple expression</strong>
+          <p><code>[x, x**2 for x in range(6)]</code> raises <code>SyntaxError</code>. When the expression is a tuple, it must be wrapped in parentheses: <code>[(x, x**2) for x in range(6)]</code>. The Python docs call this out explicitly.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Getting for clause order wrong in nested comprehensions</strong>
+          <p>The order of <code>for</code> clauses in a comprehension matches the order of loops if you were to write them out. Outer loop first, inner loop second — same as nested loops.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Putting the if condition in the wrong place</strong>
+          <p>Filtering <code>if</code> goes at the end: <code>[x for x in items if x > 0]</code>. Conditional expressions (ternary) go in the expression position: <code>[x if x > 0 else 0 for x in items]</code>. These are different things and different syntax.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Using comprehensions for side effects</strong>
+          <p><code>[print(x) for x in items]</code> works but creates a list of <code>None</code> values nobody uses — wasteful and confusing. If you want side effects, write a regular <code>for</code> loop.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Writing comprehensions that are too complex to read</strong>
+          <p>Deeply nested or multi-condition comprehensions can become unreadable fast. If you have to think hard to understand it, break it into a loop or split it across variables. Readability is more valuable than brevity.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 10 -->
+    <h2 id="interview">Python List Comprehension Interview Questions and Answers</h2>
+
+    <div class="iq-list">
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q1</span> What is a list comprehension in Python and what is the syntax?</div>
+        <div class="iq-a">A list comprehension creates a new list from an iterable in one line. Syntax: <code>[expression for item in iterable if condition]</code>. The <code>if</code> part is optional. It's equivalent to a for loop with <code>.append()</code> but more concise and often more readable.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q2</span> What is the difference between a list comprehension and a generator expression?</div>
+        <div class="iq-a">A list comprehension <code>[x for x in items]</code> evaluates immediately and stores all values in memory. A generator expression <code>(x for x in items)</code> is lazy — it computes values one at a time on demand. Use generators for large datasets where you don't need all values at once.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q3</span> Write a list comprehension to get squares of even numbers from 1 to 20.</div>
+        <div class="iq-a"><code>[x**2 for x in range(1, 21) if x % 2 == 0]</code> gives <code>[4, 16, 36, 64, 100, 144, 196, 256, 324, 400]</code>. The <code>if x % 2 == 0</code> filters to even numbers only before squaring.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q4</span> How do you flatten a 2D list using a list comprehension?</div>
+        <div class="iq-a"><code>[num for row in matrix for num in row]</code>. The outer <code>for row in matrix</code> iterates over each sublist, and the inner <code>for num in row</code> iterates over each element. From the Python docs: <code>[num for elem in vec for num in elem]</code>.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q5</span> What happens if you use a tuple as the expression without parentheses?</div>
+        <div class="iq-a"><code>[x, x**2 for x in range(6)]</code> raises a <code>SyntaxError</code>. Python can't parse it correctly without parentheses around the tuple. The fix: <code>[(x, x**2) for x in range(6)]</code>. The Python docs call this out specifically.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q6</span> What is a nested list comprehension? Give an example.</div>
+        <div class="iq-a">A nested list comprehension has a comprehension as its expression. The classic example from the Python docs — transposing a matrix: <code>[[row[i] for row in matrix] for i in range(4)]</code>. The inner comprehension collects each column, the outer builds the transposed rows.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q7</span> Are list comprehensions always faster than for loops?</div>
+        <div class="iq-a">Usually yes — list comprehensions are optimized at the CPython level and avoid the overhead of <code>.append()</code> calls. But the difference is small for small lists. For very large datasets, a generator expression may be better if you don't need the full list in memory at once.</div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="section-divider"></div>
+ 
+    <!-- 12 -->
+    <h2 id="project">Mini Project — Student Report Card Generator</h2>
+    <p>You've got a list of students with their names and raw scores across three subjects. Using only list comprehensions, build a report card: calculate each student's average, assign a grade, and filter out anyone who hasn't passed all three subjects.</p>
+ 
+    <p>This covers filtering, transformation, multi-value unpacking, and conditional expressions — all the core comprehension patterns in one project.</p>
+ 
+ 
+    <div class="callout">
+      <strong>Extend it:</strong> try adding a subject-wise topper — <code>[max(students, key=lambda s: s["scores"][i])["name"] for i in range(3)]</code> — which gives the top scorer for each of the three subjects in one line.
+    </div>
+ 
+    
+
+
+    <div class="section-divider"></div>
+
+    <!-- 11 -->
+    <h2 id="faq">Python List Comprehensions FAQ</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is a list comprehension in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">A list comprehension creates a new list from an existing iterable in one line. Syntax: <code>[expression for item in iterable]</code>. It's a concise replacement for a for loop + <code>append()</code>. From the Python docs: "a concise way to create lists."</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do you add a condition to a list comprehension? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Add <code>if condition</code> at the end: <code>[x for x in items if x > 0]</code>. Only items where the condition is True make it into the list. For a ternary (if/else in the result), put it in the expression: <code>[x if x > 0 else 0 for x in items]</code>.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can a list comprehension have multiple for clauses? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes. <code>[(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]</code> — this is equivalent to nested for loops. The order of the <code>for</code> clauses matches the nesting order: leftmost is the outermost loop.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Why do I get a SyntaxError with tuples in list comprehensions? <span class="faq-icon">+</span></button>
+        <div class="faq-a">When the expression is a tuple, it must be parenthesized. <code>[x, x**2 for x in range(6)]</code> is a SyntaxError. The correct form is <code>[(x, x**2) for x in range(6)]</code>. The Python docs specifically call this out.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is a nested list comprehension? <span class="faq-icon">+</span></button>
+        <div class="faq-a">A nested list comprehension is one where the expression itself is another comprehension. The classic use case from the Python docs is matrix transposition: <code>[[row[i] for row in matrix] for i in range(4)]</code>. For simple cases, the built-in <code>zip(*matrix)</code> is often cleaner.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">When should you use a for loop instead of a list comprehension? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Use a loop when: the logic requires multiple statements, you need side effects (printing, file writing), the comprehension would be too complex to read in one glance, or you're not actually building a list. The goal of a comprehension is readability — if it makes things harder to read, use a loop.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="author-strip">
+      <div class="author-avatar">PM</div>
+      <div class="author-info">
+        <strong>Palak Mishra</strong>
+        <span>Backend developer · Building beginner-friendly Python docs at Kiddo</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>More Python topics →</strong><br><br>
+      <a href="../python/lists.html">Lists</a> ·
+      <a href="../python/tuples.html">Tuples (5.3)</a> ·
+      <a href="../python/dictionary.html">Dictionaries (5.5)</a> ·
+      <a href="../python/sets.html">Sets (5.4)</a> ·
+      <a href="../python/functions.html">Functions</a> ·
+      <a href="../python/while_loop.html">While Loop</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
+    <div class="footer-links">
+      <a href="../info/privacy.html">Privacy</a>
+      <a href="../info/terms.html">Terms</a>
+      <a href="../info/contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const desktopToggle = document.getElementById('desktopToggleTheme');
+  const mobileToggle  = document.getElementById('mobileToggleTheme');
+  const applyTheme = (dark) => {
+    document.body.classList.toggle('dark', dark);
+    const icon = dark ? '☀️' : '🌙';
+    if (desktopToggle) desktopToggle.textContent = icon;
+    if (mobileToggle)  mobileToggle.textContent  = icon;
+  };
+  applyTheme(localStorage.getItem('theme') === 'dark');
+  const toggleTheme = () => {
+    const isDark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  };
+  if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+  if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+
+  const hamburger    = document.getElementById('hamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  hamburger?.addEventListener('click', (e) => { e.stopPropagation(); menuDropdown.classList.toggle('open'); });
+  document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.querySelectorAll('.code-container').forEach(container => {
+    const btn  = container.querySelector('.copy-btn');
+    const tip  = container.querySelector('.tooltip');
+    const code = container.querySelector('pre code');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(code.innerText.trim()).then(() => {
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
       });
     });
-  </script>
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans    = btn.nextElementSibling;
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+</script>
 </body>
 </html>
