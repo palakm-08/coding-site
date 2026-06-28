@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="../assests/icon.png" />
+
+<meta name="description" content="Learn Python Tuples (Python Docs 5.3) with beginner-friendly explanations. Understand tuple creation, packing, sequence unpacking, immutability, nested tuples, singleton tuples, tuple methods, tuple vs list, examples, and common mistakes." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Python Tuples Documentation Explained (Python Docs 5.3) | Kiddo" />
+  <meta property="og:description" content="The official Python tuples documentation explained in simple language. Learn tuple packing, unpacking, immutability, nested tuples, and common interview questions." />
+  <meta property="og:url" content="https://kiddoedu.org/python/tuples.html" />
+  <meta property="og:site_name" content="Kiddo" />
+  <meta property="og:image" content="https://kiddoedu.org/python/tuples.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Python Tuples Documentation Explained (Python Docs 5.3) | Kiddo" />
+  <meta name="twitter:description" content="Beginner-friendly explanation of Python tuples. Learn packing, unpacking, immutability, singleton tuples, nested tuples, and interview questions." />
+  <meta name="twitter:image" content="https://kiddoedu.org/python/tuples.png" />
+  <link rel="canonical" href="https://kiddoedu.org/python/tuples.html" />
+<title>Python Tuples Explained (Python Docs 5.3) | Packing, Unpacking, Methods & Tuple vs List</title>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Python Tuples Documentation Explained (Python Docs 5.3)",
+    "description": "Beginner-friendly explanation of Python tuples documentation section 5.3 with examples, tuple packing, sequence unpacking, immutability, nested tuples, singleton tuples, interview questions, and common mistakes.",
+    "keywords": ["Python Tuples","Python Docs 5.3","Python Tuple Tutorial","Tuple Packing Unpacking","Python Immutable","Sequence Unpacking Python","Python Interview Questions","Python Docs Explained"],
+    "url": "https://kiddoedu.org/python/tuples.html",
+    "datePublished": "2025-01-01",
+    "dateModified": "2026-06-15",
+    "author": { "@type": "Person", "name": "Palak Mishra" },
+    "publisher": { "@type": "Organization", "name": "Kiddo", "url": "https://kiddoedu.org" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://kiddoedu.org/python/tuples.html" }
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ESNWS8F9HE');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 4px 24px rgba(0,0,0,0.07);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    body.dark {
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
+      --border: rgba(255,255,255,0.07);
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 999; width: 0%; transition: width 0.1s linear; }
+
+    header { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark header { background: rgba(15,14,12,0.82); }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
+    .logo span em { font-style: normal; color: var(--accent); }
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
+    nav a:hover { color: var(--text); background: var(--surface2); }
+    .theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background var(--transition), transform var(--transition); margin-left: 8px; }
+    .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
+
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 20px; height: var(--header-h); background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark .mobile-header { background: rgba(15,14,12,0.82); }
+    .mobile-right { display: flex; align-items: center; gap: 8px; }
+    .hamburger { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; position: relative; }
+    .menu-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); padding: 8px; min-width: 160px; flex-direction: column; gap: 2px; }
+    .menu-dropdown.open { display: flex; }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
+    .menu-dropdown a:hover { background: var(--surface2); }
+
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+
+    aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px); }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    aside ul li a { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.4; }
+    aside ul li a:hover { background: var(--surface2); color: var(--text); }
+    aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; margin-top: 6px; }
+
+    main { min-width: 0; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { opacity: 0.4; }
+    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
+    .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
+    .meta-pill.blue { background: rgba(61,90,254,0.08); color: var(--accent2); border-color: rgba(61,90,254,0.2); }
+    .meta-pill.orange { background: rgba(232,108,47,0.08); color: var(--accent); border-color: rgba(232,108,47,0.2); }
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
+
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+    .doc-ref { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; }
+    .doc-ref a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .doc-ref a:hover { text-decoration: underline; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 18px; margin-bottom: 8px; color: var(--text-muted); }
+    main p { font-size: 0.95rem; line-height: 1.78; color: var(--text); margin-bottom: 14px; }
+    main code { font-family: 'Courier New', monospace; font-size: 0.88em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
+    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
+
+    /* TOC */
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
+    .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
+    .toc-grid a:hover { background: var(--surface2); color: var(--text); }
+    .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
+
+    /* Prop grid */
+    .prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0 24px; }
+    .prop-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
+    .prop-card strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 4px; }
+    .prop-card span { font-size: 0.81rem; color: var(--text-muted); line-height: 1.45; display: block; }
+
+    /* Doc block */
+    .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
+    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
+    .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
+    .doc-block code { font-family: 'Courier New', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+
+    /* Note box */
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .note-box code { font-family: 'Courier New', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Warn box */
+    .warn-box { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.2); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .warn-box code { font-family: 'Courier New', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Callout */
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
+    .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .callout a:hover { text-decoration: underline; }
+
+    /* Param table */
+    .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 26px; font-size: 0.875rem; }
+    .param-table th { text-align: left; padding: 8px 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+    .param-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); line-height: 1.5; vertical-align: top; }
+    .param-table tr:last-child td { border-bottom: none; }
+    .param-table tr:hover td { background: var(--surface2); }
+    .param-table td:last-child { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* Code blocks */
+    .code-container { background: #1e1e1e; border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid var(--border); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; text-transform: uppercase; }
+    .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
+    .copy-btn { background: none; border: none; color: rgba(255,255,255,0.35); padding: 2px 0; cursor: pointer; font-size: 0.75rem; font-family: 'DM Sans', sans-serif; transition: color var(--transition); position: relative; margin-left: auto; }
+    .copy-btn:hover { color: rgba(255,255,255,0.75); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: var(--surface2); color: var(--text); padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .tooltip.show { opacity: 1; }
+    pre { margin: 0; padding: 18px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.875rem; line-height: 1.65; color: #d4d4d4; background: transparent; white-space: pre; tab-size: 2; }
+
+    /* vs grid */
+    .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 26px; }
+    .vs-card { border-radius: var(--radius-sm); padding: 18px 20px; }
+    .vs-card.yes { background: rgba(0,184,148,0.07); border: 1px solid rgba(0,184,148,0.2); }
+    .vs-card.no { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.18); }
+    .vs-head { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+    .vs-card.yes .vs-head { color: var(--accent3); }
+    .vs-card.no .vs-head { color: var(--accent); }
+    .vs-card ul { margin: 0; }
+    .vs-card ul li { font-size: 0.875rem; line-height: 1.55; color: var(--text); }
+
+    /* Mistake list */
+    .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 26px; }
+    .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
+    .mi-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
+    .mi-body p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+    .mi-body code { font-family: 'Courier New', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* IQ list */
+    .iq-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+    .iq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .iq-q { padding: 14px 18px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
+    .iq-badge { background: rgba(232,108,47,0.1); color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; padding: 2px 8px; flex-shrink: 0; margin-top: 2px; }
+    .iq-a { padding: 0 18px 14px 18px; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+    .iq-a code { font-family: 'Courier New', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Checklist */
+    .checklist { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+    .check-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; }
+    .check-item div strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.87rem; display: block; margin-bottom: 2px; }
+    .check-item div p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+
+    /* FAQ accordion */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 18px 0; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; padding: 14px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
+    .faq-a.open { max-height: 300px; padding: 2px 18px 15px; }
+    .faq-a code { font-family: 'Courier New', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Author strip */
+    .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .author-info { font-size: 0.85rem; line-height: 1.5; }
+    .author-info strong { font-weight: 600; display: block; }
+    .author-info span { color: var(--text-muted); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+    .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      header { display: none; }
+      .mobile-header { display: flex; }
+      .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
+      aside { position: static; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .vs-grid { grid-template-columns: 1fr; }
+      .prop-grid { grid-template-columns: 1fr 1fr; }
+      footer { padding: 20px; }
+      .footer-container { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) { main h1 { font-size: 1.6rem; } .prop-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../info/about.html">About</a>
+    <a href="../info/contact.html">Contact</a>
+    <button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button>
+  </nav>
+</header>
+
+<div class="mobile-header">
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <div class="mobile-right">
+    <button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button>
+    <button class="hamburger" id="hamburgerBtn">☰
+      <div class="menu-dropdown" id="menuDropdown">
+        <a href="../index.html">Home</a>
+        <a href="../info/about.html">About</a>
+        <a href="../info/contact.html">Contact</a>
+      </div>
+    </button>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <aside>
+    <div class="aside-label">Python Topics</div>
+    <ul>
+      <li><a href="../python/variables.html"><span class="dot"></span>Variables</a></li>
+      <li><a href="../python/lists.html"><span class="dot"></span>Lists</a></li>
+      <li><a href="../python/tuples.html" class="active"><span class="dot"></span>Tuples</a></li>
+      <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
+      <li><a href="../python/sets.html"><span class="dot"></span>Sets</a></li>
+      <li><a href="../python/functions.html"><span class="dot"></span>Functions</a></li>
+      <li><a href="../python/loops.html"><span class="dot"></span>Loops</a></li>
+      <li><a href="../python/list-comp"><span class="dot"></span>List Comprehension</a></li>
+      <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../python/lists.html">Python</a><span>›</span>
+      5.3 Tuples and Sequences
+    </div>
+
+    <h1>Python Tuples Documentation Explained (Python Docs 5.3) | Tuple Packing, Sequence Unpacking & Beginner Guide</h1>
+
+    <div class="doc-ref">
+      📖 Based on <a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences" target="_blank" rel="noopener">Python 3 official docs §5.3</a> — explained like a friend, with extra examples added
+    </div>
+
+    <div class="meta-row">
+      <span class="meta-pill">Python</span>
+      <span class="meta-pill green">Beginner</span>
+      <span class="meta-pill blue">Data Structures</span>
+      <span class="meta-pill orange">Official Docs</span>
+      <span class="date-badge">Updated June 2026</span>
+    </div>
+
+    <p>This page explains the official Python Tuples documentation (Python Docs 5.3) in simple language. If the official docs feel like a wall of text, this guide breaks down tuples, tuple packing, sequence unpacking, immutability, nested tuples, singleton tuples, and when to use a tuple over a list — with beginner-friendly explanations and practical examples.</p>
+
+    <p>By the end of this guide, you'll understand what makes tuples different from lists, how to create them, how packing and unpacking work, and when Python expects you to use a tuple instead of something else.</p>
+
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">In this guide</div>
+      <div class="toc-grid">
+        <a href="#what-is"><span class="toc-num">01</span>What is a Python tuple?</a>
+        <a href="#create"><span class="toc-num">02</span>Creating a tuple</a>
+        <a href="#indexing"><span class="toc-num">03</span>Indexing and slicing</a>
+        <a href="#immutable"><span class="toc-num">04</span>Immutability explained</a>
+        <a href="#singleton"><span class="toc-num">05</span>Empty and singleton tuples</a>
+        <a href="#packing"><span class="toc-num">06</span>Tuple packing</a>
+        <a href="#unpacking"><span class="toc-num">07</span>Sequence unpacking</a>
+        <a href="#nested"><span class="toc-num">08</span>Nested tuples</a>
+        <a href="#vs"><span class="toc-num">09</span>Tuple vs list</a>
+        <a href="#methods"><span class="toc-num">10</span>Tuple methods</a>
+        <a href="#mistakes"><span class="toc-num">11</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">12</span>Interview questions</a>
+        <a href="#faq"><span class="toc-num">13</span>FAQs</a>
+      </div>
+    </nav>
+
+    <div class="section-divider"></div>
+
+    <!-- 01 -->
+    <h2 id="what-is">What is a Python Tuple? (Python Docs 5.3 Explained)</h2>
+    <p>A tuple is a sequence of values, just like a list — but once you create it, you can't change it. No adding, no removing, no editing. That's the whole deal. Tuples are Python's way of saying "this data is fixed, and that's intentional."</p>
+    <p>They're used everywhere in Python under the hood — function return values, dictionary keys, coordinate pairs, database rows. Understanding tuples is one of those things that quietly makes you a better Python developer.</p>
+
+    <div class="prop-grid">
+      <div class="prop-card">
+        <strong>Ordered</strong>
+        <span>Elements have a defined position — access by index like a list</span>
+      </div>
+      <div class="prop-card">
+        <strong>Immutable</strong>
+        <span>Can't add, remove, or change elements after creation</span>
+      </div>
+      <div class="prop-card">
+        <strong>Allows duplicates</strong>
+        <span>Same value can appear multiple times at different positions</span>
+      </div>
+      <div class="prop-card">
+        <strong>Heterogeneous</strong>
+        <span>Usually holds mixed types — a name, an age, a score together</span>
+      </div>
+    </div>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>Tuples are immutable, and usually contain a heterogeneous sequence of elements that are accessed via unpacking or indexing. Lists are mutable, and their elements are usually homogeneous and are accessed by iterating over the list.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 -->
+    <h2 id="create">Creating a Python Tuple — 3 Ways</h2>
+    <p>You can create tuples with parentheses, without them (just commas), or using the <code>tuple()</code> constructor:</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># From the Python docs 5.3 — tuple packing (no parentheses needed)
+t = 12345, 54321, 'hello!'
+t[0]
+# 12345
+
+t
+# (12345, 54321, 'hello!')   ← output always shows parentheses</code></pre>
+    </div>
+
+    <h4>Kiddo extra — all three ways</h4>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># Method 1 — with parentheses (most readable)
+coords = (10.5, 20.3)
+
+# Method 2 — without parentheses (tuple packing)
+person = "Palak", 21, "Delhi"
+
+# Method 3 — tuple() from another iterable
+from_list = tuple([1, 2, 3])
+from_str  = tuple("hello")   # ('h', 'e', 'l', 'l', 'o')
+
+print(coords)    # (10.5, 20.3)
+print(person)    # ('Palak', 21, 'Delhi')
+print(from_list) # (1, 2, 3)</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 -->
+    <h2 id="indexing">Indexing and Slicing a Tuple</h2>
+    <p>Tuples support all the same indexing and slicing as lists — that's what makes them a sequence type. The only difference is you can't use assignment on the result.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>t = (10, 20, 30, 40, 50)
+
+# Indexing
+print(t[0])    # 10
+print(t[-1])   # 50  ← last element
+
+# Slicing
+print(t[1:3])  # (20, 30)
+print(t[::-1]) # (50, 40, 30, 20, 10)  ← reversed
+
+# Length
+print(len(t))  # 5
+
+# Check membership
+print(30 in t)   # True
+print(99 in t)   # False</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <h2 id="immutable">Tuple Immutability Explained</h2>
+    <p>Immutable means you cannot change a tuple after creating it. No item assignment, no append, no pop. This is by design — it's what makes tuples safe to use as dictionary keys and reliable for fixed data.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>t = 12345, 54321, 'hello!'
+
+# Tuples are immutable — this raises an error:
+t[0] = 88888
+# Traceback (most recent call last):
+#   File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+# TypeError: 'tuple' object does not support item assignment
+
+# BUT tuples can CONTAIN mutable objects:
+v = ([1, 2, 3], [3, 2, 1])
+v[0].append(4)   # modifying the list inside is fine
+print(v)
+# ([1, 2, 3, 4], [3, 2, 1])</code></pre>
+    </div>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>It is not possible to assign to the individual items of a tuple, however it is possible to create tuples which contain mutable objects, such as lists.</p>
+    </div>
+
+    <div class="note-box">
+      <strong>The key distinction:</strong> the tuple itself is immutable — you can't change <em>which objects</em> it holds. But if one of those objects is a list, the list itself can still be modified. The tuple's reference to that list stays fixed; the list's contents can change.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 -->
+    <h2 id="singleton">Empty Tuples and Singleton Tuples — The Quirky Syntax</h2>
+    <p>This is where tuples have a genuinely odd syntax quirk that trips up almost everyone. The Python docs call it "ugly, but effective."</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># Empty tuple — just empty parentheses
+empty = ()
+len(empty)   # 0
+
+# Singleton tuple — ONE item needs a trailing comma
+singleton = 'hello',    # ← note the trailing comma
+len(singleton)          # 1
+singleton               # ('hello',)
+
+# This is NOT a tuple — just parentheses around a string
+not_a_tuple = ('hello')
+type(not_a_tuple)   # &lt;class 'str'&gt;
+
+# This IS a tuple
+is_a_tuple = ('hello',)
+type(is_a_tuple)    # &lt;class 'tuple'&gt;</code></pre>
+    </div>
+
+    <div class="warn-box">
+      <strong>The singleton trap:</strong> <code>('hello')</code> is just a string in parentheses — Python treats the parentheses as grouping, not tuple syntax. The comma is what makes it a tuple: <code>('hello',)</code>. This is one of the most common Python beginner mistakes.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 -->
+    <h2 id="packing">Tuple Packing — Grouping Values Without Parentheses</h2>
+    <p>When you write multiple values separated by commas and assign them to one variable, Python automatically packs them into a tuple. No parentheses required — the comma is what creates the tuple.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># From the Python docs — tuple packing
+t = 12345, 54321, 'hello!'
+# The values 12345, 54321 and 'hello!' are packed together in a tuple
+print(t)   # (12345, 54321, 'hello!')</code></pre>
+    </div>
+
+    <h4>Kiddo extra — real-world packing</h4>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># Functions that return multiple values use tuple packing automatically
+def get_user():
+    name = "Palak"
+    age  = 21
+    city = "Delhi"
+    return name, age, city   # ← Python packs this into a tuple
+
+result = get_user()
+print(result)        # ('Palak', 21, 'Delhi')
+print(type(result))  # &lt;class 'tuple'&gt;
+
+# Swapping variables uses tuple packing + unpacking in one line
+a, b = 10, 20
+a, b = b, a       # ← classic Python swap
+print(a, b)       # 20 10</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 -->
+    <h2 id="unpacking">Sequence Unpacking — Splitting a Tuple into Variables</h2>
+    <p>Unpacking is the reverse of packing. You take a tuple (or any sequence) and split its values into separate variables in one line. The Python docs say this works for any sequence on the right-hand side — not just tuples.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>t = 12345, 54321, 'hello!'
+
+# Sequence unpacking — requires same number of variables as elements
+x, y, z = t
+print(x)   # 12345
+print(y)   # 54321
+print(z)   # hello!</code></pre>
+    </div>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>Sequence unpacking requires that there are as many variables on the left side of the equals sign as there are elements in the sequence. Note that multiple assignment is really just a combination of tuple packing and sequence unpacking.</p>
+    </div>
+
+    <h4>Kiddo extra — extended unpacking with *</h4>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># Basic unpacking
+name, age, city = ("Palak", 21, "Delhi")
+print(name)   # Palak
+print(city)   # Delhi
+
+# Extended unpacking with * — grabs the "rest"
+first, *middle, last = (1, 2, 3, 4, 5)
+print(first)    # 1
+print(middle)   # [2, 3, 4]
+print(last)     # 5
+
+# Unpacking in a for loop — very common pattern
+students = [("Palak", 95), ("Rohan", 78), ("Sneha", 88)]
+for name, score in students:
+    print(f"{name}: {score}")
+# Palak: 95
+# Rohan: 78
+# Sneha: 88
+
+# Unpacking to ignore values with _
+_, age, _ = ("Palak", 21, "Delhi")
+print(age)   # 21  ← grabbed only what we needed</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 -->
+    <h2 id="nested">Nested Tuples in Python</h2>
+    <p>Tuples can contain other tuples. The Python docs show this directly — nested tuples are interpreted correctly because output always encloses them in parentheses.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>t = 12345, 54321, 'hello!'
+
+# Tuples may be nested:
+u = t, (1, 2, 3, 4, 5)
+u
+# ((12345, 54321, 'hello!'), (1, 2, 3, 4, 5))</code></pre>
+    </div>
+
+    <h4>Kiddo extra — nested tuple access and unpacking</h4>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code># Nested tuple representing a student record
+student = ("Palak", 21, ("Python", "DSA", "DBMS"))
+
+# Access by chaining indexes
+print(student[0])       # Palak
+print(student[2][0])    # Python  ← first subject
+
+# Unpack nested tuple
+name, age, subjects = student
+print(subjects)   # ('Python', 'DSA', 'DBMS')
+
+# Grid coordinates as nested tuples
+grid = ((0, 0), (1, 0), (1, 1), (0, 1))
+for x, y in grid:
+    print(f"Point: x={x}, y={y}")</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+<h2>When Should You Use a Tuple in Python?</h2>
+
+<p>
+Use tuples when your data should stay unchanged after creation. They are perfect for fixed collections like coordinates, database records, configuration values, and returning multiple values from functions.
+</p>
+
+<ul>
+<li>Coordinates: (10, 20)</li>
+<li>RGB colors: (255, 0, 0)</li>
+<li>Function return values</li>
+<li>Dictionary keys with immutable values</li>
+<li>Fixed records that should not change</li>
+</ul>
+ <div class="section-divider"></div>
+
+    <!-- 09 -->
+    <h2 id="vs">Python Tuple vs List — When to Use Which</h2>
+
+    <div class="vs-grid">
+      <div class="vs-card yes">
+        <div class="vs-head">Use a tuple when</div>
+        <ul>
+          <li>Data is fixed and shouldn't change — coordinates, RGB values, config</li>
+          <li>You want to use it as a dictionary key (lists can't be keys)</li>
+          <li>Returning multiple values from a function</li>
+          <li>You're representing a record — name, age, score together</li>
+          <li>You want slightly better performance than a list for read-only data</li>
+        </ul>
+      </div>
+      <div class="vs-card no">
+        <div class="vs-head">Use a list when</div>
+        <ul>
+          <li>Data needs to change — add, remove, or update elements</li>
+          <li>Elements are all the same type (homogeneous collection)</li>
+          <li>You need methods like <code>append()</code>, <code>sort()</code>, <code>pop()</code></li>
+          <li>You'll be iterating and modifying at the same time</li>
+          <li>The collection represents a queue or stack</li>
+        </ul>
+      </div>
+    </div>
+
+    <table class="param-table">
+      <thead>
+        <tr><th>Feature</th><th>Tuple</th><th>List</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Mutable</td><td>No — fixed after creation</td><td>Yes — add, remove, update</td></tr>
+        <tr><td>Syntax</td><td><code>(1, 2, 3)</code> or <code>1, 2, 3</code></td><td><code>[1, 2, 3]</code></td></tr>
+        <tr><td>Can be dict key</td><td>Yes (if elements are immutable)</td><td>No</td></tr>
+        <tr><td>Methods</td><td><code>count()</code>, <code>index()</code> only</td><td>Full method set</td></tr>
+        <tr><td>Typical use</td><td>Heterogeneous, fixed records</td><td>Homogeneous, changing collections</td></tr>
+        <tr><td>Performance</td><td>Slightly faster for iteration</td><td>Slightly slower</td></tr>
+        <tr><td>Memory</td><td>Less memory</td><td>More memory</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 10 -->
+    <h2 id="methods">Python Tuple Methods Cheat Sheet</h2>
+    <p>Tuples have only two built-in methods — because they're immutable, there's nothing to add, remove, or sort. But these two are genuinely useful:</p>
+
+    <table class="param-table">
+      <thead>
+        <tr><th>Method / Expression</th><th>What it does</th><th>Returns</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>t.count(x)</code></td><td>Count how many times value x appears in the tuple</td><td>int</td></tr>
+        <tr><td><code>t.index(x)</code></td><td>Find the index of the first occurrence of x — ValueError if not found</td><td>int</td></tr>
+        <tr><td><code>len(t)</code></td><td>Number of elements</td><td>int</td></tr>
+        <tr><td><code>t[i]</code></td><td>Access element at index i</td><td>Element</td></tr>
+        <tr><td><code>t[i:j]</code></td><td>Slice from i to j</td><td>tuple</td></tr>
+        <tr><td><code>x in t</code></td><td>True if x is in the tuple</td><td>bool</td></tr>
+        <tr><td><code>t1 + t2</code></td><td>Concatenate two tuples into a new tuple</td><td>tuple</td></tr>
+        <tr><td><code>t * n</code></td><td>Repeat tuple n times</td><td>tuple</td></tr>
+        <tr><td><code>min(t)</code> / <code>max(t)</code></td><td>Smallest / largest element</td><td>Element</td></tr>
+        <tr><td><code>sorted(t)</code></td><td>Returns a sorted list (not a tuple)</td><td>list</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 11 -->
+    <h2 id="mistakes">Common Python Tuple Mistakes</h2>
+
+    <div class="mistake-list">
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Forgetting the trailing comma for singleton tuples</strong>
+          <p><code>t = ('hello')</code> creates a string, not a tuple. You need <code>t = ('hello',)</code> — the trailing comma is what makes it a tuple. The Python docs specifically call this "ugly, but effective."</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Trying to modify a tuple</strong>
+          <p><code>t[0] = 99</code> raises <code>TypeError: 'tuple' object does not support item assignment</code>. If you need to "change" a tuple, convert to a list, modify it, then convert back: <code>t = tuple(list(t))</code>.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Unpacking with wrong number of variables</strong>
+          <p><code>x, y = (1, 2, 3)</code> raises <code>ValueError: too many values to unpack</code>. The number of variables must match the number of elements exactly. Use <code>*</code> to capture extras: <code>x, *rest = (1, 2, 3)</code>.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Thinking tuples with mutable contents are fully immutable</strong>
+          <p><code>t = ([1, 2], [3, 4])</code> — the tuple itself is immutable (you can't replace <code>t[0]</code>), but the list inside can still be modified: <code>t[0].append(5)</code> works fine. The tuple holds a reference to the list, not a copy of it.</p>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mi-body">
+          <strong>Using a list as a tuple for dict keys</strong>
+          <p>Only immutable types can be dictionary keys. <code>d[[1,2]] = "val"</code> fails with <code>TypeError: unhashable type: 'list'</code>. Use a tuple instead: <code>d[(1,2)] = "val"</code> works perfectly.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 12 -->
+    <h2 id="interview">Python Tuple Interview Questions and Answers</h2>
+    <p>These come up often in Python interviews — from beginner screens to data engineering roles:</p>
+
+    <div class="iq-list">
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q1</span> What is the difference between a tuple and a list in Python?</div>
+        <div class="iq-a">Tuples are immutable — you can't change them after creation. Lists are mutable — you can add, remove, and update elements. Tuples are typically used for fixed, heterogeneous data (a name, age, and score together). Lists are used for collections of similar items that may change. Tuples can be dictionary keys; lists cannot.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q2</span> What is tuple packing and sequence unpacking?</div>
+        <div class="iq-a">Tuple packing is when multiple values separated by commas are automatically grouped into a tuple: <code>t = 1, 2, 3</code>. Sequence unpacking is the reverse — assigning a tuple's elements to separate variables: <code>a, b, c = t</code>. The Python docs note that multiple assignment is just packing and unpacking combined.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q3</span> How do you create a tuple with only one element?</div>
+        <div class="iq-a">Add a trailing comma: <code>t = (42,)</code> or <code>t = 42,</code>. Without the comma, <code>(42)</code> is just an integer in parentheses — Python treats the brackets as grouping, not tuple syntax. This is one of the most common tuple gotchas.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q4</span> Can a tuple contain mutable objects?</div>
+        <div class="iq-a">Yes. A tuple can contain lists, dicts, or other mutable objects. The tuple is immutable in the sense that you can't replace its elements — but the objects it contains can still be modified. <code>t = ([1, 2], [3, 4])</code> — you can't do <code>t[0] = [5, 6]</code>, but you can do <code>t[0].append(5)</code>.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q5</span> Why are tuples used as dictionary keys but lists are not?</div>
+        <div class="iq-a">Dictionary keys must be hashable — they need a stable hash value. Tuples (containing only immutable elements) are hashable because their contents can't change. Lists are mutable so Python can't compute a reliable hash for them. A tuple like <code>(1, 2)</code> works as a key; <code>[1, 2]</code> raises a <code>TypeError</code>.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q6</span> What is the output of: <code>t = (1,); print(t * 3)</code>?</div>
+        <div class="iq-a"><code>(1, 1, 1)</code>. The <code>*</code> operator repeats a tuple. The trailing comma makes <code>t</code> a tuple (without it, <code>t = (1)</code> would be an integer and <code>t * 3</code> would give <code>3</code>).</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q7</span> How do you swap two variables in Python using tuples?</div>
+        <div class="iq-a"><code>a, b = b, a</code>. Python first evaluates the right side, packing <code>b</code> and <code>a</code> into a tuple, then unpacks it into <code>a</code> and <code>b</code>. This is the cleanest Python idiom for swapping — no temp variable needed.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 13 -->
+    <h2 id="faq">Python Tuples FAQ</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is a Python tuple? <span class="faq-icon">+</span></button>
+        <div class="faq-a">A tuple is an ordered, immutable sequence of elements. Created with commas — parentheses are optional but conventional. Once created, elements cannot be added, removed, or changed. Tuples are often used for fixed records, function return values, and as dictionary keys.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do you create a tuple in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Three ways: with parentheses <code>(1, 2, 3)</code>, without parentheses <code>1, 2, 3</code> (tuple packing), or using <code>tuple([1, 2, 3])</code>. For a single-element tuple, you must use a trailing comma: <code>(42,)</code>. An empty tuple is just <code>()</code>.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is the difference between a tuple and a list? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Tuples are immutable (can't change after creation), lists are mutable. Tuples use parentheses, lists use square brackets. Tuples can be dictionary keys, lists cannot. Tuples are typically for heterogeneous fixed data; lists are for homogeneous collections you'll iterate and modify.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is tuple packing and sequence unpacking? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Packing: <code>t = 1, 2, 3</code> — multiple comma-separated values get automatically grouped into a tuple. Unpacking: <code>a, b, c = t</code> — a tuple's values get split into separate variables. The Python docs say multiple assignment is just these two operations combined.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Why does Python need a trailing comma for single-element tuples? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Because Python uses parentheses for grouping expressions too. <code>(42)</code> is just 42 in parentheses — not a tuple. The trailing comma is what signals "this is a tuple": <code>(42,)</code>. Without it, you've created an integer, not a tuple.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can you modify a tuple after creating it? <span class="faq-icon">+</span></button>
+        <div class="faq-a">No — tuples are immutable. Trying to do <code>t[0] = 99</code> raises <code>TypeError</code>. If you need to "change" it, convert to a list, modify, and convert back: <code>lst = list(t); lst[0] = 99; t = tuple(lst)</code>. Note: if a tuple contains a list, that list can still be modified.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Are Python tuples ordered? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes — tuples maintain insertion order and support indexing. <code>t[0]</code> always gives the first element. This is what makes them a sequence type, alongside lists and strings.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What are tuples used for in real Python code? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Returning multiple values from a function (Python packs them automatically), dictionary keys for compound identifiers like <code>(row, col)</code>, coordinate and color values like <code>(x, y)</code> or <code>(255, 0, 0)</code>, database rows, and named records. Anywhere you have fixed, structured data that shouldn't change.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="author-strip">
+      <div class="author-avatar">PM</div>
+      <div class="author-info">
+        <strong>Palak Mishra</strong>
+        <span>Backend developer · Building beginner-friendly Python docs at Kiddo</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>More Python topics →</strong><br><br>
+      <a href="../python/lists.html">Lists</a> ·
+      <a href="../python/dictionary.html">Dictionaries (5.5)</a> ·
+      <a href="../python/sets.html">Sets (5.4)</a> ·
+      <a href="../python/functions.html">Functions</a> ·
+      <a href="../python/list-comp">List Comprehension</a> ·
+      <a href="../python/while_loop.html">While Loop</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
+    <div class="footer-links">
+      <a href="../info/privacy.html">Privacy</a>
+      <a href="../info/terms.html">Terms</a>
+      <a href="../info/contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const desktopToggle = document.getElementById('desktopToggleTheme');
+  const mobileToggle  = document.getElementById('mobileToggleTheme');
+  const applyTheme = (dark) => {
+    document.body.classList.toggle('dark', dark);
+    const icon = dark ? '☀️' : '🌙';
+    if (desktopToggle) desktopToggle.textContent = icon;
+    if (mobileToggle)  mobileToggle.textContent  = icon;
+  };
+  applyTheme(localStorage.getItem('theme') === 'dark');
+  const toggleTheme = () => {
+    const isDark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  };
+  if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+  if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+
+  const hamburger    = document.getElementById('hamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  hamburger?.addEventListener('click', (e) => { e.stopPropagation(); menuDropdown.classList.toggle('open'); });
+  document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.querySelectorAll('.code-container').forEach(container => {
+    const btn  = container.querySelector('.copy-btn');
+    const tip  = container.querySelector('.tooltip');
+    const code = container.querySelector('pre code');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(code.innerText.trim()).then(() => {
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
+      });
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans    = btn.nextElementSibling;
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+</script>
+</body>
+</html>
