@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="../assests/icon.png" />
+
+<meta name="description" content="Learn Python if statements (Python Docs 4.1) with beginner-friendly explanations. Understand if, elif, else, nested if statements, comparison operators, logical operators, examples, common mistakes, and interview questions." />  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Python if Statements Explained (Python Docs 4.1) | Kiddo" />
+  <meta property="og:description" content="Python if, elif, and else explained for beginners. Syntax, comparison operators, nested conditions, and real examples from the official Python docs." />
+  <meta property="og:url" content="https://kiddoedu.org/python/if-statements.html" />
+  <meta property="og:site_name" content="Kiddo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://kiddoedu.org/python/if-statements.html" />
+<title>Python if Statements Explained (Python Docs 4.1) | if, elif, else, Nested if & Examples</title>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Python if Statements Explained (Python Docs 4.1)",
+    "description": "Beginner-friendly explanation of Python if statements, elif chains, else blocks, comparison operators, and nested conditions with examples.",
+    "keywords": ["Python if statement","Python elif","Python else","Python conditionals","Python Docs 4.1","if elif else Python","Python comparison operators"],
+    "url": "https://kiddoedu.org/python/if-statements.html",
+    "datePublished": "2025-01-01",
+    "dateModified": "2026-06-15",
+    "author": { "@type": "Person", "name": "Palak Mishra" },
+    "publisher": { "@type": "Organization", "name": "Kiddo", "url": "https://kiddoedu.org" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://kiddoedu.org/python/if-statements.html" }
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ESNWS8F9HE');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 4px 24px rgba(0,0,0,0.07);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    body.dark {
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
+      --border: rgba(255,255,255,0.07);
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 999; width: 0%; transition: width 0.1s linear; }
+
+    header { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark header { background: rgba(15,14,12,0.82); }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
+    .logo span em { font-style: normal; color: var(--accent); }
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
+    nav a:hover { color: var(--text); background: var(--surface2); }
+    .theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background var(--transition), transform var(--transition); margin-left: 8px; }
+    .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
+
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 20px; height: var(--header-h); background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark .mobile-header { background: rgba(15,14,12,0.82); }
+    .mobile-right { display: flex; align-items: center; gap: 8px; }
+    .hamburger { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; position: relative; }
+    .menu-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); padding: 8px; min-width: 160px; flex-direction: column; gap: 2px; }
+    .menu-dropdown.open { display: flex; }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
+    .menu-dropdown a:hover { background: var(--surface2); }
+
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+
+    aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px); }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    aside ul li a { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.4; }
+    aside ul li a:hover { background: var(--surface2); color: var(--text); }
+    aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; margin-top: 6px; }
+
+    main { min-width: 0; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { opacity: 0.4; }
+    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
+    .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
+    .meta-pill.blue { background: rgba(61,90,254,0.08); color: var(--accent2); border-color: rgba(61,90,254,0.2); }
+    .meta-pill.orange { background: rgba(232,108,47,0.08); color: var(--accent); border-color: rgba(232,108,47,0.2); }
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
+
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+    .doc-ref { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; }
+    .doc-ref a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .doc-ref a:hover { text-decoration: underline; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 18px; margin-bottom: 8px; color: var(--text-muted); }
+    main p { font-size: 0.95rem; line-height: 1.78; color: var(--text); margin-bottom: 14px; }
+    main code { font-family: 'Courier New', monospace; font-size: 0.88em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
+    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
+
+    /* TOC */
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
+    .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
+    .toc-grid a:hover { background: var(--surface2); color: var(--text); }
+    .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
+
+    /* IQ list */
+.iq-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+.iq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.iq-q { padding: 14px 18px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
+.iq-badge { background: rgba(232,108,47,0.1); color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; padding: 2px 8px; flex-shrink: 0; margin-top: 2px; }
+.iq-a { padding: 0 18px 14px 18px; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+.iq-a code { font-family: 'Courier New', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Doc block */
+    .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
+    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
+    .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
+    .doc-block code { font-family: 'Courier New', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+
+    /* Note box */
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .note-box code { font-family: 'Courier New', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Callout */
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
+    .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .callout a:hover { text-decoration: underline; }
+
+    /* Param table */
+    .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 26px; font-size: 0.875rem; }
+    .param-table th { text-align: left; padding: 8px 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+    .param-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); line-height: 1.5; vertical-align: top; }
+    .param-table tr:last-child td { border-bottom: none; }
+    .param-table tr:hover td { background: var(--surface2); }
+
+    /* Code blocks */
+    .code-container { background: #1e1e1e; border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid var(--border); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; text-transform: uppercase; }
+    .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
+    .copy-btn { background: none; border: none; color: rgba(255,255,255,0.35); padding: 2px 0; cursor: pointer; font-size: 0.75rem; font-family: 'DM Sans', sans-serif; transition: color var(--transition); position: relative; margin-left: auto; }
+    .copy-btn:hover { color: rgba(255,255,255,0.75); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: var(--surface2); color: var(--text); padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .tooltip.show { opacity: 1; }
+    pre { margin: 0; padding: 18px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.875rem; line-height: 1.65; color: #d4d4d4; background: transparent; white-space: pre; tab-size: 2; }
+
+    /* Mistake list */
+    .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 26px; }
+    .mistake-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; }
+    .mistake-item strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
+    .mistake-item p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+    .mistake-item code { font-family: 'Courier New', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* FAQ accordion */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 18px 0; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; padding: 14px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
+    .faq-a.open { max-height: 280px; padding: 2px 18px 15px; }
+    .faq-a code { font-family: 'Courier New', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Author strip */
+    .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .author-info { font-size: 0.85rem; line-height: 1.5; }
+    .author-info strong { font-weight: 600; display: block; }
+    .author-info span { color: var(--text-muted); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+    .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      header { display: none; }
+      .mobile-header { display: flex; }
+      .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
+      aside { position: static; }
+      .toc-grid { grid-template-columns: 1fr; }
+      footer { padding: 20px; }
+      .footer-container { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) { main h1 { font-size: 1.6rem; } }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../info/about.html">About</a>
+    <a href="../info/contact.html">Contact</a>
+    <button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button>
+  </nav>
+</header>
+
+<div class="mobile-header">
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <div class="mobile-right">
+    <button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button>
+    <button class="hamburger" id="hamburgerBtn">☰
+      <div class="menu-dropdown" id="menuDropdown">
+        <a href="../index.html">Home</a>
+        <a href="../info/about.html">About</a>
+        <a href="../info/contact.html">Contact</a>
+      </div>
+    </button>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <aside>
+  <div class="aside-label">Python Topics</div>
+  <ul>
+    <li><a href="../python/user_input.html"><span class="dot"></span>User Input</a></li>
+    <li><a href="../python/if_statements.html" class="active"><span class="dot"></span>If Statements</a></li>
+    <li><a href="../python/list.html"><span class="dot"></span>Lists</a></li>
+    <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
+    <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
+    <li><a href="../python/sets.html"><span class="dot"></span>Sets</a></li>
+    <li><a href="../python/for_loop.html"><span class="dot"></span>For Loop</a></li>
+    <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
+    <li><a href="../python/list-comp.html"><span class="dot"></span>List Comprehension</a></li>
+  </ul>
+
+  <div class="aside-label" style="margin-top:24px;">Mini Projects</div>
+  <ul>
+    <li><a href="../python/password.html"><span class="dot"></span>Password Generator</a></li>
+  </ul>
+</aside>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../python/variables.html">Python</a><span>›</span>
+      4.1 if Statements
+    </div>
+
+    <h1>Python if Statements Explained (Python Docs 4.1) | if, elif, else & Beginner Guide</h1>
+
+    <div class="doc-ref">
+      📖 Based on <a href="https://docs.python.org/3/tutorial/controlflow.html#if-statements" target="_blank" rel="noopener">Python 3 official docs §4.1</a> — explained like a friend, with extra examples added
+    </div>
+
+    <div class="meta-row">
+      <span class="meta-pill">Python</span>
+      <span class="meta-pill green">Beginner</span>
+      <span class="meta-pill blue">Control Flow</span>
+      <span class="meta-pill orange">Official Docs</span>
+      <span class="date-badge">Updated June 2026</span>
+    </div>
+
+    <p>This page explains the official Python if statements documentation (Python Docs 4.1) in simple language. Learn how Python's if, elif, and else statements work, use comparison and logical operators, write nested conditions, avoid common mistakes, and understand real-world decision making with beginner-friendly explanations and practical examples.
+
+By the end of this guide, you'll know how Python evaluates conditions, when to use if, elif, and else, combine multiple conditions with logical operators, write clean decision-making code, and avoid the most common beginner mistakes.</p>
+
+    <nav class="toc" aria-label="Table of contents">
+  <div class="toc-label">In this guide</div>
+  <div class="toc-grid">
+    <a href="#syntax"><span class="toc-num">01</span>Basic syntax</a>
+    <a href="#elif"><span class="toc-num">02</span>elif and else</a>
+    <a href="#operators"><span class="toc-num">03</span>Comparison operators</a>
+    <a href="#logical"><span class="toc-num">04</span>Logical operators</a>
+    <a href="#nested"><span class="toc-num">05</span>Nested if statements</a>
+    <a href="#examples"><span class="toc-num">06</span>Real-world examples</a>
+    <a href="#mistakes"><span class="toc-num">07</span>Common mistakes</a>
+    <a href="#interview"><span class="toc-num">08</span>Interview questions</a>
+    <a href="#faq"><span class="toc-num">09</span>FAQs</a>
+  </div>
+</nav>
+
+    <div class="section-divider"></div>
+
+    <!-- 01 -->
+    <h2 id="syntax">Basic if Statement Syntax</h2>
+    <p>An <code>if</code> statement checks a condition. If it's <code>True</code>, the indented block runs. If it's <code>False</code>, Python skips it entirely.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>x = int(input("Please enter an integer: "))
+
+if x < 0:
+    x = 0
+    print('Negative changed to zero')
+elif x == 0:
+    print('Zero')
+elif x == 1:
+    print('Single')
+else:
+    print('More')
+
+# If you enter 42, the output is:
+# More</code></pre>
+    </div>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>There can be zero or more <code>elif</code> parts, and the <code>else</code> part is optional. The keyword <code>elif</code> is short for "else if", and is useful to avoid excessive indentation. An <code>if</code> … <code>elif</code> … <code>elif</code> … sequence is a substitute for the <code>switch</code> or <code>case</code> statements found in other languages.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 -->
+    <h2 id="elif">elif and else — Handling Multiple Conditions</h2>
+    <p>Python checks conditions from top to bottom and stops at the first one that's <code>True</code>. The <code>else</code> block is the fallback — it runs only if every condition above it was <code>False</code>.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>score = 74
+
+if score >= 90:
+    print("Grade: A")
+elif score >= 75:
+    print("Grade: B")
+elif score >= 60:
+    print("Grade: C")
+else:
+    print("Grade: F")
+
+# Output: Grade: C
+# Python stops as soon as score >= 60 is True — it doesn't check further</code></pre>
+    </div>
+
+    <div class="note-box">
+      <strong>Order matters.</strong> Python checks conditions in order and stops at the first <code>True</code> one. If you put a broader condition before a narrower one (like <code>score >= 60</code> before <code>score >= 90</code>), the narrower one will never run — it'll already be caught by the broader check.
+    </div>
+
+    <h4>if without elif or else</h4>
+    <p>Both <code>elif</code> and <code>else</code> are optional. A standalone <code>if</code> is perfectly valid when you only need to act on one condition:</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>name = "Palak"
+
+# No elif, no else — just a simple guard
+if name == "Palak":
+    print("Welcome back, Palak!")
+
+# This still works fine — if the condition is False, nothing happens</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 -->
+    <h2 id="operators">Comparison Operators in if Statements</h2>
+    <p>The condition inside an <code>if</code> statement is any expression that evaluates to <code>True</code> or <code>False</code>. These are the operators you'll use most:</p>
+
+    <table class="param-table">
+      <thead>
+        <tr><th>Operator</th><th>Meaning</th><th>Example</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>==</code></td><td>Equal to</td><td><code>x == 5</code></td></tr>
+        <tr><td><code>!=</code></td><td>Not equal to</td><td><code>x != 0</code></td></tr>
+        <tr><td><code>&gt;</code></td><td>Greater than</td><td><code>x &gt; 10</code></td></tr>
+        <tr><td><code>&lt;</code></td><td>Less than</td><td><code>x &lt; 10</code></td></tr>
+        <tr><td><code>&gt;=</code></td><td>Greater than or equal to</td><td><code>x &gt;= 18</code></td></tr>
+        <tr><td><code>&lt;=</code></td><td>Less than or equal to</td><td><code>x &lt;= 100</code></td></tr>
+        <tr><td><code>in</code></td><td>Value exists in a sequence</td><td><code>"a" in "Palak"</code></td></tr>
+        <tr><td><code>not in</code></td><td>Value not in a sequence</td><td><code>x not in [1, 2, 3]</code></td></tr>
+        <tr><td><code>is</code></td><td>Same object in memory</td><td><code>x is None</code></td></tr>
+        <tr><td><code>is not</code></td><td>Not the same object</td><td><code>x is not None</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>== vs is:</strong> use <code>==</code> to compare values, use <code>is</code> to check identity. <code>x == None</code> works but <code>x is None</code> is the correct Python idiom — <code>None</code> is a singleton, so identity comparison is more accurate and faster.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <h2 id="logical">Combining Conditions with and, or, not</h2>
+    <p>You can combine multiple conditions in one <code>if</code> using logical operators:</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>age  = 20
+city = "Delhi"
+
+# and — both conditions must be True
+if age >= 18 and city == "Delhi":
+    print("Eligible Delhi voter")
+
+# or — at least one condition must be True
+if age < 13 or age > 60:
+    print("Special pricing applies")
+
+# not — flips True to False and vice versa
+logged_in = False
+if not logged_in:
+    print("Please log in first")
+
+# Chaining comparisons — Python allows this naturally
+marks = 75
+if 60 <= marks < 80:
+    print("B grade")   # True — marks is between 60 and 80</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 -->
+    <h2 id="nested">Nested if Statements</h2>
+    <p>You can put an <code>if</code> inside another <code>if</code>. Python uses indentation to know which block belongs to which condition — so get the spacing right.</p>
+
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>score    = 85
+attended = True
+
+if score >= 50:
+    if attended:
+        print("Passed — attendance confirmed")
+    else:
+        print("Score ok, but attendance too low")
+else:
+    print("Failed")</code></pre>
+    </div>
+
+    <div class="note-box">
+      <strong>Keep nesting shallow.</strong> One or two levels deep is fine. Beyond that, your code gets hard to read fast. If you're nesting three or more levels, consider restructuring with <code>and</code>/<code>or</code>, early returns, or helper functions.
+    </div>
+
+    <div class="section-divider"></div>
+<h2>Real-World Examples of Python <code>if</code> Statements</h2>
+
+<p>
+  You'll use <code>if</code> statements in almost every Python project. Here are some common real-world examples:
+</p>
+
+<ul>
+  <li><strong>Login systems:</strong> Allow users to log in only if the username and password are correct.</li>
+  <li><strong>ATM software:</strong> Check whether the account has enough balance before allowing a withdrawal.</li>
+  <li><strong>Games:</strong> Decide whether the player wins, loses, or unlocks the next level.</li>
+  <li><strong>E-commerce websites:</strong> Apply discounts only if the cart value exceeds a certain amount.</li>
+  <li><strong>Weather apps:</strong> Recommend carrying an umbrella if rain is expected.</li>
+</ul>
+<div class="section-divider"></div>
+
+    <!-- 06 -->
+    <h2 id="mistakes">Common if Statement Mistakes</h2>
+
+    <div class="mistake-list">
+      <div class="mistake-item">
+        <strong>Using = instead of == for comparison</strong>
+        <p><code>if x = 5:</code> raises a <code>SyntaxError</code>. Single <code>=</code> is assignment; double <code>==</code> is comparison. This is one of the most common beginner errors across every programming language.</p>
+      </div>
+      <div class="mistake-item">
+        <strong>Missing the colon at the end</strong>
+        <p><code>if x > 0</code> without a colon raises a <code>SyntaxError</code>. Every <code>if</code>, <code>elif</code>, and <code>else</code> line must end with <code>:</code>.</p>
+      </div>
+      <div class="mistake-item">
+        <strong>Wrong indentation inside the block</strong>
+        <p>Python uses indentation to define blocks — not curly braces. If your code inside the <code>if</code> isn't indented consistently (4 spaces is standard), you'll get an <code>IndentationError</code>.</p>
+      </div>
+      <div class="mistake-item">
+        <strong>Putting broader conditions before narrower ones</strong>
+        <p>If you check <code>score >= 50</code> before <code>score >= 90</code>, a score of 95 will match the first condition and never reach the second. Always order from most specific to most general.</p>
+      </div>
+      <div class="mistake-item">
+        <strong>Comparing to True/False explicitly</strong>
+        <p><code>if is_active == True:</code> is redundant. Just write <code>if is_active:</code>. Similarly, <code>if is_active == False:</code> should be <code>if not is_active:</code>. Cleaner and more Pythonic.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+<h2 id="interview">Python if Statement Interview Questions and Answers</h2>
+<p>These come up in Python beginner and junior-level interviews — straightforward but easy to fumble if you haven't thought them through:</p>
+
+<div class="iq-list">
+  <div class="iq-item">
+    <div class="iq-q"><span class="iq-badge">Q1</span>What is the difference between if and elif?</div>
+    <div class="iq-a"><code>if</code> starts a new conditional check — Python always evaluates it. <code>elif</code> only runs if every <code>if</code> and <code>elif</code> above it was <code>False</code>. You can have as many <code>elif</code> blocks as you need, but only one <code>if</code> to start the chain. Think of <code>elif</code> as "otherwise, if this other thing is true."</div>
+  </div>
+  <div class="iq-item">
+    <div class="iq-q"><span class="iq-badge">Q2</span>What is the difference between == and is?</div>
+    <div class="iq-a"><code>==</code> compares values — it checks whether two objects have the same content. <code>is</code> checks identity — whether two variables point to the exact same object in memory. <code>a = [1, 2]; b = [1, 2]; a == b</code> is <code>True</code>, but <code>a is b</code> is <code>False</code> because they're two separate list objects. Use <code>is</code> only for <code>None</code>, <code>True</code>, and <code>False</code> — for everything else, use <code>==</code>.</div>
+  </div>
+  <div class="iq-item">
+    <div class="iq-q"><span class="iq-badge">Q3</span>Can a Python if statement have multiple else blocks?</div>
+    <div class="iq-a">No. An <code>if</code> block can have only one <code>else</code> — it's the final fallback. If you need multiple branches, use <code>elif</code> for the middle cases and <code>else</code> for the last one. Having two <code>else</code> blocks on the same <code>if</code> raises a <code>SyntaxError</code>.</div>
+  </div>
+  <div class="iq-item">
+    <div class="iq-q"><span class="iq-badge">Q4</span>How does Python evaluate chained comparisons like 0 &lt; x &lt; 10?</div>
+    <div class="iq-a">Python evaluates chained comparisons left to right and short-circuits — meaning it stops as soon as it finds a <code>False</code>. <code>0 &lt; x &lt; 10</code> is equivalent to <code>(0 &lt; x) and (x &lt; 10)</code>, but Python only evaluates <code>x</code> once. This is a Python-specific feature — in languages like C or Java, <code>0 &lt; x &lt; 10</code> would not work the same way.</div>
+  </div>
+  <div class="iq-item">
+    <div class="iq-q"><span class="iq-badge">Q5</span>What is the difference between nested if and using logical operators?</div>
+    <div class="iq-a">Both can express the same logic, but they read differently. <code>if age >= 18 and city == "Delhi":</code> is a single condition — both must be true together. A nested <code>if</code> lets you handle each condition separately with its own block. Use logical operators when both conditions lead to the same outcome. Use nested <code>if</code> when the inner condition only makes sense to check after the outer one passes, or when each combination needs different handling.</div>
+  </div>
+  <div class="iq-item">
+    <div class="iq-q"><span class="iq-badge">Q6</span>What values are considered falsy in a Python if condition?</div>
+    <div class="iq-a">Python treats these as <code>False</code> in an <code>if</code> condition: <code>None</code>, <code>False</code>, <code>0</code>, <code>0.0</code>, empty string <code>""</code>, empty list <code>[]</code>, empty dict <code>{}</code>, empty tuple <code>()</code>, and empty set <code>set()</code>. Everything else is truthy. This means <code>if my_list:</code> is a clean way to check if a list has any items — no need to write <code>if len(my_list) > 0:</code>.</div>
+  </div>
+</div>
+<div class="section-divider"></div>
+
+    <!-- 07 -->
+    <h2 id="faq">Python if Statement FAQ</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is an if statement in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">An <code>if</code> statement checks a condition and runs a block of code only if that condition is <code>True</code>. It's Python's primary tool for branching — making decisions about which code to run based on data.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is the difference between elif and else? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><code>elif</code> (short for "else if") checks another condition if the previous <code>if</code> was <code>False</code>. You can have as many <code>elif</code> blocks as you need. <code>else</code> has no condition — it's the fallback that runs only if every <code>if</code> and <code>elif</code> above it was <code>False</code>.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can you have an if without else? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes — both <code>elif</code> and <code>else</code> are optional. A standalone <code>if</code> is valid. If the condition is <code>False</code> and there's no <code>else</code>, Python simply moves on to the next line after the block.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is elif short for and why use it? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><code>elif</code> is short for "else if". From the Python docs: it's useful to avoid excessive indentation. Without <code>elif</code>, you'd have to nest <code>if</code> statements inside <code>else</code> blocks, which gets messy fast. An <code>if/elif/elif</code> chain is Python's equivalent of <code>switch/case</code> in other languages.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do you write an if statement on one line in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Python supports a ternary (inline) form: <code>value = "yes" if condition else "no"</code>. This is useful for simple assignments. For anything more complex — multiple statements, no else — use the standard multi-line form for readability.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="author-strip">
+      <div class="author-avatar">PM</div>
+      <div class="author-info">
+        <strong>Palak Mishra</strong>
+        <span>Backend developer · Building beginner-friendly Python docs at Kiddo</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>More Python topics →</strong><br><br>
+      <a href="../python/loops.html">Loops</a> ·
+      <a href="../python/while_loop.html">While Loop</a> ·
+      <a href="../python/functions.html">Functions</a> ·
+      <a href="../python/lists.html">Lists</a> ·
+      <a href="../python/dictionary.html">Dictionaries</a> ·
+      <a href="../python/list-comp">List Comprehension</a> .
+      <a href="../python/sets.html">Sets</a> .
+      <a href="../python/tuples.html">Tuples</a> .
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
+    <div class="footer-links">
+      <a href="../info/privacy.html">Privacy</a>
+      <a href="../info/terms.html">Terms</a>
+      <a href="../info/contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const desktopToggle = document.getElementById('desktopToggleTheme');
+  const mobileToggle  = document.getElementById('mobileToggleTheme');
+  const applyTheme = (dark) => {
+    document.body.classList.toggle('dark', dark);
+    const icon = dark ? '☀️' : '🌙';
+    if (desktopToggle) desktopToggle.textContent = icon;
+    if (mobileToggle)  mobileToggle.textContent  = icon;
+  };
+  applyTheme(localStorage.getItem('theme') === 'dark');
+  const toggleTheme = () => {
+    const isDark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  };
+  if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+  if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+
+  const hamburger    = document.getElementById('hamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  hamburger?.addEventListener('click', (e) => { e.stopPropagation(); menuDropdown.classList.toggle('open'); });
+  document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.querySelectorAll('.code-container').forEach(container => {
+    const btn  = container.querySelector('.copy-btn');
+    const tip  = container.querySelector('.tooltip');
+    const code = container.querySelector('pre code');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(code.innerText.trim()).then(() => {
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
+      });
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans    = btn.nextElementSibling;
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+</script>
+</body>
+</html>
