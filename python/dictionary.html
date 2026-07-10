@@ -166,6 +166,24 @@
     .da-val { color: var(--accent3); font-weight: 600; }
     .da-label { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-left: 14px; vertical-align: middle; }
 
+    aside ul li { position: relative; }
+aside ul .submenu{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  margin:2px 0 2px 14px;
+  padding-left:10px;
+  border-left:1px solid var(--border);
+}
+aside ul .submenu li a{
+  font-size:0.8rem;
+  padding:6px 10px;
+}
+aside ul .submenu li a .dot{
+  width:4px;
+  height:4px;
+}
     /* Prop grid */
     .prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0 24px; }
     .prop-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
@@ -320,13 +338,19 @@
   <ul>
     <li><a href="../python/user_input.html"><span class="dot"></span>User Input</a></li>
     <li><a href="../python/if_statements.html"><span class="dot"></span>If Statements</a></li>
-    <li><a href="../python/list.html"><span class="dot"></span>Lists</a></li>
+    <li>
+      <a href="../python/list.html"><span class="dot"></span>Lists</a>
+      <ul class="submenu">
+        <li><a href="../python/list-stack-queue.html"><span class="dot"></span>Stack &amp; Queue</a></li>
+        <li><a href="../python/list-comp.html"><span class="dot"></span>List Comprehension</a></li>
+        <li><a href="../python/nested-list-comp.html"><span class="dot"></span>Nested List Comprehension</a></li>
+      </ul>
+    </li>
     <li><a href="../python/dictionary.html" class="active"><span class="dot"></span>Dictionaries</a></li>
     <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
     <li><a href="../python/sets.html"><span class="dot"></span>Sets</a></li>
     <li><a href="../python/for_loop.html"><span class="dot"></span>For Loop</a></li>
     <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
-    <li><a href="../python/list-comp.html"><span class="dot"></span>List Comprehension</a></li>
   </ul>
 
   <div class="aside-label" style="margin-top:24px;">Mini Projects</div>
@@ -976,7 +1000,8 @@ print(score)   # not found  ← no KeyError even if "Ananya" missing</code></pre
       <a href="../python/lists.html">Lists</a> ·
       <a href="../python/tuples.html">Tuples</a> ·
       <a href="../python/sets.html">Sets</a> ·
-      <a href="../python/functions.html">Functions</a> ·
+      <a href="../python/list-stack-queue.html">Lists as Stack and Queue</a> ·
+      <a href="../python/nested-list-comp.html">Nested List Comprehension</a> ·
       <a href="../python/list-comp">List Comprehension</a> ·
       <a href="../python/while_loop.html">While Loop</a> .
       <a href="../python/if_statements.html">If Statements</a> .

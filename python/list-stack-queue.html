@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="../assests/icon.png" />
-  <meta name="description" content="Learn Python list methods (Python Docs 5.1) with beginner-friendly explanations. Understand append(), extend(), insert(), remove(), pop(), sort(), reverse(), index(), count(), copy(), common mistakes, and interview questions." />
+  <meta name="description" content="Learn Python Stacks and Queues (Python Docs 5.1.1 & 5.1.2) with beginner-friendly explanations. Understand LIFO vs FIFO, append(), pop(), collections.deque, popleft(), time complexity, and practical examples." />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Python List Methods Explained (Python Docs 5.1) | Kiddo" />
-  <meta property="og:url" content="https://kiddoedu.org/python/lists.html" />
+  <meta property="og:title" content="Python Stacks &amp; Queues Explained (Python Docs 5.1.1 / 5.1.2) | Kiddo" />
+  <meta property="og:url" content="https://kiddoedu.org/python/lists-stack-queue.html" />
   <meta property="og:site_name" content="Kiddo" />
-  <link rel="canonical" href="https://kiddoedu.org/python/lists.html" />
-  <title>Python List Methods Explained (Python Docs 5.1) | append(), pop(), sort() & Examples</title>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Python List Methods Explained (Python Docs 5.1)","url":"https://kiddoedu.org/python/lists.html","author":{"@type":"Person","name":"Palak Mishra"},"publisher":{"@type":"Organization","name":"Kiddo","url":"https://kiddoedu.org"}}</script>
+  <link rel="canonical" href="https://kiddoedu.org/python/lists-stack-queue.html" />
+  <title>Python Stacks & Queues Explained (Python Docs 5.1.1 & 5.1.2) | append(), pop(), deque</title>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Python Stacks & Queues Explained (Python Docs 5.1.1 / 5.1.2)","url":"https://kiddoedu.org/python/lists-stack-queue.html","author":{"@type":"Person","name":"Palak Mishra"},"publisher":{"@type":"Organization","name":"Kiddo","url":"https://kiddoedu.org"}}</script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ESNWS8F9HE');</script>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -88,23 +88,19 @@
     .callout{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius-sm);padding:16px 20px;margin:22px 0;font-size:0.9rem;line-height:1.6;}
     .callout a{color:var(--accent2);text-decoration:none;font-weight:500;}
     .callout a:hover{text-decoration:underline;}
-    aside ul li { position: relative; }
-aside ul .submenu{
-  list-style:none;
-  display:flex;
-  flex-direction:column;
-  gap:2px;
-  margin:2px 0 2px 14px;
-  padding-left:10px;
-  border-left:1px solid var(--border);
-}
-aside ul .submenu li a{
-  font-size:0.8rem;
-  padding:6px 10px;
-}
-aside ul .submenu li a .dot{
-  width:4px;
-  height:4px;
+    .param-table{width:100%;border-collapse:collapse;margin:16px 0 26px;font-size:0.875rem;}
+    .param-table th{text-align:left;padding:8px 12px;font-family:'Syne',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);border-bottom:2px solid var(--border);}
+    .param-table td{padding:10px 12px;border-bottom:1px solid var(--border);line-height:1.5;vertical-align:top;}
+    .param-table tr:last-child td{border-bottom:none;}
+    .param-table tr:hover td{background:var(--surface2);}
+    .param-table td:last-child{color:var(--text-muted);font-size:0.85rem;}
+    .content-img{
+  margin:24px 0 28px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:12px;
+  box-shadow:var(--shadow);
 }
 .content-img{
   margin:24px 0 28px;
@@ -128,12 +124,6 @@ aside ul .submenu li a .dot{
   margin-top:10px;
   line-height:1.5;
 }
-    .param-table{width:100%;border-collapse:collapse;margin:16px 0 26px;font-size:0.875rem;}
-    .param-table th{text-align:left;padding:8px 12px;font-family:'Syne',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);border-bottom:2px solid var(--border);}
-    .param-table td{padding:10px 12px;border-bottom:1px solid var(--border);line-height:1.5;vertical-align:top;}
-    .param-table tr:last-child td{border-bottom:none;}
-    .param-table tr:hover td{background:var(--surface2);}
-    .param-table td:last-child{color:var(--text-muted);font-size:0.85rem;}
     .code-container{background:#1e1e1e;border-radius:var(--radius-sm);overflow:hidden;margin:14px 0 24px;border:1px solid var(--border);}
     .code-header{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,0.06);gap:8px;}
     .lang-tag{font-size:0.72rem;font-weight:600;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;}
@@ -158,6 +148,24 @@ aside ul .submenu li a .dot{
     .faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;}
     .faq-q{width:100%;background:none;border:none;padding:14px 18px;text-align:left;font-family:'Syne',sans-serif;font-weight:700;font-size:0.92rem;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:background var(--transition);line-height:1.4;}
     .faq-q:hover{background:var(--surface2);}
+    aside ul li { position: relative; }
+aside ul .submenu{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  margin:2px 0 2px 14px;
+  padding-left:10px;
+  border-left:1px solid var(--border);
+}
+aside ul .submenu li a{
+  font-size:0.8rem;
+  padding:6px 10px;
+}
+aside ul .submenu li a .dot{
+  width:4px;
+  height:4px;
+}
     .faq-icon{font-size:1.1rem;color:var(--accent);flex-shrink:0;transition:transform 0.25s ease;}
     .faq-q.open .faq-icon{transform:rotate(45deg);}
     .faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease,padding 0.3s ease;font-size:0.9rem;line-height:1.72;color:var(--text-muted);padding:0 18px;}
@@ -189,15 +197,15 @@ aside ul .submenu li a .dot{
   <div class="mobile-right"><button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button><button class="hamburger" id="hamburgerBtn">☰<div class="menu-dropdown" id="menuDropdown"><a href="../index.html">Home</a><a href="../info/about.html">About</a><a href="../info/contact.html">Contact</a></div></button></div>
 </div>
 <div class="page-wrap">
-  <aside>
+ <aside>
   <div class="aside-label">Python Topics</div>
   <ul>
     <li><a href="../python/user_input.html"><span class="dot"></span>User Input</a></li>
     <li><a href="../python/if_statements.html"><span class="dot"></span>If Statements</a></li>
     <li>
-      <a href="../python/list.html" class="active"><span class="dot"></span>Lists</a>
+      <a href="../python/list.html"><span class="dot"></span>Lists</a>
       <ul class="submenu">
-        <li><a href="../python/list-stack-queue.html"><span class="dot"></span>Stack &amp; Queue</a></li>
+        <li><a href="../python/lists-stack-queue.html" class="active"><span class="dot"></span>Stack &amp; Queue</a></li>
         <li><a href="../python/list-comp.html"><span class="dot"></span>List Comprehension</a></li>
         <li><a href="../python/nested-list-comp.html"><span class="dot"></span>Nested List Comprehension</a></li>
       </ul>
@@ -216,22 +224,22 @@ aside ul .submenu li a .dot{
 </aside>
 
   <main>
-    <div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><a href="../python/lists.html">Python</a><span>›</span>5.1 Lists</div>
-    <h1>Python List Methods Explained (Python Docs 5.1) | append(), sort(), pop() & Beginner Guide</h1>
-    <div class="doc-ref">📖 Based on <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists" target="_blank" rel="noopener">Python 3 official docs §5.1</a> — explained like a friend, with extra examples added</div>
+    <div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><a href="../python/lists.html">Python</a><span>›</span>5.1.1 / 5.1.2 Stacks &amp; Queues</div>
+    <h1>Python Stacks &amp; Queues Explained (Python Docs 5.1.1 / 5.1.2) | append(), pop(), deque</h1>
+    <div class="doc-ref">📖 Based on <a href="https://docs.python.org/3/tutorial/datastructures.html#using-lists-as-stacks" target="_blank" rel="noopener">Python 3 official docs §5.1.1 &amp; §5.1.2</a> — explained like a friend, with extra examples added</div>
     <div class="meta-row">
-      <span class="meta-pill">Python</span><span class="meta-pill green">Beginner</span><span class="meta-pill blue">Data Structures</span><span class="meta-pill orange">Official Docs</span><span class="date-badge">Updated June 2026</span>
+      <span class="meta-pill">Python</span><span class="meta-pill green">Beginner</span><span class="meta-pill blue">Data Structures</span><span class="meta-pill orange">Official Docs</span><span class="date-badge">Updated July 2026</span>
     </div>
-    <p>This page explains the official Python Lists documentation (Python Docs 5.1) in simple language. Lists are Python's most versatile data structure — and knowing all their methods is essential. This guide covers every list method with explanations, the famous fruits example from the docs, common mistakes, and interview questions.</p>
-    <p>By the end of this guide you'll know when to use <code>append()</code> vs <code>extend()</code>, how <code>sort()</code> and <code>sorted()</code> differ, why methods like <code>sort()</code> return <code>None</code>, and how to avoid the most common list pitfalls.</p>
+    <p>Lists aren't just general-purpose containers — with just two methods, <code>append()</code> and <code>pop()</code>, they turn into a fully working stack. This page explains the official Python docs §5.1.1 and §5.1.2 in simple language: how to use a list as a stack, why lists are a poor fit for queues, and how <code>collections.deque</code> solves that problem.</p>
+    <p>By the end of this guide you'll know when a list makes a great stack, why <code>pop(0)</code> on a list is slow, and how to build a proper FIFO queue with <code>deque</code>.</p>
     <nav class="toc" aria-label="Table of contents">
       <div class="toc-label">In this guide</div>
       <div class="toc-grid">
-        <a href="#what-is"><span class="toc-num">01</span>What is a Python list?</a>
-        <a href="#methods"><span class="toc-num">02</span>All list methods</a>
-        <a href="#fruits"><span class="toc-num">03</span>The fruits example</a>
-        <a href="#none-return"><span class="toc-num">04</span>Why methods return None</a>
-        <a href="#sort-vs-sorted"><span class="toc-num">05</span>sort() vs sorted()</a>
+        <a href="#what-is"><span class="toc-num">01</span>Stacks vs Queues</a>
+        <a href="#stacks"><span class="toc-num">02</span>Using lists as stacks</a>
+        <a href="#queues"><span class="toc-num">03</span>Using lists as queues</a>
+        <a href="#deque"><span class="toc-num">04</span>collections.deque</a>
+        <a href="#complexity"><span class="toc-num">05</span>Time complexity</a>
         <a href="#mistakes"><span class="toc-num">06</span>Common mistakes</a>
         <a href="#interview"><span class="toc-num">07</span>Interview questions</a>
         <a href="#faq"><span class="toc-num">08</span>FAQs</a>
@@ -239,297 +247,267 @@ aside ul .submenu li a .dot{
     </nav>
     <div class="section-divider"></div>
 
-    <h2 id="what-is">What is a Python List?</h2>
-    <p>A list is an ordered, mutable collection of items. You can put anything in it — strings, numbers, other lists, even mixed types. It's the most commonly used data structure in Python, and it comes packed with methods that make working with sequences easy.</p>
+    <h2 id="what-is">Stacks vs Queues — What's the Difference?</h2>
+    <p>Both stacks and queues are ways of ordering how items go in and come out of a collection. The difference is entirely about which end you remove items from:</p>
     <ul>
-      <li><strong>Ordered</strong> — elements have a defined position, accessible by index</li>
-      <li><strong>Mutable</strong> — you can add, remove, and change elements after creation</li>
-      <li><strong>Allows duplicates</strong> — the same value can appear multiple times</li>
-      <li><strong>Any type</strong> — strings, numbers, booleans, other lists, all welcome</li>
+      <li><strong>Stack (LIFO)</strong> — Last-In, First-Out. The last item you added is the first one you take out. Think of a stack of plates.</li>
+      <li><strong>Queue (FIFO)</strong> — First-In, First-Out. The first item you added is the first one you take out. Think of a line at a ticket counter.</li>
     </ul>
+    <p>Python lists can act as both — but only one of these is actually efficient with a plain list, as you'll see below.</p>
+    <div class="section-divider"></div>
+<figure class="content-img">
+  <img src="../assests/stack-queue.png" alt="Diagram showing a stack (LIFO) adding and removing from the top, versus a queue (FIFO) adding at the back and removing from the front" loading="lazy" />
+  <figcaption>Stack (LIFO) vs Queue (FIFO) — visualizing how items enter and leave each structure</figcaption>
+</figure>
+<div class="section-divider"></div>
+
+    <h2 id="stacks">5.1.1. Using Lists as Stacks</h2>
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>The list methods make it very easy to use a list as a stack, where the last element added is the first element retrieved ("last-in, first-out"). To add an item to the top of the stack, use <code>append()</code>. To retrieve an item from the top of the stack, use <code>pop()</code> without an explicit index.</p>
+    </div>
+    <p>Because both operations happen at the <em>end</em> of the list, they're fast — no shifting of other elements is needed. That's exactly what makes lists a natural fit for stacks.</p>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>stack = [3, 4, 5]
+stack.append(6)
+stack.append(7)
+stack
+# [3, 4, 5, 6, 7]
+
+stack.pop()
+# 7
+
+stack
+# [3, 4, 5, 6]
+
+stack.pop()
+# 6
+
+stack.pop()
+# 5
+
+stack
+# [3, 4]</code></pre>
+    </div>
+
+    <h4>Kiddo extra — peeking at the top without popping</h4>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>stack = [10, 20, 30]
+
+# "Peek" at the top item without removing it
+top_item = stack[-1]
+print(top_item)   # 30
+print(stack)      # [10, 20, 30]  ← unchanged, because we didn't pop()
+
+# Check if the stack is empty before popping
+if stack:
+    print(stack.pop())   # 30
+else:
+    print("Stack is empty")</code></pre>
+    </div>
+
     <div class="section-divider"></div>
 
-    <h2 id="methods">All Python List Methods — Complete Reference</h2>
-    <p>The Python docs §5.1 covers all of these. Here's every method with its exact signature and what it does:</p>
-    <table class="param-table">
-      <thead><tr><th>Method</th><th>What it does</th><th>Returns</th></tr></thead>
-      <tbody>
-        <tr><td><code>list.append(x)</code></td><td>Add item x to the end of the list</td><td>None</td></tr>
-        <tr><td><code>list.extend(iterable)</code></td><td>Add all items from iterable to the end — like appending a whole list</td><td>None</td></tr>
-        <tr><td><code>list.insert(i, x)</code></td><td>Insert x before index i. <code>insert(0, x)</code> = front, <code>insert(len(a), x)</code> = same as append</td><td>None</td></tr>
-        <tr><td><code>list.remove(x)</code></td><td>Remove the first item equal to x — ValueError if not found</td><td>None</td></tr>
-        <tr><td><code>list.pop(i=-1)</code></td><td>Remove and return item at index i. Default (no index) removes and returns last item</td><td>Removed item</td></tr>
-        <tr><td><code>list.clear()</code></td><td>Remove all items. Same as <code>del a[:]</code></td><td>None</td></tr>
-        <tr><td><code>list.index(x[, start[, end]])</code></td><td>Return index of first item equal to x. Optional start/end to search a slice. ValueError if not found</td><td>int</td></tr>
-        <tr><td><code>list.count(x)</code></td><td>Count how many times x appears in the list</td><td>int</td></tr>
-        <tr><td><code>list.sort(*, key=None, reverse=False)</code></td><td>Sort the list in place. Use key= for custom sort logic, reverse=True for descending</td><td>None</td></tr>
-        <tr><td><code>list.reverse()</code></td><td>Reverse the list in place</td><td>None</td></tr>
-        <tr><td><code>list.copy()</code></td><td>Return a shallow copy. Same as <code>a[:]</code></td><td>New list</td></tr>
-      </tbody>
-    </table>
+    <h2 id="queues">5.1.2. Using Lists as Queues</h2>
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>It is also possible to use a list as a queue, where the first element added is the first element retrieved ("first-in, first-out"); however, lists are not efficient for this purpose. While appends and pops from the end of a list are fast, doing inserts or pops from the beginning of a list is slow — because all of the other elements have to be shifted by one.</p>
+    </div>
+    <p>This is the key catch: a list stores its elements in one contiguous block of memory. Removing from the front means every remaining element has to shift left by one position to fill the gap. For a small list this is unnoticeable — for a large one, it adds up fast.</p>
+    <div class="note-box">To implement a proper queue, the Python docs recommend <code>collections.deque</code>, which was designed to have fast appends and pops from <strong>both</strong> ends.</div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="deque">collections.deque — The Right Tool for Queues</h2>
+    <p>A <code>deque</code> (pronounced "deck", short for double-ended queue) behaves like a list but is built specifically so that adding or removing from either end is fast. It supports <code>append()</code> / <code>pop()</code> on the right, and <code>appendleft()</code> / <code>popleft()</code> on the left — all in constant time.</p>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>from collections import deque
+
+queue = deque(["Eric", "John", "Michael"])
+queue.append("Terry")           # Terry arrives
+queue.append("Graham")          # Graham arrives
+
+queue.popleft()                 # The first to arrive now leaves
+# 'Eric'
+
+queue.popleft()                 # The second to arrive now leaves
+# 'John'
+
+queue                           # Remaining queue in order of arrival
+# deque(['Michael', 'Terry', 'Graham'])</code></pre>
+    </div>
+
+    <h4>Kiddo extra — deque as a stack too</h4>
+    <div class="code-container">
+      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
+      <pre><code>from collections import deque
+
+# deque works great as a stack too — same append()/pop() API as a list
+stack = deque([1, 2, 3])
+stack.append(4)
+print(stack.pop())    # 4
+
+# but it also gives you fast operations on the left side, which a list doesn't
+d = deque([1, 2, 3])
+d.appendleft(0)
+print(d)               # deque([0, 1, 2, 3])
+print(d.popleft())      # 0</code></pre>
+    </div>
 
     <div class="section-divider"></div>
 <div class="callout">
-  <strong>Time Complexity of Python List Methods</strong>
-  <p>
-    Knowing what a method does is only half the story. Knowing how fast it is
-    becomes important when you're working with large lists or preparing for coding interviews.
+  <strong>Time Complexity: list vs deque</strong>
+  <p id="complexity">
+    The choice between a list and a <code>deque</code> comes down to which end of the collection you're working with most often.
   </p>
 
   <table class="param-table">
     <thead>
       <tr>
-        <th>Method</th>
-        <th>Average Time Complexity</th>
+        <th>Operation</th>
+        <th>list</th>
+        <th>deque</th>
         <th>Why?</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td><code>append(x)</code></td>
+        <td><code>append(x)</code> (right end)</td>
         <td><strong>O(1)</strong></td>
-        <td>Adds to the end of the list.</td>
-      </tr>
-
-      <tr>
-        <td><code>pop()</code></td>
         <td><strong>O(1)</strong></td>
-        <td>Removing the last item is constant time.</td>
+        <td>Both add to the end without shifting anything.</td>
       </tr>
 
       <tr>
-        <td><code>insert(i, x)</code></td>
+        <td><code>pop()</code> (right end)</td>
+        <td><strong>O(1)</strong></td>
+        <td><strong>O(1)</strong></td>
+        <td>Removing the last item is constant time for both.</td>
+      </tr>
+
+      <tr>
+        <td>Insert/remove at front — <code>insert(0, x)</code> / <code>pop(0)</code></td>
         <td><strong>O(n)</strong></td>
-        <td>Elements after the insertion point must shift.</td>
+        <td><strong>O(1)</strong> (<code>appendleft</code> / <code>popleft</code>)</td>
+        <td>A list must shift every remaining element by one; a deque is built for both ends.</td>
       </tr>
 
       <tr>
-        <td><code>remove(x)</code></td>
+        <td>Random access by index — <code>a[i]</code></td>
+        <td><strong>O(1)</strong></td>
         <td><strong>O(n)</strong></td>
-        <td>Python searches for the value before removing it.</td>
-      </tr>
-
-      <tr>
-        <td><code>index(x)</code></td>
-        <td><strong>O(n)</strong></td>
-        <td>Python scans the list until it finds the value.</td>
-      </tr>
-
-      <tr>
-        <td><code>count(x)</code></td>
-        <td><strong>O(n)</strong></td>
-        <td>Every element must be checked.</td>
-      </tr>
-
-      <tr>
-        <td><code>extend(iterable)</code></td>
-        <td><strong>O(k)</strong></td>
-        <td><code>k</code> is the number of elements being added.</td>
-      </tr>
-
-      <tr>
-        <td><code>sort()</code></td>
-        <td><strong>O(n log n)</strong></td>
-        <td>Python uses the highly optimized Timsort algorithm.</td>
-      </tr>
-
-      <tr>
-        <td><code>reverse()</code></td>
-        <td><strong>O(n)</strong></td>
-        <td>Every element is swapped once.</td>
+        <td>Lists are contiguous in memory; a deque has to walk from an end to reach index <code>i</code>.</td>
       </tr>
     </tbody>
   </table>
 
   <p style="margin-top:18px;">
-    <strong>Interview Tip:</strong> Companies frequently ask why
-    <code>append()</code> is usually <code>O(1)</code> while
-    <code>insert()</code> and <code>remove()</code> are
-    <code>O(n)</code>. Understanding this difference helps explain
-    why some list operations are much faster than others.
+    <strong>Interview Tip:</strong> Interviewers often ask why you'd use <code>deque</code> instead of a list for a queue. The answer is exactly this trade-off: a list is optimized for the end and for indexing, while a deque is optimized for both ends at the cost of slower random access.
   </p>
 </div>
  <div class="section-divider"></div>
+<section id="real-world-uses">
+    <h2>Real-World Uses of Stacks and Queues</h2>
 
-    <h2 id="fruits">The Fruits Example — From the Python Docs</h2>
-    <p>The Python docs show all the list methods in action with a single fruits list. Here it is, exactly as in the docs, with explanations for each step:</p>
-    <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+    <p>
+        Stacks and queues aren't just interview topics—they're used in many real applications.
+        Once you recognize the pattern, you'll start seeing them everywhere.
+    </p>
 
-fruits.count('apple')   # 2  ← 'apple' appears twice
-fruits.count('tangerine')  # 0  ← not in the list
-
-fruits.index('banana')  # 3  ← first 'banana' is at index 3
-fruits.index('banana', 4)  # 6  ← next 'banana' starting from index 4
-
-fruits.reverse()
-fruits
-# ['banana', 'apple', 'kiwi', 'banana', 'pear', 'apple', 'orange']
-
-fruits.append('grape')
-fruits
-# ['banana', 'apple', 'kiwi', 'banana', 'pear', 'apple', 'orange', 'grape']
-
-fruits.sort()
-fruits
-# ['apple', 'apple', 'banana', 'banana', 'grape', 'kiwi', 'orange', 'pear']
-
-fruits.pop()   # 'pear'  ← removes and returns last item
-# ['apple', 'apple', 'banana', 'banana', 'grape', 'kiwi', 'orange']</code></pre>
+    <div class="info-card">
+        <h3>Stack (LIFO) Examples</h3>
+        <ul>
+            <li><strong>Undo / Redo</strong> in text editors like VS Code or Microsoft Word.</li>
+            <li><strong>Browser Back button</strong> — the last page visited is the first one you return to.</li>
+            <li><strong>Function calls</strong> in Python use a call stack internally.</li>
+            <li><strong>Expression evaluation</strong> and parsing in compilers.</li>
+        </ul>
     </div>
 
-    <h4>Kiddo extra — append vs extend</h4>
-    <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>a = [1, 2, 3]
-
-# append() adds one item — even if it's a list
-a.append([4, 5])
-print(a)   # [1, 2, 3, [4, 5]]  ← list inside a list
-
-b = [1, 2, 3]
-
-# extend() unpacks the iterable and adds each item individually
-b.extend([4, 5])
-print(b)   # [1, 2, 3, 4, 5]  ← flat list</code></pre>
+    <div class="info-card">
+        <h3>Queue (FIFO) Examples</h3>
+        <ul>
+            <li><strong>Printer queue</strong> — documents are printed in the order they arrive.</li>
+            <li><strong>Customer support tickets</strong> — older requests are handled first.</li>
+            <li><strong>Task scheduling</strong> in operating systems.</li>
+            <li><strong>Breadth-First Search (BFS)</strong> in graphs uses a queue.</li>
+        </ul>
     </div>
 
-    <div class="section-divider"></div>
-<figure class="content-img">
-  <img src="../assests/list-visual.png" alt="Visual comparison of Python append() and extend() methods showing append adding a list as a single element and extend adding each element individually" loading="lazy" />
-  <figcaption>
-  Python <code>append()</code> vs <code>extend()</code> — understanding how each method adds elements to a list.
-</figcaption>
-</figure>
+    <p class="tip-box">
+        <strong>Easy way to remember:</strong><br>
+        <strong>Stack = Plates </strong> (last plate placed on top is the first one removed).<br>
+        <strong>Queue = People in a line </strong> (first person in line gets served first).
+    </p>
+</section>
 <div class="section-divider"></div>
 
-
-    <h2 id="none-return">Why Do List Methods Like sort() Return None?</h2>
-    <div class="doc-block">
-      <span class="doc-block-label">From the Python docs</span>
-      <p>You might have noticed that methods like <code>insert</code>, <code>remove</code>, or <code>sort</code> that only modify the list have no return value printed — they return the default <code>None</code>. This is a design principle for all mutable data structures in Python.</p>
-    </div>
-    <p>This catches beginners all the time. If you write <code>new_list = my_list.sort()</code>, you get <code>None</code> back — not the sorted list. The sort happens in place on the original list.</p>
-    <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>nums = [3, 1, 4, 1, 5, 9]
-
-# Wrong — sort() returns None, not a list
-result = nums.sort()
-print(result)   # None
-
-# Right — sort in place, then use the original
-nums.sort()
-print(nums)   # [1, 1, 3, 4, 5, 9]
-
-# If you need the original untouched, use sorted() instead
-nums = [3, 1, 4, 1, 5, 9]
-sorted_nums = sorted(nums)
-print(sorted_nums)  # [1, 1, 3, 4, 5, 9]
-print(nums)         # [3, 1, 4, 1, 5, 9]  ← unchanged</code></pre>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <h2 id="sort-vs-sorted">sort() vs sorted() — Which One to Use?</h2>
-    <p>Both sort data, but they work very differently:</p>
-    <table class="param-table">
-      <thead><tr><th>Feature</th><th>list.sort()</th><th>sorted()</th></tr></thead>
-      <tbody>
-        <tr><td>Modifies original</td><td>Yes — in place</td><td>No — returns new list</td></tr>
-        <tr><td>Return value</td><td>None</td><td>New sorted list</td></tr>
-        <tr><td>Works on</td><td>Lists only</td><td>Any iterable (tuple, set, string...)</td></tr>
-        <tr><td>Speed</td><td>Slightly faster (no copy)</td><td>Slightly slower (makes a copy)</td></tr>
-        <tr><td>Use when</td><td>You don't need the original order</td><td>You need both the original and sorted version</td></tr>
-      </tbody>
-    </table>
-    <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>students = ["Sneha", "Palak", "Rohan", "Arjun"]
-
-# sort() — modifies in place, returns None
-students.sort()
-print(students)  # ['Arjun', 'Palak', 'Rohan', 'Sneha']
-
-# sorted() — leaves original alone, returns new sorted list
-scores = [88, 45, 92, 71]
-top = sorted(scores, reverse=True)
-print(top)     # [92, 88, 71, 45]
-print(scores)  # [88, 45, 92, 71]  ← unchanged
-
-# Custom sort with key=
-words = ["banana", "apple", "kiwi", "pear"]
-words.sort(key=len)          # sort by word length
-print(words)  # ['kiwi', 'pear', 'apple', 'banana']</code></pre>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <h2 id="mistakes">Common Python List Mistakes</h2>
+    <h2 id="mistakes">Common Stack &amp; Queue Mistakes</h2>
     <div class="mistake-list">
-      <div class="mistake-item"><div class="mi-body"><strong>Assigning sort() to a variable</strong><p><code>sorted_list = my_list.sort()</code> gives you <code>None</code>. Use <code>my_list.sort()</code> and work with <code>my_list</code>, or use <code>sorted_list = sorted(my_list)</code> instead.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>Using append() instead of extend() to merge lists</strong><p><code>a.append([4, 5])</code> adds the list as a single nested element. <code>a.extend([4, 5])</code> adds each item individually. Most of the time you want <code>extend()</code>.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>pop() on an empty list</strong><p><code>a.pop()</code> raises <code>IndexError: pop from empty list</code>. Check <code>if a:</code> before popping, or use a try/except block.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>remove() removes only the first match</strong><p><code>a.remove(2)</code> on <code>[2, 3, 2]</code> gives <code>[3, 2]</code> — only the first <code>2</code> is removed. Loop to remove all occurrences: <code>[x for x in a if x != 2]</code>.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>Mixing types breaks sort()</strong><p>From the Python docs: <code>[None, 'hello', 10]</code> doesn't sort because integers can't be compared to strings. Make sure your list is homogeneous before sorting.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>copy() is shallow — nested lists still share references</strong><p><code>b = a.copy()</code> creates a new list, but if <code>a</code> contains other lists, those inner lists are still shared. Use <code>copy.deepcopy(a)</code> for a fully independent clone.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Using a list with pop(0) as a queue</strong><p><code>my_list.pop(0)</code> works, but it's <code>O(n)</code> because every remaining item shifts left. For real queue workloads, use <code>collections.deque</code> and <code>popleft()</code> instead.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>pop() on an empty stack or queue</strong><p>Calling <code>.pop()</code> or <code>.popleft()</code> on an empty collection raises <code>IndexError</code>. Always check <code>if stack:</code> or <code>if queue:</code> first, or wrap it in a try/except.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Confusing append() direction with stack vs queue logic</strong><p>Both stacks and queues can use <code>append()</code> to add — the difference is entirely in which end you remove from: <code>pop()</code> for a stack, <code>popleft()</code> for a queue.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Forgetting to import deque</strong><p><code>deque</code> lives in the <code>collections</code> module — you need <code>from collections import deque</code> before using it. It isn't a built-in like <code>list</code>.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Indexing into a deque frequently</strong><p><code>deque</code> is optimized for both ends, not the middle. If your code does a lot of <code>d[i]</code> lookups, a list (or a different structure entirely) may be a better fit.</p></div></div>
     </div>
 
     <div class="section-divider"></div>
 
-    <h2 id="interview">Python List Interview Questions and Answers</h2>
+    <h2 id="interview">Stack &amp; Queue Interview Questions and Answers</h2>
     <div class="iq-list">
       <div class="iq-item">
-        <div class="iq-q"><span class="iq-badge">Q1</span>What is the difference between append() and extend()?</div>
-        <div class="iq-a"><code>append(x)</code> adds x as a single item — if x is a list, it becomes a nested list. <code>extend(iterable)</code> unpacks the iterable and adds each element individually. <code>[1,2].append([3,4])</code> gives <code>[1, 2, [3, 4]]</code>. <code>[1,2].extend([3,4])</code> gives <code>[1, 2, 3, 4]</code>.</div>
+        <div class="iq-q"><span class="iq-badge">Q1</span>What is the difference between a stack and a queue?</div>
+        <div class="iq-a">A stack is LIFO (Last-In, First-Out) — the most recently added item comes out first, using <code>append()</code> and <code>pop()</code>. A queue is FIFO (First-In, First-Out) — the oldest item comes out first, typically using <code>append()</code> and <code>popleft()</code> on a <code>deque</code>.</div>
       </div>
       <div class="iq-item">
-        <div class="iq-q"><span class="iq-badge">Q2</span>Why does list.sort() return None?</div>
-        <div class="iq-a">It's a design principle for all mutable data structures in Python — methods that modify in place return <code>None</code> to make it clear the operation happened on the original. This prevents confusion about whether you're working with the original or a new object. Use <code>sorted()</code> if you need the sorted version as a return value.</div>
+        <div class="iq-q"><span class="iq-badge">Q2</span>Why are lists inefficient as queues?</div>
+        <div class="iq-a">Lists store elements contiguously in memory. Removing from the front with <code>pop(0)</code> forces every remaining element to shift left by one position, making it an <code>O(n)</code> operation. A <code>deque</code> avoids this by supporting fast operations at both ends.</div>
       </div>
       <div class="iq-item">
-        <div class="iq-q"><span class="iq-badge">Q3</span>What is the difference between remove() and pop()?</div>
-        <div class="iq-a"><code>remove(x)</code> searches for the first item equal to x and deletes it — no return value. <code>pop(i)</code> removes the item at index i and returns it. If you need the removed value, use <code>pop()</code>. If you need to remove by value (not position), use <code>remove()</code>.</div>
+        <div class="iq-q"><span class="iq-badge">Q3</span>What is collections.deque and when should you use it?</div>
+        <div class="iq-a"><code>deque</code> (double-ended queue) is a list-like container optimized for fast <code>O(1)</code> appends and pops from both ends. Use it whenever you need queue behavior, a sliding window, or any structure where items are frequently added/removed from the front.</div>
       </div>
       <div class="iq-item">
-        <div class="iq-q"><span class="iq-badge">Q4</span>How do you find the index of an item in a list?</div>
-        <div class="iq-a"><code>list.index(x)</code> returns the index of the first occurrence of x. It raises <code>ValueError</code> if x isn't in the list. To search within a slice, use <code>list.index(x, start, end)</code>. To safely check existence first: <code>if x in my_list: idx = my_list.index(x)</code>.</div>
+        <div class="iq-q"><span class="iq-badge">Q4</span>Can a list be used as a stack efficiently?</div>
+        <div class="iq-a">Yes. Since both <code>append()</code> and <code>pop()</code> (without an index) operate on the end of the list, no shifting is required, so both run in <code>O(1)</code>. This makes plain lists a perfectly good choice for stacks.</div>
       </div>
       <div class="iq-item">
-        <div class="iq-q"><span class="iq-badge">Q5</span>What is a shallow copy and how does list.copy() work?</div>
-        <div class="iq-a"><code>list.copy()</code> creates a new list with the same elements — equivalent to <code>a[:]</code>. It's shallow, meaning nested objects (like lists inside the list) are not copied — both the original and the copy point to the same nested objects. For fully independent copies, use <code>import copy; copy.deepcopy(a)</code>.</div>
+        <div class="iq-q"><span class="iq-badge">Q5</span>How do you implement a FIFO queue in Python?</div>
+        <div class="iq-a">Import <code>deque</code> from <code>collections</code>, then use <code>append(x)</code> to add items to the back and <code>popleft()</code> to remove items from the front: <code>from collections import deque; q = deque(); q.append(x); q.popleft()</code>.</div>
       </div>
       <div class="iq-item">
-        <div class="iq-q"><span class="iq-badge">Q6</span>How do you sort a list of strings by length?</div>
-        <div class="iq-a">Use <code>list.sort(key=len)</code> or <code>sorted(my_list, key=len)</code>. The <code>key</code> parameter accepts any function — Python calls it on each element and sorts by the result. For descending order by length: <code>sorted(my_list, key=len, reverse=True)</code>.</div>
+        <div class="iq-q"><span class="iq-badge">Q6</span>What is the time complexity of appendleft() and popleft() on a deque?</div>
+        <div class="iq-a">Both are <code>O(1)</code>. Unlike a list, a <code>deque</code> is implemented internally so that operations on either end don't require shifting the remaining elements.</div>
       </div>
     </div>
 
     <div class="section-divider"></div>
 
-    <h2 id="faq">Python Lists FAQ</h2>
+    <h2 id="faq">Stack &amp; Queue FAQ</h2>
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">What is a Python list? <span class="faq-icon">+</span></button>
-        <div class="faq-a">A Python list is an ordered, mutable collection of items defined with square brackets: <code>[1, 2, 3]</code>. Lists can hold any type, allow duplicates, support indexing and slicing, and come with a full set of built-in methods for adding, removing, and reordering elements.</div>
+        <button class="faq-q" aria-expanded="false">Can I use a Python list as both a stack and a queue? <span class="faq-icon">+</span></button>
+        <div class="faq-a">You can, but only stack usage is efficient. A list makes a great stack since <code>append()</code> and <code>pop()</code> both work on the end in <code>O(1)</code> time. For queue usage, avoid <code>pop(0)</code> and use <code>collections.deque</code> instead.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">How do you add items to a Python list? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Three ways: <code>append(x)</code> adds one item to the end. <code>extend(iterable)</code> adds all items from another iterable. <code>insert(i, x)</code> adds x at a specific index. For merging two lists, <code>extend()</code> is usually what you want — <code>append()</code> would nest the second list inside the first.</div>
+        <button class="faq-q" aria-expanded="false">What does LIFO and FIFO mean? <span class="faq-icon">+</span></button>
+        <div class="faq-a">LIFO means Last-In, First-Out — the behavior of a stack. FIFO means First-In, First-Out — the behavior of a queue. The names describe the order in which items are retrieved relative to when they were added.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">What is the difference between sort() and sorted()? <span class="faq-icon">+</span></button>
-        <div class="faq-a"><code>list.sort()</code> sorts the list in place and returns <code>None</code>. <code>sorted(iterable)</code> returns a new sorted list and leaves the original untouched. Use <code>sort()</code> when you don't need the original order. Use <code>sorted()</code> when you need both the original and sorted version, or when sorting a non-list iterable.</div>
+        <button class="faq-q" aria-expanded="false">Do I need to import anything to use a list as a stack? <span class="faq-icon">+</span></button>
+        <div class="faq-a">No. Lists are built into Python, so <code>append()</code> and <code>pop()</code> work right away with no imports. You only need an import — <code>from collections import deque</code> — if you want an efficient queue.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">How do you remove an item from a Python list? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Three ways: <code>remove(x)</code> removes the first item equal to x. <code>pop(i)</code> removes and returns the item at index i (default: last item). <code>del a[i]</code> deletes by index with no return value. Use <code>pop()</code> when you need the removed value. Use <code>remove()</code> when you know the value but not the index.</div>
+        <button class="faq-q" aria-expanded="false">Is deque slower than a list for everything? <span class="faq-icon">+</span></button>
+        <div class="faq-a">No — deque matches list performance for adding/removing at the end, and is faster at the front. The trade-off is random access by index, which is <code>O(n)</code> on a deque versus <code>O(1)</code> on a list.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">How do you check how many times an item appears in a list? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Use <code>list.count(x)</code>. It returns the number of times x appears in the list. From the Python docs: <code>fruits.count('apple')</code> on <code>['orange', 'apple', 'pear', 'apple']</code> returns <code>2</code>. Returns <code>0</code> if the item isn't in the list.</div>
+        <button class="faq-q" aria-expanded="false">What is a real-world example of a queue? <span class="faq-icon">+</span></button>
+        <div class="faq-a">A line at a ticket counter is a classic real-world queue — the first person in line is served first. In programming, task schedulers, print queues, and breadth-first search (BFS) all rely on FIFO queue behavior.</div>
       </div>
     </div>
 
@@ -537,16 +515,16 @@ print(words)  # ['kiwi', 'pear', 'apple', 'banana']</code></pre>
     <div class="author-strip"><div class="author-avatar">PM</div><div class="author-info"><strong>Palak Mishra</strong><span>Backend developer · Building beginner-friendly Python docs at Kiddo</span></div></div>
     <div class="callout">
       <strong>More Python topics →</strong><br><br>
-      <a href="../python/lists-stack-queue.html">Stack &amp; Queue</a> ·
+      <a href="../python/lists.html">Lists</a> ·
       <a href="../python/list-comp">List Comprehension</a> ·
       <a href="../python/tuples.html">Tuples</a> ·
       <a href="../python/dictionary.html">Dictionaries</a> ·
       <a href="../python/sets.html">Sets</a> ·
-      <a href="../python/while_loop.html">While loop</a> ·
       <a href="../python/nested-list-comp.html">Nested List Comprehension</a> ·
         <a href="../python/for_loop.html">For Loop</a> ·
-        <a href="../python/if_statements.html">If Statements</a> ·
-        <a href="../python/user_input.html">User Input</a> ·
+        <a href="../python/while_loop.html">While Loop</a> ·
+      <a href="../python/user_input.html">User Input</a> ·
+      <a href="../python/if_statements.html">If Statements/a> ·
     </div>
   </main>
 </div>
