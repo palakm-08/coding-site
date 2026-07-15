@@ -108,6 +108,24 @@
     main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
     .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
 
+    aside ul li { position: relative; }
+aside ul .submenu{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  margin:2px 0 2px 14px;
+  padding-left:10px;
+  border-left:1px solid var(--border);
+}
+aside ul .submenu li a{
+  font-size:0.8rem;
+  padding:6px 10px;
+}
+aside ul .submenu li a .dot{
+  width:4px;
+  height:4px;
+}
     .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
     .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
     .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
@@ -240,7 +258,7 @@
   <div class="aside-label">Python Topics</div>
   <ul>
     <li><a href="../python/py-intro.html"><span class="dot"></span>Introduction</a></li>
-    <li><a href="../python/user_input.html" class="active"><span class="dot"></span>User Input</a></li>
+    <li><a href="../python/user_input.html"><span class="dot"></span>User Input</a></li>
     <li><a href="../python/if_statements.html"><span class="dot"></span>If Statements</a></li>
     <li>
       <a href="../python/list.html"><span class="dot"></span>Lists</a>
@@ -251,7 +269,7 @@
       </ul>
     </li>
     <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
-    <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
+    <li><a href="../python/tuples.html" class="active"><span class="dot"></span>Tuples</a></li>
     <li><a href="../python/sets.html"><span class="dot"></span>Sets</a></li>
     <li><a href="../python/looping-techniques.html"><span class="dot"></span>Looping Techniques</a></li>
     <li><a href="../python/for_loop.html"><span class="dot"></span>For Loop</a></li>
