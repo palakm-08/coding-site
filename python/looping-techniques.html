@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="../assests/icon.png" />
+  <meta name="description" content="Learn Python Looping Techniques (Python Docs 5.6) — items(), enumerate(), zip(), reversed(), sorted(), set() with beginner-friendly explanations and real examples." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Python Looping Techniques Explained (Python Docs 5.6) | Kiddo" />
+  <meta property="og:url" content="https://kiddoedu.org/python/looping-techniques.html" />
+  <meta property="og:site_name" content="Kiddo" />
+  <link rel="canonical" href="https://kiddoedu.org/python/looping-techniques.html" />
+  <title>Python Looping Techniques Explained (Python Docs 5.6) | enumerate, zip, reversed, sorted & Beginner Guide</title>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Python Looping Techniques Explained (Python Docs 5.6)",
+    "description": "Beginner-friendly explanation of Python looping techniques — items(), enumerate(), zip(), reversed(), sorted(), set() with examples and interview questions.",
+    "keywords": ["Python Looping Techniques","Python Docs 5.6","enumerate Python","zip Python","reversed Python","items() dictionary loop","Python sorted loop"],
+    "url": "https://kiddoedu.org/python/looping-techniques.html",
+    "datePublished": "2025-01-01",
+    "dateModified": "2026-07-13",
+    "author": { "@type": "Person", "name": "Palak Mishra" },
+    "publisher": { "@type": "Organization", "name": "Kiddo", "url": "https://kiddoedu.org" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://kiddoedu.org/python/looping-techniques.html" }
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ESNWS8F9HE');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 4px 24px rgba(0,0,0,0.07);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    body.dark {
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
+      --border: rgba(255,255,255,0.07);
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 999; width: 0%; transition: width 0.1s linear; }
+
+    header { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark header { background: rgba(15,14,12,0.82); }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
+    .logo span em { font-style: normal; color: var(--accent); }
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
+    nav a:hover { color: var(--text); background: var(--surface2); }
+    .theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background var(--transition), transform var(--transition); margin-left: 8px; }
+    .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
+
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 20px; height: var(--header-h); background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark .mobile-header { background: rgba(15,14,12,0.82); }
+    .mobile-right { display: flex; align-items: center; gap: 8px; }
+    .hamburger { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; position: relative; }
+    .menu-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); padding: 8px; min-width: 160px; flex-direction: column; gap: 2px; }
+    .menu-dropdown.open { display: flex; }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
+    .menu-dropdown a:hover { background: var(--surface2); }
+
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+
+    aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px); }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    aside ul li a { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.4; }
+    aside ul li a:hover { background: var(--surface2); color: var(--text); }
+    aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; margin-top: 6px; }
+    .aside-divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+    main { min-width: 0; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { opacity: 0.4; }
+    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
+    .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
+    .meta-pill.blue { background: rgba(61,90,254,0.08); color: var(--accent2); border-color: rgba(61,90,254,0.2); }
+    .meta-pill.orange { background: rgba(232,108,47,0.08); color: var(--accent); border-color: rgba(232,108,47,0.2); }
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
+
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+    .doc-ref { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; }
+    .doc-ref a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .doc-ref a:hover { text-decoration: underline; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 18px; margin-bottom: 8px; color: var(--text-muted); }
+    main p { font-size: 0.95rem; line-height: 1.78; color: var(--text); margin-bottom: 14px; }
+    main code { font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
+    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
+
+    /* TOC */
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
+    .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
+    .toc-grid a:hover { background: var(--surface2); color: var(--text); }
+    .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
+
+    /* ── VS Code-style code blocks ── */
+    .code-container {
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin: 14px 0 24px;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .code-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 16px;
+      background: #2d2d2d;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      gap: 8px;
+    }
+    .code-header-left { display: flex; align-items: center; gap: 10px; }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .code-dot.red   { background: #ff5f57; }
+    .code-dot.yellow{ background: #febc2e; }
+    .code-dot.green { background: #28c840; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Fira Code', monospace; }
+    .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
+    .copy-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); padding: 3px 10px; cursor: pointer; font-size: 0.72rem; font-family: 'DM Sans', sans-serif; transition: all 0.2s; position: relative; border-radius: 4px; }
+    .copy-btn:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.1); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: #3a3a3a; color: #d4d4d4; padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .tooltip.show { opacity: 1; }
+    pre {
+      margin: 0; padding: 20px;
+      overflow-x: auto;
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      background: #1e1e1e;
+      white-space: pre;
+      tab-size: 4;
+    }
+    /* Syntax colours — VS Code Dark+ palette */
+    .py-kw   { color: #569cd6; }   /* for, if, not, import, in */
+    .py-bi   { color: #dcdcaa; }   /* enumerate, zip, reversed, sorted, set, print, append, math, isnan */
+    .py-str  { color: #ce9178; }   /* strings */
+    .py-num  { color: #b5cea8; }   /* numbers */
+    .py-cmt  { color: #6a9955; font-style: italic; }  /* comments */
+    .py-punc { color: #d4d4d4; }   /* everything else */
+    .py-var  { color: #9cdcfe; }   /* variables */
+    .py-out  { color: #4ec9b0; }   /* output lines */
+    .py-prompt { color: #569cd6; user-select: none; } /* >>> ... */
+
+    /* Doc block */
+    .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
+    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
+    .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
+    .doc-block code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+
+    /* Note / callout */
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .note-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
+    .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .callout a:hover { text-decoration: underline; }
+
+    /* Technique cards */
+    .technique-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; margin-bottom: 8px; display: flex; gap: 14px; align-items: flex-start; }
+    .tc-fn { font-family: 'Fira Code', monospace; font-weight: 500; font-size: 0.88rem; color: var(--accent2); background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: 5px; padding: 3px 10px; flex-shrink: 0; white-space: nowrap; }
+    .tc-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 3px; }
+    .tc-body p { font-size: 0.84rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+
+    /* IQ list */
+    .iq-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+    .iq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .iq-q { padding: 14px 18px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
+    .iq-badge { background: rgba(232,108,47,0.1); color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; padding: 2px 8px; flex-shrink: 0; margin-top: 2px; }
+    .iq-a { padding: 0 18px 14px 18px; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+    .iq-a code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 18px 0; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; padding: 14px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
+    .faq-a.open { max-height: 300px; padding: 2px 18px 15px; }
+    .faq-a code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Author strip */
+    .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .author-info { font-size: 0.85rem; line-height: 1.5; }
+    .author-info strong { font-weight: 600; display: block; }
+    .author-info span { color: var(--text-muted); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+    .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      header { display: none; }
+      .mobile-header { display: flex; }
+      .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
+      aside { position: static; }
+      .toc-grid { grid-template-columns: 1fr; }
+      footer { padding: 20px; }
+      .footer-container { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) { main h1 { font-size: 1.6rem; } }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../info/about.html">About</a>
+    <a href="../info/contact.html">Contact</a>
+    <button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button>
+  </nav>
+</header>
+
+<div class="mobile-header">
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <div class="mobile-right">
+    <button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button>
+    <button class="hamburger" id="hamburgerBtn">☰
+      <div class="menu-dropdown" id="menuDropdown">
+        <a href="../index.html">Home</a>
+        <a href="../info/about.html">About</a>
+        <a href="../info/contact.html">Contact</a>
+      </div>
+    </button>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <aside>
+  <div class="aside-label">Python Topics</div>
+  <ul>
+    <li><a href="../python/py-intro.html"><span class="dot"></span>Introduction</a></li>
+    <li><a href="../python/user_input.html"><span class="dot"></span>User Input</a></li>
+    <li><a href="../python/if_statements.html"><span class="dot"></span>If Statements</a></li>
+    <li>
+      <a href="../python/list.html"><span class="dot"></span>Lists</a>
+      <ul class="submenu">
+        <li><a href="../python/list-stack-queue.html"><span class="dot"></span>Stack &amp; Queue</a></li>
+        <li><a href="../python/list-comp.html"><span class="dot"></span>List Comprehension</a></li>
+        <li><a href="../python/nested-list-comp.html"><span class="dot"></span>Nested List Comprehension</a></li>
+      </ul>
+    </li>
+    <li><a href="../python/dictionary.html" class="active"><span class="dot"></span>Dictionaries</a></li>
+    <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
+    <li><a href="../python/sets.html"><span class="dot"></span>Sets</a></li>
+    <li><a href="../python/looping-techniques.html"><span class="dot"></span>Looping Techniques</a></li>
+    <li><a href="../python/for_loop.html"><span class="dot"></span>For Loop</a></li>
+    <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
+  </ul>
+
+  <div class="aside-label" style="margin-top:24px;">Mini Projects</div>
+  <ul>
+    <li><a href="../python/password.html"><span class="dot"></span>Password Generator</a></li>
+  </ul>
+</aside>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../python/lists.html">Python</a><span>›</span>
+      5.6 Looping Techniques
+    </div>
+
+    <h1>Python Looping Techniques Explained (Python Docs 5.6) | enumerate(), zip(), reversed(), sorted() & Beginner Guide</h1>
+
+    <div class="doc-ref">
+      📖 Based on <a href="https://docs.python.org/3/tutorial/datastructures.html#looping-techniques" target="_blank" rel="noopener">Python 3 official docs §5.6</a> — explained like a friend, with extra examples added
+    </div>
+
+    <div class="meta-row">
+      <span class="meta-pill">Python</span>
+      <span class="meta-pill green">Beginner</span>
+      <span class="meta-pill blue">Loops</span>
+      <span class="meta-pill orange">Official Docs</span>
+      <span class="date-badge">Updated July 2026</span>
+    </div>
+
+    <p>This page explains the official Python Looping Techniques documentation (Python Docs 5.6) in simple language. Python has a handful of built-in functions that make looping cleaner, more readable, and more Pythonic. Instead of tracking index variables manually or writing extra code, you can use <code>enumerate()</code>, <code>zip()</code>, <code>reversed()</code>, <code>sorted()</code>, and <code>set()</code> directly inside your loops.</p>
+    <p>By the end of this guide you'll know exactly when to reach for each one — and why they're better than the alternative.</p>
+
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">In this guide</div>
+      <div class="toc-grid">
+        <a href="#overview"><span class="toc-num">01</span>Quick overview</a>
+        <a href="#items"><span class="toc-num">02</span>items() — dict looping</a>
+        <a href="#enumerate"><span class="toc-num">03</span>enumerate()</a>
+        <a href="#zip"><span class="toc-num">04</span>zip()</a>
+        <a href="#reversed"><span class="toc-num">05</span>reversed()</a>
+        <a href="#sorted"><span class="toc-num">06</span>sorted()</a>
+        <a href="#set-sorted"><span class="toc-num">07</span>sorted() + set()</a>
+        <a href="#filter"><span class="toc-num">08</span>Filtering while looping</a>
+        <a href="#mistakes"><span class="toc-num">09</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">10</span>Interview questions</a>
+        <a href="#faq"><span class="toc-num">11</span>FAQs</a>
+      </div>
+    </nav>
+
+    <div class="section-divider"></div>
+
+    <!-- 01 -->
+    <h2 id="overview">Quick Overview — All 5 Techniques</h2>
+    <p>The Python docs §5.6 covers five built-in functions that make looping cleaner. Here's the full picture before we dig into each one:</p>
+
+    <div class="technique-card">
+      <span class="tc-fn">.items()</span>
+      <div class="tc-body"><strong>Loop a dictionary — get key and value together</strong><p>No need to do <code>d[key]</code> inside the loop. <code>.items()</code> unpacks both at once.</p></div>
+    </div>
+    <div class="technique-card">
+      <span class="tc-fn">enumerate()</span>
+      <div class="tc-body"><strong>Loop a sequence — get index and value together</strong><p>Replaces the manual <code>i = 0; i += 1</code> pattern entirely.</p></div>
+    </div>
+    <div class="technique-card">
+      <span class="tc-fn">zip()</span>
+      <div class="tc-body"><strong>Loop two or more sequences in parallel</strong><p>Pairs up elements by position — stops at the shortest.</p></div>
+    </div>
+    <div class="technique-card">
+      <span class="tc-fn">reversed()</span>
+      <div class="tc-body"><strong>Loop a sequence in reverse order</strong><p>Doesn't create a copy — uses an iterator. Works on any sequence.</p></div>
+    </div>
+    <div class="technique-card">
+      <span class="tc-fn">sorted()</span>
+      <div class="tc-body"><strong>Loop a sequence in sorted order</strong><p>Returns a new sorted list — leaves the original untouched.</p></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 -->
+    <h2 id="items">items() — Looping Through Dictionaries</h2>
+    <p>When looping through a dictionary, you normally only get the key. Using <code>.items()</code> gives you the key and its value at the same time — no need to look up <code>d[key]</code> inside the loop.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left">
+          <div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+          <span class="lang-tag">Python</span>
+          <span class="code-src">Python docs §5.6</span>
+        </div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">knights</span> <span class="py-punc">= {</span><span class="py-str">'gallahad'</span><span class="py-punc">:</span> <span class="py-str">'the pure'</span><span class="py-punc">,</span> <span class="py-str">'robin'</span><span class="py-punc">:</span> <span class="py-str">'the brave'</span><span class="py-punc">}</span>
+<span class="py-kw">for</span> <span class="py-var">k</span><span class="py-punc">,</span> <span class="py-var">v</span> <span class="py-kw">in</span> <span class="py-var">knights</span><span class="py-punc">.</span><span class="py-bi">items</span><span class="py-punc">():</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">k</span><span class="py-punc">,</span> <span class="py-var">v</span><span class="py-punc">)</span>
+
+<span class="py-out">gallahad the pure</span>
+<span class="py-out">robin the brave</span></pre>
+    </div>
+
+    <h4>Kiddo extra — real-world use</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left">
+          <div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+          <span class="lang-tag">Python</span>
+          <span class="code-src">Kiddo example</span>
+        </div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">scores</span> <span class="py-punc">= {</span><span class="py-str">'Palak'</span><span class="py-punc">:</span> <span class="py-num">92</span><span class="py-punc">,</span> <span class="py-str">'Rohan'</span><span class="py-punc">:</span> <span class="py-num">78</span><span class="py-punc">,</span> <span class="py-str">'Sneha'</span><span class="py-punc">:</span> <span class="py-num">85</span><span class="py-punc">}</span>
+
+<span class="py-kw">for</span> <span class="py-var">name</span><span class="py-punc">,</span> <span class="py-var">score</span> <span class="py-kw">in</span> <span class="py-var">scores</span><span class="py-punc">.</span><span class="py-bi">items</span><span class="py-punc">():</span>
+    <span class="py-kw">if</span> <span class="py-var">score</span> <span class="py-punc">&gt;=</span> <span class="py-num">90</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{name}</span><span class="py-str"> scored A grade!"</span><span class="py-punc">)</span>
+    <span class="py-kw">else</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{name}</span><span class="py-str">: </span><span class="py-var">{score}</span><span class="py-str">"</span><span class="py-punc">)</span>
+
+<span class="py-out">Palak scored A grade!</span>
+<span class="py-out">Rohan: 78</span>
+<span class="py-out">Sneha: 85</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 -->
+    <h2 id="enumerate">enumerate() — Get Index and Value Together</h2>
+    <p>When looping through a sequence, you often need both the position and the value. The old way is a manual counter. <code>enumerate()</code> does it in one clean step.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left">
+          <div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+          <span class="lang-tag">Python</span>
+          <span class="code-src">Python docs §5.6</span>
+        </div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">for</span> <span class="py-var">i</span><span class="py-punc">,</span> <span class="py-var">v</span> <span class="py-kw">in</span> <span class="py-bi">enumerate</span><span class="py-punc">([</span><span class="py-str">'tic'</span><span class="py-punc">,</span> <span class="py-str">'tac'</span><span class="py-punc">,</span> <span class="py-str">'toe'</span><span class="py-punc">]):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">i</span><span class="py-punc">,</span> <span class="py-var">v</span><span class="py-punc">)</span>
+
+<span class="py-out">0 tic</span>
+<span class="py-out">1 tac</span>
+<span class="py-out">2 toe</span></pre>
+    </div>
+
+    <h4>Kiddo extra — start= and real-world use</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left">
+          <div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+          <span class="lang-tag">Python</span>
+          <span class="code-src">Kiddo example</span>
+        </div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">subjects</span> <span class="py-punc">= [</span><span class="py-str">'Python'</span><span class="py-punc">,</span> <span class="py-str">'DSA'</span><span class="py-punc">,</span> <span class="py-str">'DBMS'</span><span class="py-punc">,</span> <span class="py-str">'OS'</span><span class="py-punc">]</span>
+
+<span class="py-cmt"># Default: starts at 0</span>
+<span class="py-kw">for</span> <span class="py-var">i</span><span class="py-punc">,</span> <span class="py-var">subject</span> <span class="py-kw">in</span> <span class="py-bi">enumerate</span><span class="py-punc">(</span><span class="py-var">subjects</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{i}</span><span class="py-str">. </span><span class="py-var">{subject}</span><span class="py-str">"</span><span class="py-punc">)</span>
+<span class="py-cmt"># 0. Python  1. DSA  2. DBMS  3. OS</span>
+
+<span class="py-cmt"># start=1 — human-friendly numbering</span>
+<span class="py-kw">for</span> <span class="py-var">i</span><span class="py-punc">,</span> <span class="py-var">subject</span> <span class="py-kw">in</span> <span class="py-bi">enumerate</span><span class="py-punc">(</span><span class="py-var">subjects</span><span class="py-punc">,</span> <span class="py-num">1</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{i}</span><span class="py-str">. </span><span class="py-var">{subject}</span><span class="py-str">"</span><span class="py-punc">)</span>
+<span class="py-out">1. Python</span>
+<span class="py-out">2. DSA</span>
+<span class="py-out">3. DBMS</span>
+<span class="py-out">4. OS</span></pre>
+    </div>
+
+    <div class="note-box">
+      <strong>Why not just use range(len(list))?</strong> <code>for i in range(len(subjects))</code> works but forces you to write <code>subjects[i]</code> everywhere. <code>enumerate()</code> gives you both directly — cleaner, less error-prone, and the officially recommended pattern.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <h2 id="zip">zip() — Loop Two Sequences in Parallel</h2>
+    <p>When you have two lists that go together — questions and answers, names and scores, keys and values — <code>zip()</code> pairs them up by position so you can loop both at once.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left">
+          <div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+          <span class="lang-tag">Python</span>
+          <span class="code-src">Python docs §5.6</span>
+        </div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">questions</span> <span class="py-punc">= [</span><span class="py-str">'name'</span><span class="py-punc">,</span> <span class="py-str">'quest'</span><span class="py-punc">,</span> <span class="py-str">'favorite color'</span><span class="py-punc">]</span>
+<span class="py-var">answers</span>   <span class="py-punc">= [</span><span class="py-str">'lancelot'</span><span class="py-punc">,</span> <span class="py-str">'the holy grail'</span><span class="py-punc">,</span> <span class="py-str">'blue'</span><span class="py-punc">]</span>
+
+<span class="py-kw">for</span> <span class="py-var">q</span><span class="py-punc">,</span> <span class="py-var">a</span> <span class="py-kw">in</span> <span class="py-bi">zip</span><span class="py-punc">(</span><span class="py-var">questions</span><span class="py-punc">,</span> <span class="py-var">answers</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">'What is your {0}?  It is {1}.'</span><span class="py-punc">.</span><span class="py-bi">format</span><span class="py-punc">(</span><span class="py-var">q</span><span class="py-punc">,</span> <span class="py-var">a</span><span class="py-punc">))</span>
+
+<span class="py-out">What is your name?  It is lancelot.</span>
+<span class="py-out">What is your quest?  It is the holy grail.</span>
+<span class="py-out">What is your favorite color?  It is blue.</span></pre>
+    </div>
+
+    <h4>Kiddo extra — practical patterns</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left">
+          <div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+          <span class="lang-tag">Python</span>
+          <span class="code-src">Kiddo example</span>
+        </div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">names</span>  <span class="py-punc">= [</span><span class="py-str">'Palak'</span><span class="py-punc">,</span> <span class="py-str">'Rohan'</span><span class="py-punc">,</span> <span class="py-str">'Sneha'</span><span class="py-punc">]</span>
+<span class="py-var">scores</span> <span class="py-punc">= [</span><span class="py-num">92</span><span class="py-punc">,</span> <span class="py-num">78</span><span class="py-punc">,</span> <span class="py-num">85</span><span class="py-punc">]</span>
+<span class="py-var">grades</span> <span class="py-punc">= [</span><span class="py-str">'A'</span><span class="py-punc">,</span> <span class="py-str">'C'</span><span class="py-punc">,</span> <span class="py-str">'B'</span><span class="py-punc">]</span>
+
+<span class="py-cmt"># zip() works on 3+ sequences too</span>
+<span class="py-kw">for</span> <span class="py-var">name</span><span class="py-punc">,</span> <span class="py-var">score</span><span class="py-punc">,</span> <span class="py-var">grade</span> <span class="py-kw">in</span> <span class="py-bi">zip</span><span class="py-punc">(</span><span class="py-var">names</span><span class="py-punc">,</span> <span class="py-var">scores</span><span class="py-punc">,</span> <span class="py-var">grades</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{name}</span><span class="py-str">: </span><span class="py-var">{score}</span><span class="py-str"> (Grade </span><span class="py-var">{grade}</span><span class="py-str">)"</span><span class="py-punc">)</span>
+<span class="py-out">Palak: 92 (Grade A)</span>
+<span class="py-out">Rohan: 78 (Grade C)</span>
+<span class="py-out">Sneha: 85 (Grade B)</span>
+
+<span class="py-cmt"># zip stops at the shortest sequence</span>
+<span class="py-bi">list</span><span class="py-punc">(</span><span class="py-bi">zip</span><span class="py-punc">([</span><span class="py-num">1</span><span class="py-punc">,</span><span class="py-num">2</span><span class="py-punc">,</span><span class="py-num">3</span><span class="py-punc">],</span> <span class="py-punc">[</span><span class="py-str">'a'</span><span class="py-punc">,</span><span class="py-str">'b'</span><span class="py-punc">]))</span>
+<span class="py-out">[(1, 'a'), (2, 'b')]</span>  <span class="py-cmt"># 3 is dropped</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 -->
+    <h2 id="reversed">reversed() — Loop a Sequence Backwards</h2>
+    <p>To loop in reverse, pass your sequence to <code>reversed()</code>. It returns an iterator — no copy is made, so it's memory efficient. Works on any sequence.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left">
+          <div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+          <span class="lang-tag">Python</span>
+          <span class="code-src">Python docs §5.6</span>
+        </div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-bi">reversed</span><span class="py-punc">(</span><span class="py-bi">range</span><span class="py-punc">(</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">10</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">)):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">i</span><span class="py-punc">)</span>
+
+<span class="py-out">9</span>
+<span class="py-out">7</span>
+<span class="py-out">5</span>
+<span class="py-out">3</span>
+<span class="py-out">1</span></pre>
+    </div>
+
+    <h4>Kiddo extra — reversed() on a list</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left">
+          <div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+          <span class="lang-tag">Python</span>
+          <span class="code-src">Kiddo example</span>
+        </div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">steps</span> <span class="py-punc">= [</span><span class="py-str">'Import data'</span><span class="py-punc">,</span> <span class="py-str">'Clean data'</span><span class="py-punc">,</span> <span class="py-str">'Analyse'</span><span class="py-punc">,</span> <span class="py-str">'Visualise'</span><span class="py-punc">]</span>
+
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Undo order:"</span><span class="py-punc">)</span>
+<span class="py-kw">for</span> <span class="py-var">step</span> <span class="py-kw">in</span> <span class="py-bi">reversed</span><span class="py-punc">(</span><span class="py-var">steps</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"  ← </span><span class="py-var">{step}</span><span class="py-str">"</span><span class="py-punc">)</span>
+<span class="py-out">Undo order:</span>
+<span class="py-out">  ← Visualise</span>
+<span class="py-out">  ← Analyse</span>
+<span class="py-out">  ← Clean data</span>
+<span class="py-out">  ← Import data</span>
+
+<span class="py-cmt"># reversed() does NOT modify the original list</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">steps</span><span class="py-punc">)</span>  <span class="py-cmt"># still in original order</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 -->
+    <h2 id="sorted">sorted() — Loop in Sorted Order</h2>
+    <p><code>sorted()</code> returns a new sorted list from any iterable, leaving the original untouched. It's the cleanest way to loop through data in alphabetical or numerical order.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left">
+          <div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+          <span class="lang-tag">Python</span>
+          <span class="code-src">Python docs §5.6</span>
+        </div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">basket</span> <span class="py-punc">= [</span><span class="py-str">'apple'</span><span class="py-punc">,</span> <span class="py-str">'orange'</span><span class="py-punc">,</span> <span class="py-str">'apple'</span><span class="py-punc">,</span> <span class="py-str">'pear'</span><span class="py-punc">,</span> <span class="py-str">'orange'</span><span class="py-punc">,</span> <span class="py-str">'banana'</span><span class="py-punc">]</span>
+
+<span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-bi">sorted</span><span class="py-punc">(</span><span class="py-var">basket</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">i</span><span class="py-punc">)</span>
+
+<span class="py-out">apple</span>
+<span class="py-out">apple</span>
+<span class="py-out">banana</span>
+<span class="py-out">orange</span>
+<span class="py-out">orange</span>
+<span class="py-out">pear</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 -->
+    <h2 id="set-sorted">sorted() + set() — Loop Unique Elements in Order</h2>
+    <p>The Python docs call this an idiomatic Python pattern — combining <code>set()</code> to remove duplicates with <code>sorted()</code> to get a clean, ordered loop over unique values.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left">
+          <div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+          <span class="lang-tag">Python</span>
+          <span class="code-src">Python docs §5.6</span>
+        </div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">basket</span> <span class="py-punc">= [</span><span class="py-str">'apple'</span><span class="py-punc">,</span> <span class="py-str">'orange'</span><span class="py-punc">,</span> <span class="py-str">'apple'</span><span class="py-punc">,</span> <span class="py-str">'pear'</span><span class="py-punc">,</span> <span class="py-str">'orange'</span><span class="py-punc">,</span> <span class="py-str">'banana'</span><span class="py-punc">]</span>
+
+<span class="py-kw">for</span> <span class="py-var">f</span> <span class="py-kw">in</span> <span class="py-bi">sorted</span><span class="py-punc">(</span><span class="py-bi">set</span><span class="py-punc">(</span><span class="py-var">basket</span><span class="py-punc">)):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">f</span><span class="py-punc">)</span>
+
+<span class="py-out">apple</span>
+<span class="py-out">banana</span>
+<span class="py-out">orange</span>
+<span class="py-out">pear</span></pre>
+    </div>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>Using <code>set()</code> on a sequence eliminates duplicate elements. The use of <code>sorted()</code> in combination with <code>set()</code> over a sequence is an idiomatic way to loop over unique elements of the sequence in sorted order.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 -->
+    <h2 id="filter">Filtering While Looping — Create a New List Instead</h2>
+    <p>The docs give an important piece of advice here: it's tempting to modify a list while looping over it, but it's often simpler and safer to create a new list instead. The <code>math.isnan()</code> example is the perfect illustration — filtering out NaN values cleanly:</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left">
+          <div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+          <span class="lang-tag">Python</span>
+          <span class="code-src">Python docs §5.6</span>
+        </div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">import</span> <span class="py-bi">math</span>
+
+<span class="py-var">raw_data</span> <span class="py-punc">= [</span><span class="py-num">56.2</span><span class="py-punc">,</span> <span class="py-bi">float</span><span class="py-punc">(</span><span class="py-str">'NaN'</span><span class="py-punc">),</span> <span class="py-num">51.7</span><span class="py-punc">,</span> <span class="py-num">55.3</span><span class="py-punc">,</span> <span class="py-num">52.5</span><span class="py-punc">,</span> <span class="py-bi">float</span><span class="py-punc">(</span><span class="py-str">'NaN'</span><span class="py-punc">),</span> <span class="py-num">47.8</span><span class="py-punc">]</span>
+<span class="py-var">filtered_data</span> <span class="py-punc">= []</span>
+
+<span class="py-kw">for</span> <span class="py-var">value</span> <span class="py-kw">in</span> <span class="py-var">raw_data</span><span class="py-punc">:</span>
+    <span class="py-kw">if not</span> <span class="py-bi">math</span><span class="py-punc">.</span><span class="py-bi">isnan</span><span class="py-punc">(</span><span class="py-var">value</span><span class="py-punc">):</span>
+        <span class="py-var">filtered_data</span><span class="py-punc">.</span><span class="py-bi">append</span><span class="py-punc">(</span><span class="py-var">value</span><span class="py-punc">)</span>
+
+<span class="py-var">filtered_data</span>
+<span class="py-out">[56.2, 51.7, 55.3, 52.5, 47.8]</span></pre>
+    </div>
+
+    <p>This pattern — loop the original, build a new filtered list — avoids the <code>RuntimeError</code> you'd get from deleting items while iterating. The same pattern written as a list comprehension is even cleaner:</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left">
+          <div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+          <span class="lang-tag">Python</span>
+          <span class="code-src">Kiddo example</span>
+        </div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">import</span> <span class="py-bi">math</span>
+
+<span class="py-var">raw_data</span> <span class="py-punc">= [</span><span class="py-num">56.2</span><span class="py-punc">,</span> <span class="py-bi">float</span><span class="py-punc">(</span><span class="py-str">'NaN'</span><span class="py-punc">),</span> <span class="py-num">51.7</span><span class="py-punc">,</span> <span class="py-num">55.3</span><span class="py-punc">,</span> <span class="py-num">52.5</span><span class="py-punc">,</span> <span class="py-bi">float</span><span class="py-punc">(</span><span class="py-str">'NaN'</span><span class="py-punc">),</span> <span class="py-num">47.8</span><span class="py-punc">]</span>
+
+<span class="py-cmt"># Same result, one line — list comprehension version</span>
+<span class="py-var">filtered_data</span> <span class="py-punc">= [</span><span class="py-var">v</span> <span class="py-kw">for</span> <span class="py-var">v</span> <span class="py-kw">in</span> <span class="py-var">raw_data</span> <span class="py-kw">if not</span> <span class="py-bi">math</span><span class="py-punc">.</span><span class="py-bi">isnan</span><span class="py-punc">(</span><span class="py-var">v</span><span class="py-punc">)]</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">filtered_data</span><span class="py-punc">)</span>
+<span class="py-out">[56.2, 51.7, 55.3, 52.5, 47.8]</span></pre>
+    </div>
+
+    <div class="callout">
+      <strong>Rule from the docs:</strong> don't modify a list while looping over it. Either build a new list (as shown above), or loop over <code>list(original)</code> — a copy — if you must modify in place.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 09 -->
+    <h2 id="mistakes">Common Mistakes</h2>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin:16px 0 26px;">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;">
+        <strong style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;display:block;margin-bottom:4px;">Using range(len()) instead of enumerate()</strong>
+        <p style="font-size:0.875rem;color:var(--text-muted);margin:0;line-height:1.55;"><code>for i in range(len(items))</code> is verbose and error-prone. <code>for i, item in enumerate(items)</code> is cleaner, safer, and the Python-recommended way.</p>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;">
+        <strong style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;display:block;margin-bottom:4px;">Expecting zip() to handle unequal lengths</strong>
+        <p style="font-size:0.875rem;color:var(--text-muted);margin:0;line-height:1.55;"><code>zip()</code> stops at the shortest sequence — extra elements in longer sequences are silently dropped. Use <code>itertools.zip_longest()</code> if you need to handle all elements.</p>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;">
+        <strong style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;display:block;margin-bottom:4px;">Modifying a list while iterating over it</strong>
+        <p style="font-size:0.875rem;color:var(--text-muted);margin:0;line-height:1.55;">Adding or removing items during <code>for item in my_list</code> raises <code>RuntimeError</code> or silently skips elements. Always build a new list or iterate over a copy: <code>for item in list(my_list)</code>.</p>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;">
+        <strong style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;display:block;margin-bottom:4px;">Confusing reversed() with .reverse()</strong>
+        <p style="font-size:0.875rem;color:var(--text-muted);margin:0;line-height:1.55;"><code>reversed(seq)</code> returns an iterator — original untouched. <code>list.reverse()</code> modifies the list in place and returns <code>None</code>. For looping use <code>reversed()</code>; for permanent reversal use <code>.reverse()</code>.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 10 -->
+    <h2 id="interview">Python Looping Techniques Interview Questions</h2>
+
+    <div class="iq-list">
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q1</span>What does enumerate() do and why use it over range(len())?</div>
+        <div class="iq-a"><code>enumerate(iterable)</code> returns pairs of (index, value) as you loop. It's cleaner than <code>for i in range(len(items)): items[i]</code> because you get both index and value directly. It also works on any iterable — not just lists — and you can set a custom start: <code>enumerate(items, 1)</code>.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q2</span>What does zip() do and what happens with unequal lengths?</div>
+        <div class="iq-a"><code>zip(a, b)</code> pairs elements from both sequences by position and returns an iterator of tuples. It stops at the shortest sequence — extra elements are dropped silently. Use <code>itertools.zip_longest(a, b, fillvalue=None)</code> if you need to process all elements even when lengths differ.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q3</span>What is the difference between reversed() and list.reverse()?</div>
+        <div class="iq-a"><code>reversed(seq)</code> returns a reverse iterator — it doesn't modify the original and works on any sequence. <code>list.reverse()</code> reverses the list in place and returns <code>None</code>. For looping in reverse order, use <code>reversed()</code>. For permanently reversing a list, use <code>.reverse()</code>.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q4</span>How do you loop over unique sorted elements of a list?</div>
+        <div class="iq-a"><code>for item in sorted(set(my_list))</code> — the Python docs call this an idiomatic pattern. <code>set()</code> removes duplicates, <code>sorted()</code> returns a new sorted list. Together they give you a clean loop over each unique value in alphabetical or numerical order.</div>
+      </div>
+      <div class="iq-item">
+        <div class="iq-q"><span class="iq-badge">Q5</span>Why shouldn't you modify a list while looping over it?</div>
+        <div class="iq-a">Modifying a list during iteration can raise <code>RuntimeError: list changed size during iteration</code> or silently skip elements — Python's loop iterator tracks an internal index, and insertions/deletions shift that. The safe approach is to build a new list (or use a list comprehension), or iterate over a copy: <code>for item in list(my_list)</code>.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 11 -->
+    <h2 id="faq">Python Looping Techniques FAQ</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is enumerate() in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><code>enumerate(iterable)</code> adds a counter to an iterable and returns it as an enumerate object. In a for loop: <code>for i, v in enumerate(items)</code> gives you the index and value at each step. You can set the starting number with <code>enumerate(items, start=1)</code>.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What does zip() do in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><code>zip(a, b)</code> pairs up elements from two (or more) iterables by position and returns an iterator of tuples. Useful for looping two related lists together. Stops at the shortest input — use <code>itertools.zip_longest()</code> if you need to handle all items from the longer sequence.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do you loop a dictionary and get both key and value? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Use <code>dict.items()</code>: <code>for k, v in my_dict.items():</code>. This unpacks each key-value pair directly into two variables so you never need to write <code>my_dict[k]</code> inside the loop.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do you loop in reverse in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Use <code>reversed(sequence)</code> in your for loop: <code>for item in reversed(my_list)</code>. It returns an iterator so no copy is made. The original list is unchanged. You can also use <code>sorted(..., reverse=True)</code> to loop in descending sorted order.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is the Pythonic way to loop over unique sorted values? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><code>for item in sorted(set(my_list))</code>. The Python docs call this idiomatic — <code>set()</code> removes duplicates and <code>sorted()</code> returns them in order. It's cleaner than manually deduplicating with conditions inside the loop.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="author-strip">
+      <div class="author-avatar">PM</div>
+      <div class="author-info">
+        <strong>Palak Mishra</strong>
+        <span>Backend developer · Building beginner-friendly Python docs at Kiddo</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>More Python topics →</strong><br><br>
+      <a href="../python/lists.html">Lists (5.1)</a> ·
+      <a href="../python/list-comp">List Comprehension (5.1.3)</a> ·
+      <a href="../python/dictionary.html">Dictionaries (5.5)</a> ·
+      <a href="../python/sets.html">Sets (5.4)</a> ·
+      <a href="../python/tuples.html">Tuples (5.3)</a> ·
+      <a href="../python/nested-list-comp.html">Nested List Comp. (5.1.4)</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
+    <div class="footer-links">
+      <a href="../info/privacy.html">Privacy</a>
+      <a href="../info/terms.html">Terms</a>
+      <a href="../info/contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const desktopToggle = document.getElementById('desktopToggleTheme');
+  const mobileToggle  = document.getElementById('mobileToggleTheme');
+  const applyTheme = (dark) => {
+    document.body.classList.toggle('dark', dark);
+    const icon = dark ? '☀️' : '🌙';
+    if (desktopToggle) desktopToggle.textContent = icon;
+    if (mobileToggle)  mobileToggle.textContent  = icon;
+  };
+  applyTheme(localStorage.getItem('theme') === 'dark');
+  const toggleTheme = () => {
+    const isDark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  };
+  if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+  if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+
+  const hamburger    = document.getElementById('hamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  hamburger?.addEventListener('click', (e) => { e.stopPropagation(); menuDropdown.classList.toggle('open'); });
+  document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.querySelectorAll('.code-container').forEach(container => {
+    const btn  = container.querySelector('.copy-btn');
+    const tip  = container.querySelector('.tooltip');
+    const pre  = container.querySelector('pre');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      // strip HTML tags to get plain text
+      const text = pre.innerText.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
+      });
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans    = btn.nextElementSibling;
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+</script>
+</body>
+</html>
