@@ -175,6 +175,25 @@
     .py-out  { color: #4ec9b0; }   /* output lines */
     .py-prompt { color: #569cd6; user-select: none; } /* >>> ... */
 
+    aside ul li { position: relative; }
+aside ul .submenu{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  margin:2px 0 2px 14px;
+  padding-left:10px;
+  border-left:1px solid var(--border);
+}
+aside ul .submenu li a{
+  font-size:0.8rem;
+  padding:6px 10px;
+}
+aside ul .submenu li a .dot{
+  width:4px;
+  height:4px;
+}
+
     /* Doc block */
     .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
     .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
@@ -288,10 +307,10 @@
         <li><a href="../python/nested-list-comp.html"><span class="dot"></span>Nested List Comprehension</a></li>
       </ul>
     </li>
-    <li><a href="../python/dictionary.html" class="active"><span class="dot"></span>Dictionaries</a></li>
+    <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
     <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
     <li><a href="../python/sets.html"><span class="dot"></span>Sets</a></li>
-    <li><a href="../python/looping-techniques.html"><span class="dot"></span>Looping Techniques</a></li>
+    <li><a href="../python/looping-techniques.html" class="active"><span class="dot"></span>Looping Techniques</a></li>
     <li><a href="../python/for_loop.html"><span class="dot"></span>For Loop</a></li>
     <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
   </ul>
