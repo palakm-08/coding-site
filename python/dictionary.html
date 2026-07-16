@@ -5,59 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="../assests/icon.png" />
 
-<meta name="description" content="Learn Python Dictionary Documentation (Python Docs 5.5) with beginner-friendly explanations, key-value pairs, dictionary methods, get(), KeyError, list(d), sorted(d), nested dictionaries, comprehensions, examples, interview questions, and common mistakes." />
-
-<meta property="og:type" content="article" />
-<meta property="og:title" content="Python Dictionary Documentation Explained (Python Docs 5.5)" />
-<meta property="og:description" content="The official Python dictionary documentation explained in simple language. Learn key-value pairs, methods, comprehensions, examples, interview questions, and common mistakes." />
-<meta property="og:url" content="https://kiddoedu.org/python/dictionary.html" />
-<meta property="og:site_name" content="Kiddo" />
-<meta property="og:image" content="https://kiddoedu.org/python/dictionary.png" />
-
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Python Dictionary Documentation Explained (Python Docs 5.5)" />
-<meta name="twitter:description" content="Beginner-friendly explanation of Python dictionary documentation. Learn get(), KeyError, methods, comprehensions, examples, and interview questions." />
-<meta name="twitter:image" content="https://kiddoedu.org/python/dictionary.png" />
-
-<title>Python Dictionary Documentation Explained (Python Docs 5.5) | Dictionary Methods, Examples & Beginner Guide</title>
-<link rel="canonical" href="https://kiddoedu.org/python/dictionary.html" />
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": "Python Dictionary Documentation Explained (Python Docs 5.5)",
-  "description": "Beginner-friendly explanation of Python dictionary documentation section 5.5 with examples, dictionary methods, comprehensions, nested dictionaries, interview questions, and common mistakes.",
-  "keywords": [
-    "Python Dictionary",
-    "Python Docs 5.5",
-    "Python Dictionary Documentation",
-    "Python Dictionary Tutorial",
-    "Python Dictionary Examples",
-    "Dictionary Comprehension",
-    "Python Dictionary Methods",
-    "Nested Dictionary Python",
-    "Python Interview Questions",
-    "Python Docs Explained"
-  ],
-  "url": "https://kiddoedu.org/python/dictionary.html",
-  "datePublished": "2025-01-01",
-  "dateModified": "2026-06-15",
-  "author": {
-    "@type": "Person",
-    "name": "Palak Mishra"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Kiddo",
-    "url": "https://kiddoedu.org"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://kiddoedu.org/python/dictionary.html"
-  }
-}
-</script>
+  <meta name="description" content="Learn Python Dictionary Documentation (Python Docs 5.5) with beginner-friendly explanations, key-value pairs, dictionary methods, get(), KeyError, list(d), sorted(d), nested dictionaries, comprehensions, examples, interview questions, and common mistakes." /> 
+  <meta property="og:type" content="article" /> 
+  <meta property="og:title" content="Python Dictionary Documentation Explained (Python Docs 5.5)" /> 
+  <meta property="og:description" content="The official Python dictionary documentation explained in simple language. Learn key-value pairs, methods, comprehensions, examples, interview questions, and common mistakes." /> 
+  <meta property="og:url" content="https://kiddoedu.org/python/dictionary.html" /> 
+  <meta property="og:site_name" content="Kiddo" /> 
+  <meta property="og:image" content="https://kiddoedu.org/python/dictionary.png" /> 
+  <meta name="twitter:card" content="summary_large_image" /> 
+  <meta name="twitter:title" content="Python Dictionary Documentation Explained (Python Docs 5.5)" /> 
+  <meta name="twitter:description" content="Beginner-friendly explanation of Python dictionary documentation. Learn get(), KeyError, methods, comprehensions, examples, and interview questions." /> 
+  <meta name="twitter:image" content="https://kiddoedu.org/python/dictionary.png" /> 
+  <title>Python Dictionary Documentation Explained (Python Docs 5.5) | Dictionary Methods, Examples & Beginner Guide</title> 
+  <link rel="canonical" href="https://kiddoedu.org/python/dictionary.html" />
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>
@@ -67,7 +27,7 @@
     gtag('config', 'G-ESNWS8F9HE');
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -141,16 +101,14 @@
     .doc-ref a { color: var(--accent2); text-decoration: none; font-weight: 500; }
     .doc-ref a:hover { text-decoration: underline; }
     main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
-    main h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-top: 24px; margin-bottom: 10px; color: var(--text); }
     main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 18px; margin-bottom: 8px; color: var(--text-muted); }
     main p { font-size: 0.95rem; line-height: 1.78; color: var(--text); margin-bottom: 14px; }
-    main code { font-family: 'Courier New', monospace; font-size: 0.88em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
     main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
     main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
     main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
     .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
 
-    /* TOC */
     .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
     .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
     .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
@@ -158,13 +116,35 @@
     .toc-grid a:hover { background: var(--surface2); color: var(--text); }
     .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
 
-    /* Dict anatomy */
-    .dict-anatomy { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 20px 0 24px; font-family: 'Courier New', monospace; font-size: 0.95rem; line-height: 2.1; overflow-x: auto; }
+    /* dict anatomy */
+    .dict-anatomy { background: var(--surface2); border-radius: var(--radius-sm); padding: 18px 22px; font-family: 'Fira Code', monospace; font-size: 0.9rem; line-height: 2.2; margin: 20px 0 24px; overflow-x: auto; }
     .da-brace { color: var(--text-muted); }
-    .da-key { color: var(--accent2); font-weight: 600; }
+    .da-key { color: var(--accent2); }
     .da-colon { color: var(--text-muted); }
-    .da-val { color: var(--accent3); font-weight: 600; }
-    .da-label { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-left: 14px; vertical-align: middle; }
+    .da-val { color: var(--accent3); }
+    .da-label { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; color: var(--text-muted); margin-left: 16px; font-style: italic; }
+
+    .prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0 24px; }
+    .prop-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
+    .prop-card strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 4px; }
+    .prop-card span { font-size: 0.81rem; color: var(--text-muted); line-height: 1.45; display: block; }
+
+    .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
+    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
+    .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
+    .doc-block code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .note-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
+    .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .callout a:hover { text-decoration: underline; }
+
+    .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 26px; font-size: 0.875rem; }
+    .param-table th { text-align: left; padding: 8px 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+    .param-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); line-height: 1.5; vertical-align: top; }
+    .param-table tr:last-child td { border-bottom: none; }
+    .param-table tr:hover td { background: var(--surface2); }
 
     aside ul li { position: relative; }
 aside ul .submenu{
@@ -184,82 +164,49 @@ aside ul .submenu li a .dot{
   width:4px;
   height:4px;
 }
-    /* Prop grid */
-    .prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0 24px; }
-    .prop-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
-    .prop-icon { font-size: 1.25rem; margin-bottom: 8px; display: block; }
-    .prop-card strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 4px; }
-    .prop-card span { font-size: 0.81rem; color: var(--text-muted); line-height: 1.45; display: block; }
-
-    /* Official doc highlight */
-    .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
-    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
-    .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
-    .doc-block code { font-family: 'Courier New', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
-
-    /* Method table */
-    .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 26px; font-size: 0.875rem; }
-    .param-table th { text-align: left; padding: 8px 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border); }
-    .param-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); line-height: 1.5; vertical-align: top; }
-    .param-table tr:last-child td { border-bottom: none; }
-    .param-table tr:hover td { background: var(--surface2); }
-    .param-table td:last-child { color: var(--text-muted); font-size: 0.85rem; }
-
-    /* Code blocks */
-    .code-container { background: #1e1e1e; border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid var(--border); }
-    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
-    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; text-transform: uppercase; }
+    /* VS Code dark code blocks */
+    .code-container { border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: #2d2d2d; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
+    .code-header-left { display: flex; align-items: center; gap: 10px; }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .code-dot.red    { background: #ff5f57; }
+    .code-dot.yellow { background: #febc2e; }
+    .code-dot.green  { background: #28c840; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Fira Code', monospace; }
     .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
-    .copy-btn { background: none; border: none; color: rgba(255,255,255,0.35); padding: 2px 0; cursor: pointer; font-size: 0.75rem; font-family: 'DM Sans', sans-serif; transition: color var(--transition); position: relative; margin-left: auto; }
-    .copy-btn:hover { color: rgba(255,255,255,0.75); }
-    .tooltip { position: absolute; top: -28px; right: 0; background: var(--surface2); color: var(--text); padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .copy-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); padding: 3px 10px; cursor: pointer; font-size: 0.72rem; font-family: 'DM Sans', sans-serif; transition: all 0.2s; position: relative; border-radius: 4px; }
+    .copy-btn:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.1); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: #3a3a3a; color: #d4d4d4; padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
     .tooltip.show { opacity: 1; }
-    pre { margin: 0; padding: 18px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.875rem; line-height: 1.65; color: #d4d4d4; background: transparent; white-space: pre; tab-size: 2; }
+    pre { margin: 0; padding: 20px; overflow-x: auto; font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.88rem; line-height: 1.7; background: #1e1e1e; white-space: pre; tab-size: 4; }
+    .py-kw   { color: #569cd6; }
+    .py-bi   { color: #dcdcaa; }
+    .py-str  { color: #ce9178; }
+    .py-num  { color: #b5cea8; }
+    .py-cmt  { color: #6a9955; font-style: italic; }
+    .py-punc { color: #d4d4d4; }
+    .py-var  { color: #9cdcfe; }
+    .py-out  { color: #4ec9b0; }
 
-    /* Callout */
-    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
-    .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
-    .callout a:hover { text-decoration: underline; }
+    .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 26px; }
+    .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
+    .mi-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
+    .mi-body p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+    .mi-body code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
 
-    /* Note box */
-    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
-
-    /* vs grid */
-    .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 26px; }
-    .vs-card { border-radius: var(--radius-sm); padding: 18px 20px; }
-    .vs-card.yes { background: rgba(0,184,148,0.07); border: 1px solid rgba(0,184,148,0.2); }
-    .vs-card.no  { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.18); }
-    .vs-head { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
-    .vs-card.yes .vs-head { color: var(--accent3); }
-    .vs-card.no  .vs-head { color: var(--accent); }
-    .vs-card ul { margin: 0; }
-    .vs-card ul li { font-size: 0.875rem; line-height: 1.55; color: var(--text); }
-    .vs-card ul li::before { color: inherit; opacity: 0.6; }
-
-    /* Interview Q cards */
     .iq-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
     .iq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
     .iq-q { padding: 14px 18px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
     .iq-badge { background: rgba(232,108,47,0.1); color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; padding: 2px 8px; flex-shrink: 0; margin-top: 2px; }
     .iq-a { padding: 0 18px 14px 18px; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
-    .iq-a code { font-family: 'Courier New', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .iq-a code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
 
-    /* Mistake cards */
-    .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 26px; }
-    .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
-    .mi-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
-    .mi-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
-    .mi-body p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
-    .mi-body code { font-family: 'Courier New', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
-
-    /* Checklist */
     .checklist { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
     .check-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; }
-    .check-item .ci { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
     .check-item div strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.87rem; display: block; margin-bottom: 2px; }
     .check-item div p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
 
-    /* FAQ accordion */
     .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 18px 0; }
     .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
     .faq-q { width: 100%; background: none; border: none; padding: 14px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
@@ -267,10 +214,9 @@ aside ul .submenu li a .dot{
     .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; }
     .faq-q.open .faq-icon { transform: rotate(45deg); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
-    .faq-a.open { max-height: 280px; padding: 2px 18px 15px; }
-    .faq-a code { font-family: 'Courier New', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .faq-a.open { max-height: 300px; padding: 2px 18px 15px; }
+    .faq-a code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
 
-    /* Author strip */
     .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
     .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
     .author-info { font-size: 0.85rem; line-height: 1.5; }
@@ -285,55 +231,30 @@ aside ul .submenu li a .dot{
     .footer-links a:hover { color: var(--accent); }
 
     @media (max-width: 768px) {
-      header { display: none; }
-      .mobile-header { display: flex; }
+      header { display: none; } .mobile-header { display: flex; }
       .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
-      aside { position: static; }
-      .toc-grid { grid-template-columns: 1fr; }
-      .vs-grid { grid-template-columns: 1fr; }
+      aside { position: static; } .toc-grid { grid-template-columns: 1fr; }
       .prop-grid { grid-template-columns: 1fr 1fr; }
-      footer { padding: 20px; }
-      .footer-container { flex-direction: column; align-items: flex-start; }
+      footer { padding: 20px; } .footer-container { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 480px) { main h1 { font-size: 1.6rem; } .prop-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
-
 <div class="progress-bar" id="progressBar"></div>
 
 <header>
-  <a class="logo" href="../index.html">
-    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
-    <span>Kid<em>do</em></span>
-  </a>
-  <nav>
-    <a href="../index.html">Home</a>
-    <a href="../info/about.html">About</a>
-    <a href="../info/contact.html">Contact</a>
-    <button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button>
-  </nav>
+  <a class="logo" href="../index.html"><img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" /><span>Kid<em>do</em></span></a>
+  <nav><a href="../index.html">Home</a><a href="../info/about.html">About</a><a href="../info/contact.html">Contact</a><button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button></nav>
 </header>
 
 <div class="mobile-header">
-  <a class="logo" href="../index.html">
-    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
-    <span>Kid<em>do</em></span>
-  </a>
-  <div class="mobile-right">
-    <button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button>
-    <button class="hamburger" id="hamburgerBtn">☰
-      <div class="menu-dropdown" id="menuDropdown">
-        <a href="../index.html">Home</a>
-        <a href="../info/about.html">About</a>
-        <a href="../info/contact.html">Contact</a>
-      </div>
-    </button>
-  </div>
+  <a class="logo" href="../index.html"><img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" /><span>Kid<em>do</em></span></a>
+  <div class="mobile-right"><button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button><button class="hamburger" id="hamburgerBtn">☰<div class="menu-dropdown" id="menuDropdown"><a href="../index.html">Home</a><a href="../info/about.html">About</a><a href="../info/contact.html">Contact</a></div></button></div>
 </div>
 
 <div class="page-wrap">
-  <aside>
+   <aside>
   <div class="aside-label">Python Topics</div>
   <ul>
     <li><a href="../python/py-intro.html"><span class="dot"></span>Introduction</a></li>
@@ -368,7 +289,7 @@ aside ul .submenu li a .dot{
       5.5 Dictionaries
     </div>
 
-<h1>Python Dictionary Documentation Explained (Python Docs 5.5) — dict(), get(), Comprehensions & Examples</h1>
+    <h1>Python Dictionary Documentation Explained (Python Docs 5.5) — dict(), get(), Comprehensions & Examples</h1>
 
     <div class="doc-ref">
       📖 Based on <a href="https://docs.python.org/3/tutorial/datastructures.html" target="_blank" rel="noopener">Python 3 official docs 5.5</a> — explained like a friend, with extra examples added
@@ -382,17 +303,13 @@ aside ul .submenu li a .dot{
       <span class="date-badge">Updated June 2026</span>
     </div>
 
-    <p>
-This page explains the official Python Dictionary documentation (Python Docs 5.5) in simple language. If the official Python documentation feels overwhelming, this guide breaks down dictionaries, key-value pairs, dict(), get(), list(d), sorted(d), dictionary comprehensions, and nested dictionaries with beginner-friendly explanations and practical examples.</p>
-
-<p>
-By the end of this guide, you'll understand key-value pairs, dictionary creation, accessing values, get(), del, dictionary methods, nested dictionaries, dictionary comprehensions, and when to use dictionaries in real Python projects.
-</p>
+    <p>This page explains the official Python Dictionary documentation (Python Docs 5.5) in simple language. If the official Python documentation feels overwhelming, this guide breaks down dictionaries, key-value pairs, dict(), get(), list(d), sorted(d), dictionary comprehensions, and nested dictionaries with beginner-friendly explanations and practical examples.</p>
+    <p>By the end of this guide, you'll understand key-value pairs, dictionary creation, accessing values, get(), del, dictionary methods, nested dictionaries, dictionary comprehensions, and when to use dictionaries in real Python projects.</p>
 
     <nav class="toc" aria-label="Table of contents">
       <div class="toc-label">In this guide</div>
       <div class="toc-grid">
-<a href="#what-is"><span class="toc-num">01</span>What is a Python dictionary?</a>
+        <a href="#what-is"><span class="toc-num">01</span>What is a Python dictionary?</a>
         <a href="#create"><span class="toc-num">02</span>Creating a dict</a>
         <a href="#access"><span class="toc-num">03</span>Accessing values</a>
         <a href="#modify"><span class="toc-num">04</span>Add, update, delete</a>
@@ -413,7 +330,10 @@ By the end of this guide, you'll understand key-value pairs, dictionary creation
 
     <!-- 01 -->
     <h2 id="what-is">What is a Python Dictionary? (Python Docs 5.5 Explained)</h2>
-    <p>Think of it as a labeled storage system. Instead of looking things up by position (index 0, 1, 2...) like a list, you look them up by a meaningful label — a <em>key</em>.</p>
+    <p>Think of a dictionary like a real-life contact book. Instead of finding someone's phone number by their position in the book, you search using their name. In Python, that name is called the key, and the associated information is the value. Instead of looking things up by position (index 0, 1, 2...) like a list, you look them up by a meaningful label — a <em>key</em>.</p>
+    <div class="callout">
+      <strong>Note : </strong> Behind the scenes, Python dictionaries use a data structure called a hash table. This allows Python to find values by their keys extremely quickly, which is why dictionary lookups are usually much faster than searching through a list.
+    </div>
 
     <div class="dict-anatomy">
       <div><span class="da-brace">person = {</span></div>
@@ -424,22 +344,10 @@ By the end of this guide, you'll understand key-value pairs, dictionary creation
     </div>
 
     <div class="prop-grid">
-      <div class="prop-card">
-        <strong>Indexed by keys</strong>
-        <span>Look up values by their key — not by position</span>
-      </div>
-      <div class="prop-card">
-        <strong>Mutable</strong>
-        <span>Add, update, and delete after creation</span>
-      </div>
-      <div class="prop-card">
-        <strong>Keys are unique</strong>
-        <span>Same key twice? Second value silently overwrites first</span>
-      </div>
-      <div class="prop-card">
-        <strong>Ordered</strong>
-        <span>Python 3.7+ preserves insertion order</span>
-      </div>
+      <div class="prop-card"><strong>Indexed by keys</strong><span>Look up values by their key — not by position</span></div>
+      <div class="prop-card"><strong>Mutable</strong><span>You can add, update, or remove key-value pairs after the dictionary has been created.</span></div>
+      <div class="prop-card"><strong>Keys are unique</strong><span>Every key in a dictionary must be unique. If the same key appears more than once, the last value replaces the earlier one.</span></div>
+      <div class="prop-card"><strong>Ordered</strong><span>Python 3.7+ preserves insertion order</span></div>
     </div>
 
     <div class="doc-block">
@@ -454,24 +362,27 @@ By the end of this guide, you'll understand key-value pairs, dictionary creation
     <p>Three ways — the docs show all three, and each has its moment:</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo + Python docs</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code># Method 1 — curly braces (most common)
-tel = {'jack': 4098, 'sape': 4139}
-print(tel)  # {'jack': 4098, 'sape': 4139}
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo + Python docs</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># Method 1 — curly braces (most common)</span>
+<span class="py-var">tel</span> <span class="py-punc">= {</span><span class="py-str">'jack'</span><span class="py-punc">:</span> <span class="py-num">4098</span><span class="py-punc">,</span> <span class="py-str">'sape'</span><span class="py-punc">:</span> <span class="py-num">4139</span><span class="py-punc">}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">tel</span><span class="py-punc">)</span>  <span class="py-out"># {'jack': 4098, 'sape': 4139}</span>
 
-# Method 2 — dict() from a list of (key, value) tuples
-# This is straight from the Python docs §5.5
-tel2 = dict([('sape', 4139), ('guido', 4127), ('jack', 4098)])
-print(tel2)  # {'sape': 4139, 'guido': 4127, 'jack': 4098}
+<span class="py-cmt"># Method 2 — dict() from a list of (key, value) tuples</span>
+<span class="py-cmt"># This is straight from the Python docs §5.5</span>
+<span class="py-var">tel2</span> <span class="py-punc">=</span> <span class="py-bi">dict</span><span class="py-punc">([(</span><span class="py-str">'sape'</span><span class="py-punc">,</span> <span class="py-num">4139</span><span class="py-punc">), (</span><span class="py-str">'guido'</span><span class="py-punc">,</span> <span class="py-num">4127</span><span class="py-punc">), (</span><span class="py-str">'jack'</span><span class="py-punc">,</span> <span class="py-num">4098</span><span class="py-punc">)])</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">tel2</span><span class="py-punc">)</span>  <span class="py-out"># {'sape': 4139, 'guido': 4127, 'jack': 4098}</span>
 
-# Method 3 — dict() with keyword arguments (keys become strings)
-# From the Python docs: "easier when keys are simple strings"
-tel3 = dict(sape=4139, guido=4127, jack=4098)
-print(tel3)  # {'sape': 4139, 'guido': 4127, 'jack': 4098}
+<span class="py-cmt"># Method 3 — dict() with keyword arguments (keys become strings)</span>
+<span class="py-cmt"># From the Python docs: "easier when keys are simple strings"</span>
+<span class="py-var">tel3</span> <span class="py-punc">=</span> <span class="py-bi">dict</span><span class="py-punc">(</span><span class="py-var">sape</span><span class="py-punc">=</span><span class="py-num">4139</span><span class="py-punc">,</span> <span class="py-var">guido</span><span class="py-punc">=</span><span class="py-num">4127</span><span class="py-punc">,</span> <span class="py-var">jack</span><span class="py-punc">=</span><span class="py-num">4098</span><span class="py-punc">)</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">tel3</span><span class="py-punc">)</span>  <span class="py-out"># {'sape': 4139, 'guido': 4127, 'jack': 4098}</span>
 
-# Empty dictionary
-empty = {}
-empty2 = dict()  # same thing</code></pre>
+<span class="py-cmt"># Empty dictionary</span>
+<span class="py-var">empty</span> <span class="py-punc">= {}</span>
+<span class="py-var">empty2</span> <span class="py-punc">=</span> <span class="py-bi">dict</span><span class="py-punc">()</span>  <span class="py-cmt"># same thing</span></pre>
     </div>
 
     <div class="callout">
@@ -485,43 +396,48 @@ empty2 = dict()  # same thing</code></pre>
     <p>The main operation on a dictionary is storing a value with a key and then extracting the value given the key. Two ways to read — and the difference matters:</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>tel = {'jack': 4098, 'sape': 4139}
-tel['guido'] = 4127
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">tel</span> <span class="py-punc">= {</span><span class="py-str">'jack'</span><span class="py-punc">:</span> <span class="py-num">4098</span><span class="py-punc">,</span> <span class="py-str">'sape'</span><span class="py-punc">:</span> <span class="py-num">4139</span><span class="py-punc">}</span>
+<span class="py-var">tel</span><span class="py-punc">[</span><span class="py-str">'guido'</span><span class="py-punc">] =</span> <span class="py-num">4127</span>
 
-# Direct access — fast, but crashes if key doesn't exist
-print(tel['jack'])    # 4098
+<span class="py-cmt"># Direct access — fast, but crashes if key doesn't exist</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">tel</span><span class="py-punc">[</span><span class="py-str">'jack'</span><span class="py-punc">])</span>    <span class="py-out"># 4098</span>
 
-# This would crash:
-# print(tel['irv'])   # KeyError: 'irv'
-# Traceback (most recent call last):
-#   File "<stdin>", line 1, in <module>
-# KeyError: 'irv'
+<span class="py-cmt"># This would crash:</span>
+<span class="py-cmt"># print(tel['irv'])   # KeyError: 'irv'</span>
+<span class="py-cmt"># Traceback (most recent call last):</span>
+<span class="py-cmt">#   File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span>
+<span class="py-cmt"># KeyError: 'irv'</span>
 
-# .get() — safe access, returns None if key missing
-print(tel.get('irv'))           # None
-print(tel.get('irv', 'N/A'))    # N/A  ← custom default</code></pre>
+<span class="py-cmt"># .get() — safe access, returns None if key missing</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">tel</span><span class="py-punc">.</span><span class="py-bi">get</span><span class="py-punc">(</span><span class="py-str">'irv'</span><span class="py-punc">))</span>           <span class="py-out"># None</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">tel</span><span class="py-punc">.</span><span class="py-bi">get</span><span class="py-punc">(</span><span class="py-str">'irv'</span><span class="py-punc">,</span> <span class="py-str">'N/A'</span><span class="py-punc">))</span>    <span class="py-out"># N/A  ← custom default</span></pre>
     </div>
 
     <div class="note-box">
       <strong>From the Python docs:</strong> extracting a value for a non-existent key by subscripting (<code>d[key]</code>) raises a <code>KeyError</code>. To avoid this, use the <code>get()</code> method instead — it returns <code>None</code> (or a specified default value) if the key is not in the dictionary.
     </div>
 
-    <!-- Kiddo extra example -->
     <h4>Kiddo extra — real-world version</h4>
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>user = {"name": "Palak", "plan": "free", "verified": True}
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">user</span> <span class="py-punc">= {</span><span class="py-str">"name"</span><span class="py-punc">:</span> <span class="py-str">"Messi"</span><span class="py-punc">,</span> <span class="py-str">"plan"</span><span class="py-punc">:</span> <span class="py-str">"free"</span><span class="py-punc">,</span> <span class="py-str">"verified"</span><span class="py-punc">:</span> <span class="py-kw">True</span><span class="py-punc">}</span>
 
-# Safe pattern before accessing
-if "email" in user:
-    print(user["email"])
-else:
-    print("Email not set")
+<span class="py-cmt"># Safe pattern before accessing</span>
+<span class="py-kw">if</span> <span class="py-str">"email"</span> <span class="py-kw">in</span> <span class="py-var">user</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">user</span><span class="py-punc">[</span><span class="py-str">"email"</span><span class="py-punc">])</span>
+<span class="py-kw">else</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Email not set"</span><span class="py-punc">)</span>
 
-# Or just use .get() with a default
-email = user.get("email", "not provided")
-print(email)  # not provided</code></pre>
+<span class="py-cmt"># Or just use .get() with a default</span>
+<span class="py-var">email</span> <span class="py-punc">=</span> <span class="py-var">user</span><span class="py-punc">.</span><span class="py-bi">get</span><span class="py-punc">(</span><span class="py-str">"email"</span><span class="py-punc">,</span> <span class="py-str">"not provided"</span><span class="py-punc">)</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">email</span><span class="py-punc">)</span>  <span class="py-out"># not provided</span></pre>
     </div>
 
     <div class="section-divider"></div>
@@ -531,37 +447,42 @@ print(email)  # not provided</code></pre>
     <p>Dictionaries are mutable — all three operations use simple syntax. If you store using a key that is already in use, the old value is forgotten.</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>tel = {'jack': 4098, 'sape': 4139}
-tel['guido'] = 4127          # ADD new key
-print(tel)
-# {'jack': 4098, 'sape': 4139, 'guido': 4127}
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">tel</span> <span class="py-punc">= {</span><span class="py-str">'jack'</span><span class="py-punc">:</span> <span class="py-num">4098</span><span class="py-punc">,</span> <span class="py-str">'sape'</span><span class="py-punc">:</span> <span class="py-num">4139</span><span class="py-punc">}</span>
+<span class="py-var">tel</span><span class="py-punc">[</span><span class="py-str">'guido'</span><span class="py-punc">] =</span> <span class="py-num">4127</span>          <span class="py-cmt"># ADD new key</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">tel</span><span class="py-punc">)</span>
+<span class="py-out"># {'jack': 4098, 'sape': 4139, 'guido': 4127}</span>
 
-del tel['sape']              # DELETE with del
-tel['irv'] = 4127            # ADD after delete
-print(tel)
-# {'jack': 4098, 'guido': 4127, 'irv': 4127}
+<span class="py-kw">del</span> <span class="py-var">tel</span><span class="py-punc">[</span><span class="py-str">'sape'</span><span class="py-punc">]</span>              <span class="py-cmt"># DELETE with del</span>
+<span class="py-var">tel</span><span class="py-punc">[</span><span class="py-str">'irv'</span><span class="py-punc">] =</span> <span class="py-num">4127</span>            <span class="py-cmt"># ADD after delete</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">tel</span><span class="py-punc">)</span>
+<span class="py-out"># {'jack': 4098, 'guido': 4127, 'irv': 4127}</span>
 
-# UPDATE — same syntax as ADD, just use existing key
-tel['jack'] = 9999           # old value 4098 is forgotten
-print(tel['jack'])           # 9999</code></pre>
+<span class="py-cmt"># UPDATE — same syntax as ADD, just use existing key</span>
+<span class="py-var">tel</span><span class="py-punc">[</span><span class="py-str">'jack'</span><span class="py-punc">] =</span> <span class="py-num">9999</span>           <span class="py-cmt"># old value 4098 is forgotten</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">tel</span><span class="py-punc">[</span><span class="py-str">'jack'</span><span class="py-punc">])</span>           <span class="py-out"># 9999</span></pre>
     </div>
 
-    <!-- Kiddo extra -->
     <h4>Kiddo extra — .pop() and .update()</h4>
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>person = {"name": "Palak", "age": 20, "city": "Delhi"}
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">person</span> <span class="py-punc">= {</span><span class="py-str">"name"</span><span class="py-punc">:</span> <span class="py-str">"Ronaldo"</span><span class="py-punc">,</span> <span class="py-str">"age"</span><span class="py-punc">:</span> <span class="py-num">39</span><span class="py-punc">,</span> <span class="py-str">"city"</span><span class="py-punc">:</span> <span class="py-str">"Lisbon"</span><span class="py-punc">}</span>
 
-# .pop() removes AND returns the value
-removed = person.pop("city")
-print(removed)   # Delhi
-print(person)    # {"name": "Palak", "age": 20}
+<span class="py-cmt"># .pop() removes AND returns the value</span>
+<span class="py-var">removed</span> <span class="py-punc">=</span> <span class="py-var">person</span><span class="py-punc">.</span><span class="py-bi">pop</span><span class="py-punc">(</span><span class="py-str">"city"</span><span class="py-punc">)</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">removed</span><span class="py-punc">)</span>   <span class="py-out"># Lisbon</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">person</span><span class="py-punc">)</span>    <span class="py-out"># {"name": "Ronaldo", "age": 39}</span>
 
-# .update() merges multiple keys at once
-person.update({"age": 21, "city": "Mumbai", "course": "BCA"})
-print(person)
-# {'name': 'Palak', 'age': 21, 'city': 'Mumbai', 'course': 'BCA'}</code></pre>
+<span class="py-cmt"># .update() merges multiple keys at once</span>
+<span class="py-var">person</span><span class="py-punc">.</span><span class="py-bi">update</span><span class="py-punc">({</span><span class="py-str">"age"</span><span class="py-punc">:</span> <span class="py-num">40</span><span class="py-punc">,</span> <span class="py-str">"city"</span><span class="py-punc">:</span> <span class="py-str">"Riyadh"</span><span class="py-punc">,</span> <span class="py-str">"club"</span><span class="py-punc">:</span> <span class="py-str">"Al Nassr"</span><span class="py-punc">})</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">person</span><span class="py-punc">)</span>
+<span class="py-out"># {'name': 'Ronaldo', 'age': 40, 'city': 'Riyadh', 'club': 'Al Nassr'}</span></pre>
     </div>
 
     <div class="section-divider"></div>
@@ -571,16 +492,19 @@ print(person)
     <p>Two built-in functions that work directly on dictionaries — no method call, no <code>.keys()</code> needed:</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>tel = {'jack': 4098, 'guido': 4127, 'irv': 4127}
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">tel</span> <span class="py-punc">= {</span><span class="py-str">'jack'</span><span class="py-punc">:</span> <span class="py-num">4098</span><span class="py-punc">,</span> <span class="py-str">'guido'</span><span class="py-punc">:</span> <span class="py-num">4127</span><span class="py-punc">,</span> <span class="py-str">'irv'</span><span class="py-punc">:</span> <span class="py-num">4127</span><span class="py-punc">}</span>
 
-# list(d) — all keys as a list, in insertion order
-list(tel)
-# ['jack', 'guido', 'irv']
+<span class="py-cmt"># list(d) — all keys as a list, in insertion order</span>
+<span class="py-bi">list</span><span class="py-punc">(</span><span class="py-var">tel</span><span class="py-punc">)</span>
+<span class="py-out"># ['jack', 'guido', 'irv']</span>
 
-# sorted(d) — all keys sorted alphabetically
-sorted(tel)
-# ['guido', 'irv', 'jack']</code></pre>
+<span class="py-cmt"># sorted(d) — all keys sorted alphabetically</span>
+<span class="py-bi">sorted</span><span class="py-punc">(</span><span class="py-var">tel</span><span class="py-punc">)</span>
+<span class="py-out"># ['guido', 'irv', 'jack']</span></pre>
     </div>
 
     <div class="doc-block">
@@ -588,62 +512,69 @@ sorted(tel)
       <p>Performing <code>list(d)</code> on a dictionary returns a list of all the keys in insertion order. If you want them sorted, use <code>sorted(d)</code> instead.</p>
     </div>
 
-    <!-- Kiddo extra -->
     <h4>Kiddo extra — practical uses</h4>
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>scores = {"Mehak": 98, "Palak": 95, "Rohan": 78, "Arjun": 65}
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">scores</span> <span class="py-punc">= {</span><span class="py-str">"Mbappe"</span><span class="py-punc">:</span> <span class="py-num">98</span><span class="py-punc">,</span> <span class="py-str">"Messi"</span><span class="py-punc">:</span> <span class="py-num">95</span><span class="py-punc">,</span> <span class="py-str">"Ronaldo"</span><span class="py-punc">:</span> <span class="py-num">78</span><span class="py-punc">,</span> <span class="py-str">"Neymar"</span><span class="py-punc">:</span> <span class="py-num">65</span><span class="py-punc">}</span>
 
-# Print all names in alphabetical order
-for name in sorted(scores):
-    print(f"{name}: {scores[name]}")
-# Arjun: 65
-# Mehak: 98
-# Palak: 95
-# Rohan: 78
+<span class="py-cmt"># Print all names in alphabetical order</span>
+<span class="py-kw">for</span> <span class="py-var">name</span> <span class="py-kw">in</span> <span class="py-bi">sorted</span><span class="py-punc">(</span><span class="py-var">scores</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{name}</span><span class="py-str">: </span><span class="py-var">{scores[name]}</span><span class="py-str">"</span><span class="py-punc">)</span>
+<span class="py-out"># Mbappe: 98</span>
+<span class="py-out"># Messi: 95</span>
+<span class="py-out"># Neymar: 65</span>
+<span class="py-out"># Ronaldo: 78</span>
 
-# Count how many students
-print(f"Total students: {len(list(scores))}")  # 4
+<span class="py-cmt"># Count how many players</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Total players: </span><span class="py-var">{len(list(scores))}</span><span class="py-str">"</span><span class="py-punc">)</span>  <span class="py-out"># 4</span>
 
-# Get list of names to display in a dropdown
-student_names = list(scores)
-print(student_names)  # ['Mehak', 'Palak', 'Rohan', 'Arjun']</code></pre>
+<span class="py-cmt"># Get list of names to display in a dropdown</span>
+<span class="py-var">player_names</span> <span class="py-punc">=</span> <span class="py-bi">list</span><span class="py-punc">(</span><span class="py-var">scores</span><span class="py-punc">)</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">player_names</span><span class="py-punc">)</span>  <span class="py-out"># ['Mbappe', 'Messi', 'Ronaldo', 'Neymar']</span></pre>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 06 -->
     <h2 id="in-keyword">Checking Dictionary Keys with in and not in</h2>
-    <p>Use the <code>in</code> keyword to check whether a single key is in the dictionary. It's fast — O(1) average time regardless of how big the dictionary is:</p>
+    <p>Use the <code>in</code> keyword to check whether a single key is in the dictionary. It's fast—Python can usually find a key in nearly constant time (called O(1)), even if the dictionary contains thousands of items.</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>tel = {'jack': 4098, 'guido': 4127, 'irv': 4127}
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">tel</span> <span class="py-punc">= {</span><span class="py-str">'jack'</span><span class="py-punc">:</span> <span class="py-num">4098</span><span class="py-punc">,</span> <span class="py-str">'guido'</span><span class="py-punc">:</span> <span class="py-num">4127</span><span class="py-punc">,</span> <span class="py-str">'irv'</span><span class="py-punc">:</span> <span class="py-num">4127</span><span class="py-punc">}</span>
 
-'guido' in tel       # True
-'jack' not in tel    # False  ← jack IS in tel, so not in = False</code></pre>
+<span class="py-str">'guido'</span> <span class="py-kw">in</span> <span class="py-var">tel</span>       <span class="py-out"># True</span>
+<span class="py-str">'jack'</span> <span class="py-kw">not in</span> <span class="py-var">tel</span>    <span class="py-out"># False  ← jack IS in tel, so not in = False</span></pre>
     </div>
 
-    <!-- Kiddo extra -->
     <h4>Kiddo extra — practical patterns</h4>
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>config = {"debug": True, "port": 8080, "host": "localhost"}
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">config</span> <span class="py-punc">= {</span><span class="py-str">"debug"</span><span class="py-punc">:</span> <span class="py-kw">True</span><span class="py-punc">,</span> <span class="py-str">"port"</span><span class="py-punc">:</span> <span class="py-num">8080</span><span class="py-punc">,</span> <span class="py-str">"host"</span><span class="py-punc">:</span> <span class="py-str">"localhost"</span><span class="py-punc">}</span>
 
-# Safe lookup before accessing
-if "timeout" in config:
-    print(config["timeout"])
-else:
-    print("No timeout set — using default 30s")
+<span class="py-cmt"># Safe lookup before accessing</span>
+<span class="py-kw">if</span> <span class="py-str">"timeout"</span> <span class="py-kw">in</span> <span class="py-var">config</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">config</span><span class="py-punc">[</span><span class="py-str">"timeout"</span><span class="py-punc">])</span>
+<span class="py-kw">else</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"No timeout set — using default 30s"</span><span class="py-punc">)</span>
 
-# Check multiple keys
-required = ["port", "host", "api_key"]
-missing = [key for key in required if key not in config]
-print(f"Missing config: {missing}")   # Missing config: ['api_key']
+<span class="py-cmt"># Check multiple keys</span>
+<span class="py-var">required</span> <span class="py-punc">= [</span><span class="py-str">"port"</span><span class="py-punc">,</span> <span class="py-str">"host"</span><span class="py-punc">,</span> <span class="py-str">"api_key"</span><span class="py-punc">]</span>
+<span class="py-var">missing</span> <span class="py-punc">= [</span><span class="py-var">key</span> <span class="py-kw">for</span> <span class="py-var">key</span> <span class="py-kw">in</span> <span class="py-var">required</span> <span class="py-kw">if</span> <span class="py-var">key</span> <span class="py-kw">not in</span> <span class="py-var">config</span><span class="py-punc">]</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Missing config: </span><span class="py-var">{missing}</span><span class="py-str">"</span><span class="py-punc">)</span>   <span class="py-out"># Missing config: ['api_key']</span>
 
-# in checks keys — not values
-print(8080 in config)             # False! (checks keys, not values)
-print(8080 in config.values())    # True  (checking values explicitly)</code></pre>
+<span class="py-cmt"># in checks keys — not values</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-num">8080</span> <span class="py-kw">in</span> <span class="py-var">config</span><span class="py-punc">)</span>             <span class="py-out"># False! (checks keys, not values)</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-num">8080</span> <span class="py-kw">in</span> <span class="py-var">config</span><span class="py-punc">.</span><span class="py-bi">values</span><span class="py-punc">())</span>    <span class="py-out"># True  (checking values explicitly)</span></pre>
     </div>
 
     <div class="callout">
@@ -654,11 +585,8 @@ print(8080 in config.values())    # True  (checking values explicitly)</code></p
 
     <!-- 07 -->
     <h2 id="methods">Python Dictionary Methods Cheat Sheet</h2>
-
     <table class="param-table">
-      <thead>
-        <tr><th>Method / Expression</th><th>What it does</th><th>Returns</th></tr>
-      </thead>
+      <thead><tr><th>Method / Expression</th><th>What it does</th><th>Returns</th></tr></thead>
       <tbody>
         <tr><td><code>d[key]</code></td><td>Get value by key — KeyError if missing</td><td>Value</td></tr>
         <tr><td><code>d[key] = val</code></td><td>Add or update a key-value pair</td><td>—</td></tr>
@@ -688,32 +616,35 @@ print(8080 in config.values())    # True  (checking values explicitly)</code></p
     <p>Three patterns — each gives you different access:</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>person = {"name": "Palak", "age": 20, "city": "Delhi"}
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">person</span> <span class="py-punc">= {</span><span class="py-str">"name"</span><span class="py-punc">:</span> <span class="py-str">"Haaland"</span><span class="py-punc">,</span> <span class="py-str">"age"</span><span class="py-punc">:</span> <span class="py-num">24</span><span class="py-punc">,</span> <span class="py-str">"city"</span><span class="py-punc">:</span> <span class="py-str">"Manchester"</span><span class="py-punc">}</span>
 
-# 1 — Keys only (default when you loop a dict)
-for key in person:
-    print(key)
-# name  age  city
+<span class="py-cmt"># 1 — Keys only (default when you loop a dict)</span>
+<span class="py-kw">for</span> <span class="py-var">key</span> <span class="py-kw">in</span> <span class="py-var">person</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">key</span><span class="py-punc">)</span>
+<span class="py-out"># name  age  city</span>
 
-# 2 — Values only
-for value in person.values():
-    print(value)
-# Palak  20  Delhi
+<span class="py-cmt"># 2 — Values only</span>
+<span class="py-kw">for</span> <span class="py-var">value</span> <span class="py-kw">in</span> <span class="py-var">person</span><span class="py-punc">.</span><span class="py-bi">values</span><span class="py-punc">():</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">value</span><span class="py-punc">)</span>
+<span class="py-out"># Haaland  24  Manchester</span>
 
-# 3 — Both at once — USE THIS ONE most of the time
-for key, value in person.items():
-    print(f"{key}: {value}")
-# name: Palak
-# age: 20
-# city: Delhi
+<span class="py-cmt"># 3 — Both at once — USE THIS ONE most of the time</span>
+<span class="py-kw">for</span> <span class="py-var">key</span><span class="py-punc">,</span> <span class="py-var">value</span> <span class="py-kw">in</span> <span class="py-var">person</span><span class="py-punc">.</span><span class="py-bi">items</span><span class="py-punc">():</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{key}</span><span class="py-str">: </span><span class="py-var">{value}</span><span class="py-str">"</span><span class="py-punc">)</span>
+<span class="py-out"># name: Haaland</span>
+<span class="py-out"># age: 24</span>
+<span class="py-out"># city: Manchester</span>
 
-# 4 — In sorted key order (using sorted from the docs)
-for key in sorted(person):
-    print(f"{key}: {person[key]}")
-# age: 20
-# city: Delhi
-# name: Palak</code></pre>
+<span class="py-cmt"># 4 — In sorted key order (using sorted from the docs)</span>
+<span class="py-kw">for</span> <span class="py-var">key</span> <span class="py-kw">in</span> <span class="py-bi">sorted</span><span class="py-punc">(</span><span class="py-var">person</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{key}</span><span class="py-str">: </span><span class="py-var">{person[key]}</span><span class="py-str">"</span><span class="py-punc">)</span>
+<span class="py-out"># age: 24</span>
+<span class="py-out"># city: Manchester</span>
+<span class="py-out"># name: Haaland</span></pre>
     </div>
 
     <div class="section-divider"></div>
@@ -723,40 +654,46 @@ for key in sorted(person):
     <p>Dict comprehensions create a dictionary from any key-value expression — in one line. They work exactly like list comprehensions but produce a dict instead.</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code># From the Python docs §5.5 — squares of specific numbers
-{x: x**2 for x in (2, 4, 6)}
-# {2: 4, 4: 16, 6: 36}</code></pre>
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># From the Python docs §5.5 — squares of specific numbers</span>
+<span class="py-punc">{</span><span class="py-var">x</span><span class="py-punc">:</span> <span class="py-var">x</span><span class="py-punc">**</span><span class="py-num">2</span> <span class="py-kw">for</span> <span class="py-var">x</span> <span class="py-kw">in</span> <span class="py-punc">(</span><span class="py-num">2</span><span class="py-punc">,</span> <span class="py-num">4</span><span class="py-punc">,</span> <span class="py-num">6</span><span class="py-punc">)}</span>
+<span class="py-out"># {2: 4, 4: 16, 6: 36}</span></pre>
     </div>
 
     <h4>Kiddo extras — more comprehension patterns</h4>
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code># Basic syntax: {key_expr: value_expr for item in iterable}
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># Basic syntax: {key_expr: value_expr for item in iterable}</span>
 
-# 1 — Word lengths
-words = ["python", "dict", "comprehension"]
-word_len = {word: len(word) for word in words}
-# {'python': 6, 'dict': 4, 'comprehension': 13}
+<span class="py-cmt"># 1 — Word lengths</span>
+<span class="py-var">words</span> <span class="py-punc">= [</span><span class="py-str">"python"</span><span class="py-punc">,</span> <span class="py-str">"dict"</span><span class="py-punc">,</span> <span class="py-str">"comprehension"</span><span class="py-punc">]</span>
+<span class="py-var">word_len</span> <span class="py-punc">= {</span><span class="py-var">word</span><span class="py-punc">:</span> <span class="py-bi">len</span><span class="py-punc">(</span><span class="py-var">word</span><span class="py-punc">)</span> <span class="py-kw">for</span> <span class="py-var">word</span> <span class="py-kw">in</span> <span class="py-var">words</span><span class="py-punc">}</span>
+<span class="py-out"># {'python': 6, 'dict': 4, 'comprehension': 13}</span>
 
-# 2 — Uppercase version of each name
-names = ["palak", "rohan", "sneha"]
-upper = {name: name.upper() for name in names}
-# {'palak': 'PALAK', 'rohan': 'ROHAN', 'sneha': 'SNEHA'}
+<span class="py-cmt"># 2 — Uppercase version of each name</span>
+<span class="py-var">names</span> <span class="py-punc">= [</span><span class="py-str">"messi"</span><span class="py-punc">,</span> <span class="py-str">"ronaldo"</span><span class="py-punc">,</span> <span class="py-str">"mbappe"</span><span class="py-punc">]</span>
+<span class="py-var">upper</span> <span class="py-punc">= {</span><span class="py-var">name</span><span class="py-punc">:</span> <span class="py-var">name</span><span class="py-punc">.</span><span class="py-bi">upper</span><span class="py-punc">()</span> <span class="py-kw">for</span> <span class="py-var">name</span> <span class="py-kw">in</span> <span class="py-var">names</span><span class="py-punc">}</span>
+<span class="py-out"># {'messi': 'MESSI', 'ronaldo': 'RONALDO', 'mbappe': 'MBAPPE'}</span>
 
-# 3 — With a condition (only pass scores)
-scores = {"Palak": 92, "Arjun": 45, "Sneha": 88, "Rohan": 37}
-passing = {name: score for name, score in scores.items() if score >= 50}
-# {'Palak': 92, 'Sneha': 88}
+<span class="py-cmt"># 3 — With a condition (only pass scores)</span>
+<span class="py-var">scores</span> <span class="py-punc">= {</span><span class="py-str">"Messi"</span><span class="py-punc">:</span> <span class="py-num">92</span><span class="py-punc">,</span> <span class="py-str">"Neymar"</span><span class="py-punc">:</span> <span class="py-num">45</span><span class="py-punc">,</span> <span class="py-str">"Mbappe"</span><span class="py-punc">:</span> <span class="py-num">88</span><span class="py-punc">,</span> <span class="py-str">"Benzema"</span><span class="py-punc">:</span> <span class="py-num">37</span><span class="py-punc">}</span>
+<span class="py-var">passing</span> <span class="py-punc">= {</span><span class="py-var">name</span><span class="py-punc">:</span> <span class="py-var">score</span> <span class="py-kw">for</span> <span class="py-var">name</span><span class="py-punc">,</span> <span class="py-var">score</span> <span class="py-kw">in</span> <span class="py-var">scores</span><span class="py-punc">.</span><span class="py-bi">items</span><span class="py-punc">()</span> <span class="py-kw">if</span> <span class="py-var">score</span> <span class="py-punc">&gt;=</span> <span class="py-num">50</span><span class="py-punc">}</span>
+<span class="py-out"># {'Messi': 92, 'Mbappe': 88}</span>
 
-# 4 — Swap keys and values
-original = {"a": 1, "b": 2, "c": 3}
-swapped  = {v: k for k, v in original.items()}
-# {1: 'a', 2: 'b', 3: 'c'}
+<span class="py-cmt"># 4 — Swap keys and values</span>
+<span class="py-var">original</span> <span class="py-punc">= {</span><span class="py-str">"a"</span><span class="py-punc">:</span> <span class="py-num">1</span><span class="py-punc">,</span> <span class="py-str">"b"</span><span class="py-punc">:</span> <span class="py-num">2</span><span class="py-punc">,</span> <span class="py-str">"c"</span><span class="py-punc">:</span> <span class="py-num">3</span><span class="py-punc">}</span>
+<span class="py-var">swapped</span>  <span class="py-punc">= {</span><span class="py-var">v</span><span class="py-punc">:</span> <span class="py-var">k</span> <span class="py-kw">for</span> <span class="py-var">k</span><span class="py-punc">,</span> <span class="py-var">v</span> <span class="py-kw">in</span> <span class="py-var">original</span><span class="py-punc">.</span><span class="py-bi">items</span><span class="py-punc">()}</span>
+<span class="py-out"># {1: 'a', 2: 'b', 3: 'c'}</span>
 
-# 5 — Squares of 1-5 (range version)
-squares = {n: n**2 for n in range(1, 6)}
-# {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}</code></pre>
+<span class="py-cmt"># 5 — Squares of 1-5 (range version)</span>
+<span class="py-var">squares</span> <span class="py-punc">= {</span><span class="py-var">n</span><span class="py-punc">:</span> <span class="py-var">n</span><span class="py-punc">**</span><span class="py-num">2</span> <span class="py-kw">for</span> <span class="py-var">n</span> <span class="py-kw">in</span> <span class="py-bi">range</span><span class="py-punc">(</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">6</span><span class="py-punc">)}</span>
+<span class="py-out"># {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}</span></pre>
     </div>
 
     <div class="doc-block">
@@ -771,119 +708,64 @@ squares = {n: n**2 for n in range(1, 6)}
     <p>Values in a dictionary can themselves be dictionaries. This is how you model structured records — API responses, student data, config files with sections:</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>students = {
-    "Palak": {
-        "grade": "A",
-        "score": 95,
-        "subjects": ["Python", "DSA", "DBMS"]
-    },
-    "Rohan": {
-        "grade": "B",
-        "score": 78,
-        "subjects": ["Java", "Web Dev"]
-    }
-}
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">players</span> <span class="py-punc">= {</span>
+    <span class="py-str">"Messi"</span><span class="py-punc">: {</span>
+        <span class="py-str">"grade"</span><span class="py-punc">:</span> <span class="py-str">"A"</span><span class="py-punc">,</span>
+        <span class="py-str">"score"</span><span class="py-punc">:</span> <span class="py-num">95</span><span class="py-punc">,</span>
+        <span class="py-str">"trophies"</span><span class="py-punc">: [</span><span class="py-str">"World Cup"</span><span class="py-punc">,</span> <span class="py-str">"Champions League"</span><span class="py-punc">,</span> <span class="py-str">"Copa America"</span><span class="py-punc">]</span>
+    <span class="py-punc">},</span>
+    <span class="py-str">"Ronaldo"</span><span class="py-punc">: {</span>
+        <span class="py-str">"grade"</span><span class="py-punc">:</span> <span class="py-str">"A"</span><span class="py-punc">,</span>
+        <span class="py-str">"score"</span><span class="py-punc">:</span> <span class="py-num">92</span><span class="py-punc">,</span>
+        <span class="py-str">"trophies"</span><span class="py-punc">: [</span><span class="py-str">"Champions League"</span><span class="py-punc">,</span> <span class="py-str">"Premier League"</span><span class="py-punc">]</span>
+    <span class="py-punc">}</span>
+<span class="py-punc">}</span>
 
-# Access nested values by chaining keys
-print(students["Palak"]["grade"])         # A
-print(students["Palak"]["score"])         # 95
-print(students["Rohan"]["subjects"][0])   # Java
+<span class="py-cmt"># Access nested values by chaining keys</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">players</span><span class="py-punc">[</span><span class="py-str">"Messi"</span><span class="py-punc">][</span><span class="py-str">"grade"</span><span class="py-punc">])</span>           <span class="py-out"># A</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">players</span><span class="py-punc">[</span><span class="py-str">"Messi"</span><span class="py-punc">][</span><span class="py-str">"score"</span><span class="py-punc">])</span>           <span class="py-out"># 95</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">players</span><span class="py-punc">[</span><span class="py-str">"Ronaldo"</span><span class="py-punc">][</span><span class="py-str">"trophies"</span><span class="py-punc">][</span><span class="py-num">0</span><span class="py-punc">])</span>  <span class="py-out"># Champions League</span>
 
-# Loop through nested dict
-for name, info in students.items():
-    print(f"{name}: {info['score']}% — Grade {info['grade']}")
+<span class="py-cmt"># Loop through nested dict</span>
+<span class="py-kw">for</span> <span class="py-var">name</span><span class="py-punc">,</span> <span class="py-var">info</span> <span class="py-kw">in</span> <span class="py-var">players</span><span class="py-punc">.</span><span class="py-bi">items</span><span class="py-punc">():</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{name}</span><span class="py-str">: </span><span class="py-var">{info['score']}</span><span class="py-str">% — Grade </span><span class="py-var">{info['grade']}</span><span class="py-str">"</span><span class="py-punc">)</span>
 
-# Safe nested access
-score = students.get("Ananya", {}).get("score", "not found")
-print(score)   # not found  ← no KeyError even if "Ananya" missing</code></pre>
+<span class="py-cmt"># Safe nested access</span>
+<span class="py-var">score</span> <span class="py-punc">=</span> <span class="py-var">players</span><span class="py-punc">.</span><span class="py-bi">get</span><span class="py-punc">(</span><span class="py-str">"Neymar"</span><span class="py-punc">, {}).</span><span class="py-bi">get</span><span class="py-punc">(</span><span class="py-str">"score"</span><span class="py-punc">,</span> <span class="py-str">"not found"</span><span class="py-punc">)</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">score</span><span class="py-punc">)</span>   <span class="py-out"># not found  ← no KeyError even if "Neymar" missing</span></pre>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 11 -->
     <h2 id="mistakes">Common Python Dictionary Mistakes</h2>
-
     <div class="mistake-list">
-      <div class="mistake-item">
-        <div class="mi-body">
-          <strong>Using dict[key] without checking — KeyError crash</strong>
-          <p><code>tel['irv']</code> crashes if <code>'irv'</code> isn't in the dict. Use <code>tel.get('irv')</code> or check <code>'irv' in tel</code> first.</p>
-        </div>
-      </div>
-      <div class="mistake-item">
-        <div class="mi-body">
-          <strong>Using a list as a key</strong>
-          <p><code>d[[1,2]] = "value"</code> throws a <code>TypeError</code>. Lists are mutable, so they can't be keys. Use a tuple instead: <code>d[(1,2)] = "value"</code>.</p>
-        </div>
-      </div>
-      <div class="mistake-item">
-        <div class="mi-body">
-          <strong>Expecting duplicate keys to keep both values</strong>
-          <p><code>{'a': 1, 'a': 2}</code> silently becomes <code>{'a': 2}</code>. The second value overwrites the first — no warning, no error.</p>
-        </div>
-      </div>
-      <div class="mistake-item">
-        <div class="mi-body">
-          <strong>Modifying a dict while looping over it</strong>
-          <p>Adding or deleting keys during a <code>for key in dict</code> loop raises <code>RuntimeError: dictionary changed size during iteration</code>. Loop over <code>list(dict.items())</code> if you need to modify while iterating.</p>
-        </div>
-      </div>
-      <div class="mistake-item">
-        <div class="mi-body">
-          <strong>Checking values with "in" (it checks keys)</strong>
-          <p><code>4098 in tel</code> is <code>False</code> — it checks keys, not values. Use <code>4098 in tel.values()</code> to check values.</p>
-        </div>
-      </div>
-      <div class="mistake-item">
-        <div class="mi-body">
-          <strong>Thinking .copy() gives a fully independent copy</strong>
-          <p><code>dict.copy()</code> is a shallow copy — nested dictionaries inside are still shared references. Use <code>copy.deepcopy(d)</code> for a completely independent clone.</p>
-        </div>
-      </div>
-      <div class="mistake-item">
-        <div class="mi-body">
-          <strong>The safe access pattern</strong>
-          <p>When a key might or might not exist: <code>value = d.get('key', 'fallback')</code> — one line, no crash, no if-else needed.</p>
-        </div>
-      </div>
+      <div class="mistake-item"><div class="mi-body"><strong>Using dict[key] without checking — KeyError crash</strong><p><code>tel['irv']</code> crashes if <code>'irv'</code> isn't in the dict. Use <code>tel.get('irv')</code> or check <code>'irv' in tel</code> first.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Using a list as a key</strong><p><code>d[[1,2]] = "value"</code> throws a <code>TypeError</code>. Lists are mutable, so they can't be keys. Use a tuple instead: <code>d[(1,2)] = "value"</code>.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Expecting duplicate keys to keep both values</strong><p><code>{'a': 1, 'a': 2}</code> silently becomes <code>{'a': 2}</code>. The second value overwrites the first — no warning, no error.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Modifying a dict while looping over it</strong><p>Adding or deleting keys during a <code>for key in dict</code> loop raises <code>RuntimeError: dictionary changed size during iteration</code>. Loop over <code>list(dict.items())</code> if you need to modify while iterating.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Checking values with "in" (it checks keys)</strong><p><code>4098 in tel</code> is <code>False</code> — it checks keys, not values. Use <code>4098 in tel.values()</code> to check values.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Thinking .copy() gives a fully independent copy</strong><p><code>dict.copy()</code> is a shallow copy — nested dictionaries inside are still shared references. Use <code>copy.deepcopy(d)</code> for a completely independent clone.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>The safe access pattern</strong><p>When a key might or might not exist: <code>value = d.get('key', 'fallback')</code> — one line, no crash, no if-else needed.</p></div></div>
     </div>
 
     <div class="section-divider"></div>
 
-    <!-- 12 — INTERVIEW QUESTIONS -->
+    <!-- 12 -->
     <h2 id="interview">Python Dictionary Interview Questions and Answers</h2>
     <p>These come up regularly in Python interviews — from beginner screens to technical rounds:</p>
-
     <div class="iq-list">
-      <div class="iq-item">
-        <div class="iq-q"><span class="iq-badge">Q1</span> What is a Python dictionary and how is it different from a list?</div>
-        <div class="iq-a">A dictionary stores key-value pairs and is indexed by keys. A list stores values in order and is indexed by position (0, 1, 2...). Dict lookup by key is O(1). List lookup by value is O(n). Use a dict when data has a natural label; use a list when order and position matter.</div>
-      </div>
-      <div class="iq-item">
-        <div class="iq-q"><span class="iq-badge">Q2</span> What types can be used as dictionary keys?</div>
-        <div class="iq-a">Only immutable types — strings, integers, floats, and tuples (containing only immutable items). Lists and dicts cannot be keys because they can be modified in place, which would break the hash-based lookup mechanism.</div>
-      </div>
-      <div class="iq-item">
-        <div class="iq-q"><span class="iq-badge">Q3</span> What is the difference between dict.get() and dict[key]?</div>
-        <div class="iq-a"><code>dict[key]</code> raises a <code>KeyError</code> if the key doesn't exist — this will crash your program. <code>dict.get(key)</code> returns <code>None</code> instead. You can also provide a fallback: <code>dict.get(key, 'default')</code>. Always use <code>.get()</code> when the key might be missing.</div>
-      </div>
-      <div class="iq-item">
-        <div class="iq-q"><span class="iq-badge">Q4</span> How do you merge two dictionaries in Python?</div>
-        <div class="iq-a">Three ways: <code>dict1.update(dict2)</code> modifies dict1 in place. <code>{**dict1, **dict2}</code> creates a new merged dict. In Python 3.9+: <code>dict1 | dict2</code> creates a new merged dict. If keys overlap, the second dict's values win.</div>
-      </div>
-      <div class="iq-item">
-        <div class="iq-q"><span class="iq-badge">Q5</span> How would you count word frequency in a string using a dictionary?</div>
-        <div class="iq-a">Loop through the words and use <code>setdefault</code> or <code>get</code>: <code>freq[word] = freq.get(word, 0) + 1</code>. Or use <code>collections.Counter(words.split())</code> which does the same thing with less code.</div>
-      </div>
-      <div class="iq-item">
-        <div class="iq-q"><span class="iq-badge">Q6</span> Are Python dictionaries ordered?</div>
-        <div class="iq-a">Yes — from Python 3.7 onwards, dictionaries maintain insertion order as part of the language spec (not just an implementation detail). In Python 3.6 it was an implementation detail of CPython. Before 3.6, no ordering guarantee existed.</div>
-      </div>
-      <div class="iq-item">
-        <div class="iq-q"><span class="iq-badge">Q7</span> Write a dict comprehension that creates a dict of numbers and their cubes.</div>
-        <div class="iq-a"><code>{n: n**3 for n in range(1, 6)}</code> produces <code>{1: 1, 2: 8, 3: 27, 4: 64, 5: 125}</code>. Add a condition with: <code>{n: n**3 for n in range(1, 6) if n % 2 == 0}</code> for even numbers only.</div>
-      </div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> What is a Python dictionary and how is it different from a list?</div><div class="iq-a">A dictionary stores key-value pairs and is indexed by keys. A list stores values in order and is indexed by position (0, 1, 2...). Dict lookup by key is O(1). List lookup by value is O(n). Use a dict when data has a natural label; use a list when order and position matter.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q2</span> What types can be used as dictionary keys?</div><div class="iq-a">Only immutable types — strings, integers, floats, and tuples (containing only immutable items). Lists and dicts cannot be keys because they can be modified in place, which would break the hash-based lookup mechanism.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q3</span> What is the difference between dict.get() and dict[key]?</div><div class="iq-a"><code>dict[key]</code> raises a <code>KeyError</code> if the key doesn't exist — this will crash your program. <code>dict.get(key)</code> returns <code>None</code> instead. You can also provide a fallback: <code>dict.get(key, 'default')</code>. Always use <code>.get()</code> when the key might be missing.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q4</span> How do you merge two dictionaries in Python?</div><div class="iq-a">Three ways: <code>dict1.update(dict2)</code> modifies dict1 in place. <code>{**dict1, **dict2}</code> creates a new merged dict. In Python 3.9+: <code>dict1 | dict2</code> creates a new merged dict. If keys overlap, the second dict's values win.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q5</span> How would you count word frequency in a string using a dictionary?</div><div class="iq-a">Loop through the words and use <code>setdefault</code> or <code>get</code>: <code>freq[word] = freq.get(word, 0) + 1</code>. Or use <code>collections.Counter(words.split())</code> which does the same thing with less code.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q6</span> Are Python dictionaries ordered?</div><div class="iq-a">Yes — from Python 3.7 onwards, dictionaries maintain insertion order as part of the language spec (not just an implementation detail). In Python 3.6 it was an implementation detail of CPython. Before 3.6, no ordering guarantee existed.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q7</span> Write a dict comprehension that creates a dict of numbers and their cubes.</div><div class="iq-a"><code>{n: n**3 for n in range(1, 6)}</code> produces <code>{1: 1, 2: 8, 3: 27, 4: 64, 5: 125}</code>. Add a condition with: <code>{n: n**3 for n in range(1, 6) if n % 2 == 0}</code> for even numbers only.</div></div>
     </div>
 
     <div class="section-divider"></div>
@@ -891,7 +773,6 @@ print(score)   # not found  ← no KeyError even if "Ananya" missing</code></pre
     <!-- 13 -->
     <h2 id="project">Python Dictionary Project — Word Frequency Counter</h2>
     <p>A classic dictionary use case — count how many times each word appears in a piece of text. This pattern shows up everywhere: search engines, text analysis, spam filters.</p>
-
     <div class="checklist">
       <div class="check-item"><div><strong>Take a string of text</strong><p>Split it into words and convert to lowercase so "Python" and "python" count as the same word.</p></div></div>
       <div class="check-item"><div><strong>Count frequencies</strong><p>Use <code>dict.get(word, 0) + 1</code> to increment each word's count safely — no KeyError if the word hasn't been seen yet.</p></div></div>
@@ -899,8 +780,6 @@ print(score)   # not found  ← no KeyError even if "Ananya" missing</code></pre
       <div class="check-item"><div><strong>Print a report</strong><p>Show the top 5 words and their counts in a clean formatted output.</p></div></div>
       <div class="check-item"><div><strong>Add a lookup</strong><p>Use <code>freq.get(word, 0)</code> to safely look up any word's count — 0 if it wasn't in the text.</p></div></div>
     </div>
-
-
 
     <div class="callout">
       <strong>Level up:</strong> use <code>from collections import Counter; Counter(words)</code> — it does all of step 2 in one line. But writing it manually first is how you understand what Counter is doing under the hood.
@@ -910,91 +789,43 @@ print(score)   # not found  ← no KeyError even if "Ananya" missing</code></pre
 
     <!-- 14 -->
     <h2 id="faq">Python Dictionary FAQ</h2>
-
     <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">What is a Python dictionary? <span class="faq-icon">+</span></button>
-        <div class="faq-a">A Python dictionary is a collection of key-value pairs where every key is unique. Defined with curly braces <code>{}</code>, it is mutable, ordered (Python 3.7+), and sometimes called an "associative array" or "hash map" in other languages. Keys must be immutable; values can be anything.</div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is a Python dictionary? <span class="faq-icon">+</span></button><div class="faq-a">A Python dictionary is a collection of key-value pairs where every key is unique. Defined with curly braces <code>{}</code>, it is mutable, ordered (Python 3.7+), and sometimes called an "associative array" or "hash map" in other languages. Keys must be immutable; values can be anything.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">How do you create a dictionary in Python? <span class="faq-icon">+</span></button><div class="faq-a">Three ways from the Python docs: curly braces <code>{'jack': 4098}</code>, the dict() constructor with keyword args <code>dict(jack=4098)</code>, or dict() from a list of tuples <code>dict([('jack', 4098)])</code>. An empty dict is just <code>{}</code>.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is the difference between dict[key] and dict.get(key)? <span class="faq-icon">+</span></button><div class="faq-a"><code>dict[key]</code> raises a <code>KeyError</code> if the key doesn't exist. <code>dict.get(key)</code> returns <code>None</code> instead — no crash. You can pass a custom default: <code>dict.get(key, 'fallback')</code>. Use <code>.get()</code> whenever the key might be missing.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is a dictionary comprehension in Python? <span class="faq-icon">+</span></button><div class="faq-a">A dict comprehension creates a dictionary in one line. From the Python docs: <code>{x: x**2 for x in (2, 4, 6)}</code> produces <code>{2: 4, 4: 16, 6: 36}</code>. Syntax: <code>{key_expr: value_expr for item in iterable}</code>. Add <code>if condition</code> to filter.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">How do you get all keys from a Python dictionary? <span class="faq-icon">+</span></button><div class="faq-a">Use <code>list(d)</code> for all keys in insertion order. Use <code>sorted(d)</code> for sorted keys. <code>dict.keys()</code> returns a live view object — wrap it in <code>list()</code> if you need an actual list you can index.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can Python dictionary keys be any type? <span class="faq-icon">+</span></button><div class="faq-a">Keys must be immutable — strings, numbers, or tuples (containing only immutable items). You can't use lists as keys because lists can be modified in place (append, slice assignment, etc.), which would break the internal hash lookup.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">How do you check if a key exists in a dictionary? <span class="faq-icon">+</span></button><div class="faq-a">Use the <code>in</code> operator: <code>'guido' in tel</code> returns <code>True</code> if the key exists. Use <code>not in</code> for the opposite. This checks keys only — use <code>value in d.values()</code> to check values. Key lookups are O(1) (instant).</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is a nested dictionary in Python? <span class="faq-icon">+</span></button><div class="faq-a">A nested dictionary has another dictionary as one or more of its values. Example: <code>players = {'Messi': {'score': 95, 'grade': 'A'}}</code>. Access nested values by chaining keys: <code>players['Messi']['score']</code> returns 95. Use <code>.get()</code> chaining for safe access.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- CTA -->
+    <div style="margin: 40px 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;">
+      <div style="background: var(--surface2); padding: 28px 32px; text-align: center; border-bottom: 1px solid var(--border);">
+        <p style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 10px;">Python Docs 5.5</p>
+        <h3 style="font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--text); margin: 0 0 8px;">Mastered dictionaries?</h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0; line-height: 1.65;">You've covered key-value pairs, get(), comprehensions, and nested dicts.<br>Save this page and share it with a friend who's learning Python.</p>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">How do you create a dictionary in Python? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Three ways from the Python docs: curly braces <code>{'jack': 4098}</code>, the dict() constructor with keyword args <code>dict(jack=4098)</code>, or dict() from a list of tuples <code>dict([('jack', 4098)])</code>. An empty dict is just <code>{}</code>.</div>
+      <div style="padding: 24px 32px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; align-items: center;">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 0.875rem; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif;">↑ Back to top</button>
+        <a href="../python/sets.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 0.875rem; font-weight: 500; text-decoration: none;">Sets next →</a>
+        <button onclick="navigator.clipboard.writeText('https://kiddoedu.org/python/dictionary.html').then(() => { this.textContent = 'Copied!'; setTimeout(() => this.textContent = 'Copy link', 2000); })" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 0.875rem; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif;">Copy link</button>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">What is the difference between dict[key] and dict.get(key)? <span class="faq-icon">+</span></button>
-        <div class="faq-a"><code>dict[key]</code> raises a <code>KeyError</code> if the key doesn't exist. <code>dict.get(key)</code> returns <code>None</code> instead — no crash. You can pass a custom default: <code>dict.get(key, 'fallback')</code>. Use <code>.get()</code> whenever the key might be missing.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">What is a dictionary comprehension in Python? <span class="faq-icon">+</span></button>
-        <div class="faq-a">A dict comprehension creates a dictionary in one line. From the Python docs: <code>{x: x**2 for x in (2, 4, 6)}</code> produces <code>{2: 4, 4: 16, 6: 36}</code>. Syntax: <code>{key_expr: value_expr for item in iterable}</code>. Add <code>if condition</code> to filter.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">How do you get all keys from a Python dictionary? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Use <code>list(d)</code> for all keys in insertion order. Use <code>sorted(d)</code> for sorted keys. <code>dict.keys()</code> returns a live view object — wrap it in <code>list()</code> if you need an actual list you can index.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Can Python dictionary keys be any type? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Keys must be immutable — strings, numbers, or tuples (containing only immutable items). You can't use lists as keys because lists can be modified in place (append, slice assignment, etc.), which would break the internal hash lookup.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">How do you check if a key exists in a dictionary? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Use the <code>in</code> operator: <code>'guido' in tel</code> returns <code>True</code> if the key exists. Use <code>not in</code> for the opposite. This checks keys only — use <code>value in d.values()</code> to check values. Key lookups are O(1) (instant).</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">What is a nested dictionary in Python? <span class="faq-icon">+</span></button>
-        <div class="faq-a">A nested dictionary has another dictionary as one or more of its values. Example: <code>students = {'Palak': {'score': 95, 'grade': 'A'}}</code>. Access nested values by chaining keys: <code>students['Palak']['score']</code> returns 95. Use <code>.get()</code> chaining for safe access.</div>
+      <div style="border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(3, 1fr);">
+        <a href="../python/list.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 16px 8px; text-decoration: none; border-right: 1px solid var(--border);"><span style="font-size: 0.8rem; font-weight: 600; font-family: 'Syne', sans-serif; color: var(--text);">Lists</span><span style="font-size: 0.72rem; color: var(--text-muted);">5.1</span></a>
+        <a href="../python/tuples.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 16px 8px; text-decoration: none; border-right: 1px solid var(--border);"><span style="font-size: 0.8rem; font-weight: 600; font-family: 'Syne', sans-serif; color: var(--text);">Tuples</span><span style="font-size: 0.72rem; color: var(--text-muted);">5.3</span></a>
+        <a href="../python/sets.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 16px 8px; text-decoration: none;"><span style="font-size: 0.8rem; font-weight: 600; font-family: 'Syne', sans-serif; color: var(--text);">Sets</span><span style="font-size: 0.72rem; color: var(--text-muted);">5.4</span></a>
       </div>
     </div>
 
     <div class="section-divider"></div>
-<!-- Strong CTA Section -->
-<div style="margin: 40px 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;">
-
-  <div style="background: var(--surface2); padding: 28px 32px; text-align: center; border-bottom: 1px solid var(--border);">
-    <p style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 10px;">Python Docs 5.5</p>
-    <h3 style="font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--text); margin: 0 0 8px;">Mastered dictionaries?</h3>
-    <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0; line-height: 1.65;">You've covered key-value pairs, get(), comprehensions, and nested dicts.<br>Save this page and share it with a friend who's learning Python.</p>
-  </div>
-
-  <div style="padding: 24px 32px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; align-items: center;">
-    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-      style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 0.875rem; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif;">
-      ↑ Back to top
-    </button>
-    <a href="../python/sets.html"
-      style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 0.875rem; font-weight: 500; text-decoration: none;">
-      Sets next →
-    </a>
-    <button onclick="navigator.clipboard.writeText('https://kiddoedu.org/python/dictionary.html').then(() => { this.textContent = 'Copied!'; setTimeout(() => this.textContent = 'Copy link', 2000); })"
-      style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 0.875rem; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif;">
-      Copy link
-    </button>
-  </div>
-
-  <div style="border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(3, 1fr);">
-    <a href="../python/list.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 16px 8px; text-decoration: none; border-right: 1px solid var(--border);">
-      <span style="font-size: 0.8rem; font-weight: 600; font-family: 'Syne', sans-serif; color: var(--text);">Lists</span>
-      <span style="font-size: 0.72rem; color: var(--text-muted);">5.1</span>
-    </a>
-    <a href="../python/tuples.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 16px 8px; text-decoration: none; border-right: 1px solid var(--border);">
-      <span style="font-size: 0.8rem; font-weight: 600; font-family: 'Syne', sans-serif; color: var(--text);">Tuples</span>
-      <span style="font-size: 0.72rem; color: var(--text-muted);">5.3</span>
-    </a>
-    <a href="../python/sets.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 16px 8px; text-decoration: none;">
-      <span style="font-size: 0.8rem; font-weight: 600; font-family: 'Syne', sans-serif; color: var(--text);">Sets</span>
-      <span style="font-size: 0.72rem; color: var(--text-muted);">5.4</span>
-    </a>
-  </div>
-
-</div>
-<div class="section-divider"></div>
 
     <div class="author-strip">
       <div class="author-avatar">PM</div>
-      <div class="author-info">
-        <strong>Palak Mishra</strong>
-        <span>Backend developer · Building beginner-friendly Python docs at Kiddo</span>
-      </div>
+      <div class="author-info"><strong>Palak Mishra</strong><span>Backend developer · Building beginner-friendly Python docs at Kiddo</span></div>
     </div>
 
     <div class="callout">
@@ -1005,8 +836,8 @@ print(score)   # not found  ← no KeyError even if "Ananya" missing</code></pre
       <a href="../python/list-stack-queue.html">Lists as Stack and Queue</a> ·
       <a href="../python/nested-list-comp.html">Nested List Comprehension</a> ·
       <a href="../python/list-comp.html">List Comprehension</a> ·
-      <a href="../python/while_loop.html">While Loop</a> .
-      <a href="../python/if_statements.html">If Statements</a> .
+      <a href="../python/while_loop.html">While Loop</a> ·
+      <a href="../python/if_statements.html">If Statements</a>
     </div>
   </main>
 </div>
@@ -1014,11 +845,7 @@ print(score)   # not found  ← no KeyError even if "Ananya" missing</code></pre
 <footer>
   <div class="footer-container">
     <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
-    <div class="footer-links">
-      <a href="../info/privacy.html">Privacy</a>
-      <a href="../info/terms.html">Terms</a>
-      <a href="../info/contact.html">Contact</a>
-    </div>
+    <div class="footer-links"><a href="../info/privacy.html">Privacy</a><a href="../info/terms.html">Terms</a><a href="../info/contact.html">Contact</a></div>
   </div>
 </footer>
 
@@ -1052,12 +879,12 @@ print(score)   # not found  ← no KeyError even if "Ananya" missing</code></pre
   });
 
   document.querySelectorAll('.code-container').forEach(container => {
-    const btn  = container.querySelector('.copy-btn');
-    const tip  = container.querySelector('.tooltip');
-    const code = container.querySelector('pre code');
+    const btn = container.querySelector('.copy-btn');
+    const tip = container.querySelector('.tooltip');
+    const pre = container.querySelector('pre');
     if (!btn) return;
     btn.addEventListener('click', () => {
-      navigator.clipboard.writeText(code.innerText.trim()).then(() => {
+      navigator.clipboard.writeText(pre.innerText.trim()).then(() => {
         tip.classList.add('show');
         setTimeout(() => tip.classList.remove('show'), 2000);
       });
