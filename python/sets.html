@@ -355,6 +355,7 @@ aside ul .submenu li a .dot{
     <li><a href="../python/py-intro.html"><span class="dot"></span>Introduction</a></li>
     <li><a href="../python/user_input.html"><span class="dot"></span>User Input</a></li>
     <li><a href="../python/if_statements.html"><span class="dot"></span>If Statements</a></li>
+    <li><a href="../python/for_loop.html"><span class="dot"></span>For Loop</a></li>
     <li>
       <a href="../python/list.html"><span class="dot"></span>Lists</a>
       <ul class="submenu">
@@ -367,7 +368,6 @@ aside ul .submenu li a .dot{
     <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
     <li><a href="../python/sets.html" class="active"><span class="dot"></span>Sets</a></li>
     <li><a href="../python/looping-techniques.html"><span class="dot"></span>Looping Techniques</a></li>
-    <li><a href="../python/for_loop.html"><span class="dot"></span>For Loop</a></li>
     <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
   </ul>
 
@@ -603,7 +603,8 @@ print(a.intersection(b))            # {3, 4}
 print(a.difference(b))              # {1, 2}
 print(a.symmetric_difference(b))    # {1, 2, 5, 6}
 
-# Subset and superset checks
+      <tbody>
+  # Subset and superset checks
 x = {1, 2}
 print(x.issubset(a))    # True — every element of x is in a
 print(a.issuperset(x))  # True — a contains all of x
@@ -642,8 +643,7 @@ print(f"Exactly one class: {exclusive}")</code></pre>
       <thead>
         <tr><th>Method / Operator</th><th>What it does</th><th>Returns / Modifies</th></tr>
       </thead>
-      <tbody>
-        <tr><td><code>s.add(x)</code></td><td>Adds element x — no error if already present</td><td>Modifies s in place</td></tr>
+      <tr><td><code>s.add(x)</code></td><td>Adds element x — no error if already present</td><td>Modifies s in place</td></tr>
         <tr><td><code>s.remove(x)</code></td><td>Removes x — raises KeyError if not found</td><td>Modifies s in place</td></tr>
         <tr><td><code>s.discard(x)</code></td><td>Removes x — no error if not found (safe version of remove)</td><td>Modifies s in place</td></tr>
         <tr><td><code>s.pop()</code></td><td>Removes and returns an arbitrary element — KeyError if empty</td><td>Removed element</td></tr>

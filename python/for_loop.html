@@ -3,9 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="icon" type="image/png" href="../assests/icon.png">
-  <meta name="description" content="Master Python's for loops with this easy, beginner-friendly guide! Learn how to loop through lists, strings, numbers, and more with 6+ real examples, tips, and challenges to boost your coding skills.">
-  <title>Python For Loops for Beginners – Easy Guide with 6+ Practical Examples</title>
+  <link rel="icon" type="image/png" href="../assests/icon.png" />
+  <meta name="description" content="Learn Python for Loops (Python Docs 4.2) with beginner-friendly explanations. Understand the for statement, range(), enumerate(), looping over sequences, modifying collections safely, nested for loops, for-else, and common mistakes." /> 
+  <meta property="og:type" content="article" /> 
+  <meta property="og:title" content="Python for Loops Documentation Explained (Python Docs 4.2) | Kiddo" /> 
+  <meta property="og:description" content="The official Python for statement documentation explained in simple language. Learn range(), enumerate(), nested loops, and safe iteration over collections." /> 
+  <meta property="og:url" content="https://kiddoedu.org/python/for_loop.html" /> 
+  <meta property="og:site_name" content="Kiddo" /> 
+  <meta property="og:image" content="https://kiddoedu.org/python/for_loop.png" /> 
+  <meta name="twitter:card" content="summary_large_image" /> 
+  <meta name="twitter:title" content="Python for Loops Documentation Explained (Python Docs 4.2) | Kiddo" /> 
+  <meta name="twitter:description" content="Beginner-friendly explanation of Python for loops. Learn the for statement, range(), enumerate(), nested loops, and for-else." /> 
+  <meta name="twitter:image" content="https://kiddoedu.org/python/for_loop.png" /> 
+  <link rel="canonical" href="https://kiddoedu.org/python/for_loop.html" /> 
+  <title>Python for Loops Explained (Python Docs 4.2) | range(), enumerate() & Nested Loops</title>
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -13,331 +25,90 @@
     gtag('js', new Date());
     gtag('config', 'G-ESNWS8F9HE');
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg: #f5f3ee;
-      --surface: #ffffff;
-      --surface2: #eceae4;
-      --text: #1a1814;
-      --text-muted: #6b6760;
-      --accent: #e86c2f;
-      --accent2: #3d5afe;
-      --accent3: #00b894;
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
       --border: rgba(0,0,0,0.08);
       --shadow: 0 4px 24px rgba(0,0,0,0.07);
       --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
-      --radius: 16px;
-      --radius-sm: 10px;
-      --header-h: 70px;
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
       --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
     }
     body.dark {
-      --bg: #0f0e0c;
-      --surface: #1c1a17;
-      --surface2: #252320;
-      --text: #f0ede6;
-      --text-muted: #918e87;
-      --accent: #ff7d3e;
-      --accent2: #7986cb;
-      --accent3: #55efc4;
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
       --border: rgba(255,255,255,0.07);
       --shadow: 0 4px 24px rgba(0,0,0,0.4);
       --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      transition: background var(--transition), color var(--transition);
-      overflow-x: hidden;
-    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 999; width: 0%; transition: width 0.1s linear; }
 
-    /* Progress bar */
-    .progress-bar {
-      position: fixed;
-      top: 0; left: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      z-index: 999;
-      width: 0%;
-      transition: width 0.1s linear;
-    }
-
-    /* ── Header ── */
-    header {
-      height: var(--header-h);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      background: rgba(245,243,238,0.82);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: background var(--transition);
-    }
+    header { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
     body.dark header { background: rgba(15,14,12,0.82); }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
-    .logo span {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.4rem;
-      letter-spacing: -0.02em;
-      color: var(--text);
-    }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
     .logo span em { font-style: normal; color: var(--accent); }
-
     nav { display: flex; align-items: center; gap: 8px; }
-    nav a {
-      font-weight: 500;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 6px 14px;
-      border-radius: 8px;
-      transition: color var(--transition), background var(--transition);
-    }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
     nav a:hover { color: var(--text); background: var(--surface2); }
-
-    .theme-btn {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      width: 38px; height: 38px;
-      cursor: pointer;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background var(--transition), transform var(--transition);
-      margin-left: 8px;
-    }
+    .theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background var(--transition), transform var(--transition); margin-left: 8px; }
     .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
 
-    /* ── Mobile Header ── */
-    .mobile-header {
-      display: none;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      height: var(--header-h);
-      background: rgba(245,243,238,0.82);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: background var(--transition);
-    }
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 20px; height: var(--header-h); background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
     body.dark .mobile-header { background: rgba(15,14,12,0.82); }
     .mobile-right { display: flex; align-items: center; gap: 8px; }
-
-    .hamburger {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      width: 38px; height: 38px;
-      cursor: pointer;
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    .menu-dropdown {
-      display: none;
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      box-shadow: var(--shadow-lg);
-      padding: 8px;
-      min-width: 160px;
-      flex-direction: column;
-      gap: 2px;
-    }
+    .hamburger { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; position: relative; }
+    .menu-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); padding: 8px; min-width: 160px; flex-direction: column; gap: 2px; }
     .menu-dropdown.open { display: flex; }
-    .menu-dropdown a {
-      display: block;
-      font-weight: 500;
-      font-size: 0.95rem;
-      color: var(--text);
-      text-decoration: none;
-      padding: 9px 14px;
-      border-radius: 8px;
-      transition: background var(--transition);
-    }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
     .menu-dropdown a:hover { background: var(--surface2); }
 
-    /* ── Layout ── */
-    .page-wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 40px 80px;
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 40px;
-      align-items: start;
-    }
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
 
-    /* ── Sidebar ── */
-    aside {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      position: sticky;
-      top: calc(var(--header-h) + 20px);
-    }
-    .aside-label {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-    }
+    aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px); }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
     aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
-    aside ul li a {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 8px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: background var(--transition), color var(--transition);
-      line-height: 1.3;
-    }
+    aside ul li a { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.4; }
     aside ul li a:hover { background: var(--surface2); color: var(--text); }
     aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
-    aside ul li a .dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: currentColor;
-      flex-shrink: 0;
-      opacity: 0.5;
-    }
-    .aside-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 14px 0;
-    }
-    .aside-project-label {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; margin-top: 6px; }
 
-    /* ── Main content ── */
     main { min-width: 0; }
-
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
     .breadcrumb a { color: var(--text-muted); text-decoration: none; }
     .breadcrumb a:hover { color: var(--accent); }
     .breadcrumb span { opacity: 0.4; }
-
-    main h1 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(1.7rem, 3vw, 2.4rem);
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      margin-bottom: 16px;
-    }
-
-    .meta-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-    .meta-pill {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 5px 12px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
+    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
     .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
+    .meta-pill.blue { background: rgba(61,90,254,0.08); color: var(--accent2); border-color: rgba(61,90,254,0.2); }
+    .meta-pill.orange { background: rgba(232,108,47,0.08); color: var(--accent); border-color: rgba(232,108,47,0.2); }
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
 
-    main p { font-size: 0.95rem; line-height: 1.75; color: var(--text); margin-bottom: 14px; }
-    main h2 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.2rem;
-      letter-spacing: -0.01em;
-      margin-top: 36px;
-      margin-bottom: 14px;
-    }
-    main code {
-      font-family: 'Courier New', monospace;
-      font-size: 0.88em;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 2px 6px;
-      color: var(--accent);
-    }
-    main ul {
-      padding-left: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    main ul li {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      padding-left: 20px;
-      position: relative;
-      color: var(--text);
-    }
-    main ul li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-weight: 600;
-    }
-aside ul li { position: relative; }
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+    .doc-ref { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; }
+    .doc-ref a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .doc-ref a:hover { text-decoration: underline; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 18px; margin-bottom: 8px; color: var(--text-muted); }
+    main p { font-size: 0.95rem; line-height: 1.78; color: var(--text); margin-bottom: 14px; }
+    main code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
+    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
+
+    aside ul li { position: relative; }
 aside ul .submenu{
   list-style:none;
   display:flex;
@@ -355,185 +126,141 @@ aside ul .submenu li a .dot{
   width:4px;
   height:4px;
 }
-    /* ── Code blocks ── */
-    .code-container {
-      background: #1e1e1e;
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      margin: 16px 0 26px;
-      border: 1px solid var(--border);
-    }
-    .code-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .lang-tag {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.3);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .copy-btn {
-      background: none;
-      border: none;
-      color: rgba(255,255,255,0.35);
-      padding: 2px 0;
-      cursor: pointer;
-      font-size: 0.75rem;
-      font-family: 'DM Sans', sans-serif;
-      transition: color var(--transition);
-      position: relative;
-    }
-    .copy-btn:hover { color: rgba(255,255,255,0.75); }
-    .tooltip {
-      position: absolute;
-      top: -28px;
-      right: 0;
-      background: var(--surface2);
-      color: var(--text);
-      padding: 3px 8px;
-      font-size: 0.7rem;
-      border-radius: 4px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
-      white-space: nowrap;
-    }
-    .tooltip.show { opacity: 1; }
-    pre {
-      margin: 0;
-      padding: 18px;
-      overflow-x: auto;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.875rem;
-      line-height: 1.65;
-      color: #d4d4d4;
-      background: transparent;
-      white-space: pre;
-      tab-size: 2;
-    }
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
+    .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
+    .toc-grid a:hover { background: var(--surface2); color: var(--text); }
+    .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
 
-    /* ── Callout / tip box ── */
-    .callout {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
-      border-radius: var(--radius-sm);
-      padding: 16px 20px;
-      margin: 24px 0;
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-    .callout strong { color: var(--accent); font-family: 'Syne', sans-serif; }
+    .prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0 24px; }
+    .prop-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
+    .prop-card strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 4px; }
+    .prop-card span { font-size: 0.81rem; color: var(--text-muted); line-height: 1.45; display: block; }
+
+    .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
+    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
+    .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
+    .doc-block code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .note-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .warn-box { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.2); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .warn-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
     .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
     .callout a:hover { text-decoration: underline; }
 
-    .note-box {
-      background: rgba(61,90,254,0.07);
-      border: 1px solid rgba(61,90,254,0.18);
-      border-radius: var(--radius-sm);
-      padding: 14px 18px;
-      margin: 20px 0;
-      font-size: 0.88rem;
-      color: var(--text);
-      line-height: 1.6;
-    }
+    .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 26px; font-size: 0.875rem; }
+    .param-table th { text-align: left; padding: 8px 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+    .param-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); line-height: 1.5; vertical-align: top; }
+    .param-table tr:last-child td { border-bottom: none; }
+    .param-table tr:hover td { background: var(--surface2); }
+    .param-table td:last-child { color: var(--text-muted); font-size: 0.85rem; }
 
-    /* ── Footer ── */
-    footer {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 28px 40px;
-    }
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
+    /* VS Code dark code blocks */
+    .code-container { border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: #2d2d2d; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
+    .code-header-left { display: flex; align-items: center; gap: 10px; }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .code-dot.red    { background: #ff5f57; }
+    .code-dot.yellow { background: #febc2e; }
+    .code-dot.green  { background: #28c840; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Fira Code', monospace; }
+    .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
+    .copy-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); padding: 3px 10px; cursor: pointer; font-size: 0.72rem; font-family: 'DM Sans', sans-serif; transition: all 0.2s; position: relative; border-radius: 4px; }
+    .copy-btn:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.1); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: #3a3a3a; color: #d4d4d4; padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .tooltip.show { opacity: 1; }
+    pre { margin: 0; padding: 20px; overflow-x: auto; font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.88rem; line-height: 1.7; background: #1e1e1e; white-space: pre; tab-size: 4; }
+    /* VS Code Dark+ token colours */
+    .py-kw   { color: #569cd6; }
+    .py-bi   { color: #dcdcaa; }
+    .py-str  { color: #ce9178; }
+    .py-num  { color: #b5cea8; }
+    .py-cmt  { color: #6a9955; font-style: italic; }
+    .py-punc { color: #d4d4d4; }
+    .py-var  { color: #9cdcfe; }
+    .py-out  { color: #4ec9b0; }
+
+    .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 26px; }
+    .vs-card { border-radius: var(--radius-sm); padding: 18px 20px; }
+    .vs-card.yes { background: rgba(0,184,148,0.07); border: 1px solid rgba(0,184,148,0.2); }
+    .vs-card.no  { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.18); }
+    .vs-head { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+    .vs-card.yes .vs-head { color: var(--accent3); }
+    .vs-card.no  .vs-head { color: var(--accent); }
+    .vs-card ul { margin: 0; }
+    .vs-card ul li { font-size: 0.875rem; line-height: 1.55; color: var(--text); }
+
+    .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 26px; }
+    .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
+    .mi-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
+    .mi-body p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+    .mi-body code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .iq-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+    .iq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .iq-q { padding: 14px 18px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
+    .iq-badge { background: rgba(232,108,47,0.1); color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; padding: 2px 8px; flex-shrink: 0; margin-top: 2px; }
+    .iq-a { padding: 0 18px 14px 18px; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+    .iq-a code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 18px 0; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; padding: 14px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
+    .faq-a.open { max-height: 300px; padding: 2px 18px 15px; }
+    .faq-a code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .author-info { font-size: 0.85rem; line-height: 1.5; }
+    .author-info strong { font-weight: 600; display: block; }
+    .author-info span { color: var(--text-muted); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
     .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
     .footer-links { display: flex; gap: 20px; }
-    .footer-links a {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color var(--transition);
-    }
+    .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
     .footer-links a:hover { color: var(--accent); }
 
-    /* ── Responsive ── */
     @media (max-width: 768px) {
-      header { display: none; }
-      .mobile-header { display: flex; }
+      header { display: none; } .mobile-header { display: flex; }
       .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
-      aside {
-        position: static;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0 16px;
-      }
-      .aside-label, .aside-divider, .aside-project-label { grid-column: 1 / -1; }
-      footer { padding: 20px; }
-      .footer-container { flex-direction: column; align-items: flex-start; }
+      aside { position: static; } .toc-grid { grid-template-columns: 1fr; }
+      .vs-grid { grid-template-columns: 1fr; } .prop-grid { grid-template-columns: 1fr 1fr; }
+      footer { padding: 20px; } .footer-container { flex-direction: column; align-items: flex-start; }
     }
-    @media (max-width: 480px) {
-      aside { grid-template-columns: 1fr; }
-      main h1 { font-size: 1.6rem; }
-    }
+    @media (max-width: 480px) { main h1 { font-size: 1.6rem; } .prop-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
+<div class="progress-bar" id="progressBar"></div>
 
-  <div class="progress-bar" id="progressBar"></div>
+<header>
+  <a class="logo" href="../index.html"><img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" /><span>Kid<em>do</em></span></a>
+  <nav><a href="../index.html">Home</a><a href="../info/about.html">About</a><a href="../info/contact.html">Contact</a><button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button></nav>
+</header>
 
-  <!-- Desktop Header -->
-  <header>
-    <a class="logo" href="../index.html">
-      <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
-      <span>Kid<em>do</em></span>
-    </a>
-    <nav>
-      <a href="../index.html">Home</a>
-      <a href="../info/about.html">About</a>
-      <a href="../info/contact.html">Contact</a>
-      <button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button>
-    </nav>
-  </header>
+<div class="mobile-header">
+  <a class="logo" href="../index.html"><img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" /><span>Kid<em>do</em></span></a>
+  <div class="mobile-right"><button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button><button class="hamburger" id="hamburgerBtn">☰<div class="menu-dropdown" id="menuDropdown"><a href="../index.html">Home</a><a href="../info/about.html">About</a><a href="../info/contact.html">Contact</a></div></button></div>
+</div>
 
-  <!-- Mobile Header -->
-  <div class="mobile-header">
-    <a class="logo" href="../index.html">
-      <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
-      <span>Kid<em>do</em></span>
-    </a>
-    <div class="mobile-right">
-      <button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button>
-      <button class="hamburger" id="hamburgerBtn">☰
-        <div class="menu-dropdown" id="menuDropdown">
-          <a href="../index.html">Home</a>
-          <a href="../info/about.html">About</a>
-          <a href="../info/contact.html">Contact</a>
-        </div>
-      </button>
-    </div>
-  </div>
-
-  <div class="page-wrap">
-
-    <!-- Sidebar -->
-    <aside>
+<div class="page-wrap">
+  <aside>
   <div class="aside-label">Python Topics</div>
   <ul>
     <li><a href="../python/py-intro.html"><span class="dot"></span>Introduction</a></li>
     <li><a href="../python/user_input.html"><span class="dot"></span>User Input</a></li>
     <li><a href="../python/if_statements.html"><span class="dot"></span>If Statements</a></li>
+    <li><a href="../python/for_loop.html" class="active"><span class="dot"></span>For Loop</a></li>
     <li>
       <a href="../python/list.html"><span class="dot"></span>Lists</a>
       <ul class="submenu">
@@ -546,7 +273,6 @@ aside ul .submenu li a .dot{
     <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
     <li><a href="../python/sets.html"><span class="dot"></span>Sets</a></li>
     <li><a href="../python/looping-techniques.html"><span class="dot"></span>Looping Techniques</a></li>
-    <li><a href="../python/for_loop.html" class="active"><span class="dot"></span>For Loop</a></li>
     <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
   </ul>
 
@@ -556,217 +282,547 @@ aside ul .submenu li a .dot{
   </ul>
 </aside>
 
-    <!-- Main -->
-    <main>
-      <div class="breadcrumb">
-        <a href="../index.html">Home</a>
-        <span>›</span>
-        <a href="../python/py-intro.html">Python</a>
-        <span>›</span>
-        For Loops
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../python/py-intro.html">Python</a><span>›</span>
+      4.2 for Statements
+    </div>
+
+    <h1>Python for Loops Documentation Explained (Python Docs 4.2) | The for Statement, range(), enumerate() & Nested Loops</h1>
+
+    <div class="doc-ref">
+      📖 Based on <a href="https://docs.python.org/3/tutorial/controlflow.html#for-statements" target="_blank" rel="noopener">Python 3 official docs §4.2</a> — explained like a friend, with extra examples added
+    </div>
+
+    <div class="meta-row">
+      <span class="meta-pill">Python</span>
+      <span class="meta-pill green">Beginner</span>
+      <span class="meta-pill blue">Control Flow</span>
+      <span class="meta-pill orange">Official Docs</span>
+      <span class="date-badge">Updated July 2026</span>
+    </div>
+
+    <p>This page explains the official Python <code>for</code> statement documentation (Python Docs 4.2) in simple language. If the official docs feel like a wall of text, this guide breaks down how Python's <code>for</code> loop actually works, why it's different from a C-style loop, how <code>range()</code> and <code>enumerate()</code> fit in, and the safe way to loop over a collection you're also modifying.</p>
+    <p>By the end of this guide, you'll understand what makes Python's <code>for</code> loop unique among programming languages, how to loop over any sequence, and the one iteration mistake that trips up almost every beginner at least once.</p>
+
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">In this guide</div>
+      <div class="toc-grid">
+        <a href="#what-is"><span class="toc-num">01</span>What is a for statement?</a>
+        <a href="#syntax"><span class="toc-num">02</span>Basic for loop syntax</a>
+        <a href="#sequences"><span class="toc-num">03</span>Looping over sequences</a>
+        <a href="#range"><span class="toc-num">04</span>The range() function</a>
+        <a href="#enumerate"><span class="toc-num">05</span>enumerate() explained</a>
+        <a href="#modifying"><span class="toc-num">06</span>Modifying a collection while iterating</a>
+        <a href="#nested"><span class="toc-num">07</span>Nested for loops</a>
+        <a href="#else"><span class="toc-num">08</span>for...else in Python</a>
+        <a href="#break-continue-pass"><span class="toc-num">09</span>break, continue &amp; pass</a>
+        <a href="#vs"><span class="toc-num">10</span>for loop vs while loop</a>
+        <a href="#mistakes"><span class="toc-num">11</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">12</span>Interview questions</a>
+        <a href="#faq"><span class="toc-num">13</span>FAQs</a>
       </div>
+    </nav>
 
-      <h1>Python For Loops –<br>Repeat Like a Pro!</h1>
+    <div class="section-divider"></div>
 
-      <div class="meta-row">
-        <span class="meta-pill">⏱ 5 min read</span>
-        <span class="meta-pill green">Beginner</span>
-        <span class="meta-pill">Last updated: April 2026</span>
+    <!-- 01 -->
+    <h2 id="what-is">What is a for Statement? (Python Docs 4.2 Explained)</h2>
+    <p>Python's <code>for</code> loop works differently from the <code>for</code> loop you might know from C or Pascal. Instead of stepping through a counter you define yourself, Python's <code>for</code> statement walks through the items of any sequence — a list, a string, a tuple — directly, in the order they appear. There's no manual index tracking, no separate halting condition to write. Python just hands you each item, one at a time.</p>
+    <p>This is one of the first things that feels genuinely different when moving from a language like C or Java into Python. You stop thinking "how do I count to the end of this array" and start thinking "give me each item in this collection."</p>
+
+    <div class="prop-grid">
+      <div class="prop-card"><strong>Sequence-based</strong><span>Iterates directly over items, not over index numbers</span></div>
+      <div class="prop-card"><strong>No manual counter</strong><span>No need to increment or check a halting condition yourself</span></div>
+      <div class="prop-card"><strong>Works on any iterable</strong><span>Lists, strings, tuples, dicts, sets, files, and more</span></div>
+      <div class="prop-card"><strong>Preserves iteration order</strong><span>Items are visited in the same order they appear in the iterable.</span></div>
+    </div>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>Python's <code>for</code> statement iterates over the items of any sequence, in the order that they appear in the sequence, rather than always iterating over an arithmetic progression of numbers as in some other languages.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 -->
+    <h2 id="syntax">Basic for Loop Syntax</h2>
+    <p>The Python docs illustrate this with a simple example — measuring the length of a few strings:</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
+      <pre><span class="py-cmt"># Measure some strings:</span>
+<span class="py-var">words</span> <span class="py-punc">= [</span><span class="py-str">'cat'</span><span class="py-punc">,</span> <span class="py-str">'window'</span><span class="py-punc">,</span> <span class="py-str">'defenestrate'</span><span class="py-punc">]</span>
+<span class="py-kw">for</span> <span class="py-var">w</span> <span class="py-kw">in</span> <span class="py-var">words</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">w</span><span class="py-punc">,</span> <span class="py-bi">len</span><span class="py-punc">(</span><span class="py-var">w</span><span class="py-punc">))</span>
 
-      <p>Want Python to do the same thing again and again without writing it multiple times? That's where <code>for</code> loops come to the rescue! They're simple, powerful, and everywhere once you start coding.</p>
+<span class="py-out"># cat 3</span>
+<span class="py-out"># window 6</span>
+<span class="py-out"># defenestrate 12</span></pre>
+    </div>
 
-      <h2>What's a For Loop?</h2>
-      <p>A <code>for</code> loop lets you go through a collection like a list or string one item at a time. Instead of repeating code, you just tell Python: "For every item in this list, do this thing." Easy and neat!</p>
+    <p>The pattern is always <code>for &lt;variable&gt; in &lt;iterable&gt;:</code>, followed by an indented block. On each pass, the loop variable is set to the next item, and the indented block runs once for that item.</p>
 
-      <h2>Example 1: Looping Through a List</h2>
-      <div class="code-container">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-        </div>
-        <pre><code>fruits = ["apple", "banana", "mango"]
-
-for fruit in fruits:
-    print(fruit)</code></pre>
+    <h4>Kiddo extra — looping over a list of players</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <p>🔹 Python goes through each fruit and prints it one by one. No need to repeat lines of code!</p>
+      <pre><span class="py-var">forwards</span> <span class="py-punc">= [</span><span class="py-str">"Mbappe"</span><span class="py-punc">,</span> <span class="py-str">"Haaland"</span><span class="py-punc">,</span> <span class="py-str">"Yamal"</span><span class="py-punc">]</span>
 
-      <h2>Example 2: Using <code>range()</code> for Numbers</h2>
-      <div class="code-container">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-        </div>
-        <pre><code>for i in range(5):
-    print(i)</code></pre>
+<span class="py-kw">for</span> <span class="py-var">player</span> <span class="py-kw">in</span> <span class="py-var">forwards</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{player}</span><span class="py-str"> plays as a forward"</span><span class="py-punc">)</span>
+
+<span class="py-out"># Mbappe plays as a forward</span>
+<span class="py-out"># Haaland plays as a forward</span>
+<span class="py-out"># Yamal plays as a forward</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 -->
+    <h2 id="sequences">Looping Over Different Sequences</h2>
+    <p>Because Python's <code>for</code> loop works on any sequence, the same syntax applies whether you're looping over a list, a string, a tuple, or the keys of a dictionary.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <p>🔹 <code>range(5)</code> means numbers from 0 to 4. Perfect when you want to repeat something a certain number of times!</p>
+      <pre><span class="py-cmt"># Looping over a string — each character is one item</span>
+<span class="py-kw">for</span> <span class="py-var">letter</span> <span class="py-kw">in</span> <span class="py-str">"Pedri"</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">letter</span><span class="py-punc">)</span>
+<span class="py-out"># P e d r i  (each on its own line)</span>
 
-      <h2>Example 3: Looping Through a String</h2>
-      <div class="code-container">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-        </div>
-        <pre><code>for char in "Python":
-    print(char)</code></pre>
+<span class="py-cmt"># Looping over a tuple</span>
+<span class="py-var">midfielders</span> <span class="py-punc">= (</span><span class="py-str">"Bellingham"</span><span class="py-punc">,</span> <span class="py-str">"Pedri"</span><span class="py-punc">,</span> <span class="py-str">"Odegaard"</span><span class="py-punc">)</span>
+<span class="py-kw">for</span> <span class="py-var">name</span> <span class="py-kw">in</span> <span class="py-var">midfielders</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">name</span><span class="py-punc">)</span>
+
+<span class="py-cmt"># Looping over dictionary keys (default behaviour)</span>
+<span class="py-var">ratings</span> <span class="py-punc">= {</span><span class="py-str">"Mbappe"</span><span class="py-punc">:</span> <span class="py-num">91</span><span class="py-punc">,</span> <span class="py-str">"Haaland"</span><span class="py-punc">:</span> <span class="py-num">92</span><span class="py-punc">}</span>
+<span class="py-kw">for</span> <span class="py-var">player</span> <span class="py-kw">in</span> <span class="py-var">ratings</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">player</span><span class="py-punc">,</span> <span class="py-var">ratings</span><span class="py-punc">[</span><span class="py-var">player</span><span class="py-punc">])</span>
+<span class="py-out"># Mbappe 91</span>
+<span class="py-out"># Haaland 92</span></pre>
+    </div>
+
+    <div class="note-box">
+      Looping directly over a dictionary gives you its <strong>keys</strong>, not its values. Use <code>.items()</code> if you want the key and value together — that's exactly what the next section on modifying collections uses.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <h2 id="range">The range() Function With for Loops</h2>
+    <p>Sometimes you do need a counter — for example, to run a block a fixed number of times, or to access items by index. That's what <code>range()</code> is for. It generates a sequence of numbers on demand, without building the whole list in memory.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <p>🔹 Each character is treated like an item in a list. Python loops through them one by one!</p>
+      <pre><span class="py-cmt"># range(stop) — 0 up to (not including) stop</span>
+<span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-bi">range</span><span class="py-punc">(</span><span class="py-num">5</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">i</span><span class="py-punc">)</span>
+<span class="py-out"># 0 1 2 3 4</span>
 
-      <h2>Example 4: Using <code>break</code> to Stop Early</h2>
-      <div class="code-container">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-        </div>
-        <pre><code>for i in range(1, 6):
-    if i == 4:
-        break
-    print(i)</code></pre>
+<span class="py-cmt"># range(start, stop)</span>
+<span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-bi">range</span><span class="py-punc">(</span><span class="py-num">2</span><span class="py-punc">,</span> <span class="py-num">6</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">i</span><span class="py-punc">)</span>
+<span class="py-out"># 2 3 4 5</span>
+
+<span class="py-cmt"># range(start, stop, step)</span>
+<span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-bi">range</span><span class="py-punc">(</span><span class="py-num">10</span><span class="py-punc">,</span> <span class="py-num">0</span><span class="py-punc">, -</span><span class="py-num">2</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">i</span><span class="py-punc">)</span>
+<span class="py-out"># 10 8 6 4 2</span>
+
+<span class="py-cmt"># Access a list by index with range(len(...))</span>
+<span class="py-var">squad</span> <span class="py-punc">= [</span><span class="py-str">"Vinicius Jr"</span><span class="py-punc">,</span> <span class="py-str">"Rodrygo"</span><span class="py-punc">,</span> <span class="py-str">"Musiala"</span><span class="py-punc">]</span>
+<span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-bi">range</span><span class="py-punc">(</span><span class="py-bi">len</span><span class="py-punc">(</span><span class="py-var">squad</span><span class="py-punc">)):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">i</span><span class="py-punc">,</span> <span class="py-var">squad</span><span class="py-punc">[</span><span class="py-var">i</span><span class="py-punc">])</span>
+<span class="py-out"># 0 Vinicius Jr</span>
+<span class="py-out"># 1 Rodrygo</span>
+<span class="py-out"># 2 Musiala</span></pre>
+    </div>
+
+    <table class="param-table">
+      <thead><tr><th>Form</th><th>Meaning</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><code>range(stop)</code></td><td>0 up to (not including) stop</td><td><code>range(5)</code> → 0,1,2,3,4</td></tr>
+        <tr><td><code>range(start, stop)</code></td><td>start up to (not including) stop</td><td><code>range(2,6)</code> → 2,3,4,5</td></tr>
+        <tr><td><code>range(start, stop, step)</code></td><td>start to stop, moving by step</td><td><code>range(10,0,-2)</code> → 10,8,6,4,2</td></tr>
+        <tr><td><code>list(range(...))</code></td><td>Materialize a range into a real list</td><td><code>list(range(3))</code> → [0,1,2]</td></tr>
+      </tbody>
+    </table>
+
+    <div class="warn-box">
+Using an index when you only need the values is usually considered a code smell. If you find yourself writing <code>for i in range(len(squad)): print(squad[i])</code> just to access each item, a simple <code>for player in squad:</code> is cleaner. Use <code>enumerate()</code> only when you actually need both the index and the value.    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 -->
+    <h2 id="enumerate">enumerate() — Index and Value Together</h2>
+    <p>When you need both the position and the value while looping, <code>enumerate()</code> is the idiomatic way to get them — cleaner than manually tracking a counter or indexing with <code>range(len(...))</code>.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <p>🔹 <code>break</code> stops the loop when the condition is met. Here, it stops before reaching 4!</p>
+      <pre><span class="py-var">squad</span> <span class="py-punc">= [</span><span class="py-str">"Foden"</span><span class="py-punc">,</span> <span class="py-str">"Saka"</span><span class="py-punc">,</span> <span class="py-str">"Bellingham"</span><span class="py-punc">]</span>
 
-      <h2>Example 5: Skipping Items with <code>continue</code></h2>
-      <div class="code-container">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-        </div>
-        <pre><code>for i in range(1, 6):
-    if i == 3:
-        continue
-    print(i)</code></pre>
+<span class="py-kw">for</span> <span class="py-var">index</span><span class="py-punc">,</span> <span class="py-var">name</span> <span class="py-kw">in</span> <span class="py-bi">enumerate</span><span class="py-punc">(</span><span class="py-var">squad</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">index</span><span class="py-punc">,</span> <span class="py-var">name</span><span class="py-punc">)</span>
+<span class="py-out"># 0 Foden</span>
+<span class="py-out"># 1 Saka</span>
+<span class="py-out"># 2 Bellingham</span>
+
+<span class="py-cmt"># Start counting from 1 instead of 0</span>
+<span class="py-kw">for</span> <span class="py-var">shirt_no</span><span class="py-punc">,</span> <span class="py-var">name</span> <span class="py-kw">in</span> <span class="py-bi">enumerate</span><span class="py-punc">(</span><span class="py-var">squad</span><span class="py-punc">,</span> <span class="py-kw">start</span><span class="py-punc">=</span><span class="py-num">1</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"#</span><span class="py-var">{shirt_no}</span><span class="py-str"> </span><span class="py-var">{name}</span><span class="py-str">"</span><span class="py-punc">)</span>
+<span class="py-out"># #1 Foden</span>
+<span class="py-out"># #2 Saka</span>
+<span class="py-out"># #3 Bellingham</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 -->
+    <h2 id="modifying">Modifying a Collection While Iterating</h2>
+    <p>This is where the Python docs give a genuinely important warning. Changing a collection while you're looping over that exact same collection can produce surprising, hard-to-predict results — items get skipped, or the loop behaves inconsistently.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>Code that modifies a collection while iterating over that same collection can be tricky to get right. Instead, it is usually more straightforward to loop over a copy of the collection or to create a new collection.</p>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <p>🔹 <code>continue</code> skips the current iteration. Here, it jumps over 3 and keeps going!</p>
+      <pre><span class="py-cmt"># Create a sample collection</span>
+<span class="py-var">users</span> <span class="py-punc">= {</span><span class="py-str">'Hans'</span><span class="py-punc">:</span> <span class="py-str">'active'</span><span class="py-punc">,</span> <span class="py-str">'Éléonore'</span><span class="py-punc">:</span> <span class="py-str">'inactive'</span><span class="py-punc">,</span> <span class="py-str">'景太郎'</span><span class="py-punc">:</span> <span class="py-str">'active'</span><span class="py-punc">}</span>
 
-      <h2>Example 6: Looping with <code>else</code></h2>
-      <div class="code-container">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-        </div>
-        <pre><code>for i in range(3):
-    print(i)
-else:
-    print("Loop is done!")</code></pre>
+<span class="py-cmt"># Strategy: Iterate over a copy</span>
+<span class="py-kw">for</span> <span class="py-var">user</span><span class="py-punc">,</span> <span class="py-var">status</span> <span class="py-kw">in</span> <span class="py-var">users</span><span class="py-punc">.</span><span class="py-bi">copy</span><span class="py-punc">().</span><span class="py-bi">items</span><span class="py-punc">():</span>
+    <span class="py-kw">if</span> <span class="py-var">status</span> <span class="py-punc">==</span> <span class="py-str">'inactive'</span><span class="py-punc">:</span>
+        <span class="py-kw">del</span> <span class="py-var">users</span><span class="py-punc">[</span><span class="py-var">user</span><span class="py-punc">]</span>
+
+<span class="py-cmt"># Strategy: Create a new collection</span>
+<span class="py-var">active_users</span> <span class="py-punc">= {}</span>
+<span class="py-kw">for</span> <span class="py-var">user</span><span class="py-punc">,</span> <span class="py-var">status</span> <span class="py-kw">in</span> <span class="py-var">users</span><span class="py-punc">.</span><span class="py-bi">items</span><span class="py-punc">():</span>
+    <span class="py-kw">if</span> <span class="py-var">status</span> <span class="py-punc">==</span> <span class="py-str">'active'</span><span class="py-punc">:</span>
+        <span class="py-var">active_users</span><span class="py-punc">[</span><span class="py-var">user</span><span class="py-punc">] =</span> <span class="py-var">status</span></pre>
+    </div>
+
+    <h4>Kiddo extra — the same two strategies, with a football squad</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <p>🔹 You can attach <code>else</code> to run code after the loop finishes normally. Handy for cleanup or final messages!</p>
+      <pre><span class="py-var">squad_status</span> <span class="py-punc">= {</span><span class="py-str">"Mbappe"</span><span class="py-punc">:</span> <span class="py-str">"fit"</span><span class="py-punc">,</span> <span class="py-str">"Haaland"</span><span class="py-punc">:</span> <span class="py-str">"injured"</span><span class="py-punc">,</span> <span class="py-str">"Musiala"</span><span class="py-punc">:</span> <span class="py-str">"fit"</span><span class="py-punc">}</span>
 
-      <h2>Example 7: Shopping Cart Total Calculator</h2>
-      <div class="code-container">
-        <div class="code-header">
-          <span class="lang-tag">Python</span>
-          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-        </div>
-        <pre><code>cart = [
-    {"name": "T-shirt",  "price": 499},
-    {"name": "Jeans",    "price": 899},
-    {"name": "Sneakers", "price": 1299},
-    {"name": "Cap",      "price": 199}
-]
+<span class="py-cmt"># Strategy 1 — iterate over a copy, edit the original safely</span>
+<span class="py-kw">for</span> <span class="py-var">player</span><span class="py-punc">,</span> <span class="py-var">status</span> <span class="py-kw">in</span> <span class="py-var">squad_status</span><span class="py-punc">.</span><span class="py-bi">copy</span><span class="py-punc">().</span><span class="py-bi">items</span><span class="py-punc">():</span>
+    <span class="py-kw">if</span> <span class="py-var">status</span> <span class="py-punc">==</span> <span class="py-str">"injured"</span><span class="py-punc">:</span>
+        <span class="py-kw">del</span> <span class="py-var">squad_status</span><span class="py-punc">[</span><span class="py-var">player</span><span class="py-punc">]</span>
 
-total = 0
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">squad_status</span><span class="py-punc">)</span>
+<span class="py-out"># {'Mbappe': 'fit', 'Musiala': 'fit'}</span>
 
-for item in cart:
-    print(f"Adding {item['name']} for ₹{item['price']}")
-    total += item["price"]
+<span class="py-cmt"># Strategy 2 — build a brand new collection instead</span>
+<span class="py-var">available</span> <span class="py-punc">= {}</span>
+<span class="py-kw">for</span> <span class="py-var">player</span><span class="py-punc">,</span> <span class="py-var">status</span> <span class="py-kw">in</span> <span class="py-var">squad_status</span><span class="py-punc">.</span><span class="py-bi">items</span><span class="py-punc">():</span>
+    <span class="py-kw">if</span> <span class="py-var">status</span> <span class="py-punc">==</span> <span class="py-str">"fit"</span><span class="py-punc">:</span>
+        <span class="py-var">available</span><span class="py-punc">[</span><span class="py-var">player</span><span class="py-punc">] =</span> <span class="py-var">status</span>
 
-print("------------------------")
-print(f"Total amount: ₹{total}")</code></pre>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">available</span><span class="py-punc">)</span>
+<span class="py-out"># {'Mbappe': 'fit', 'Musiala': 'fit'}</span></pre>
+    </div>
+
+    <div class="warn-box">
+      <strong>Why this matters:</strong> deleting from a dictionary or list while directly looping over it changes its size mid-iteration. Python's internal position tracking gets thrown off, and items can silently be skipped. Looping over <code>.copy()</code>, or building a fresh collection, sidesteps the problem entirely.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 -->
+    <h2 id="nested">Nested for Loops</h2>
+    <p>A <code>for</code> loop can contain another <code>for</code> loop inside it. The inner loop runs completely for every single pass of the outer loop — useful for grids, matchups, and any two-dimensional data.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <p>🔹 This program goes through each item in the shopping cart, prints it, and keeps adding the price to get the final total!</p>
+      <pre><span class="py-var">teams</span> <span class="py-punc">= [</span><span class="py-str">"Real Madrid"</span><span class="py-punc">,</span> <span class="py-str">"Man City"</span><span class="py-punc">]</span>
+<span class="py-var">stars</span> <span class="py-punc">= [</span><span class="py-str">"Mbappe"</span><span class="py-punc">,</span> <span class="py-str">"Haaland"</span><span class="py-punc">]</span>
 
-      <h2>Why Use For Loops?</h2>
-      <ul>
-        <li>They make your code shorter and easier to read.</li>
-        <li>You can loop through lists, strings, dictionaries, and more.</li>
-        <li>They're perfect when you know how many items you want to go through!</li>
-      </ul>
+<span class="py-kw">for</span> <span class="py-var">team</span> <span class="py-kw">in</span> <span class="py-var">teams</span><span class="py-punc">:</span>
+    <span class="py-kw">for</span> <span class="py-var">star</span> <span class="py-kw">in</span> <span class="py-var">stars</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{team}</span><span class="py-str"> vs a team with </span><span class="py-var">{star}</span><span class="py-str">"</span><span class="py-punc">)</span>
 
-      <h2>Common Errors</h2>
-      <div class="note-box">
-        Forgetting to indent the loop block properly will cause a syntax error. Always make sure your loop contents are indented under the <code>for</code> statement!
+<span class="py-out"># Real Madrid vs a team with Mbappe</span>
+<span class="py-out"># Real Madrid vs a team with Haaland</span>
+<span class="py-out"># Man City vs a team with Mbappe</span>
+<span class="py-out"># Man City vs a team with Haaland</span></pre>
+    </div>
+
+    <div class="note-box">
+      The outer loop runs 2 times here, and the inner loop runs 2 times for <em>each</em> of those — 4 total print statements. Nested loops multiply: <code>len(outer) × len(inner)</code> iterations.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 -->
+    <h2 id="else">for...else in Python</h2>
+    <p>Python lets a <code>for</code> loop have an <code>else</code> block. It's an unusual feature to languages outside Python — the <code>else</code> runs only if the loop finishes normally, without hitting a <code>break</code>.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
+      <pre><span class="py-var">squad</span> <span class="py-punc">= [</span><span class="py-str">"Odegaard"</span><span class="py-punc">,</span> <span class="py-str">"Saka"</span><span class="py-punc">,</span> <span class="py-str">"Rice"</span><span class="py-punc">]</span>
 
-      <h2>Practice Time!</h2>
-      <p>Create a list of your favorite games, then use a <code>for</code> loop to print them out one by one. Add a condition to skip one of them using <code>continue</code>. See how it works!</p>
+<span class="py-kw">for</span> <span class="py-var">player</span> <span class="py-kw">in</span> <span class="py-var">squad</span><span class="py-punc">:</span>
+    <span class="py-kw">if</span> <span class="py-var">player</span> <span class="py-punc">==</span> <span class="py-str">"Bellingham"</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Found him!"</span><span class="py-punc">)</span>
+        <span class="py-kw">break</span>
+<span class="py-kw">else</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Bellingham is not in this squad"</span><span class="py-punc">)</span>
 
-      <div class="callout">
-        <strong>Ready to go deeper?</strong> Explore more Python essentials:
-        <a href="../python/list.html">Lists</a>,
-        <a href="../python/list-comp.html">List Comprehensions</a>,
-        <a href="../python/while_loop.html">While Loops</a>, and
-        <a href="../python/if_statements.html">If Statements</a>
-        <a href="../python/sets.html">Sets</a>
-        <a href="../python/list-stack-queue.html">Lists as Stack and Queue</a> ·
-      <a href="../python/nested-list-comp.html">Nested List Comprehension</a> ·
-        <a href="../python/tuples.html">Tuples</a>
-        <a href="../python/dictionary.html">Dictionaries</a> ·
-      </div>
-    </main>
+<span class="py-out"># Bellingham is not in this squad</span></pre>
+    </div>
 
+    <div class="note-box">
+      Think of it as a built-in "search finished without finding it" branch. If <code>break</code> runs, the <code>else</code> is skipped entirely. If the loop runs through every item without breaking, <code>else</code> executes.
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 id="break-continue-pass">break, continue &amp; pass in for Loops</h2>
+<p>Three small keywords control the flow inside a loop body, and beginners often mix them up. <code>break</code> exits the loop entirely, <code>continue</code> skips to the next iteration, and <code>pass</code> does nothing at all — it's just a placeholder.</p>
+
+<div class="prop-grid">
+  <div class="prop-card"><strong>break</strong><span>Stops the loop immediately — no more iterations run</span></div>
+  <div class="prop-card"><strong>continue</strong><span>Skips the rest of this iteration, moves to the next item</span></div>
+  <div class="prop-card"><strong>pass</strong><span>Does nothing — a placeholder where code is syntactically required</span></div>
+</div>
+
+<div class="code-container">
+  <div class="code-header">
+    <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+    <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
   </div>
+  <pre><span class="py-var">squad</span> <span class="py-punc">= [</span><span class="py-str">"Mbappe"</span><span class="py-punc">,</span> <span class="py-str">"Haaland"</span><span class="py-punc">,</span> <span class="py-str">"Yamal"</span><span class="py-punc">,</span> <span class="py-str">"Musiala"</span><span class="py-punc">]</span>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-container">
-      <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
-      <div class="footer-links">
-        <a href="../info/privacy.html">Privacy</a>
-        <a href="../info/terms.html">Terms</a>
-        <a href="../info/contact.html">Contact</a>
+<span class="py-cmt"># break — stop the loop entirely once a condition is met</span>
+<span class="py-kw">for</span> <span class="py-var">player</span> <span class="py-kw">in</span> <span class="py-var">squad</span><span class="py-punc">:</span>
+    <span class="py-kw">if</span> <span class="py-var">player</span> <span class="py-punc">==</span> <span class="py-str">"Yamal"</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Found Yamal, stopping search"</span><span class="py-punc">)</span>
+        <span class="py-kw">break</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Checking </span><span class="py-var">{player}</span><span class="py-str">..."</span><span class="py-punc">)</span>
+<span class="py-out"># Checking Mbappe...</span>
+<span class="py-out"># Checking Haaland...</span>
+<span class="py-out"># Found Yamal, stopping search</span>
+
+<span class="py-cmt"># continue — skip this iteration, keep looping</span>
+<span class="py-kw">for</span> <span class="py-var">player</span> <span class="py-kw">in</span> <span class="py-var">squad</span><span class="py-punc">:</span>
+    <span class="py-kw">if</span> <span class="py-var">player</span> <span class="py-punc">==</span> <span class="py-str">"Haaland"</span><span class="py-punc">:</span>
+        <span class="py-kw">continue</span>   <span class="py-cmt"># skip Haaland, move to the next player</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">player</span><span class="py-punc">)</span>
+<span class="py-out"># Mbappe</span>
+<span class="py-out"># Yamal</span>
+<span class="py-out"># Musiala</span>
+
+<span class="py-cmt"># pass — a no-op placeholder, useful while sketching out logic</span>
+<span class="py-kw">for</span> <span class="py-var">player</span> <span class="py-kw">in</span> <span class="py-var">squad</span><span class="py-punc">:</span>
+    <span class="py-kw">if</span> <span class="py-var">player</span> <span class="py-punc">==</span> <span class="py-str">"Musiala"</span><span class="py-punc">:</span>
+        <span class="py-kw">pass</span>   <span class="py-cmt"># TODO: handle Musiala's case later</span>
+    <span class="py-kw">else</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">player</span><span class="py-punc">)</span>
+<span class="py-out"># Mbappe</span>
+<span class="py-out"># Haaland</span>
+<span class="py-out"># Yamal</span></pre>
+</div>
+
+<table class="param-table">
+  <thead><tr><th>Keyword</th><th>Effect on the loop</th><th>When to reach for it</th></tr></thead>
+  <tbody>
+    <tr><td><code>break</code></td><td>Exits the loop immediately — remaining items are never visited</td><td>Stop searching once you've found what you needed</td></tr>
+    <tr><td><code>continue</code></td><td>Skips the rest of the current iteration, moves to the next item</td><td>Skip items that don't meet a condition without stopping the whole loop</td></tr>
+    <tr><td><code>pass</code></td><td>Does nothing — the loop continues normally to the next line</td><td>Placeholder for a block you haven't written yet, or an intentionally empty branch</td></tr>
+  </tbody>
+</table>
+
+<div class="warn-box">
+  <strong>pass is not the same as continue.</strong> <code>pass</code> just fills a spot where Python's syntax requires a statement — it doesn't skip anything or affect the loop at all. <code>continue</code> actively jumps to the next iteration. Mixing these up is a common beginner mistake since both can appear to "do nothing visible" in simple examples.
+</div>
+
+<div class="section-divider"></div>
+
+    <!-- 09 -->
+    <h2 id="vs">Python for Loop vs while Loop</h2>
+    <div class="vs-grid">
+      <div class="vs-card yes">
+        <div class="vs-head">Use a for loop when</div>
+        <ul>
+          <li>You already have a sequence — a list, string, tuple, or dict</li>
+          <li>You know how many times you want to loop, or the collection defines it</li>
+          <li>You need to process every item in a known collection</li>
+          <li>You want index + value together via <code>enumerate()</code></li>
+        </ul>
+      </div>
+      <div class="vs-card no">
+        <div class="vs-head">Use a while loop when</div>
+        <ul>
+          <li>The number of iterations isn't known ahead of time</li>
+          <li>You're waiting for a condition to change — user input, a flag, a timer</li>
+          <li>You need to keep looping until something specific happens</li>
+          <li>There's no ready-made sequence to iterate over</li>
+        </ul>
       </div>
     </div>
-  </footer>
 
-  <script>
-    /* ── Theme ── */
-    const desktopToggle = document.getElementById('desktopToggleTheme');
-    const mobileToggle  = document.getElementById('mobileToggleTheme');
-    const applyTheme = (dark) => {
-      document.body.classList.toggle('dark', dark);
-      const icon = dark ? '☀️' : '🌙';
-      if (desktopToggle) desktopToggle.textContent = icon;
-      if (mobileToggle)  mobileToggle.textContent  = icon;
-    };
-    applyTheme(localStorage.getItem('theme') === 'dark');
-    const toggleTheme = () => {
-      const isDark = !document.body.classList.contains('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      applyTheme(isDark);
-    };
-    if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
-    if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+    <table class="param-table">
+      <thead><tr><th>Feature</th><th>for loop</th><th>while loop</th></tr></thead>
+      <tbody>
+        <tr><td>Best for</td><td>Iterating over a known sequence</td><td>Repeating until a condition changes</td></tr>
+        <tr><td>Iteration count</td><td>Determined by the sequence length</td><td>Determined by the condition</td></tr>
+        <tr><td>Risk of infinite loop</td><td>Very low</td><td>Higher — easy to forget to update the condition</td></tr>
+        <tr><td>Typical use</td><td>Processing lists, strings, dicts</td><td>Polling, retries, game loops</td></tr>
+      </tbody>
+    </table>
 
-    /* ── Mobile menu ── */
-    const hamburger    = document.getElementById('hamburgerBtn');
-    const menuDropdown = document.getElementById('menuDropdown');
-    hamburger?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      menuDropdown.classList.toggle('open');
-    });
-    document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+    <div class="section-divider"></div>
 
-    /* ── Scroll progress ── */
-    const progressBar = document.getElementById('progressBar');
-    window.addEventListener('scroll', () => {
-      const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-      progressBar.style.width = Math.min(pct, 100) + '%';
-    });
+    <!-- 10 -->
+    <h2 id="mistakes">Common Python for Loop Mistakes</h2>
+    <div class="mistake-list">
+      <div class="mistake-item"><div class="mi-body"><strong>Modifying a list or dict while looping over it directly</strong><p>Deleting or adding items to the same collection you're iterating over can silently skip items. Loop over <code>.copy()</code> or build a new collection instead, as shown above.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Using range(len(...)) when a plain for loop would do</strong><p><code>for i in range(len(squad)): print(squad[i])</code> works, but <code>for player in squad: print(player)</code> is simpler and more Pythonic — reach for <code>range()</code> or <code>enumerate()</code> only when you actually need the index.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Forgetting range(stop) doesn't include stop</strong><p><code>range(5)</code> gives <code>0, 1, 2, 3, 4</code> — five numbers, not including 5. A common off-by-one bug is expecting <code>range(5)</code> to include the number 5.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Confusing for...else with if...else</strong><p>The <code>else</code> after a for loop doesn't mean "if the loop condition is false." It means "the loop finished without hitting <code>break</code>." These are unrelated to the <code>else</code> used with <code>if</code>.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Reusing the loop variable name after the loop ends</strong><p>The loop variable still holds its last value after the loop finishes. Reusing that variable name elsewhere in the function without reassigning it can cause confusing bugs.</p></div></div>
+    </div>
 
-    /* ── Copy buttons ── */
-    document.querySelectorAll('.code-container').forEach(container => {
-      const btn     = container.querySelector('.copy-btn');
-      const tooltip = container.querySelector('.tooltip');
-      const code    = container.querySelector('pre code');
-      btn.addEventListener('click', () => {
-        navigator.clipboard.writeText(code.innerText.trim()).then(() => {
-          tooltip.classList.add('show');
-          setTimeout(() => tooltip.classList.remove('show'), 2000);
-        });
+    <div class="section-divider"></div>
+
+    <!-- 11 -->
+    <h2 id="interview">Python for Loop Interview Questions and Answers</h2>
+    <p>These come up often in Python interviews — from beginner screens to backend engineering roles:</p>
+    <div class="iq-list">
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> How is Python's for loop different from a C-style for loop?</div><div class="iq-a">A C-style for loop typically defines a counter, a condition, and an increment step manually. Python's for loop iterates directly over the items of a sequence — a list, string, tuple, or any iterable — without you managing an index or halting condition yourself.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q2</span> Why shouldn't you modify a list or dict while looping over it?</div><div class="iq-a">Changing the size of a collection mid-iteration confuses the internal position tracking Python uses to step through it, which can cause items to be skipped or the loop to behave unpredictably. The safe approach is to loop over a copy (<code>collection.copy()</code>) or build a new collection instead.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q3</span> What does range(5) actually produce?</div><div class="iq-a">It produces the numbers 0, 1, 2, 3, 4 — five values starting at 0, stopping before reaching 5. <code>range()</code> generates numbers lazily rather than building a full list in memory upfront.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q4</span> What is the difference between range() and enumerate()?</div><div class="iq-a"><code>range()</code> generates a sequence of numbers, typically used as a counter. <code>enumerate()</code> wraps an existing iterable and yields (index, value) pairs together, so you get both the position and the item without indexing manually.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q5</span> When does the else block of a for loop execute?</div><div class="iq-a">Only when the loop completes all its iterations without hitting a <code>break</code> statement. If <code>break</code> is triggered at any point, the <code>else</code> block is skipped entirely.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q6</span> Can you loop over a dictionary directly? What do you get?</div><div class="iq-a">Yes — looping directly over a dictionary gives you its keys, not its values or key-value pairs. To get both key and value together, use <code>.items()</code>: <code>for key, value in d.items():</code>.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 12 -->
+    <h2 id="faq">Python for Loop FAQ</h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is a for loop in Python? <span class="faq-icon">+</span></button><div class="faq-a">A for loop repeats a block of code once for every item in a sequence — a list, string, tuple, dictionary, or other iterable. Unlike for loops in some other languages, Python's for loop iterates over the items themselves, not over a numeric counter.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is the syntax of a for loop in Python? <span class="faq-icon">+</span></button><div class="faq-a"><code>for item in iterable:</code> followed by an indented block. On each pass, <code>item</code> is set to the next value from <code>iterable</code>, and the indented code runs once for that value.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">How do you loop a specific number of times in Python? <span class="faq-icon">+</span></button><div class="faq-a">Use <code>range()</code>: <code>for i in range(5):</code> runs the block 5 times, with <code>i</code> taking values 0 through 4. Use <code>range(start, stop, step)</code> for more control over where to start and how to increment.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What does enumerate() do in a for loop? <span class="faq-icon">+</span></button><div class="faq-a">It wraps an iterable and yields pairs of (index, value) instead of just the value. This is the standard way to get both the position and the item in a single loop, without a separate counter variable.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Is it safe to remove items from a list while looping over it? <span class="faq-icon">+</span></button><div class="faq-a">No — removing items from the same list you're iterating over can cause elements to be skipped, because the list shrinks while Python's internal position counter keeps advancing. Loop over a copy (<code>for item in my_list.copy():</code>) or build a new list instead.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is a nested for loop? <span class="faq-icon">+</span></button><div class="faq-a">A for loop placed inside another for loop. The inner loop runs to completion for every single pass of the outer loop, which is useful for grids, matchups, and two-dimensional data.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What does the else clause do after a for loop? <span class="faq-icon">+</span></button><div class="faq-a">The else block runs only if the loop finishes all its iterations without hitting a break statement. It's commonly used for "search" patterns — if the item was never found and break never ran, the else block reports that.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="author-strip">
+      <div class="author-avatar">PM</div>
+      <div class="author-info"><strong>Palak Mishra</strong><span>Backend developer · Building beginner-friendly Python docs at Kiddo</span></div>
+    </div>
+
+    <div class="callout">
+      <strong>More Python topics →</strong><br><br>
+      <a href="../python/while_loop.html">While Loop</a> ·
+      <a href="../python/looping-techniques.html">Looping Techniques</a> ·
+      <a href="../python/list.html">Lists</a> ·
+      <a href="../python/dictionary.html">Dictionaries (5.5)</a> ·
+      <a href="../python/tuples.html">Tuples (5.3)</a> ·
+      <a href="../python/sets.html">Sets (5.4)</a> ·
+      <a href="../python/if_statements.html">If Statements</a> ·
+      <a href="../python/list-comp.html">List Comprehension</a> ·
+      <a href="../python/nested-list-comp.html">Nested List Comprehension</a> ·
+      <a href="../python/user_input.html">User Input</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
+    <div class="footer-links"><a href="../info/privacy.html">Privacy</a><a href="../info/terms.html">Terms</a><a href="../info/contact.html">Contact</a></div>
+  </div>
+</footer>
+
+<script>
+  const desktopToggle = document.getElementById('desktopToggleTheme');
+  const mobileToggle  = document.getElementById('mobileToggleTheme');
+  const applyTheme = (dark) => {
+    document.body.classList.toggle('dark', dark);
+    const icon = dark ? '☀️' : '🌙';
+    if (desktopToggle) desktopToggle.textContent = icon;
+    if (mobileToggle)  mobileToggle.textContent  = icon;
+  };
+  applyTheme(localStorage.getItem('theme') === 'dark');
+  const toggleTheme = () => {
+    const isDark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  };
+  if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+  if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+
+  const hamburger    = document.getElementById('hamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  hamburger?.addEventListener('click', (e) => { e.stopPropagation(); menuDropdown.classList.toggle('open'); });
+  document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.querySelectorAll('.code-container').forEach(container => {
+    const btn = container.querySelector('.copy-btn');
+    const tip = container.querySelector('.tooltip');
+    const pre = container.querySelector('pre');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(pre.innerText.trim()).then(() => {
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
       });
     });
-  </script>
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans    = btn.nextElementSibling;
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+</script>
 </body>
 </html>
