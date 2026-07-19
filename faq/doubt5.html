@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="../assests/icon.png" />
+  <meta name="description" content="Python break vs continue vs pass explained with beginner-friendly examples. Understand the real difference between break and continue, when to use pass, and see side-by-side code with football examples." /> 
+  <meta property="og:type" content="article" /> 
+  <meta property="og:title" content="Python break vs continue vs pass Explained | Differences with Examples | Kiddo" /> 
+  <meta property="og:description" content="A beginner-friendly breakdown of break, continue and pass in Python — what each one actually does, when to reach for it, and the mistakes almost everyone makes at first." /> 
+  <meta property="og:url" content="https://kiddoedu.org/python/doubt-break-continue-pass.html" /> 
+  <meta property="og:site_name" content="Kiddo" /> 
+  <meta property="og:image" content="https://kiddoedu.org/python/doubt-break-continue-pass.png" /> 
+  <meta name="twitter:card" content="summary_large_image" /> 
+  <meta name="twitter:title" content="Python break vs continue vs pass Explained | Kiddo" /> 
+  <meta name="twitter:description" content="The real difference between break, continue and pass in Python, explained with football-themed examples." /> 
+  <meta name="twitter:image" content="https://kiddoedu.org/python/doubt-break-continue-pass.png" /> 
+  <link rel="canonical" href="https://kiddoedu.org/python/doubt-break-continue-pass.html" /> 
+  <title>Python break vs continue vs pass Explained | Differences with Examples</title>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ESNWS8F9HE');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 4px 24px rgba(0,0,0,0.07);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    body.dark {
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
+      --border: rgba(255,255,255,0.07);
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 999; width: 0%; transition: width 0.1s linear; }
+
+    header { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark header { background: rgba(15,14,12,0.82); }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
+    .logo span em { font-style: normal; color: var(--accent); }
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
+    nav a:hover { color: var(--text); background: var(--surface2); }
+    .theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background var(--transition), transform var(--transition); margin-left: 8px; }
+    .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
+
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 20px; height: var(--header-h); background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark .mobile-header { background: rgba(15,14,12,0.82); }
+    .mobile-right { display: flex; align-items: center; gap: 8px; }
+    .hamburger { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; position: relative; }
+    .menu-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); padding: 8px; min-width: 160px; flex-direction: column; gap: 2px; }
+    .menu-dropdown.open { display: flex; }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
+    .menu-dropdown a:hover { background: var(--surface2); }
+
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+
+    aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px); }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    aside ul li a { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.4; }
+    aside ul li a:hover { background: var(--surface2); color: var(--text); }
+    aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; margin-top: 6px; }
+
+    main { min-width: 0; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { opacity: 0.4; }
+    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
+    .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
+    .meta-pill.blue { background: rgba(61,90,254,0.08); color: var(--accent2); border-color: rgba(61,90,254,0.2); }
+    .meta-pill.orange { background: rgba(232,108,47,0.08); color: var(--accent); border-color: rgba(232,108,47,0.2); }
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
+
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+    .doc-ref { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; }
+    .doc-ref a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .doc-ref a:hover { text-decoration: underline; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.02rem; margin-top: 22px; margin-bottom: 10px; }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 18px; margin-bottom: 8px; color: var(--text-muted); }
+    main p { font-size: 0.95rem; line-height: 1.78; color: var(--text); margin-bottom: 14px; }
+    main code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
+    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
+
+    aside ul li { position: relative; }
+aside ul .submenu{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  margin:2px 0 2px 14px;
+  padding-left:10px;
+  border-left:1px solid var(--border);
+}
+aside ul .submenu li a{
+  font-size:0.8rem;
+  padding:6px 10px;
+}
+aside ul .submenu li a .dot{
+  width:4px;
+  height:4px;
+}
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
+    .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
+    .toc-grid a:hover { background: var(--surface2); color: var(--text); }
+    .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
+
+    .prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0 24px; }
+    .prop-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
+    .prop-card strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 4px; }
+    .prop-card span { font-size: 0.81rem; color: var(--text-muted); line-height: 1.45; display: block; }
+
+    .tri-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0 26px; }
+    .tri-card { border-radius: var(--radius-sm); padding: 18px 20px; border: 1px solid var(--border); background: var(--surface); }
+    .tri-card.break-card { border-left: 3px solid var(--accent); }
+    .tri-card.continue-card { border-left: 3px solid var(--accent2); }
+    .tri-card.pass-card { border-left: 3px solid var(--accent3); }
+    .tri-head { font-family: 'Fira Code', monospace; font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; }
+    .tri-card.break-card .tri-head { color: var(--accent); }
+    .tri-card.continue-card .tri-head { color: var(--accent2); }
+    .tri-card.pass-card .tri-head { color: var(--accent3); }
+    .tri-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
+
+    .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
+    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
+    .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
+    .doc-block code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .note-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .warn-box { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.2); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .warn-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
+    .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .callout a:hover { text-decoration: underline; }
+
+    .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 26px; font-size: 0.875rem; }
+    .param-table th { text-align: left; padding: 8px 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+    .param-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); line-height: 1.5; vertical-align: top; }
+    .param-table tr:last-child td { border-bottom: none; }
+    .param-table tr:hover td { background: var(--surface2); }
+    .param-table td:last-child { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* VS Code dark code blocks */
+    .code-container { border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: #2d2d2d; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
+    .code-header-left { display: flex; align-items: center; gap: 10px; }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .code-dot.red    { background: #ff5f57; }
+    .code-dot.yellow { background: #febc2e; }
+    .code-dot.green  { background: #28c840; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Fira Code', monospace; }
+    .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
+    .copy-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); padding: 3px 10px; cursor: pointer; font-size: 0.72rem; font-family: 'DM Sans', sans-serif; transition: all 0.2s; position: relative; border-radius: 4px; }
+    .copy-btn:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.1); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: #3a3a3a; color: #d4d4d4; padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .tooltip.show { opacity: 1; }
+    pre { margin: 0; padding: 20px; overflow-x: auto; font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.88rem; line-height: 1.7; background: #1e1e1e; white-space: pre; tab-size: 4; }
+    /* VS Code Dark+ token colours */
+    .py-kw   { color: #569cd6; }
+    .py-bi   { color: #dcdcaa; }
+    .py-str  { color: #ce9178; }
+    .py-num  { color: #b5cea8; }
+    .py-cmt  { color: #6a9955; font-style: italic; }
+    .py-punc { color: #d4d4d4; }
+    .py-var  { color: #9cdcfe; }
+    .py-out  { color: #4ec9b0; }
+
+    .output-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin: -10px 0 10px; }
+
+    .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 26px; }
+    .vs-card { border-radius: var(--radius-sm); padding: 18px 20px; }
+    .vs-card.yes { background: rgba(0,184,148,0.07); border: 1px solid rgba(0,184,148,0.2); }
+    .vs-card.no  { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.18); }
+    .vs-head { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+    .vs-card.yes .vs-head { color: var(--accent3); }
+    .vs-card.no  .vs-head { color: var(--accent); }
+    .vs-card ul { margin: 0; }
+    .vs-card ul li { font-size: 0.875rem; line-height: 1.55; color: var(--text); }
+
+    .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 26px; }
+    .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
+    .mi-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
+    .mi-body p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+    .mi-body code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .iq-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+    .iq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .iq-q { padding: 14px 18px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
+    .iq-badge { background: rgba(232,108,47,0.1); color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; padding: 2px 8px; flex-shrink: 0; margin-top: 2px; }
+    .iq-a { padding: 0 18px 14px 18px; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+    .iq-a code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 18px 0; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; padding: 14px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
+    .faq-a.open { max-height: 300px; padding: 2px 18px 15px; }
+    .faq-a code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .author-info { font-size: 0.85rem; line-height: 1.5; }
+    .author-info strong { font-weight: 600; display: block; }
+    .author-info span { color: var(--text-muted); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+    .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      header { display: none; } .mobile-header { display: flex; }
+      .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
+      aside { position: static; } .toc-grid { grid-template-columns: 1fr; }
+      .vs-grid { grid-template-columns: 1fr; } .prop-grid { grid-template-columns: 1fr 1fr; }
+      .tri-grid { grid-template-columns: 1fr; }
+      footer { padding: 20px; } .footer-container { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) { main h1 { font-size: 1.6rem; } .prop-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <a class="logo" href="../index.html"><img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" /><span>Kid<em>do</em></span></a>
+  <nav><a href="../index.html">Home</a><a href="../info/about.html">About</a><a href="../info/contact.html">Contact</a><button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button></nav>
+</header>
+
+<div class="mobile-header">
+  <a class="logo" href="../index.html"><img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" /><span>Kid<em>do</em></span></a>
+  <div class="mobile-right"><button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button><button class="hamburger" id="hamburgerBtn">☰<div class="menu-dropdown" id="menuDropdown"><a href="../index.html">Home</a><a href="../info/about.html">About</a><a href="../info/contact.html">Contact</a></div></button></div>
+</div>
+
+<div class="page-wrap">
+  <aside>
+    <div class="aside-label">FAQ Topics</div>
+    <ul>
+      <li><a href="../faq/doubt1.html"><span class="dot"></span>= vs == in Python</a></li>
+      <li><a href="../faq/doubt2.html"><span class="dot"></span>if __name__ == '__main__'</a></li>
+      <li><a href="../faq/doubt5.html" class="active"><span class="dot"></span>break vs pass vs continue</a></li>
+      <li><a href="../faq/doubt3.html"><span class="dot"></span>Coding roadmap from scratch</a></li>
+      <li><a href="../faq/doubt4.html"><span class="dot"></span>Learn coding without CS degree?</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../python/py-intro.html">Python</a><span>›</span>
+      Doubts &amp; FAQs
+    </div>
+
+    <h1>Python break vs continue vs pass Explained | Differences with Examples</h1>
+
+    <div class="meta-row">
+      <span class="meta-pill">Python</span>
+      <span class="meta-pill green">Beginner</span>
+      <span class="meta-pill blue">Loop Control</span>
+      <span class="meta-pill orange">FAQ</span>
+      <span class="date-badge">Updated July 2026</span>
+    </div>
+
+    <p>If you've ever stared at a loop and wondered "wait, should I use <code>break</code> here or <code>continue</code>?" — you're in good company. This is one of the most common points of confusion for anyone learning Python, and honestly, it makes sense why. All three keywords — <code>break</code>, <code>continue</code>, and <code>pass</code> — show up inside loops, all three are single words with no parentheses, and all three feel like they're "controlling" the loop in some way. On the surface they can look almost interchangeable, especially in short examples where the difference doesn't visibly matter.</p>
+    <p>But once you actually run into a bug caused by mixing them up — a loop that stops way too early, or one that skips items you didn't want skipped — the difference suddenly matters a lot. The good news is that once you see them side by side, with the same data, the confusion tends to disappear for good. That's exactly what this guide is built to do.</p>
+    <p>We'll go through what each keyword actually does under the hood, why it behaves that way, when experienced developers reach for each one, and the mistakes almost every beginner makes at least once. Expect plenty of football-themed examples along the way, because comparing squads and filtering players makes these ideas stick a lot better than abstract number lists.</p>
+
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">In this guide</div>
+      <div class="toc-grid">
+        <a href="#what-are"><span class="toc-num">01</span>What are break, continue and pass?</a>
+        <a href="#quick-cards"><span class="toc-num">02</span>Quick comparison cards</a>
+        <a href="#comparison-table"><span class="toc-num">03</span>Comparison table</a>
+        <a href="#break-explained"><span class="toc-num">04</span>break explained</a>
+        <a href="#continue-explained"><span class="toc-num">05</span>continue explained</a>
+        <a href="#pass-explained"><span class="toc-num">06</span>pass explained</a>
+        <a href="#side-by-side"><span class="toc-num">07</span>Side-by-side comparison</a>
+        <a href="#when-to-use"><span class="toc-num">08</span>When should you use each?</a>
+        <a href="#mistakes"><span class="toc-num">09</span>Common beginner mistakes</a>
+        <a href="#interview"><span class="toc-num">10</span>Interview questions</a>
+        <a href="#cheatsheet"><span class="toc-num">11</span>Mini cheat sheet</a>
+        <a href="#faq"><span class="toc-num">12</span>FAQs</a>
+      </div>
+    </nav>
+
+    <div class="section-divider"></div>
+
+    <!-- 01 -->
+    <h2 id="what-are">What Are break, continue and pass in Python?</h2>
+    <p>All three of these are what we call loop control statements — small keywords that change how a loop behaves from the inside, without you needing to write a bunch of extra if-checks around the whole loop. They're each one word, they don't take any arguments, and they only make sense when used inside a loop body (with one small exception for <code>pass</code>, which can technically go almost anywhere Python expects a statement).</p>
+    <p>Here's the one-line version of each, before we go deeper:</p>
+    <ul>
+      <li><code>break</code> — stops the loop completely, right now, no matter how many items are left</li>
+      <li><code>continue</code> — skips whatever is left in the current pass of the loop, and jumps straight to the next item</li>
+      <li><code>pass</code> — does absolutely nothing; it's a placeholder that satisfies Python's syntax without actually running any logic</li>
+    </ul>
+    <p>Notice the pattern already: <code>break</code> and <code>continue</code> actually change what the loop does next. <code>pass</code> doesn't change anything at all — it just exists so your code has something to run where Python otherwise expects a statement. That distinction is the key to understanding all three, and we'll come back to it constantly.</p>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 -->
+    <h2 id="quick-cards">Quick Comparison Cards</h2>
+    <p>Before the deep dive, here's a fast mental snapshot of each keyword:</p>
+    <div class="tri-grid">
+      <div class="tri-card break-card">
+        <div class="tri-head">break</div>
+        <p>Exits the nearest loop immediately. No more iterations happen, and code right after the loop runs next. Think of it as an emergency exit.</p>
+      </div>
+      <div class="tri-card continue-card">
+        <div class="tri-head">continue</div>
+        <p>Skips only the rest of the current iteration. The loop keeps going and moves straight to the next item. Think of it as "next, please."</p>
+      </div>
+      <div class="tri-card pass-card">
+        <div class="tri-head">pass</div>
+        <p>Does nothing at all. It's a placeholder for code you haven't written yet, or for a branch that's intentionally empty.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 -->
+    <h2 id="comparison-table">break vs continue vs pass — Comparison Table</h2>
+    <table class="param-table">
+      <thead><tr><th>Feature</th><th>break</th><th>continue</th><th>pass</th></tr></thead>
+      <tbody>
+        <tr><td>What it does</td><td>Exits the loop entirely</td><td>Skips to the next iteration</td><td>Does nothing</td></tr>
+        <tr><td>Remaining iterations</td><td>Never run</td><td>Still run, just not for this item</td><td>Unaffected — loop continues normally</td></tr>
+        <tr><td>Typical use case</td><td>Stop searching once found</td><td>Filter out unwanted items</td><td>Placeholder for unfinished code</td></tr>
+        <tr><td>Affects loop flow?</td><td>Yes — ends it</td><td>Yes — jumps ahead</td><td>No — completely inert</td></tr>
+        <tr><td>Works outside loops?</td><td>No (loop or switch-like context only)</td><td>No (loop only)</td><td>Yes — anywhere a statement is required</td></tr>
+        <tr><td>Common confusion</td><td>Confused with returning from a function</td><td>Confused with pass</td><td>Confused with continue</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+  <strong>Quick memory trick:</strong> If you ever forget the difference, remember just three words:
+  <code>break</code> = <strong>Stop</strong>,
+  <code>continue</code> = <strong>Skip</strong>,
+  <code>pass</code> = <strong>Do nothing</strong>.
+  <br><br>
+  <code>break</code> ends the loop immediately, <code>continue</code> skips only the current iteration and moves to the next one, while <code>pass</code> simply acts as a placeholder without changing the loop's behaviour at all.
+</div>
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <h2 id="break-explained">break Explained</h2>
+    <p>The <code>break</code> keyword is Python's way of saying "stop this loop right now, we're done." As soon as Python hits a <code>break</code> statement while running a loop, it exits the nearest enclosing loop immediately — it doesn't check the loop condition again, it doesn't finish the current iteration, and it doesn't look at any remaining items. Execution jumps straight to whatever code comes right after the loop.</p>
+    <p>Why does it behave this way? Because a lot of the time, once you've found what you were looking for, there's genuinely no point continuing. Checking the rest of the list would just be wasted work. <code>break</code> exists to let you stop that wasted work as soon as possible.</p>
+
+    <h4>Syntax</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">for</span> <span class="py-var">item</span> <span class="py-kw">in</span> <span class="py-var">some_iterable</span><span class="py-punc">:</span>
+    <span class="py-kw">if</span> <span class="py-var">condition</span><span class="py-punc">:</span>
+        <span class="py-kw">break</span>   <span class="py-cmt"># loop stops here, immediately</span></pre>
+    </div>
+
+    <h4>Beginner example</h4>
+    <p>Let's say we're searching a squad list for a specific player, and we want to stop the moment we find them:</p>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">squad</span> <span class="py-punc">= [</span><span class="py-str">"Mbappe"</span><span class="py-punc">,</span> <span class="py-str">"Vinicius Jr"</span><span class="py-punc">,</span> <span class="py-str">"Bellingham"</span><span class="py-punc">,</span> <span class="py-str">"Rodrygo"</span><span class="py-punc">]</span>
+
+<span class="py-kw">for</span> <span class="py-var">player</span> <span class="py-kw">in</span> <span class="py-var">squad</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Checking </span><span class="py-var">{player}</span><span class="py-str">..."</span><span class="py-punc">)</span>
+    <span class="py-kw">if</span> <span class="py-var">player</span> <span class="py-punc">==</span> <span class="py-str">"Bellingham"</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Found him! Stopping search."</span><span class="py-punc">)</span>
+        <span class="py-kw">break</span></pre>
+    </div>
+    <div class="output-label">Output</div>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Output</span></div>
+      </div>
+      <pre><span class="py-out">Checking Mbappe...
+Checking Vinicius Jr...
+Checking Bellingham...
+Found him! Stopping search.</span></pre>
+    </div>
+    <p>Notice that <code>"Rodrygo"</code> never gets checked at all. The loop had four names to go through, but it only needed three before it found what it wanted — so it stopped right there. That's <code>break</code> doing exactly its job.</p>
+
+    <h4>Real-world analogy</h4>
+    <div class="note-box">
+      Imagine you're scrolling through a contacts list looking for one specific name. The moment you spot it, you stop scrolling — you don't keep swiping through the rest of the alphabet out of habit. <code>break</code> is that "found it, stop scrolling" moment, built directly into your code.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 -->
+    <h2 id="continue-explained">continue Explained</h2>
+    <p>The <code>continue</code> keyword is much gentler than <code>break</code>. Instead of ending the loop, it only skips the rest of the current iteration — everything below the <code>continue</code> line in the loop body is skipped for that one item, and Python immediately moves on to the next item in the sequence. The loop itself keeps running normally; it just doesn't finish this particular lap.</p>
+    <p>This is exactly why <code>continue</code> is so useful for filtering data. You don't want to stop the whole loop just because one item doesn't qualify — you just want to skip that one item and keep processing everything else.</p>
+
+    <h4>Syntax</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">for</span> <span class="py-var">item</span> <span class="py-kw">in</span> <span class="py-var">some_iterable</span><span class="py-punc">:</span>
+    <span class="py-kw">if</span> <span class="py-var">condition</span><span class="py-punc">:</span>
+        <span class="py-kw">continue</span>   <span class="py-cmt"># skip the rest of this iteration only</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">item</span><span class="py-punc">)</span>   <span class="py-cmt"># this line is skipped when continue runs</span></pre>
+    </div>
+
+    <h4>Beginner example</h4>
+    <p>Say we have a list of forwards and we want to print everyone except a player who's currently injured:</p>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">forwards</span> <span class="py-punc">= [</span><span class="py-str">"Haaland"</span><span class="py-punc">,</span> <span class="py-str">"Yamal"</span><span class="py-punc">,</span> <span class="py-str">"Messi"</span><span class="py-punc">,</span> <span class="py-str">"Musiala"</span><span class="py-punc">]</span>
+<span class="py-var">injured</span> <span class="py-punc">=</span> <span class="py-str">"Messi"</span>
+
+<span class="py-kw">for</span> <span class="py-var">player</span> <span class="py-kw">in</span> <span class="py-var">forwards</span><span class="py-punc">:</span>
+    <span class="py-kw">if</span> <span class="py-var">player</span> <span class="py-punc">==</span> <span class="py-var">injured</span><span class="py-punc">:</span>
+        <span class="py-kw">continue</span>   <span class="py-cmt"># skip the injured player, keep going</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{player}</span><span class="py-str"> is available for selection"</span><span class="py-punc">)</span></pre>
+    </div>
+    <div class="output-label">Output</div>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Output</span></div>
+      </div>
+      <pre><span class="py-out">Haaland is available for selection
+Yamal is available for selection
+Musiala is available for selection</span></pre>
+    </div>
+    <p>Notice that all four players were still visited by the loop — <code>Messi</code> was checked, it just didn't get printed because <code>continue</code> jumped past the print line for that one item. Compare that to the <code>break</code> example above, where <code>Rodrygo</code> was never even looked at. That's the core difference in a nutshell.</p>
+
+    <h4>Real-world analogy</h4>
+    <div class="note-box">
+      Picture a bouncer checking IDs at a club entrance. Someone underage gets turned away, but the bouncer doesn't shut the whole club down — they just wave that one person aside and keep checking the next person in line. <code>continue</code> is that "not this one, next please" moment.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 -->
+    <h2 id="pass-explained">pass Explained</h2>
+    <p>Out of the three, <code>pass</code> is the odd one out — and honestly, the easiest to misunderstand. <code>pass</code> literally does nothing. It's not a filter, it's not an exit, it doesn't skip anything, and it doesn't change the loop's behaviour in any way. It exists purely because Python's syntax requires a statement wherever you open a block with a colon — if you write an <code>if</code>, a <code>for</code>, a <code>while</code>, a function, or a class and leave the body empty, Python will throw an <code>IndentationError</code>. <code>pass</code> is the "nothing to see here" statement that satisfies that requirement without actually doing anything.</p>
+    <p>This makes <code>pass</code> genuinely useful while writing incomplete code. You're sketching out the shape of a program, you know a branch needs to exist eventually, but you're not ready to write its logic yet — <code>pass</code> lets you leave that spot syntactically valid so the rest of your code still runs.</p>
+
+    <h4>Syntax</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">for</span> <span class="py-var">item</span> <span class="py-kw">in</span> <span class="py-var">some_iterable</span><span class="py-punc">:</span>
+    <span class="py-kw">if</span> <span class="py-var">condition</span><span class="py-punc">:</span>
+        <span class="py-kw">pass</span>   <span class="py-cmt"># does nothing, just a placeholder</span></pre>
+    </div>
+
+    <h4>Beginner example</h4>
+    <p>Imagine you're building a squad checker, and you already know you need a special case for the captain — but you haven't written that logic yet:</p>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">squad</span> <span class="py-punc">= [</span><span class="py-str">"Odegaard"</span><span class="py-punc">,</span> <span class="py-str">"Saka"</span><span class="py-punc">,</span> <span class="py-str">"Rice"</span><span class="py-punc">]</span>
+<span class="py-var">captain</span> <span class="py-punc">=</span> <span class="py-str">"Odegaard"</span>
+
+<span class="py-kw">for</span> <span class="py-var">player</span> <span class="py-kw">in</span> <span class="py-var">squad</span><span class="py-punc">:</span>
+    <span class="py-kw">if</span> <span class="py-var">player</span> <span class="py-punc">==</span> <span class="py-var">captain</span><span class="py-punc">:</span>
+        <span class="py-kw">pass</span>   <span class="py-cmt"># TODO: add captain-specific logic later</span>
+    <span class="py-kw">else</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{player}</span><span class="py-str"> is a regular squad member"</span><span class="py-punc">)</span></pre>
+    </div>
+    <div class="output-label">Output</div>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Output</span></div>
+      </div>
+      <pre><span class="py-out">Saka is a regular squad member
+Rice is a regular squad member</span></pre>
+    </div>
+    <p>Notice that <code>Odegaard</code> was still visited by the loop, just like every other name. The <code>if</code> branch matched for him, and <code>pass</code> ran — which means literally nothing happened for that iteration. He didn't get skipped in the "move to next item" sense; the branch that matched him simply did nothing. That's a subtle but important distinction from <code>continue</code>, which we'll unpack next.</p>
+
+    <h4>Real-world analogy</h4>
+    <div class="note-box">
+      Think of <code>pass</code> as a sticky note on an empty shelf that says "reserved — stock coming soon." The shelf spot exists, it's accounted for, but right now there's genuinely nothing on it. Nobody skipped past the shelf; it's just empty on purpose, for now.
+    </div>
+
+    <div class="warn-box">
+      <strong>pass and continue are NOT the same, even though beginners often assume they are.</strong> <code>continue</code> actively jumps the loop forward to the next item, skipping any remaining code in that iteration. <code>pass</code> does not skip anything — it simply lets the current branch finish doing nothing, and the loop proceeds normally from there, including running any code that comes after the <code>if</code> block in that same iteration.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 -->
+    <h2 id="side-by-side">Side-by-Side Comparison — Same Data, Three Behaviours</h2>
+    <p>This is the section that usually makes everything click. We'll use the exact same squad list and the exact same condition — checking for <code>"Haaland"</code> — and run it through all three keywords so you can compare the output directly.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">squad</span> <span class="py-punc">= [</span><span class="py-str">"Mbappe"</span><span class="py-punc">,</span> <span class="py-str">"Haaland"</span><span class="py-punc">,</span> <span class="py-str">"Yamal"</span><span class="py-punc">,</span> <span class="py-str">"Musiala"</span><span class="py-punc">]</span>
+
+<span class="py-cmt"># --- Using break ---</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"break version:"</span><span class="py-punc">)</span>
+<span class="py-kw">for</span> <span class="py-var">player</span> <span class="py-kw">in</span> <span class="py-var">squad</span><span class="py-punc">:</span>
+    <span class="py-kw">if</span> <span class="py-var">player</span> <span class="py-punc">==</span> <span class="py-str">"Haaland"</span><span class="py-punc">:</span>
+        <span class="py-kw">break</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">player</span><span class="py-punc">)</span>
+
+<span class="py-cmt"># --- Using continue ---</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"continue version:"</span><span class="py-punc">)</span>
+<span class="py-kw">for</span> <span class="py-var">player</span> <span class="py-kw">in</span> <span class="py-var">squad</span><span class="py-punc">:</span>
+    <span class="py-kw">if</span> <span class="py-var">player</span> <span class="py-punc">==</span> <span class="py-str">"Haaland"</span><span class="py-punc">:</span>
+        <span class="py-kw">continue</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">player</span><span class="py-punc">)</span>
+
+<span class="py-cmt"># --- Using pass ---</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"pass version:"</span><span class="py-punc">)</span>
+<span class="py-kw">for</span> <span class="py-var">player</span> <span class="py-kw">in</span> <span class="py-var">squad</span><span class="py-punc">:</span>
+    <span class="py-kw">if</span> <span class="py-var">player</span> <span class="py-punc">==</span> <span class="py-str">"Haaland"</span><span class="py-punc">:</span>
+        <span class="py-kw">pass</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">player</span><span class="py-punc">)</span></pre>
+    </div>
+    <div class="output-label">Output</div>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Output</span></div>
+      </div>
+      <pre><span class="py-out">break version:
+Mbappe
+
+continue version:
+Mbappe
+Yamal
+Musiala
+
+pass version:
+Mbappe
+Haaland
+Yamal
+Musiala</span></pre>
+    </div>
+    <p>Look at how differently the same condition plays out:</p>
+    <ul>
+      <li><strong>break:</strong> only <code>Mbappe</code> prints. The loop stopped the instant it saw <code>Haaland</code>, so <code>Yamal</code> and <code>Musiala</code> were never even reached.</li>
+      <li><strong>continue:</strong> everyone prints <em>except</em> <code>Haaland</code>. The loop kept running through all four names — it just skipped the print line for that one match.</li>
+      <li><strong>pass:</strong> every single name prints, including <code>Haaland</code>. That's because <code>pass</code> did nothing at all — the <code>print(player)</code> line sits outside the <code>if</code> block here, so it runs for every player regardless of whether the condition matched.</li>
+    </ul>
+    <p>This one example is worth bookmarking. If you ever forget the difference again, come back to this and re-read the outputs — it makes the behaviour unmistakable.</p>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 -->
+    <h2 id="when-to-use">When Should You Use Each One?</h2>
+    <p>Knowing what each keyword does is one thing — knowing when to reach for it in real code is what actually matters day to day. Here's how to think about it:</p>
+    <div class="vs-grid">
+      <div class="vs-card yes">
+        <div class="vs-head">Reach for break when</div>
+        <ul>
+          <li>You're searching for something and want to stop the moment it's found</li>
+          <li>You've hit an error condition and continuing the loop would be pointless or unsafe</li>
+          <li>You're implementing a game or simulation loop that needs to end on a specific event</li>
+          <li>Checking the remaining items would just waste time with no benefit</li>
+        </ul>
+      </div>
+      <div class="vs-card no">
+        <div class="vs-head">Reach for continue when</div>
+        <ul>
+          <li>You're filtering out unwanted items but still need to process the rest</li>
+          <li>You want to skip invalid or missing data without stopping the whole loop</li>
+          <li>You're validating each item and only some checks should stop that item's processing</li>
+          <li>You want cleaner code than wrapping the whole loop body in one big if-block</li>
+        </ul>
+      </div>
+    </div>
+    <p>And <code>pass</code> earns its place in a slightly different situation altogether — it's less about controlling the loop and more about controlling your development process:</p>
+    <ul>
+      <li>You're outlining a function, class, or loop body and aren't ready to fill in the logic yet</li>
+      <li>You genuinely want an empty branch — for example, an <code>if</code> condition where "do nothing" is the correct, intentional behaviour</li>
+      <li>You're temporarily disabling a piece of logic while debugging, without deleting the structure around it</li>
+    </ul>
+
+    <div class="section-divider"></div>
+
+    <!-- 09 -->
+    <h2 id="mistakes">Common Beginner Mistakes</h2>
+    <div class="mistake-list">
+      <div class="mistake-item"><div class="mi-body"><strong>Thinking pass and continue do the same thing</strong><p>They don't. <code>continue</code> actively skips ahead to the next iteration. <code>pass</code> does nothing — code after the <code>if</code> block in that same iteration still runs normally. Mixing these up is probably the single most common mistake with these three keywords.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Using break when you actually meant to filter, not stop</strong><p>If you want to skip one unwanted item but keep processing the rest of the list, <code>break</code> is the wrong tool — it will end the whole loop early and you'll lose every item that came after the match. That's a job for <code>continue</code>.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Expecting break to exit more than the nearest loop</strong><p><code>break</code> only exits the loop it's directly inside — the nearest enclosing <code>for</code> or <code>while</code>. In a nested loop, a <code>break</code> inside the inner loop will not stop the outer loop; the outer loop keeps going to its next iteration.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Putting pass where continue was intended</strong><p><code>if player == injured: pass</code> followed by <code>print(player)</code> will still print the injured player, because <code>pass</code> didn't skip anything. If the goal was to hide that player from the output, <code>continue</code> was the correct keyword all along.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Assuming pass is required for every empty-looking block</strong><p><code>pass</code> is only needed when a block would otherwise be completely empty. If there's already at least one statement inside the block, adding <code>pass</code> is unnecessary clutter.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Forgetting that continue still counts as visiting the item</strong><p>Even though <code>continue</code> skips the rest of the iteration's code, the loop still considers that item "processed" for counting purposes. If you're tallying how many items you've looped through, a <code>continue</code>-skipped item still counts toward that total.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Using break inside a loop that has an else clause without understanding the interaction</strong><p>A <code>for...else</code> block's <code>else</code> only runs if the loop finishes without hitting <code>break</code>. Beginners sometimes add a <code>break</code> and are then confused when the expected <code>else</code> message never shows up — that's expected behaviour, not a bug.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Writing pass as a "fix" for an IndentationError without addressing the real issue</strong><p>If Python complains about an empty block and you slap <code>pass</code> in just to silence the error, you may forget to come back and write the actual logic later. It's a useful placeholder, but treat it as a reminder, not a permanent solution.</p></div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 10 -->
+    <h2 id="interview">Interview Questions and Answers</h2>
+    <div class="iq-list">
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> What is the difference between break and continue in Python?</div><div class="iq-a"><code>break</code> exits the loop completely — no further iterations run, and control jumps to the code after the loop. <code>continue</code> only skips the rest of the current iteration and moves on to the next item, while the loop itself keeps running.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q2</span> Does break exit only the innermost loop, or all nested loops at once?</div><div class="iq-a">Only the nearest (innermost) enclosing loop. If you have a loop inside another loop, a <code>break</code> in the inner loop stops the inner loop only — the outer loop continues to its next iteration as normal.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q3</span> What does the pass keyword actually do?</div><div class="iq-a">Nothing. It's a null operation used purely to satisfy Python's syntax, which requires at least one statement inside any block. It's commonly used as a placeholder in loops, functions, classes, or conditionals that are not yet implemented.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q4</span> Can pass be used outside of a loop?</div><div class="iq-a">Yes. Unlike <code>break</code> and <code>continue</code>, which are only valid inside loops, <code>pass</code> can be used anywhere Python expects a statement — inside empty functions, empty classes, empty if-blocks, and more.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q5</span> Why would you use continue instead of wrapping code in an if statement?</div><div class="iq-a"><code>continue</code> lets you handle the "skip" condition early and keep the rest of the loop body at a normal indentation level, rather than nesting all remaining logic inside an <code>if</code> block. For longer loop bodies, this keeps the code flatter and easier to read.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q6</span> What happens if you use break inside a for...else loop?</div><div class="iq-a">If <code>break</code> runs at any point, the loop's <code>else</code> block is skipped entirely — it only executes if the loop finishes all its iterations without ever hitting a <code>break</code>.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q7</span> Is continue considered good practice, or does it make code harder to read?</div><div class="iq-a">Used sparingly and for clear filtering conditions, <code>continue</code> is considered good practice and often improves readability by avoiding deep nesting. Overusing it with many scattered <code>continue</code> statements throughout a large loop body, however, can make the control flow harder to follow.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q8</span> Can you use break or continue inside a function that isn't itself inside a loop?</div><div class="iq-a">No. Both <code>break</code> and <code>continue</code> raise a <code>SyntaxError</code> if used outside of a loop — they only have meaning inside a <code>for</code> or <code>while</code> loop's body.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q9</span> What's a practical real-world scenario for using break?</div><div class="iq-a">Searching through a large dataset for a matching record — for example, scanning a list of players for one specific name and stopping the search the instant a match is found, instead of needlessly checking the rest of the list.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 11 -->
+    <h2 id="cheatsheet">Mini Cheat Sheet</h2>
+    <table class="param-table">
+      <thead><tr><th>Situation</th><th>Keyword to use</th></tr></thead>
+      <tbody>
+        <tr><td>You found what you were searching for and want to stop</td><td><code>break</code></td></tr>
+        <tr><td>You want to skip one bad or unwanted item, but keep the rest</td><td><code>continue</code></td></tr>
+        <tr><td>You're sketching a function or block you'll finish later</td><td><code>pass</code></td></tr>
+        <tr><td>An error condition means further looping is pointless</td><td><code>break</code></td></tr>
+        <tr><td>You're filtering a list based on some condition</td><td><code>continue</code></td></tr>
+        <tr><td>You need an intentionally empty if-branch</td><td><code>pass</code></td></tr>
+        <tr><td>A game loop needs to end when a player wins or loses</td><td><code>break</code></td></tr>
+        <tr><td>You're validating input and want to skip invalid rows</td><td><code>continue</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 12 -->
+    <h2 id="faq">FAQs</h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is the main difference between break, continue and pass? <span class="faq-icon">+</span></button><div class="faq-a"><code>break</code> stops the loop entirely. <code>continue</code> skips only the current iteration and moves to the next one. <code>pass</code> does nothing at all — it's just a placeholder statement with no effect on the loop's flow.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Is pass the same as continue in Python? <span class="faq-icon">+</span></button><div class="faq-a">No, and this is one of the most common misunderstandings. <code>continue</code> actively skips the rest of the current iteration. <code>pass</code> does not skip anything — any code after the block containing <code>pass</code> still runs normally in that same iteration.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">When should I use break instead of continue? <span class="faq-icon">+</span></button><div class="faq-a">Use <code>break</code> when finding or hitting a certain condition means there's no reason to keep looping at all — like ending a search once a match is found. Use <code>continue</code> when you only want to skip that one item and keep processing everything else.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Does break exit all loops in a nested loop structure? <span class="faq-icon">+</span></button><div class="faq-a">No. <code>break</code> only exits the nearest loop it's directly written inside. In nested loops, you'd need a separate mechanism (like a flag variable, or restructuring the code into a function with a <code>return</code>) to exit multiple loop levels at once.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can pass be used inside an empty function? <span class="faq-icon">+</span></button><div class="faq-a">Yes — this is one of the most common uses of <code>pass</code>. Writing <code>def my_function(): pass</code> creates a valid, callable function that does nothing yet, which is useful while you're planning out a program's structure before filling in the details.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Why does Python need pass at all — why not just leave the block empty? <span class="faq-icon">+</span></button><div class="faq-a">Python uses indentation to define code blocks, and every block after a colon must contain at least one statement. An empty block with no statement at all is a syntax error, so <code>pass</code> exists specifically to satisfy that requirement without doing anything.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can continue be used in a while loop, or only in a for loop? <span class="faq-icon">+</span></button><div class="faq-a">Both. <code>continue</code> works the same way in a <code>while</code> loop as it does in a <code>for</code> loop — it skips the rest of the current iteration and jumps back to re-check the loop's condition before starting the next one.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Does using continue skip the loop's condition check? <span class="faq-icon">+</span></button><div class="faq-a">No. In a <code>while</code> loop specifically, <code>continue</code> jumps back to re-evaluate the loop's condition before deciding whether to run again — it doesn't bypass that check. In a <code>for</code> loop, it simply moves on to the next item in the sequence.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Is it bad practice to use too many break or continue statements? <span class="faq-icon">+</span></button><div class="faq-a">A single, clear <code>break</code> or <code>continue</code> usually makes code more readable. Scattering many of them throughout a long loop, especially nested ones, can make the flow harder to trace — in those cases, restructuring the logic or extracting a function is often clearer.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Wrapping Up</h2>
+    <p>None of this needs to feel complicated once you've seen the three side by side. <code>break</code> is your emergency exit — stop everything, right now. <code>continue</code> is your "skip this one, keep going" filter. And <code>pass</code> is simply a placeholder that changes nothing at all. If you ever blank on which is which mid-project, come back to the side-by-side example above and run it in your head with your own data — that mental model tends to stick for good once it clicks.</p>
+
+    <div class="author-strip">
+      <div class="author-avatar">PM</div>
+      <div class="author-info"><strong>Palak Mishra</strong><span>Backend developer · Building beginner-friendly Python docs at Kiddo</span></div>
+    </div>
+
+    <div class="callout">
+      <strong>More Python topics →</strong><br><br>
+      <a href="../python/for_loop.html">For Loop</a> ·
+      <a href="../python/while_loop.html">While Loop</a> ·
+      <a href="../python/looping-techniques.html">Looping Techniques</a> ·
+      <a href="../python/if_statements.html">If Statements</a> ·
+      <a href="../python/list.html">Lists</a> ·
+      <a href="../python/dictionary.html">Dictionaries</a> ·
+      <a href="../python/tuples.html">Tuples</a> ·
+      <a href="../python/sets.html">Sets</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
+    <div class="footer-links"><a href="../info/privacy.html">Privacy</a><a href="../info/terms.html">Terms</a><a href="../info/contact.html">Contact</a></div>
+  </div>
+</footer>
+
+<script>
+  const desktopToggle = document.getElementById('desktopToggleTheme');
+  const mobileToggle  = document.getElementById('mobileToggleTheme');
+  const applyTheme = (dark) => {
+    document.body.classList.toggle('dark', dark);
+    const icon = dark ? '☀️' : '🌙';
+    if (desktopToggle) desktopToggle.textContent = icon;
+    if (mobileToggle)  mobileToggle.textContent  = icon;
+  };
+  applyTheme(localStorage.getItem('theme') === 'dark');
+  const toggleTheme = () => {
+    const isDark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  };
+  if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+  if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+
+  const hamburger    = document.getElementById('hamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  hamburger?.addEventListener('click', (e) => { e.stopPropagation(); menuDropdown.classList.toggle('open'); });
+  document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.querySelectorAll('.code-container').forEach(container => {
+    const btn = container.querySelector('.copy-btn');
+    const tip = container.querySelector('.tooltip');
+    const pre = container.querySelector('pre');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(pre.innerText.trim()).then(() => {
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
+      });
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans    = btn.nextElementSibling;
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+</script>
+</body>
+</html>
