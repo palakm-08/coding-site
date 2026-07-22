@@ -5,24 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="../assests/icon.png" />
 
-<meta name="description" content="Python Sets Documentation Explained (Python Docs 5.4) for beginners. Learn sets, remove duplicates, membership testing, union, intersection, difference, symmetric difference, set comprehensions, frozenset, set methods, examples, interview questions, and common mistakes in simple language." />
-
-<meta name="keywords" content="Python Sets, Python Docs 5.4, Python Sets Documentation, Python Set Tutorial, Python Set Operations, Union in Python, Intersection in Python, Difference in Python, Symmetric Difference Python, Python frozenset, Set Comprehension Python, Python Interview Questions, Python Documentation Explained">
-
-<meta name="robots" content="index, follow, max-image-preview:large">
-
-<meta property="og:type" content="article" />
-<meta property="og:title" content="Python Sets Documentation Explained (Python Docs 5.4) | Beginner-Friendly Guide" />
-<meta property="og:description" content="Learn Python Sets (Docs 5.4) the easy way. Understand union, intersection, difference, symmetric difference, set comprehensions, frozenset, examples, interview questions, and common mistakes." />
-<meta property="og:url" content="https://kiddoedu.org/python/sets.html" />
-<meta property="og:site_name" content="Kiddo" />
-<meta property="og:image" content="https://kiddoedu.org/python/sets.png" />
-
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Python Sets Documentation Explained (Python Docs 5.4) | Set Operations & Examples" />
-<meta name="twitter:description" content="Python Sets explained for beginners. Learn duplicate removal, membership testing, union, intersection, difference, symmetric difference, frozenset, and set comprehensions." />
-<meta name="twitter:image" content="https://kiddoedu.org/python/sets.png" />
-
+<meta name="description" content="Python Sets Documentation Explained (Python Docs 5.4) for beginners. Learn sets, remove duplicates, membership testing, union, intersection, difference, symmetric difference, set comprehensions, frozenset, set methods, examples, interview questions, and common mistakes in simple language." /> 
+<meta name="keywords" content="Python Sets, Python Docs 5.4, Python Sets Documentation, Python Set Tutorial, Python Set Operations, Union in Python, Intersection in Python, Difference in Python, Symmetric Difference Python, Python frozenset, Set Comprehension Python, Python Interview Questions, Python Documentation Explained"> 
+<meta name="robots" content="index, follow, max-image-preview:large"> 
+<meta property="og:type" content="article" /> 
+<meta property="og:title" content="Python Sets Documentation Explained (Python Docs 5.4) | Beginner-Friendly Guide" /> 
+<meta property="og:description" content="Learn Python Sets (Docs 5.4) the easy way. Understand union, intersection, difference, symmetric difference, set comprehensions, frozenset, examples, interview questions, and common mistakes." /> 
+<meta property="og:url" content="https://kiddoedu.org/python/sets.html" /> 
+<meta property="og:site_name" content="Kiddo" /> 
+<meta property="og:image" content="https://kiddoedu.org/python/sets.png" /> 
+<meta name="twitter:card" content="summary_large_image" /> 
+<meta name="twitter:title" content="Python Sets Documentation Explained (Python Docs 5.4) | Set Operations & Examples" /> 
+<meta name="twitter:description" content="Python Sets explained for beginners. Learn duplicate removal, membership testing, union, intersection, difference, symmetric difference, frozenset, and set comprehensions." /> 
+<meta name="twitter:image" content="https://kiddoedu.org/python/sets.png" /> 
 <title>Python Sets Documentation Explained (Python Docs 5.4) | Union, Intersection, Set Operations & Examples</title>
 
 <link rel="canonical" href="https://kiddoedu.org/python/sets.html" />
@@ -77,7 +72,7 @@
     gtag('config', 'G-ESNWS8F9HE');
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -154,7 +149,7 @@
     main h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-top: 24px; margin-bottom: 10px; color: var(--text); }
     main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 18px; margin-bottom: 8px; color: var(--text-muted); }
     main p { font-size: 0.95rem; line-height: 1.78; color: var(--text); margin-bottom: 14px; }
-    main code { font-family: 'Courier New', monospace; font-size: 0.88em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
     main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
     main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
     main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
@@ -180,7 +175,7 @@
     .op-symbol { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2rem; margin-bottom: 6px; display: block; }
     .op-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-bottom: 4px; }
     .op-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 8px; }
-    .op-example { font-family: 'Courier New', monospace; font-size: 0.8rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 4px 8px; display: inline-block; color: var(--text-muted); }
+    .op-example { font-family: 'Fira Code', monospace; font-size: 0.8rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 4px 8px; display: inline-block; color: var(--text-muted); }
     .op-card.union   { border-top: 3px solid var(--accent); } .op-card.union   .op-symbol { color: var(--accent); }
     .op-card.inter   { border-top: 3px solid var(--accent2); } .op-card.inter   .op-symbol { color: var(--accent2); }
     .op-card.diff    { border-top: 3px solid var(--accent3); } .op-card.diff    .op-symbol { color: var(--accent3); }
@@ -190,14 +185,15 @@
     .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
     .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
     .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
-    .doc-block code { font-family: 'Courier New', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+    .doc-block code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
 
     /* Warning box */
     .warn-box { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.2); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
-    .warn-box code { font-family: 'Courier New', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .warn-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
 
     /* Note box */
     .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .note-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
 
     /* Method table */
     .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 26px; font-size: 0.875rem; }
@@ -207,16 +203,31 @@
     .param-table tr:hover td { background: var(--surface2); }
     .param-table td:last-child { color: var(--text-muted); font-size: 0.85rem; }
 
-    /* Code blocks */
-    .code-container { background: #1e1e1e; border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid var(--border); }
-    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
-    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; text-transform: uppercase; }
+    /* VS Code dark code blocks */
+    .code-container { border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: #2d2d2d; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
+    .code-header-left { display: flex; align-items: center; gap: 10px; }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .code-dot.red    { background: #ff5f57; }
+    .code-dot.yellow { background: #febc2e; }
+    .code-dot.green  { background: #28c840; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Fira Code', monospace; }
     .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
-    .copy-btn { background: none; border: none; color: rgba(255,255,255,0.35); padding: 2px 0; cursor: pointer; font-size: 0.75rem; font-family: 'DM Sans', sans-serif; transition: color var(--transition); position: relative; margin-left: auto; }
-    .copy-btn:hover { color: rgba(255,255,255,0.75); }
-    .tooltip { position: absolute; top: -28px; right: 0; background: var(--surface2); color: var(--text); padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .copy-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); padding: 3px 10px; cursor: pointer; font-size: 0.72rem; font-family: 'DM Sans', sans-serif; transition: all 0.2s; position: relative; border-radius: 4px; }
+    .copy-btn:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.1); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: #3a3a3a; color: #d4d4d4; padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
     .tooltip.show { opacity: 1; }
-    pre { margin: 0; padding: 18px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.875rem; line-height: 1.65; color: #d4d4d4; background: transparent; white-space: pre; tab-size: 2; }
+    pre { margin: 0; padding: 20px; overflow-x: auto; font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.88rem; line-height: 1.7; background: #1e1e1e; white-space: pre; tab-size: 4; }
+    /* VS Code Dark+ token colours */
+    .py-kw   { color: #569cd6; }
+    .py-bi   { color: #dcdcaa; }
+    .py-str  { color: #ce9178; }
+    .py-num  { color: #b5cea8; }
+    .py-cmt  { color: #6a9955; font-style: italic; }
+    .py-punc { color: #d4d4d4; }
+    .py-var  { color: #9cdcfe; }
+    .py-out  { color: #4ec9b0; }
 
     /* Callout */
     .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
@@ -258,7 +269,7 @@ aside ul .submenu li a .dot{
     .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
     .mi-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
     .mi-body p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
-    .mi-body code { font-family: 'Courier New', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .mi-body code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
 
     /* Interview Qs */
     .iq-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
@@ -266,7 +277,7 @@ aside ul .submenu li a .dot{
     .iq-q { padding: 14px 18px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
     .iq-badge { background: rgba(232,108,47,0.1); color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; padding: 2px 8px; flex-shrink: 0; margin-top: 2px; }
     .iq-a { padding: 0 18px 14px 18px; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
-    .iq-a code { font-family: 'Courier New', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .iq-a code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
 
     /* Checklist */
     .checklist { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
@@ -283,7 +294,7 @@ aside ul .submenu li a .dot{
     .faq-q.open .faq-icon { transform: rotate(45deg); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
     .faq-a.open { max-height: 280px; padding: 2px 18px 15px; }
-    .faq-a code { font-family: 'Courier New', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .faq-a code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
 
     /* Author strip */
     .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
@@ -384,7 +395,7 @@ aside ul .submenu li a .dot{
       5.4 Sets
     </div>
 
-<h1>Python Sets Documentation Explained (Python Docs 5.4) | set(), Union, Intersection, Difference, Comprehensions & Beginner Guide</h1>
+<h1>Python Sets Documentation Explained (Python Docs 5.4) | set(), Union, Intersection, Difference, Comprehensions &amp; Beginner Guide</h1>
 
     <div class="doc-ref">
       📖 Based on <a href="https://docs.python.org/3/tutorial/datastructures.html#sets" target="_blank" rel="noopener">Python 3 official docs 5.4</a> — explained like a friend, with extra examples added
@@ -468,27 +479,30 @@ By the end of this guide, you'll understand when to use sets, how set operations
     <p>Two main ways to create a set — curly braces or <code>set()</code>. And one classic trap that catches almost every beginner:</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo + Python docs</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code># Method 1 — curly braces with values
-fruits = {'apple', 'orange', 'banana', 'apple'}  # duplicate 'apple'
-print(fruits)
-# {'orange', 'banana', 'apple'}  ← duplicate removed automatically
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo + Python docs</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># Method 1 — curly braces with values</span>
+<span class="py-var">fruits</span> <span class="py-punc">= {</span><span class="py-str">'apple'</span><span class="py-punc">,</span> <span class="py-str">'orange'</span><span class="py-punc">,</span> <span class="py-str">'banana'</span><span class="py-punc">,</span> <span class="py-str">'apple'</span><span class="py-punc">}</span>  <span class="py-cmt"># duplicate 'apple'</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">fruits</span><span class="py-punc">)</span>
+<span class="py-out"># {'orange', 'banana', 'apple'}  ← duplicate removed automatically</span>
 
-# Method 2 — set() constructor from a list
-colors = set(['red', 'blue', 'green', 'red'])
-print(colors)
-# {'red', 'blue', 'green'}
+<span class="py-cmt"># Method 2 — set() constructor from a list</span>
+<span class="py-var">colors</span> <span class="py-punc">=</span> <span class="py-bi">set</span><span class="py-punc">([</span><span class="py-str">'red'</span><span class="py-punc">,</span> <span class="py-str">'blue'</span><span class="py-punc">,</span> <span class="py-str">'green'</span><span class="py-punc">,</span> <span class="py-str">'red'</span><span class="py-punc">])</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">colors</span><span class="py-punc">)</span>
+<span class="py-out"># {'red', 'blue', 'green'}</span>
 
-# Method 3 — set() from a string (each character becomes an element)
-letters = set('hello')
-print(letters)
-# {'h', 'e', 'l', 'o'}  ← only one 'l', duplicate removed
+<span class="py-cmt"># Method 3 — set() from a string (each character becomes an element)</span>
+<span class="py-var">letters</span> <span class="py-punc">=</span> <span class="py-bi">set</span><span class="py-punc">(</span><span class="py-str">'hello'</span><span class="py-punc">)</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">letters</span><span class="py-punc">)</span>
+<span class="py-out"># {'h', 'e', 'l', 'o'}  ← only one 'l', duplicate removed</span>
 
-# Empty set — MUST use set(), NOT {}
-empty = set()       # correct — empty set
-not_empty = {}      # wrong — this is an empty DICTIONARY, not a set
-print(type(empty))      # &lt;class 'set'&gt;
-print(type(not_empty))  # &lt;class 'dict'&gt;</code></pre>
+<span class="py-cmt"># Empty set — MUST use set(), NOT {}</span>
+<span class="py-var">empty</span> <span class="py-punc">=</span> <span class="py-bi">set</span><span class="py-punc">()</span>       <span class="py-cmt"># correct — empty set</span>
+<span class="py-var">not_empty</span> <span class="py-punc">= {}</span>      <span class="py-cmt"># wrong — this is an empty DICTIONARY, not a set</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">type</span><span class="py-punc">(</span><span class="py-var">empty</span><span class="py-punc">))</span>      <span class="py-out"># &lt;class 'set'&gt;</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">type</span><span class="py-punc">(</span><span class="py-var">not_empty</span><span class="py-punc">))</span>  <span class="py-out"># &lt;class 'dict'&gt;</span></pre>
     </div>
 
     <div class="warn-box">
@@ -502,32 +516,38 @@ print(type(not_empty))  # &lt;class 'dict'&gt;</code></pre>
     <p>Checking if something is in a set is O(1) — instant — no matter how many elements are in it. This is one of the two things sets are built for (the other being set operations). Compare this to a list, where <code>x in list</code> has to scan every element:</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
-print(basket)
-# {'orange', 'banana', 'pear', 'apple'}  ← duplicates auto-removed
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">basket</span> <span class="py-punc">= {</span><span class="py-str">'apple'</span><span class="py-punc">,</span> <span class="py-str">'orange'</span><span class="py-punc">,</span> <span class="py-str">'apple'</span><span class="py-punc">,</span> <span class="py-str">'pear'</span><span class="py-punc">,</span> <span class="py-str">'orange'</span><span class="py-punc">,</span> <span class="py-str">'banana'</span><span class="py-punc">}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">basket</span><span class="py-punc">)</span>
+<span class="py-out"># {'orange', 'banana', 'pear', 'apple'}  ← duplicates auto-removed</span>
 
-'orange' in basket      # True
-'crabgrass' in basket   # False</code></pre>
+<span class="py-str">'orange'</span> <span class="py-kw">in</span> <span class="py-var">basket</span>      <span class="py-cmt"># True</span>
+<span class="py-str">'crabgrass'</span> <span class="py-kw">in</span> <span class="py-var">basket</span>   <span class="py-cmt"># False</span></pre>
     </div>
 
     <h4>Kiddo extra — why sets beat lists for membership tests</h4>
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code># With a list — Python scans every element (O(n))
-banned_list = ['spam@bad.com', 'hack@evil.com', 'phish@fake.com']
-print('spam@bad.com' in banned_list)   # True, but slow on large lists
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># With a list — Python scans every element (O(n))</span>
+<span class="py-var">banned_list</span> <span class="py-punc">= [</span><span class="py-str">'spam@bad.com'</span><span class="py-punc">,</span> <span class="py-str">'hack@evil.com'</span><span class="py-punc">,</span> <span class="py-str">'phish@fake.com'</span><span class="py-punc">]</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">'spam@bad.com'</span> <span class="py-kw">in</span> <span class="py-var">banned_list</span><span class="py-punc">)</span>   <span class="py-cmt"># True, but slow on large lists</span>
 
-# With a set — instant lookup (O(1))
-banned_set = {'spam@bad.com', 'hack@evil.com', 'phish@fake.com'}
-print('spam@bad.com' in banned_set)    # True, and instant
+<span class="py-cmt"># With a set — instant lookup (O(1))</span>
+<span class="py-var">banned_set</span> <span class="py-punc">= {</span><span class="py-str">'spam@bad.com'</span><span class="py-punc">,</span> <span class="py-str">'hack@evil.com'</span><span class="py-punc">,</span> <span class="py-str">'phish@fake.com'</span><span class="py-punc">}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">'spam@bad.com'</span> <span class="py-kw">in</span> <span class="py-var">banned_set</span><span class="py-punc">)</span>    <span class="py-cmt"># True, and instant</span>
 
-# Real-world: checking usernames against a blocklist
-blocked = {'admin', 'root', 'system', 'null', 'undefined'}
-username = "admin"
-if username in blocked:
-    print(f"'{username}' is not allowed")
-# 'admin' is not allowed</code></pre>
+<span class="py-cmt"># Real-world: checking usernames against a blocklist</span>
+<span class="py-var">blocked</span> <span class="py-punc">= {</span><span class="py-str">'admin'</span><span class="py-punc">,</span> <span class="py-str">'root'</span><span class="py-punc">,</span> <span class="py-str">'system'</span><span class="py-punc">,</span> <span class="py-str">'null'</span><span class="py-punc">,</span> <span class="py-str">'undefined'</span><span class="py-punc">}</span>
+<span class="py-var">username</span> <span class="py-punc">=</span> <span class="py-str">"admin"</span>
+<span class="py-kw">if</span> <span class="py-var">username</span> <span class="py-kw">in</span> <span class="py-var">blocked</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"'</span><span class="py-var">{username}</span><span class="py-str">' is not allowed"</span><span class="py-punc">)</span>
+<span class="py-out"># 'admin' is not allowed</span></pre>
     </div>
 
     <div class="section-divider"></div>
@@ -537,25 +557,28 @@ if username in blocked:
     <p>This is where sets get genuinely powerful. The Python docs demonstrate all four operations with letters from two words — here's the exact example, plus real-world uses:</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code># From the Python docs §5.4 — set operations on unique letters
-a = set('abracadabra')
-b = set('alacazam')
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># From the Python docs §5.4 — set operations on unique letters</span>
+<span class="py-var">a</span> <span class="py-punc">=</span> <span class="py-bi">set</span><span class="py-punc">(</span><span class="py-str">'abracadabra'</span><span class="py-punc">)</span>
+<span class="py-var">b</span> <span class="py-punc">=</span> <span class="py-bi">set</span><span class="py-punc">(</span><span class="py-str">'alacazam'</span><span class="py-punc">)</span>
 
-a        # unique letters in a
-# {'a', 'r', 'b', 'c', 'd'}
+<span class="py-var">a</span>        <span class="py-cmt"># unique letters in a</span>
+<span class="py-out"># {'a', 'r', 'b', 'c', 'd'}</span>
 
-a - b    # letters in a but not in b (difference)
-# {'r', 'd', 'b'}
+<span class="py-var">a</span> <span class="py-punc">-</span> <span class="py-var">b</span>    <span class="py-cmt"># letters in a but not in b (difference)</span>
+<span class="py-out"># {'r', 'd', 'b'}</span>
 
-a | b    # letters in a or b or both (union)
-# {'a', 'c', 'r', 'd', 'b', 'm', 'z', 'l'}
+<span class="py-var">a</span> <span class="py-punc">|</span> <span class="py-var">b</span>    <span class="py-cmt"># letters in a or b or both (union)</span>
+<span class="py-out"># {'a', 'c', 'r', 'd', 'b', 'm', 'z', 'l'}</span>
 
-a & b    # letters in both a and b (intersection)
-# {'a', 'c'}
+<span class="py-var">a</span> <span class="py-punc">&amp;</span> <span class="py-var">b</span>    <span class="py-cmt"># letters in both a and b (intersection)</span>
+<span class="py-out"># {'a', 'c'}</span>
 
-a ^ b    # letters in a or b but not both (symmetric difference)
-# {'r', 'd', 'b', 'm', 'z', 'l'}</code></pre>
+<span class="py-var">a</span> <span class="py-punc">^</span> <span class="py-var">b</span>    <span class="py-cmt"># letters in a or b but not both (symmetric difference)</span>
+<span class="py-out"># {'r', 'd', 'b', 'm', 'z', 'l'}</span></pre>
     </div>
 
     <div class="ops-grid">
@@ -587,51 +610,56 @@ a ^ b    # letters in a or b but not both (symmetric difference)
 
     <h4>Kiddo extra — method versions of the same operations</h4>
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>a = {1, 2, 3, 4}
-b = {3, 4, 5, 6}
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">a</span> <span class="py-punc">= {</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">,</span> <span class="py-num">3</span><span class="py-punc">,</span> <span class="py-num">4</span><span class="py-punc">}</span>
+<span class="py-var">b</span> <span class="py-punc">= {</span><span class="py-num">3</span><span class="py-punc">,</span> <span class="py-num">4</span><span class="py-punc">,</span> <span class="py-num">5</span><span class="py-punc">,</span> <span class="py-num">6</span><span class="py-punc">}</span>
 
-# Operator versions (from the docs)
-print(a | b)   # {1, 2, 3, 4, 5, 6}
-print(a & b)   # {3, 4}
-print(a - b)   # {1, 2}
-print(a ^ b)   # {1, 2, 5, 6}
+<span class="py-cmt"># Operator versions (from the docs)</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">a</span> <span class="py-punc">|</span> <span class="py-var">b</span><span class="py-punc">)</span>   <span class="py-cmt"># {1, 2, 3, 4, 5, 6}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">a</span> <span class="py-punc">&amp;</span> <span class="py-var">b</span><span class="py-punc">)</span>   <span class="py-cmt"># {3, 4}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">a</span> <span class="py-punc">-</span> <span class="py-var">b</span><span class="py-punc">)</span>   <span class="py-cmt"># {1, 2}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">a</span> <span class="py-punc">^</span> <span class="py-var">b</span><span class="py-punc">)</span>   <span class="py-cmt"># {1, 2, 5, 6}</span>
 
-# Method versions — identical results
-print(a.union(b))                   # {1, 2, 3, 4, 5, 6}
-print(a.intersection(b))            # {3, 4}
-print(a.difference(b))              # {1, 2}
-print(a.symmetric_difference(b))    # {1, 2, 5, 6}
+<span class="py-cmt"># Method versions — identical results</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">.</span><span class="py-bi">union</span><span class="py-punc">(</span><span class="py-var">b</span><span class="py-punc">))</span>                   <span class="py-cmt"># {1, 2, 3, 4, 5, 6}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">.</span><span class="py-bi">intersection</span><span class="py-punc">(</span><span class="py-var">b</span><span class="py-punc">))</span>            <span class="py-cmt"># {3, 4}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">.</span><span class="py-bi">difference</span><span class="py-punc">(</span><span class="py-var">b</span><span class="py-punc">))</span>              <span class="py-cmt"># {1, 2}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">.</span><span class="py-bi">symmetric_difference</span><span class="py-punc">(</span><span class="py-var">b</span><span class="py-punc">))</span>    <span class="py-cmt"># {1, 2, 5, 6}</span>
 
-      <tbody>
-  # Subset and superset checks
-x = {1, 2}
-print(x.issubset(a))    # True — every element of x is in a
-print(a.issuperset(x))  # True — a contains all of x
-print(a.isdisjoint(b))  # False — they share elements 3 and 4</code></pre>
+<span class="py-cmt"># Subset and superset checks</span>
+<span class="py-var">x</span> <span class="py-punc">= {</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">x</span><span class="py-punc">.</span><span class="py-bi">issubset</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">))</span>    <span class="py-cmt"># True — every element of x is in a</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">.</span><span class="py-bi">issuperset</span><span class="py-punc">(</span><span class="py-var">x</span><span class="py-punc">))</span>  <span class="py-cmt"># True — a contains all of x</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">.</span><span class="py-bi">isdisjoint</span><span class="py-punc">(</span><span class="py-var">b</span><span class="py-punc">))</span>  <span class="py-cmt"># False — they share elements 3 and 4</span></pre>
     </div>
 
     <h4>Kiddo real-world example — who's enrolled in both classes?</h4>
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>python_class = {"Palak", "Rohan", "Sneha", "Arjun", "Mehak"}
-web_class    = {"Rohan", "Mehak", "Priya", "Dev"}
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">python_class</span> <span class="py-punc">= {</span><span class="py-str">"Palak"</span><span class="py-punc">,</span> <span class="py-str">"Rohan"</span><span class="py-punc">,</span> <span class="py-str">"Sneha"</span><span class="py-punc">,</span> <span class="py-str">"Arjun"</span><span class="py-punc">,</span> <span class="py-str">"Mehak"</span><span class="py-punc">}</span>
+<span class="py-var">web_class</span>    <span class="py-punc">= {</span><span class="py-str">"Rohan"</span><span class="py-punc">,</span> <span class="py-str">"Mehak"</span><span class="py-punc">,</span> <span class="py-str">"Priya"</span><span class="py-punc">,</span> <span class="py-str">"Dev"</span><span class="py-punc">}</span>
 
-# Students in both
-both = python_class & web_class
-print(f"In both classes: {both}")        # {'Rohan', 'Mehak'}
+<span class="py-cmt"># Students in both</span>
+<span class="py-var">both</span> <span class="py-punc">=</span> <span class="py-var">python_class</span> <span class="py-punc">&amp;</span> <span class="py-var">web_class</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"In both classes: </span><span class="py-var">{both}</span><span class="py-str">"</span><span class="py-punc">)</span>        <span class="py-cmt"># {'Rohan', 'Mehak'}</span>
 
-# Students in Python but not web
-only_python = python_class - web_class
-print(f"Python only: {only_python}")     # {'Palak', 'Sneha', 'Arjun'}
+<span class="py-cmt"># Students in Python but not web</span>
+<span class="py-var">only_python</span> <span class="py-punc">=</span> <span class="py-var">python_class</span> <span class="py-punc">-</span> <span class="py-var">web_class</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Python only: </span><span class="py-var">{only_python}</span><span class="py-str">"</span><span class="py-punc">)</span>     <span class="py-cmt"># {'Palak', 'Sneha', 'Arjun'}</span>
 
-# All students enrolled in anything
-all_students = python_class | web_class
-print(f"Total unique: {len(all_students)}")  # 7
+<span class="py-cmt"># All students enrolled in anything</span>
+<span class="py-var">all_students</span> <span class="py-punc">=</span> <span class="py-var">python_class</span> <span class="py-punc">|</span> <span class="py-var">web_class</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Total unique: </span><span class="py-var">{</span><span class="py-bi">len</span><span class="py-var">(all_students)}</span><span class="py-str">"</span><span class="py-punc">)</span>  <span class="py-cmt"># 7</span>
 
-# Students in exactly one class
-exclusive = python_class ^ web_class
-print(f"Exactly one class: {exclusive}")</code></pre>
+<span class="py-cmt"># Students in exactly one class</span>
+<span class="py-var">exclusive</span> <span class="py-punc">=</span> <span class="py-var">python_class</span> <span class="py-punc">^</span> <span class="py-var">web_class</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Exactly one class: </span><span class="py-var">{exclusive}</span><span class="py-str">"</span><span class="py-punc">)</span></pre>
     </div>
 
     <div class="section-divider"></div>
@@ -670,11 +698,14 @@ print(f"Exactly one class: {exclusive}")</code></pre>
     <p>Set comprehensions create a set from any expression — in one line. They work exactly like list comprehensions but produce a set instead, which means duplicates vanish automatically. The Python docs show this example directly:</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code># From the Python docs §5.4
-a = {x for x in 'abracadabra' if x not in 'abc'}
-a
-# {'r', 'd'}</code></pre>
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># From the Python docs §5.4</span>
+<span class="py-var">a</span> <span class="py-punc">= {</span><span class="py-var">x</span> <span class="py-kw">for</span> <span class="py-var">x</span> <span class="py-kw">in</span> <span class="py-str">'abracadabra'</span> <span class="py-kw">if</span> <span class="py-var">x</span> <span class="py-kw">not</span> <span class="py-kw">in</span> <span class="py-str">'abc'</span><span class="py-punc">}</span>
+<span class="py-var">a</span>
+<span class="py-out"># {'r', 'd'}</span></pre>
     </div>
 
     <div class="doc-block">
@@ -684,27 +715,30 @@ a
 
     <h4>Kiddo extras — more set comprehension patterns</h4>
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code># Syntax: {expression for item in iterable if condition}
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># Syntax: {expression for item in iterable if condition}</span>
 
-# 1 — Unique squares (duplicates in input get merged)
-nums = [1, 2, 2, 3, 3, 3, 4]
-squares = {n**2 for n in nums}
-print(squares)   # {1, 4, 9, 16}
+<span class="py-cmt"># 1 — Unique squares (duplicates in input get merged)</span>
+<span class="py-var">nums</span> <span class="py-punc">= [</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">,</span> <span class="py-num">3</span><span class="py-punc">,</span> <span class="py-num">3</span><span class="py-punc">,</span> <span class="py-num">3</span><span class="py-punc">,</span> <span class="py-num">4</span><span class="py-punc">]</span>
+<span class="py-var">squares</span> <span class="py-punc">= {</span><span class="py-var">n</span><span class="py-punc">**</span><span class="py-num">2</span> <span class="py-kw">for</span> <span class="py-var">n</span> <span class="py-kw">in</span> <span class="py-var">nums</span><span class="py-punc">}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">squares</span><span class="py-punc">)</span>   <span class="py-cmt"># {1, 4, 9, 16}</span>
 
-# 2 — Unique first letters from a word list
-words = ["apple", "avocado", "banana", "blueberry", "cherry"]
-first_letters = {word[0] for word in words}
-print(first_letters)   # {'a', 'b', 'c'}
+<span class="py-cmt"># 2 — Unique first letters from a word list</span>
+<span class="py-var">words</span> <span class="py-punc">= [</span><span class="py-str">"apple"</span><span class="py-punc">,</span> <span class="py-str">"avocado"</span><span class="py-punc">,</span> <span class="py-str">"banana"</span><span class="py-punc">,</span> <span class="py-str">"blueberry"</span><span class="py-punc">,</span> <span class="py-str">"cherry"</span><span class="py-punc">]</span>
+<span class="py-var">first_letters</span> <span class="py-punc">= {</span><span class="py-var">word</span><span class="py-punc">[</span><span class="py-num">0</span><span class="py-punc">]</span> <span class="py-kw">for</span> <span class="py-var">word</span> <span class="py-kw">in</span> <span class="py-var">words</span><span class="py-punc">}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">first_letters</span><span class="py-punc">)</span>   <span class="py-cmt"># {'a', 'b', 'c'}</span>
 
-# 3 — Even numbers only
-evens = {n for n in range(1, 11) if n % 2 == 0}
-print(evens)   # {2, 4, 6, 8, 10}
+<span class="py-cmt"># 3 — Even numbers only</span>
+<span class="py-var">evens</span> <span class="py-punc">= {</span><span class="py-var">n</span> <span class="py-kw">for</span> <span class="py-var">n</span> <span class="py-kw">in</span> <span class="py-bi">range</span><span class="py-punc">(</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">11</span><span class="py-punc">)</span> <span class="py-kw">if</span> <span class="py-var">n</span> <span class="py-punc">%</span> <span class="py-num">2</span> <span class="py-punc">==</span> <span class="py-num">0</span><span class="py-punc">}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">evens</span><span class="py-punc">)</span>   <span class="py-cmt"># {2, 4, 6, 8, 10}</span>
 
-# 4 — Unique domain names from an email list
-emails = ["user@gmail.com", "admin@yahoo.com", "palak@gmail.com", "test@gmail.com"]
-domains = {email.split('@')[1] for email in emails}
-print(domains)   # {'gmail.com', 'yahoo.com'}</code></pre>
+<span class="py-cmt"># 4 — Unique domain names from an email list</span>
+<span class="py-var">emails</span> <span class="py-punc">= [</span><span class="py-str">"user@gmail.com"</span><span class="py-punc">,</span> <span class="py-str">"admin@yahoo.com"</span><span class="py-punc">,</span> <span class="py-str">"palak@gmail.com"</span><span class="py-punc">,</span> <span class="py-str">"test@gmail.com"</span><span class="py-punc">]</span>
+<span class="py-var">domains</span> <span class="py-punc">= {</span><span class="py-var">email</span><span class="py-punc">.</span><span class="py-bi">split</span><span class="py-punc">(</span><span class="py-str">'@'</span><span class="py-punc">)[</span><span class="py-num">1</span><span class="py-punc">]</span> <span class="py-kw">for</span> <span class="py-var">email</span> <span class="py-kw">in</span> <span class="py-var">emails</span><span class="py-punc">}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">domains</span><span class="py-punc">)</span>   <span class="py-cmt"># {'gmail.com', 'yahoo.com'}</span></pre>
     </div>
 
     <div class="callout">
@@ -718,27 +752,30 @@ print(domains)   # {'gmail.com', 'yahoo.com'}</code></pre>
     <p>You can loop over a set, but the order is not guaranteed. If you need consistent output, convert to a sorted list first:</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>fruits = {'banana', 'apple', 'cherry', 'date'}
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">fruits</span> <span class="py-punc">= {</span><span class="py-str">'banana'</span><span class="py-punc">,</span> <span class="py-str">'apple'</span><span class="py-punc">,</span> <span class="py-str">'cherry'</span><span class="py-punc">,</span> <span class="py-str">'date'</span><span class="py-punc">}</span>
 
-# Loop — order can vary each run
-for fruit in fruits:
-    print(fruit)
+<span class="py-cmt"># Loop — order can vary each run</span>
+<span class="py-kw">for</span> <span class="py-var">fruit</span> <span class="py-kw">in</span> <span class="py-var">fruits</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">fruit</span><span class="py-punc">)</span>
 
-# For consistent order — sort it
-for fruit in sorted(fruits):
-    print(fruit)
-# apple
+<span class="py-cmt"># For consistent order — sort it</span>
+<span class="py-kw">for</span> <span class="py-var">fruit</span> <span class="py-kw">in</span> <span class="py-bi">sorted</span><span class="py-punc">(</span><span class="py-var">fruits</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">fruit</span><span class="py-punc">)</span>
+<span class="py-out"># apple
 # banana
 # cherry
-# date
+# date</span>
 
-# Length
-print(len(fruits))   # 4
+<span class="py-cmt"># Length</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">len</span><span class="py-punc">(</span><span class="py-var">fruits</span><span class="py-punc">))</span>   <span class="py-cmt"># 4</span>
 
-# Convert to sorted list when you need indexing
-fruit_list = sorted(fruits)
-print(fruit_list[0])   # apple</code></pre>
+<span class="py-cmt"># Convert to sorted list when you need indexing</span>
+<span class="py-var">fruit_list</span> <span class="py-punc">=</span> <span class="py-bi">sorted</span><span class="py-punc">(</span><span class="py-var">fruits</span><span class="py-punc">)</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">fruit_list</span><span class="py-punc">[</span><span class="py-num">0</span><span class="py-punc">])</span>   <span class="py-cmt"># apple</span></pre>
     </div>
 
     <div class="note-box">
@@ -811,13 +848,18 @@ print(fruit_list[0])   # apple</code></pre>
 
 <p>A <code>frozenset</code> is an immutable version of a set. Once created, elements cannot be added, removed, or changed.</p>
 
-<pre><code>colors = frozenset({"red", "green", "blue"})
-print(colors)
-</code></pre>
+<div class="code-container">
+  <div class="code-header">
+    <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+    <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+  </div>
+  <pre><span class="py-var">colors</span> <span class="py-punc">=</span> <span class="py-bi">frozenset</span><span class="py-punc">({</span><span class="py-str">"red"</span><span class="py-punc">,</span> <span class="py-str">"green"</span><span class="py-punc">,</span> <span class="py-str">"blue"</span><span class="py-punc">})</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">colors</span><span class="py-punc">)</span></pre>
+</div>
 
 <p>Because frozensets are immutable, they can be used as dictionary keys or elements inside another set.</p>
 
-<div class="note">
+<div class="note-box">
 <strong>Python Docs Tip:</strong> Use a normal set when data changes. Use a frozenset when the collection should never change.
 </div>
 </section>
@@ -851,7 +893,7 @@ print(colors)
 <td>O(n + m)</td>
 </tr>
 <tr>
-<td>s & t</td>
+<td>s &amp; t</td>
 <td>O(min(n,m))</td>
 </tr>
 <tr>
@@ -952,7 +994,7 @@ print(colors)
     <div class="section-divider"></div>
 
     <!-- 11 -->
-    <h2 id="project"><h2>Mini Project — Build a Student Interest Matcher Using Python Sets</h2></h2>
+    <h2 id="project">Mini Project — Build a Student Interest Matcher Using Python Sets</h2>
     <p>A classic set use case — given a group of people and their interests, find who shares what. This is essentially how recommendation engines work at a basic level, and it's a great way to see all four set operations in action together.</p>
 
     <div class="checklist">
@@ -1105,12 +1147,12 @@ print(colors)
   });
 
   document.querySelectorAll('.code-container').forEach(container => {
-    const btn  = container.querySelector('.copy-btn');
-    const tip  = container.querySelector('.tooltip');
-    const code = container.querySelector('pre code');
+    const btn = container.querySelector('.copy-btn');
+    const tip = container.querySelector('.tooltip');
+    const pre = container.querySelector('pre');
     if (!btn) return;
     btn.addEventListener('click', () => {
-      navigator.clipboard.writeText(code.innerText.trim()).then(() => {
+      navigator.clipboard.writeText(pre.innerText.trim()).then(() => {
         tip.classList.add('show');
         setTimeout(() => tip.classList.remove('show'), 2000);
       });
