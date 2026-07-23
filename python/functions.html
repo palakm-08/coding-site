@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="../assests/icon.png" />
+  <meta name="description" content="Learn Python Functions (Python Docs 4.8) with beginner-friendly explanations. Understand def, docstrings, local vs global scope, call by object reference, functions as objects, return values, and the fib/fib2 examples." /> 
+  <meta property="og:type" content="article" /> 
+  <meta property="og:title" content="Python Functions Documentation Explained (Python Docs 4.8) | Kiddo" /> 
+  <meta property="og:description" content="The official Python function docs explained in simple language. Learn def syntax, docstrings, scope, arguments, return values, and functions as objects." /> 
+  <meta property="og:url" content="https://kiddoedu.org/python/functions.html" /> 
+  <meta property="og:site_name" content="Kiddo" /> 
+  <meta property="og:image" content="https://kiddoedu.org/python/functions.png" /> 
+  <meta name="twitter:card" content="summary_large_image" /> 
+  <meta name="twitter:title" content="Python Functions Documentation Explained (Python Docs 4.8) | Kiddo" /> 
+  <meta name="twitter:description" content="Beginner-friendly explanation of Python functions. def syntax, docstrings, scope, call by object reference, return values." /> 
+  <meta name="twitter:image" content="https://kiddoedu.org/python/functions.png" /> 
+  <link rel="canonical" href="https://kiddoedu.org/python/functions.html" /> 
+  <title>Python Functions Explained (Python Docs 4.8) | def, Docstrings, Scope &amp; Return Values</title>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ESNWS8F9HE');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 4px 24px rgba(0,0,0,0.07);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    body.dark {
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
+      --border: rgba(255,255,255,0.07);
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 999; width: 0%; transition: width 0.1s linear; }
+
+    header { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark header { background: rgba(15,14,12,0.82); }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
+    .logo span em { font-style: normal; color: var(--accent); }
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
+    nav a:hover { color: var(--text); background: var(--surface2); }
+    .theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background var(--transition), transform var(--transition); margin-left: 8px; }
+    .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
+
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 20px; height: var(--header-h); background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark .mobile-header { background: rgba(15,14,12,0.82); }
+    .mobile-right { display: flex; align-items: center; gap: 8px; }
+    .hamburger { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; position: relative; }
+    .menu-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); padding: 8px; min-width: 160px; flex-direction: column; gap: 2px; }
+    .menu-dropdown.open { display: flex; }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
+    .menu-dropdown a:hover { background: var(--surface2); }
+
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+
+    aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px); }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    aside ul li a { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.4; }
+    aside ul li a:hover { background: var(--surface2); color: var(--text); }
+    aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; margin-top: 6px; }
+
+    main { min-width: 0; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { opacity: 0.4; }
+    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
+    .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
+    .meta-pill.blue { background: rgba(61,90,254,0.08); color: var(--accent2); border-color: rgba(61,90,254,0.2); }
+    .meta-pill.orange { background: rgba(232,108,47,0.08); color: var(--accent); border-color: rgba(232,108,47,0.2); }
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
+
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+    .doc-ref { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; }
+    .doc-ref a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .doc-ref a:hover { text-decoration: underline; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 18px; margin-bottom: 8px; color: var(--text-muted); }
+    main p { font-size: 0.95rem; line-height: 1.78; color: var(--text); margin-bottom: 14px; }
+    main code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
+    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
+
+    aside ul li { position: relative; }
+aside ul .submenu{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  margin:2px 0 2px 14px;
+  padding-left:10px;
+  border-left:1px solid var(--border);
+}
+aside ul .submenu li a{
+  font-size:0.8rem;
+  padding:6px 10px;
+}
+aside ul .submenu li a .dot{
+  width:4px;
+  height:4px;
+}
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
+    .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
+    .toc-grid a:hover { background: var(--surface2); color: var(--text); }
+    .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
+
+    .prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0 24px; }
+    .prop-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
+    .prop-card strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 4px; }
+    .prop-card span { font-size: 0.81rem; color: var(--text-muted); line-height: 1.45; display: block; }
+
+    .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
+    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
+    .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
+    .doc-block code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .note-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .warn-box { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.2); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .warn-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
+    .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .callout a:hover { text-decoration: underline; }
+
+    .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 26px; font-size: 0.875rem; }
+    .param-table th { text-align: left; padding: 8px 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+    .param-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); line-height: 1.5; vertical-align: top; }
+    .param-table tr:last-child td { border-bottom: none; }
+    .param-table tr:hover td { background: var(--surface2); }
+    .param-table td:last-child { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* VS Code dark code blocks */
+    .code-container { border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: #2d2d2d; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
+    .code-header-left { display: flex; align-items: center; gap: 10px; }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .code-dot.red    { background: #ff5f57; }
+    .code-dot.yellow { background: #febc2e; }
+    .code-dot.green  { background: #28c840; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Fira Code', monospace; }
+    .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
+    .copy-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); padding: 3px 10px; cursor: pointer; font-size: 0.72rem; font-family: 'DM Sans', sans-serif; transition: all 0.2s; position: relative; border-radius: 4px; }
+    .copy-btn:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.1); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: #3a3a3a; color: #d4d4d4; padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .tooltip.show { opacity: 1; }
+    pre { margin: 0; padding: 20px; overflow-x: auto; font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.88rem; line-height: 1.7; background: #1e1e1e; white-space: pre; tab-size: 4; }
+    /* VS Code Dark+ token colours */
+    .py-kw   { color: #569cd6; }
+    .py-bi   { color: #dcdcaa; }
+    .py-str  { color: #ce9178; }
+    .py-num  { color: #b5cea8; }
+    .py-cmt  { color: #6a9955; font-style: italic; }
+    .py-punc { color: #d4d4d4; }
+    .py-var  { color: #9cdcfe; }
+    .py-out  { color: #4ec9b0; }
+
+    .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 26px; }
+    .vs-card { border-radius: var(--radius-sm); padding: 18px 20px; }
+    .vs-card.yes { background: rgba(0,184,148,0.07); border: 1px solid rgba(0,184,148,0.2); }
+    .vs-card.no  { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.18); }
+    .vs-head { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+    .vs-card.yes .vs-head { color: var(--accent3); }
+    .vs-card.no  .vs-head { color: var(--accent); }
+    .vs-card ul { margin: 0; }
+    .vs-card ul li { font-size: 0.875rem; line-height: 1.55; color: var(--text); }
+
+    .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 26px; }
+    .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
+    .mi-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
+    .mi-body p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+    .mi-body code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .iq-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+    .iq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .iq-q { padding: 14px 18px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
+    .iq-badge { background: rgba(232,108,47,0.1); color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; padding: 2px 8px; flex-shrink: 0; margin-top: 2px; }
+    .iq-a { padding: 0 18px 14px 18px; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+    .iq-a code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 18px 0; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; padding: 14px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
+    .faq-a.open { max-height: 300px; padding: 2px 18px 15px; }
+    .faq-a code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .author-info { font-size: 0.85rem; line-height: 1.5; }
+    .author-info strong { font-weight: 600; display: block; }
+    .author-info span { color: var(--text-muted); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+    .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      header { display: none; } .mobile-header { display: flex; }
+      .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
+      aside { position: static; } .toc-grid { grid-template-columns: 1fr; }
+      .vs-grid { grid-template-columns: 1fr; } .prop-grid { grid-template-columns: 1fr 1fr; }
+      footer { padding: 20px; } .footer-container { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) { main h1 { font-size: 1.6rem; } .prop-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <a class="logo" href="../index.html"><img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" /><span>Kid<em>do</em></span></a>
+  <nav><a href="../index.html">Home</a><a href="../info/about.html">About</a><a href="../info/contact.html">Contact</a><button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button></nav>
+</header>
+
+<div class="mobile-header">
+  <a class="logo" href="../index.html"><img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" /><span>Kid<em>do</em></span></a>
+  <div class="mobile-right"><button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button><button class="hamburger" id="hamburgerBtn">☰<div class="menu-dropdown" id="menuDropdown"><a href="../index.html">Home</a><a href="../info/about.html">About</a><a href="../info/contact.html">Contact</a></div></button></div>
+</div>
+
+<div class="page-wrap">
+  <aside>
+  <div class="aside-label">Python Topics</div>
+  <ul>
+    <li><a href="../python/py-intro.html"><span class="dot"></span>Introduction</a></li>
+    <li><a href="../python/user_input.html"><span class="dot"></span>User Input</a></li>
+    <li><a href="../python/if_statements.html"><span class="dot"></span>If Statements</a></li>
+    <li><a href="../python/for_loop.html"><span class="dot"></span>For Loop</a></li>
+    <li><a href="../python/functions.html"><span class="dot"></span>Functions</a></li>
+    <li>
+      <a href="../python/list.html"><span class="dot"></span>Lists</a>
+      <ul class="submenu">
+        <li><a href="../python/list-stack-queue.html"><span class="dot"></span>Stack &amp; Queue</a></li>
+        <li><a href="../python/list-comp.html"><span class="dot"></span>List Comprehension</a></li>
+        <li><a href="../python/nested-list-comp.html"><span class="dot"></span>Nested List Comprehension</a></li>
+      </ul>
+    </li>
+    <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
+    <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
+    <li><a href="../python/sets.html"><span class="dot"></span>Sets</a></li>
+    <li><a href="../python/looping-techniques.html"><span class="dot"></span>Looping Techniques</a></li>
+    <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
+    <li><a href="../python/functions.html" class="active"><span class="dot"></span>Functions</a></li>
+  </ul>
+
+  <div class="aside-label" style="margin-top:24px;">Mini Projects</div>
+  <ul>
+    <li><a href="../python/password.html"><span class="dot"></span>Password Generator</a></li>
+  </ul>
+</aside>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../python/py-intro.html">Python</a><span>›</span>
+      4.8 Defining Functions
+    </div>
+
+    <h1>Python Functions Documentation Explained (Python Docs 4.8) | def Syntax, Docstrings, Scope &amp; Return Values</h1>
+
+    <div class="doc-ref">
+      📖 Based on <a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions" target="_blank" rel="noopener">Python 3 official docs §4.8</a> — explained like a friend, with extra examples added
+    </div>
+
+    <div class="meta-row">
+      <span class="meta-pill">Python</span>
+      <span class="meta-pill green">Beginner</span>
+      <span class="meta-pill blue">Control Flow</span>
+      <span class="meta-pill orange">Official Docs</span>
+      <span class="date-badge">Updated July 2026</span>
+    </div>
+
+    <p>This page explains the official Python Functions documentation (Python Docs 4.8) in simple language. If the official docs feel dense, this guide breaks down <code>def</code>, docstrings, local vs global scope, how arguments actually get passed, and what a function returns when you never wrote a <code>return</code> statement at all.</p>
+    <p>By the end of this guide, you'll understand the classic Fibonacci examples from the docs line by line, why a function's name is really just a label pointing at an object, and the small scope mistakes that trip up almost every beginner at some point.</p>
+
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">In this guide</div>
+      <div class="toc-grid">
+        <a href="#what-is"><span class="toc-num">01</span>What is a function?</a>
+        <a href="#syntax"><span class="toc-num">02</span>Defining a function — def syntax</a>
+        <a href="#docstrings"><span class="toc-num">03</span>Docstrings</a>
+        <a href="#scope"><span class="toc-num">04</span>Local vs global scope</a>
+        <a href="#arguments"><span class="toc-num">05</span>Arguments — call by object reference</a>
+        <a href="#objects"><span class="toc-num">06</span>Functions as objects</a>
+        <a href="#return"><span class="toc-num">07</span>Return values and None</a>
+        <a href="#real-world"><span class="toc-num">08</span>Real-world examples</a>
+        <a href="#fib-vs-fib2"><span class="toc-num">09</span>fib() vs fib2()</a>
+        <a href="#mistakes"><span class="toc-num">10</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">11</span>Interview questions</a>
+        <a href="#faq"><span class="toc-num">12</span>FAQs</a>
+      </div>
+    </nav>
+
+    <div class="section-divider"></div>
+
+    <!-- 01 -->
+    <h2 id="what-is">What is a Function in Python? (Python Docs 4.8 Explained)</h2>
+    <p>A function is a named, reusable block of code that does one job. Instead of retyping the same logic every time you need it, you define it once and call it by name whenever you need it again. The Python docs introduce this with a classic example — a function that writes out the Fibonacci series up to some limit.</p>
+
+    <div class="prop-grid">
+      <div class="prop-card"><strong>Reusable</strong><span>Write the logic once, call it as many times as you want</span></div>
+      <div class="prop-card"><strong>Named</strong><span>The function name is a label pointing at a function object</span></div>
+      <div class="prop-card"><strong>Has its own scope</strong><span>Local variables inside stay local — they don't leak out</span></div>
+      <div class="prop-card"><strong>Always returns something</strong><span>Even with no return statement, it hands back None</span></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 -->
+    <h2 id="syntax">Defining a Function — def Syntax</h2>
+    <p>The Python docs open with the classic Fibonacci example — a function that prints every Fibonacci number below a given limit:</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">def</span> <span class="py-bi">fib</span><span class="py-punc">(</span><span class="py-var">n</span><span class="py-punc">):</span>    <span class="py-cmt"># write Fibonacci series less than n</span>
+    <span class="py-str">"""Print a Fibonacci series less than n."""</span>
+    <span class="py-var">a</span><span class="py-punc">,</span> <span class="py-var">b</span> <span class="py-punc">=</span> <span class="py-num">0</span><span class="py-punc">,</span> <span class="py-num">1</span>
+    <span class="py-kw">while</span> <span class="py-var">a</span> <span class="py-punc">&lt;</span> <span class="py-var">n</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">,</span> <span class="py-kw">end</span><span class="py-punc">=</span><span class="py-str">' '</span><span class="py-punc">)</span>
+        <span class="py-var">a</span><span class="py-punc">,</span> <span class="py-var">b</span> <span class="py-punc">=</span> <span class="py-var">b</span><span class="py-punc">,</span> <span class="py-var">a</span><span class="py-punc">+</span><span class="py-var">b</span>
+    <span class="py-bi">print</span><span class="py-punc">()</span>
+
+<span class="py-cmt"># Now call the function we just defined:</span>
+<span class="py-bi">fib</span><span class="py-punc">(</span><span class="py-num">2000</span><span class="py-punc">)</span>
+<span class="py-out">0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597</span></pre>
+    </div>
+
+    <p>The keyword <code>def</code> introduces a function definition, followed by the function name and a parenthesized list of parameters. The body starts on the next line and must be indented — Python uses that indentation to know where the function ends.</p>
+
+    <h4>Kiddo extra — a simple function of your own</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">def</span> <span class="py-bi">announce_transfer</span><span class="py-punc">(</span><span class="py-var">player</span><span class="py-punc">,</span> <span class="py-var">club</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{player}</span><span class="py-str"> has signed for </span><span class="py-var">{club}</span><span class="py-str">!"</span><span class="py-punc">)</span>
+
+<span class="py-bi">announce_transfer</span><span class="py-punc">(</span><span class="py-str">"Mbappe"</span><span class="py-punc">,</span> <span class="py-str">"Real Madrid"</span><span class="py-punc">)</span>
+<span class="py-out"># Mbappe has signed for Real Madrid!</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 -->
+    <h2 id="docstrings">Docstrings — The Function's Own Documentation</h2>
+    <p>The first statement in a function body can optionally be a string literal — that's the function's docstring. Tools can pull this string out automatically to generate documentation, so it's good practice to include one in every function you write.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>The first statement of the function body can optionally be a string literal; this string literal is the function's documentation string, or docstring. There are tools which use docstrings to automatically produce online or printed documentation, or to let the user interactively browse through code — it's good practice to include docstrings in code that you write.</p>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">def</span> <span class="py-bi">top_scorer</span><span class="py-punc">(</span><span class="py-var">players</span><span class="py-punc">):</span>
+    <span class="py-str">"""Return the player with the most goals from a dict of {name: goals}."""</span>
+    <span class="py-kw">return</span> <span class="py-bi">max</span><span class="py-punc">(</span><span class="py-var">players</span><span class="py-punc">,</span> <span class="py-kw">key</span><span class="py-punc">=</span><span class="py-var">players</span><span class="py-punc">.</span><span class="py-bi">get</span><span class="py-punc">)</span>
+
+<span class="py-cmt"># The docstring is stored on the function object itself</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">top_scorer</span><span class="py-punc">.</span><span class="py-var">__doc__</span><span class="py-punc">)</span>
+<span class="py-out"># Return the player with the most goals from a dict of {name: goals}.</span></pre>
+    </div>
+
+    <div class="note-box">
+      A docstring is just a string sitting on the first line of the function body — Python stores it on <code>function.__doc__</code>, which is exactly how tools like <code>help()</code> pull up documentation for a function.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <h2 id="scope">Local vs Global Scope</h2>
+    <p>Every time a function runs, Python creates a fresh local symbol table just for that call. Assignments inside the function go into that local table. Looking up a name works outward — first the local table, then any enclosing function's table, then the global table, and finally the built-in names.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>All variable assignments in a function store the value in the local symbol table; whereas variable references first look in the local symbol table, then in the local symbol tables of enclosing functions, then in the global symbol table, and finally in the table of built-in names. Global variables and variables of enclosing functions cannot be directly assigned a value within a function, although they may be referenced.</p>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">squad_size</span> <span class="py-punc">=</span> <span class="py-num">25</span>  <span class="py-cmt"># a global variable</span>
+
+<span class="py-kw">def</span> <span class="py-bi">show_squad_size</span><span class="py-punc">():</span>
+    <span class="py-cmt"># Just reading a global — this works fine</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Squad size: </span><span class="py-var">{squad_size}</span><span class="py-str">"</span><span class="py-punc">)</span>
+
+<span class="py-kw">def</span> <span class="py-bi">add_player</span><span class="py-punc">():</span>
+    <span class="py-cmt"># Assigning to squad_size here creates a NEW local variable</span>
+    <span class="py-cmt"># it does NOT change the global one, unless you use 'global'</span>
+    <span class="py-var">squad_size</span> <span class="py-punc">=</span> <span class="py-num">26</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Inside function: </span><span class="py-var">{squad_size}</span><span class="py-str">"</span><span class="py-punc">)</span>
+
+<span class="py-bi">show_squad_size</span><span class="py-punc">()</span>   <span class="py-cmt"># Squad size: 25</span>
+<span class="py-bi">add_player</span><span class="py-punc">()</span>       <span class="py-cmt"># Inside function: 26</span>
+<span class="py-bi">show_squad_size</span><span class="py-punc">()</span>   <span class="py-cmt"># Squad size: 25 — the global never changed</span></pre>
+    </div>
+
+    <div class="warn-box">
+      <strong>To actually modify a global from inside a function</strong>, you need to explicitly say so with a <code>global</code> statement (or <code>nonlocal</code> for a variable in an enclosing function). Without it, any assignment inside the function just creates a brand-new local variable with the same name.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 -->
+    <h2 id="arguments">Arguments — Call by Object Reference</h2>
+    <p>When you call a function, the arguments you pass get placed into that function's local symbol table. Python's model here is sometimes called "call by object reference" — you're not copying the value itself, you're passing a reference to the same object.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>The actual parameters (arguments) to a function call are introduced in the local symbol table of the called function when it is called; thus, arguments are passed using call by value, where the value is always an object reference, not the value of the object. When a function calls another function, or calls itself recursively, a new local symbol table is created for that call.</p>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">def</span> <span class="py-bi">add_to_squad</span><span class="py-punc">(</span><span class="py-var">squad_list</span><span class="py-punc">,</span> <span class="py-var">player</span><span class="py-punc">):</span>
+    <span class="py-cmt"># squad_list here is a reference to the SAME list object</span>
+    <span class="py-var">squad_list</span><span class="py-punc">.</span><span class="py-bi">append</span><span class="py-punc">(</span><span class="py-var">player</span><span class="py-punc">)</span>
+
+<span class="py-var">real_madrid</span> <span class="py-punc">= [</span><span class="py-str">"Bellingham"</span><span class="py-punc">,</span> <span class="py-str">"Vinicius Jr"</span><span class="py-punc">]</span>
+<span class="py-bi">add_to_squad</span><span class="py-punc">(</span><span class="py-var">real_madrid</span><span class="py-punc">,</span> <span class="py-str">"Mbappe"</span><span class="py-punc">)</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">real_madrid</span><span class="py-punc">)</span>
+<span class="py-out"># ['Bellingham', 'Vinicius Jr', 'Mbappe']</span>
+<span class="py-cmt"># The original list changed — because it was the same object,</span>
+<span class="py-cmt"># not a copy, that got passed into the function</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 -->
+    <h2 id="objects">Functions as Objects</h2>
+    <p>A function definition just associates a name with a function object in the current symbol table. That means other names can point to the exact same function object — calling either name calls the same underlying function.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>A function definition associates the function name with the function object in the current symbol table. The interpreter recognizes the object pointed to by that name as a user-defined function. Other names can also point to that same function object and can also be used to access the function.</p>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-bi">fib</span>
+<span class="py-out">&lt;function fib at 10042ed0&gt;</span>
+
+<span class="py-var">f</span> <span class="py-punc">=</span> <span class="py-bi">fib</span>
+<span class="py-var">f</span><span class="py-punc">(</span><span class="py-num">100</span><span class="py-punc">)</span>
+<span class="py-out">0 1 1 2 3 5 8 13 21 34 55 89</span></pre>
+    </div>
+
+    <div class="note-box">
+      <code>f = fib</code> doesn't copy the function — it just makes <code>f</code> a second name pointing at the exact same function object as <code>fib</code>. Calling <code>f(100)</code> and <code>fib(100)</code> do exactly the same thing.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 -->
+    <h2 id="return">Return Values and None</h2>
+    <p>Every function in Python returns a value — even if you never write a <code>return</code> statement. If a function falls off the end without hitting <code>return</code>, or uses a bare <code>return</code> with no expression, it hands back <code>None</code>, Python's built-in "nothing here" value.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>Even functions without a return statement do return a value, albeit a rather boring one. This value is called None. Writing the value None is normally suppressed by the interpreter if it would be the only value written. The return statement returns with a value from a function; return without an expression argument returns None, and falling off the end of a function also returns None.</p>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-bi">fib</span><span class="py-punc">(</span><span class="py-num">0</span><span class="py-punc">)</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">fib</span><span class="py-punc">(</span><span class="py-num">0</span><span class="py-punc">))</span>
+<span class="py-out">None</span></pre>
+    </div>
+
+    <div class="warn-box">
+      <strong>fib is a procedure, not a "function" in the math sense.</strong> It prints values but never returns any of them — so wrapping it in <code>print()</code> shows <code>None</code>, since that's what it actually returns. This surprises a lot of beginners who assume printing inside a function is the same as returning.
+    </div>
+
+    <div class="section-divider"></div>
+<h2 id="real-world">Real-World Uses of Python Functions</h2>
+
+<p>
+Functions are everywhere in real Python programs. Instead of writing the same code repeatedly, developers place reusable logic inside functions and call them whenever it's needed.
+</p>
+
+<div class="prop-grid">
+
+<div class="prop-card">
+<strong>Web Development</strong>
+<span>Handle user login, registration, payments, and API requests.</span>
+</div>
+
+<div class="prop-card">
+<strong>Data Analysis</strong>
+<span>Clean data, calculate statistics, and generate charts.</span>
+</div>
+
+<div class="prop-card">
+<strong>Game Development</strong>
+<span>Move characters, detect collisions, update scores, and spawn enemies.</span>
+</div>
+
+<div class="prop-card">
+<strong>AI & Machine Learning</strong>
+<span>Preprocess data, train models, and make predictions.</span>
+</div>
+
+</div>
+<div class="section-divider"></div>
+
+    <!-- 08 -->
+    <h2 id="fib-vs-fib2">fib() vs fib2() — Printing vs Returning</h2>
+    <p>The docs follow up with a second version of the same function — one that builds and returns a list instead of printing directly. This is the difference between a function with a side effect and a function that hands back usable data.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">def</span> <span class="py-bi">fib2</span><span class="py-punc">(</span><span class="py-var">n</span><span class="py-punc">):</span>  <span class="py-cmt"># return Fibonacci series up to n</span>
+    <span class="py-str">"""Return a list containing the Fibonacci series up to n."""</span>
+    <span class="py-var">result</span> <span class="py-punc">= []</span>
+    <span class="py-var">a</span><span class="py-punc">,</span> <span class="py-var">b</span> <span class="py-punc">=</span> <span class="py-num">0</span><span class="py-punc">,</span> <span class="py-num">1</span>
+    <span class="py-kw">while</span> <span class="py-var">a</span> <span class="py-punc">&lt;</span> <span class="py-var">n</span><span class="py-punc">:</span>
+        <span class="py-var">result</span><span class="py-punc">.</span><span class="py-bi">append</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">)</span>    <span class="py-cmt"># see below</span>
+        <span class="py-var">a</span><span class="py-punc">,</span> <span class="py-var">b</span> <span class="py-punc">=</span> <span class="py-var">b</span><span class="py-punc">,</span> <span class="py-var">a</span><span class="py-punc">+</span><span class="py-var">b</span>
+    <span class="py-kw">return</span> <span class="py-var">result</span>
+
+<span class="py-var">f100</span> <span class="py-punc">=</span> <span class="py-bi">fib2</span><span class="py-punc">(</span><span class="py-num">100</span><span class="py-punc">)</span>    <span class="py-cmt"># call it</span>
+<span class="py-var">f100</span>                <span class="py-cmt"># write the result</span>
+<span class="py-out">[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]</span></pre>
+    </div>
+
+    <table class="param-table">
+      <thead><tr><th>Version</th><th>What it does</th><th>Result of calling it</th></tr></thead>
+      <tbody>
+        <tr><td><code>fib(n)</code></td><td>Prints each number directly as it goes</td><td>Returns None — the printed output isn't usable data</td></tr>
+        <tr><td><code>fib2(n)</code></td><td>Builds a list and returns it</td><td>Returns a real list you can store, loop over, or pass elsewhere</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      <code>result.append(a)</code> calls a method that "belongs" to the <code>result</code> list object — written as <code>obj.methodname</code>. This is equivalent to <code>result = result + [a]</code>, but more efficient, since <code>append()</code> modifies the list in place instead of building a whole new one each time.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 09 -->
+    <h2 id="mistakes">Common Python Function Mistakes</h2>
+    <div class="mistake-list">
+      <div class="mistake-item"><div class="mi-body"><strong>Assuming print() inside a function is the same as return</strong><p>A function that only prints its result returns <code>None</code>. If you need to use the value later — store it, pass it around, do math with it — the function must actually <code>return</code> it, not just print it.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Trying to modify a global variable without the global keyword</strong><p>Assigning to a name inside a function always creates a new local variable, even if a global variable with the same name exists. Without <code>global squad_size</code>, the outer variable is left untouched.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Forgetting that mutable arguments can be changed in place</strong><p>Passing a list or dict into a function passes a reference to that same object. Calling <code>.append()</code> or similar methods on it inside the function changes the original — this surprises people expecting a "copy" like some other languages provide by default.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Skipping the docstring</strong><p>It's easy to leave the first line of a function blank, but a short docstring makes the function self-documenting and lets tools like <code>help()</code> describe it automatically. Worth building the habit early.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Not indenting the function body correctly</strong><p>Python uses indentation, not braces, to mark where the function body starts and ends. Inconsistent indentation inside a function raises an <code>IndentationError</code> before the function even runs.</p></div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 10 -->
+    <h2 id="interview">Python Function Interview Questions and Answers</h2>
+    <div class="iq-list">
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> What does a Python function return if it has no return statement?</div><div class="iq-a">It returns <code>None</code>. Every function returns something — falling off the end of the function body, or using a bare <code>return</code> with no value, both result in <code>None</code> being returned.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q2</span> What is a docstring and where does it go?</div><div class="iq-a">A docstring is a string literal placed as the very first statement in a function's body. It documents what the function does and is stored on the function object as <code>function.__doc__</code>, which tools like <code>help()</code> can read.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q3</span> How does Python decide whether a variable inside a function is local or global?</div><div class="iq-a">If a function assigns a value to a name, that name is treated as local to the function unless it's declared with <code>global</code> (or <code>nonlocal</code> for enclosing functions). Simply reading a variable without assigning to it will look outward — local, then enclosing, then global, then built-in.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q4</span> Are Python function arguments passed by value or by reference?</div><div class="iq-a">Neither, exactly — Python passes references to objects, sometimes called "call by object reference." The reference itself is passed by value, but since it points to the real object, mutating that object inside the function (like calling <code>.append()</code> on a list) affects the original object too.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q5</span> What happens when you assign a function name to another variable, like f = fib?</div><div class="iq-a"><code>f</code> becomes a second name pointing at the exact same function object as <code>fib</code>. Calling <code>f()</code> runs the identical code as calling <code>fib()</code> — nothing is copied or duplicated.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q6</span> Why is result.append(a) preferred over result = result + [a]?</div><div class="iq-a">Both add an item to the end of a list, but <code>append()</code> modifies the existing list object in place, while <code>result + [a]</code> builds an entirely new list and reassigns the name to it. <code>append()</code> is more efficient, especially inside a loop running many times.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 11 -->
+    <h2 id="faq">Python Functions FAQ</h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">How do you define a function in Python? <span class="faq-icon">+</span></button><div class="faq-a">Use the <code>def</code> keyword, followed by the function name and a parenthesized parameter list, ending in a colon. The function body goes on the following lines, indented consistently.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is a docstring in Python? <span class="faq-icon">+</span></button><div class="faq-a">A docstring is an optional string literal as the first statement inside a function, describing what the function does. It's accessible via <code>function.__doc__</code> and is used by documentation tools and <code>help()</code>.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What does a function return if there's no return statement? <span class="faq-icon">+</span></button><div class="faq-a"><code>None</code>. Every Python function returns a value — if the body finishes without hitting a <code>return</code>, or uses a bare <code>return</code>, the result is <code>None</code>.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is the difference between local and global scope in a function? <span class="faq-icon">+</span></button><div class="faq-a">Local scope holds variables created or assigned inside the function — they disappear once the function finishes. Global scope holds variables defined outside any function. A function can read a global variable freely, but assigning to it creates a new local variable instead, unless declared with <code>global</code>.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Are Python function arguments passed by reference? <span class="faq-icon">+</span></button><div class="faq-a">Python passes object references. This means mutable objects like lists and dicts can be changed in place by the function, while reassigning the parameter name itself inside the function does not affect the caller's variable.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can two different names point to the same function in Python? <span class="faq-icon">+</span></button><div class="faq-a">Yes. A function definition just links a name to a function object. Writing <code>f = fib</code> makes <code>f</code> a second name for the exact same object — calling either name runs the same function.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is the difference between fib() and fib2() in the Python docs example? <span class="faq-icon">+</span></button><div class="faq-a"><code>fib()</code> prints the Fibonacci numbers directly and returns <code>None</code>. <code>fib2()</code> builds a list of the same numbers and returns it, so the result can be stored in a variable and reused elsewhere in the program.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="author-strip">
+      <div class="author-avatar">PM</div>
+      <div class="author-info"><strong>Palak Mishra</strong><span>Backend developer · Building beginner-friendly Python docs at Kiddo</span></div>
+    </div>
+
+    <div class="callout">
+      <strong>More Python topics →</strong><br><br>
+      <a href="../python/while_loop.html">While Loop</a> ·
+      <a href="../python/for_loop.html">For Loop</a> ·
+      <a href="../python/if_statements.html">If Statements</a> ·
+      <a href="../python/list.html">Lists</a> ·
+      <a href="../python/dictionary.html">Dictionaries (5.5)</a> ·
+      <a href="../python/tuples.html">Tuples (5.3)</a> ·
+      <a href="../python/sets.html">Sets (5.4)</a> ·
+      <a href="../python/list-comp.html">List Comprehensions</a> ·
+      <a href="../python/looping-techniques.html">Looping Techniques</a> ·
+      <a href="../python/user_input.html">User Input</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
+    <div class="footer-links"><a href="../info/privacy.html">Privacy</a><a href="../info/terms.html">Terms</a><a href="../info/contact.html">Contact</a></div>
+  </div>
+</footer>
+
+<script>
+  const desktopToggle = document.getElementById('desktopToggleTheme');
+  const mobileToggle  = document.getElementById('mobileToggleTheme');
+  const applyTheme = (dark) => {
+    document.body.classList.toggle('dark', dark);
+    const icon = dark ? '☀️' : '🌙';
+    if (desktopToggle) desktopToggle.textContent = icon;
+    if (mobileToggle)  mobileToggle.textContent  = icon;
+  };
+  applyTheme(localStorage.getItem('theme') === 'dark');
+  const toggleTheme = () => {
+    const isDark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  };
+  if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+  if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+
+  const hamburger    = document.getElementById('hamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  hamburger?.addEventListener('click', (e) => { e.stopPropagation(); menuDropdown.classList.toggle('open'); });
+  document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.querySelectorAll('.code-container').forEach(container => {
+    const btn = container.querySelector('.copy-btn');
+    const tip = container.querySelector('.tooltip');
+    const pre = container.querySelector('pre');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(pre.innerText.trim()).then(() => {
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
+      });
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans    = btn.nextElementSibling;
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+</script>
+</body>
+</html>
