@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="../assests/icon.png" />
-  <meta name="description" content="Learn Python Functions (Python Docs 4.8) with beginner-friendly explanations. Understand def, docstrings, local vs global scope, call by object reference, functions as objects, return values, and the fib/fib2 examples." /> 
+  <meta name="description" content="Learn Python Default Argument Values (Python Docs 4.9.1) with beginner-friendly explanations. Understand default parameters, the ask_ok() example, when defaults are evaluated, and the famous mutable default argument trap." /> 
   <meta property="og:type" content="article" /> 
-  <meta property="og:title" content="Python Functions Documentation Explained (Python Docs 4.8) | Kiddo" /> 
-  <meta property="og:description" content="The official Python function docs explained in simple language. Learn def syntax, docstrings, scope, arguments, return values, and functions as objects." /> 
-  <meta property="og:url" content="https://kiddoedu.org/python/functions.html" /> 
+  <meta property="og:title" content="Python Default Argument Values Explained (Python Docs 4.9.1) | Kiddo" /> 
+  <meta property="og:description" content="The official Python default arguments docs explained simply. Learn default parameter syntax, evaluation timing, and the mutable default trap with lists and dicts." /> 
+  <meta property="og:url" content="https://kiddoedu.org/python/default-arguments.html" /> 
   <meta property="og:site_name" content="Kiddo" /> 
-  <meta property="og:image" content="https://kiddoedu.org/python/functions.png" /> 
+  <meta property="og:image" content="https://kiddoedu.org/python/default-arguments.png" /> 
   <meta name="twitter:card" content="summary_large_image" /> 
-  <meta name="twitter:title" content="Python Functions Documentation Explained (Python Docs 4.8) | Kiddo" /> 
-  <meta name="twitter:description" content="Beginner-friendly explanation of Python functions. def syntax, docstrings, scope, call by object reference, return values." /> 
-  <meta name="twitter:image" content="https://kiddoedu.org/python/functions.png" /> 
-  <link rel="canonical" href="https://kiddoedu.org/python/functions.html" /> 
-  <title>Python Functions Explained (Python Docs 4.8) | def, Docstrings, Scope &amp; Return Values</title>
+  <meta name="twitter:title" content="Python Default Argument Values Explained (Python Docs 4.9.1) | Kiddo" /> 
+  <meta name="twitter:description" content="Beginner-friendly explanation of Python default arguments. Syntax, evaluation timing, and the mutable default trap." /> 
+  <meta name="twitter:image" content="https://kiddoedu.org/python/default-arguments.png" /> 
+  <link rel="canonical" href="https://kiddoedu.org/python/default-arguments.html" /> 
+  <title>Python Default Argument Values Explained (Python Docs 4.9.1) | Syntax, Evaluation Timing &amp; The Mutable Default Trap</title>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>
@@ -262,9 +262,9 @@ aside ul .submenu li a .dot{
     <li><a href="../python/if_statements.html"><span class="dot"></span>If Statements</a></li>
     <li><a href="../python/for_loop.html"><span class="dot"></span>For Loop</a></li>
     <li>
-      <a href="../python/functions.html" class="active"><span class="dot"></span>Functions</a>
+      <a href="../python/functions.html"><span class="dot"></span>Functions</a>
       <ul class="submenu">
-        <li><a href="../python/default-arguments.html"><span class="dot"></span>Default Argument Values</a></li>
+        <li><a href="../python/default-arguments.html" class="active"><span class="dot"></span>Default Argument Values</a></li>
       </ul>
     </li>
     <li>
@@ -292,134 +292,121 @@ aside ul .submenu li a .dot{
     <div class="breadcrumb">
       <a href="../index.html">Home</a><span>›</span>
       <a href="../python/py-intro.html">Python</a><span>›</span>
-      4.8 Defining Functions
+      <a href="../python/functions.html">Functions</a><span>›</span>
+      4.9.1 Default Argument Values
     </div>
 
-    <h1>Python Functions Documentation Explained (Python Docs 4.8) | def Syntax, Docstrings, Scope &amp; Return Values</h1>
+    <h1>Python Default Argument Values Explained (Python Docs 4.9.1) | Syntax, Evaluation Timing &amp; The Mutable Default Trap</h1>
 
     <div class="doc-ref">
-      📖 Based on <a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions" target="_blank" rel="noopener">Python 3 official docs §4.8</a> — explained like a friend, with extra examples added
+      📖 Based on <a href="https://docs.python.org/3/tutorial/controlflow.html#default-argument-values" target="_blank" rel="noopener">Python 3 official docs §4.9.1</a> — explained like a friend, with extra examples added
     </div>
 
     <div class="meta-row">
       <span class="meta-pill">Python</span>
       <span class="meta-pill green">Beginner</span>
-      <span class="meta-pill blue">Control Flow</span>
+      <span class="meta-pill blue">Functions</span>
       <span class="meta-pill orange">Official Docs</span>
       <span class="date-badge">Updated July 2026</span>
     </div>
 
-    <p>This page explains the official Python Functions documentation (Python Docs 4.8) in simple language. If the official docs feel dense, this guide breaks down <code>def</code>, docstrings, local vs global scope, how arguments actually get passed, and what a function returns when you never wrote a <code>return</code> statement at all.</p>
-    <p>By the end of this guide, you'll understand the classic Fibonacci examples from the docs line by line, why a function's name is really just a label pointing at an object, and the small scope mistakes that trip up almost every beginner at some point.</p>
+    <p>This page explains the official Python Default Argument Values documentation (Python Docs 4.9.1) in simple language. Default arguments let you call a function with fewer arguments than it technically accepts — but they come with a genuinely famous gotcha involving lists and dictionaries that catches almost every Python developer at least once.</p>
+    <p>By the end of this guide, you'll understand the classic <code>ask_ok()</code> example line by line, exactly when a default value gets evaluated, and why a function that "remembers" values across calls is very rarely what you actually wanted.</p>
 
     <nav class="toc" aria-label="Table of contents">
       <div class="toc-label">In this guide</div>
       <div class="toc-grid">
-        <a href="#what-is"><span class="toc-num">01</span>What is a function?</a>
-        <a href="#syntax"><span class="toc-num">02</span>Defining a function — def syntax</a>
-        <a href="#docstrings"><span class="toc-num">03</span>Docstrings</a>
-        <a href="#scope"><span class="toc-num">04</span>Local vs global scope</a>
-        <a href="#arguments"><span class="toc-num">05</span>Arguments — call by object reference</a>
-        <a href="#objects"><span class="toc-num">06</span>Functions as objects</a>
-        <a href="#return"><span class="toc-num">07</span>Return values and None</a>
-        <a href="#real-world"><span class="toc-num">08</span>Real-world examples</a>
-        <a href="#fib-vs-fib2"><span class="toc-num">09</span>fib() vs fib2()</a>
-        <a href="#mistakes"><span class="toc-num">10</span>Common mistakes</a>
-        <a href="#interview"><span class="toc-num">11</span>Interview questions</a>
-        <a href="#faq"><span class="toc-num">12</span>FAQs</a>
+        <a href="#what-is"><span class="toc-num">01</span>What are default argument values?</a>
+        <a href="#syntax"><span class="toc-num">02</span>The ask_ok() example</a>
+        <a href="#calling"><span class="toc-num">03</span>Calling with fewer arguments</a>
+        <a href="#in-keyword"><span class="toc-num">04</span>The in keyword</a>
+        <a href="#evaluation"><span class="toc-num">05</span>When defaults are evaluated</a>
+        <a href="#mutable-trap"><span class="toc-num">06</span>The mutable default trap</a>
+        <a href="#the-fix"><span class="toc-num">07</span>The None fix</a>
+        <a href="#mistakes"><span class="toc-num">08</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">09</span>Interview questions</a>
+        <a href="#faq"><span class="toc-num">10</span>FAQs</a>
       </div>
     </nav>
 
     <div class="section-divider"></div>
 
     <!-- 01 -->
-    <h2 id="what-is">What is a Function in Python? (Python Docs 4.8 Explained)</h2>
-    <p>A function is a named, reusable block of code that does one job. Instead of retyping the same logic every time you need it, you define it once and call it by name whenever you need it again. The Python docs introduce this with a classic example — a function that writes out the Fibonacci series up to some limit.</p>
+    <h2 id="what-is">What Are Default Argument Values? (Python Docs 4.9.1 Explained)</h2>
+    <p>A default argument value is a value Python automatically uses when the caller doesn't provide that argument. It lets a function have optional parameters, so callers only need to supply the information they want to change while everything else falls back to sensible defaults. Instead of forcing every caller to type out every single argument every single time, you give some parameters a sensible default — and callers only need to override it when they actually want something different.</p>
 
     <div class="prop-grid">
-      <div class="prop-card"><strong>Reusable</strong><span>Write the logic once, call it as many times as you want</span></div>
-      <div class="prop-card"><strong>Named</strong><span>The function name is a label pointing at a function object</span></div>
-      <div class="prop-card"><strong>Has its own scope</strong><span>Local variables inside stay local — they don't leak out</span></div>
-      <div class="prop-card"><strong>Always returns something</strong><span>Even with no return statement, it hands back None</span></div>
+      <div class="prop-card"><strong>Fewer required arguments</strong><span>Callers can skip parameters that already have a sensible default</span></div>
+      <div class="prop-card"><strong>Set with =</strong><span>Written directly in the function signature: <code>param=value</code></span></div>
+      <div class="prop-card"><strong>Evaluated once</strong><span>At definition time, not on every call — this matters a lot</span></div>
+      <div class="prop-card"><strong>Mutable defaults are risky</strong><span>Lists and dicts as defaults can quietly persist between calls</span></div>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 02 -->
-    <h2 id="syntax">Defining a Function — def Syntax</h2>
-    <p>The Python docs open with the classic Fibonacci example — a function that prints every Fibonacci number below a given limit:</p>
+    <h2 id="syntax">The ask_ok() Example</h2>
+    <p>The Python docs introduce default arguments with a small interactive confirmation function — it asks a yes/no question, gives the user a limited number of retries, and repeats a reminder message if the answer isn't recognized:</p>
 
     <div class="code-container">
       <div class="code-header">
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-kw">def</span> <span class="py-bi">fib</span><span class="py-punc">(</span><span class="py-var">n</span><span class="py-punc">):</span>    <span class="py-cmt"># write Fibonacci series less than n</span>
-    <span class="py-str">"""Print a Fibonacci series less than n."""</span>
-    <span class="py-var">a</span><span class="py-punc">,</span> <span class="py-var">b</span> <span class="py-punc">=</span> <span class="py-num">0</span><span class="py-punc">,</span> <span class="py-num">1</span>
-    <span class="py-kw">while</span> <span class="py-var">a</span> <span class="py-punc">&lt;</span> <span class="py-var">n</span><span class="py-punc">:</span>
-        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">,</span> <span class="py-kw">end</span><span class="py-punc">=</span><span class="py-str">' '</span><span class="py-punc">)</span>
-        <span class="py-var">a</span><span class="py-punc">,</span> <span class="py-var">b</span> <span class="py-punc">=</span> <span class="py-var">b</span><span class="py-punc">,</span> <span class="py-var">a</span><span class="py-punc">+</span><span class="py-var">b</span>
-    <span class="py-bi">print</span><span class="py-punc">()</span>
-
-<span class="py-cmt"># Now call the function we just defined:</span>
-<span class="py-bi">fib</span><span class="py-punc">(</span><span class="py-num">2000</span><span class="py-punc">)</span>
-<span class="py-out">0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597</span></pre>
+      <pre><span class="py-kw">def</span> <span class="py-bi">ask_ok</span><span class="py-punc">(</span><span class="py-var">prompt</span><span class="py-punc">,</span> <span class="py-var">retries</span><span class="py-punc">=</span><span class="py-num">4</span><span class="py-punc">,</span> <span class="py-var">reminder</span><span class="py-punc">=</span><span class="py-str">'Please try again!'</span><span class="py-punc">):</span>
+    <span class="py-kw">while</span> <span class="py-kw">True</span><span class="py-punc">:</span>
+        <span class="py-var">reply</span> <span class="py-punc">=</span> <span class="py-bi">input</span><span class="py-punc">(</span><span class="py-var">prompt</span><span class="py-punc">)</span>
+        <span class="py-kw">if</span> <span class="py-var">reply</span> <span class="py-kw">in</span> <span class="py-punc">{</span><span class="py-str">'y'</span><span class="py-punc">,</span> <span class="py-str">'ye'</span><span class="py-punc">,</span> <span class="py-str">'yes'</span><span class="py-punc">}:</span>
+            <span class="py-kw">return</span> <span class="py-kw">True</span>
+        <span class="py-kw">if</span> <span class="py-var">reply</span> <span class="py-kw">in</span> <span class="py-punc">{</span><span class="py-str">'n'</span><span class="py-punc">,</span> <span class="py-str">'no'</span><span class="py-punc">,</span> <span class="py-str">'nop'</span><span class="py-punc">,</span> <span class="py-str">'nope'</span><span class="py-punc">}:</span>
+            <span class="py-kw">return</span> <span class="py-kw">False</span>
+        <span class="py-var">retries</span> <span class="py-punc">=</span> <span class="py-var">retries</span> <span class="py-punc">-</span> <span class="py-num">1</span>
+        <span class="py-kw">if</span> <span class="py-var">retries</span> <span class="py-punc">&lt;</span> <span class="py-num">0</span><span class="py-punc">:</span>
+            <span class="py-kw">raise</span> <span class="py-bi">ValueError</span><span class="py-punc">(</span><span class="py-str">'invalid user response'</span><span class="py-punc">)</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">reminder</span><span class="py-punc">)</span></pre>
     </div>
 
-    <p>The keyword <code>def</code> introduces a function definition, followed by the function name and a parenthesized list of parameters. The body starts on the next line and must be indented — Python uses that indentation to know where the function ends.</p>
-
-    <h4>Kiddo extra — a simple function of your own</h4>
-    <div class="code-container">
-      <div class="code-header">
-        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
-        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-      </div>
-      <pre><span class="py-kw">def</span> <span class="py-bi">announce_transfer</span><span class="py-punc">(</span><span class="py-var">player</span><span class="py-punc">,</span> <span class="py-var">club</span><span class="py-punc">):</span>
-    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{player}</span><span class="py-str"> has signed for </span><span class="py-var">{club}</span><span class="py-str">!"</span><span class="py-punc">)</span>
-
-<span class="py-bi">announce_transfer</span><span class="py-punc">(</span><span class="py-str">"Mbappe"</span><span class="py-punc">,</span> <span class="py-str">"Real Madrid"</span><span class="py-punc">)</span>
-<span class="py-out"># Mbappe has signed for Real Madrid!</span></pre>
-    </div>
+    <p>Two parameters here have defaults: <code>retries</code> defaults to <code>4</code>, and <code>reminder</code> defaults to <code>'Please try again!'</code>. Only <code>prompt</code> is mandatory — it has no default, so every call must supply it.</p>
 
     <div class="section-divider"></div>
 
     <!-- 03 -->
-    <h2 id="docstrings">Docstrings — The Function's Own Documentation</h2>
-    <p>The first statement in a function body can optionally be a string literal — that's the function's docstring. Tools can pull this string out automatically to generate documentation, so it's good practice to include one in every function you write.</p>
-
-    <div class="doc-block">
-      <span class="doc-block-label">From the Python docs</span>
-      <p>The first statement of the function body can optionally be a string literal; this string literal is the function's documentation string, or docstring. There are tools which use docstrings to automatically produce online or printed documentation, or to let the user interactively browse through code — it's good practice to include docstrings in code that you write.</p>
-    </div>
+    <h2 id="calling">Calling ask_ok() in Several Ways</h2>
+    <p>Because <code>retries</code> and <code>reminder</code> both have defaults, this one function can be called with one, two, or three arguments — and Python fills in whatever you leave out.</p>
 
     <div class="code-container">
       <div class="code-header">
-        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-kw">def</span> <span class="py-bi">top_scorer</span><span class="py-punc">(</span><span class="py-var">players</span><span class="py-punc">):</span>
-    <span class="py-str">"""Return the player with the most goals from a dict of {name: goals}."""</span>
-    <span class="py-kw">return</span> <span class="py-bi">max</span><span class="py-punc">(</span><span class="py-var">players</span><span class="py-punc">,</span> <span class="py-kw">key</span><span class="py-punc">=</span><span class="py-var">players</span><span class="py-punc">.</span><span class="py-bi">get</span><span class="py-punc">)</span>
+      <pre><span class="py-cmt"># Giving only the mandatory argument — retries=4, reminder='Please try again!'</span>
+<span class="py-bi">ask_ok</span><span class="py-punc">(</span><span class="py-str">'Do you really want to quit?'</span><span class="py-punc">)</span>
 
-<span class="py-cmt"># The docstring is stored on the function object itself</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">top_scorer</span><span class="py-punc">.</span><span class="py-var">__doc__</span><span class="py-punc">)</span>
-<span class="py-out"># Return the player with the most goals from a dict of {name: goals}.</span></pre>
+<span class="py-cmt"># Giving one of the optional arguments — retries=2, reminder still default</span>
+<span class="py-bi">ask_ok</span><span class="py-punc">(</span><span class="py-str">'OK to overwrite the file?'</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">)</span>
+
+<span class="py-cmt"># Giving all arguments — nothing falls back to a default</span>
+<span class="py-bi">ask_ok</span><span class="py-punc">(</span><span class="py-str">'OK to overwrite the file?'</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">,</span> <span class="py-str">'Come on, only yes or no!'</span><span class="py-punc">)</span></pre>
     </div>
 
-    <div class="note-box">
-      A docstring is just a string sitting on the first line of the function body — Python stores it on <code>function.__doc__</code>, which is exactly how tools like <code>help()</code> pull up documentation for a function.
-    </div>
+    <table class="param-table">
+      <thead><tr><th>Call</th><th>retries</th><th>reminder</th></tr></thead>
+      <tbody>
+        <tr><td><code>ask_ok('Do you really want to quit?')</code></td><td>4 (default)</td><td>'Please try again!' (default)</td></tr>
+        <tr><td><code>ask_ok('OK to overwrite the file?', 2)</code></td><td>2</td><td>'Please try again!' (default)</td></tr>
+        <tr><td><code>ask_ok('OK to overwrite the file?', 2, 'Come on, only yes or no!')</code></td><td>2</td><td>'Come on, only yes or no!'</td></tr>
+      </tbody>
+    </table>
 
     <div class="section-divider"></div>
 
     <!-- 04 -->
-    <h2 id="scope">Local vs Global Scope</h2>
-    <p>Every time a function runs, Python creates a fresh local symbol table just for that call. Assignments inside the function go into that local table. Looking up a name works outward — first the local table, then any enclosing function's table, then the global table, and finally the built-in names.</p>
+    <h2 id="in-keyword">The in Keyword — Testing Sequence Membership</h2>
+    <p>The <code>ask_ok()</code> example also introduces the <code>in</code> keyword, used here to test whether the user's reply matches one of several accepted values without writing a long chain of <code>or</code> comparisons.</p>
 
     <div class="doc-block">
       <span class="doc-block-label">From the Python docs</span>
-      <p>All variable assignments in a function store the value in the local symbol table; whereas variable references first look in the local symbol table, then in the local symbol tables of enclosing functions, then in the global symbol table, and finally in the table of built-in names. Global variables and variables of enclosing functions cannot be directly assigned a value within a function, although they may be referenced.</p>
+      <p>This example also introduces the <code>in</code> keyword. This tests whether or not a sequence contains a certain value.</p>
     </div>
 
     <div class="code-container">
@@ -427,64 +414,56 @@ aside ul .submenu li a .dot{
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-var">squad_size</span> <span class="py-punc">=</span> <span class="py-num">25</span>  <span class="py-cmt"># a global variable</span>
+      <pre><span class="py-var">reply</span> <span class="py-punc">=</span> <span class="py-str">"yes"</span>
 
-<span class="py-kw">def</span> <span class="py-bi">show_squad_size</span><span class="py-punc">():</span>
-    <span class="py-cmt"># Just reading a global — this works fine</span>
-    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Squad size: </span><span class="py-var">{squad_size}</span><span class="py-str">"</span><span class="py-punc">)</span>
+<span class="py-cmt"># Without 'in' — verbose and repetitive</span>
+<span class="py-kw">if</span> <span class="py-var">reply</span> <span class="py-punc">==</span> <span class="py-str">'y'</span> <span class="py-kw">or</span> <span class="py-var">reply</span> <span class="py-punc">==</span> <span class="py-str">'ye'</span> <span class="py-kw">or</span> <span class="py-var">reply</span> <span class="py-punc">==</span> <span class="py-str">'yes'</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Confirmed"</span><span class="py-punc">)</span>
 
-<span class="py-kw">def</span> <span class="py-bi">add_player</span><span class="py-punc">():</span>
-    <span class="py-cmt"># Assigning to squad_size here creates a NEW local variable</span>
-    <span class="py-cmt"># it does NOT change the global one, unless you use 'global'</span>
-    <span class="py-var">squad_size</span> <span class="py-punc">=</span> <span class="py-num">26</span>
-    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Inside function: </span><span class="py-var">{squad_size}</span><span class="py-str">"</span><span class="py-punc">)</span>
-
-<span class="py-bi">show_squad_size</span><span class="py-punc">()</span>   <span class="py-cmt"># Squad size: 25</span>
-<span class="py-bi">add_player</span><span class="py-punc">()</span>       <span class="py-cmt"># Inside function: 26</span>
-<span class="py-bi">show_squad_size</span><span class="py-punc">()</span>   <span class="py-cmt"># Squad size: 25 — the global never changed</span></pre>
-    </div>
-
-    <div class="warn-box">
-      <strong>To actually modify a global from inside a function</strong>, you need to explicitly say so with a <code>global</code> statement (or <code>nonlocal</code> for a variable in an enclosing function). Without it, any assignment inside the function just creates a brand-new local variable with the same name.
+<span class="py-cmt"># With 'in' — reads naturally and scales to any number of options</span>
+<span class="py-kw">if</span> <span class="py-var">reply</span> <span class="py-kw">in</span> <span class="py-punc">{</span><span class="py-str">'y'</span><span class="py-punc">,</span> <span class="py-str">'ye'</span><span class="py-punc">,</span> <span class="py-str">'yes'</span><span class="py-punc">}:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Confirmed"</span><span class="py-punc">)</span></pre>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 05 -->
-    <h2 id="arguments">Arguments — Call by Object Reference</h2>
-    <p>When you call a function, the arguments you pass get placed into that function's local symbol table. Python's model here is sometimes called "call by object reference" — you're not copying the value itself, you're passing a reference to the same object.</p>
+    <h2 id="evaluation">When Are Default Values Evaluated?</h2>
+    <p>Default values are evaluated exactly once — at the point the function is defined, in the scope where the <code>def</code> statement lives. They are not re-evaluated every time you call the function. This means a default tied to a variable captures whatever that variable's value was at definition time, even if the variable changes later.</p>
 
     <div class="doc-block">
       <span class="doc-block-label">From the Python docs</span>
-      <p>The actual parameters (arguments) to a function call are introduced in the local symbol table of the called function when it is called; thus, arguments are passed using call by value, where the value is always an object reference, not the value of the object. When a function calls another function, or calls itself recursively, a new local symbol table is created for that call.</p>
+      <p>The default values are evaluated at the point of function definition in the defining scope.</p>
     </div>
 
     <div class="code-container">
       <div class="code-header">
-        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-kw">def</span> <span class="py-bi">add_to_squad</span><span class="py-punc">(</span><span class="py-var">squad_list</span><span class="py-punc">,</span> <span class="py-var">player</span><span class="py-punc">):</span>
-    <span class="py-cmt"># squad_list here is a reference to the SAME list object</span>
-    <span class="py-var">squad_list</span><span class="py-punc">.</span><span class="py-bi">append</span><span class="py-punc">(</span><span class="py-var">player</span><span class="py-punc">)</span>
+      <pre><span class="py-var">i</span> <span class="py-punc">=</span> <span class="py-num">5</span>
 
-<span class="py-var">real_madrid</span> <span class="py-punc">= [</span><span class="py-str">"Bellingham"</span><span class="py-punc">,</span> <span class="py-str">"Vinicius Jr"</span><span class="py-punc">]</span>
-<span class="py-bi">add_to_squad</span><span class="py-punc">(</span><span class="py-var">real_madrid</span><span class="py-punc">,</span> <span class="py-str">"Mbappe"</span><span class="py-punc">)</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">real_madrid</span><span class="py-punc">)</span>
-<span class="py-out"># ['Bellingham', 'Vinicius Jr', 'Mbappe']</span>
-<span class="py-cmt"># The original list changed — because it was the same object,</span>
-<span class="py-cmt"># not a copy, that got passed into the function</span></pre>
+<span class="py-kw">def</span> <span class="py-bi">f</span><span class="py-punc">(</span><span class="py-var">arg</span><span class="py-punc">=</span><span class="py-var">i</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">arg</span><span class="py-punc">)</span>
+
+<span class="py-var">i</span> <span class="py-punc">=</span> <span class="py-num">6</span>
+<span class="py-bi">f</span><span class="py-punc">()</span>
+<span class="py-out"># prints 5 — the default was locked in when f() was defined,</span>
+<span class="py-out"># NOT when f() was called</span></pre>
+    </div>
+
+    <div class="note-box">
+      By the time <code>f()</code> is actually called, <code>i</code> has already changed to <code>6</code> — but it doesn't matter, because <code>arg</code>'s default was fixed to <code>5</code> back when <code>def f(arg=i):</code> ran. The default is baked in at definition time, not looked up fresh on every call.
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 06 -->
-    <h2 id="objects">Functions as Objects</h2>
-    <p>A function definition just associates a name with a function object in the current symbol table. That means other names can point to the exact same function object — calling either name calls the same underlying function.</p>
+    <h2 id="mutable-trap">The Mutable Default Argument Trap</h2>
+    <p>This is the single most famous gotcha in Python's default argument system. Because a default is evaluated only once, a mutable default — a list, a dict, or most class instances — is created once and then reused across every single call that relies on that default. Any changes made to it stick around for next time.</p>
 
-    <div class="doc-block">
-      <span class="doc-block-label">From the Python docs</span>
-      <p>A function definition associates the function name with the function object in the current symbol table. The interpreter recognizes the object pointed to by that name as a user-defined function. Other names can also point to that same function object and can also be used to access the function.</p>
+    <div class="warn-box">
+      <strong>Important warning, straight from the docs:</strong> the default value is evaluated only once. This makes a real difference when the default is a mutable object such as a list or dictionary, since that same object gets reused on every call that doesn't override it.
     </div>
 
     <div class="code-container">
@@ -492,147 +471,124 @@ aside ul .submenu li a .dot{
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-bi">fib</span>
-<span class="py-out">&lt;function fib at 10042ed0&gt;</span>
+      <pre><span class="py-kw">def</span> <span class="py-bi">f</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">,</span> <span class="py-var">L</span><span class="py-punc">=[]):</span>
+    <span class="py-var">L</span><span class="py-punc">.</span><span class="py-bi">append</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">)</span>
+    <span class="py-kw">return</span> <span class="py-var">L</span>
 
-<span class="py-var">f</span> <span class="py-punc">=</span> <span class="py-bi">fib</span>
-<span class="py-var">f</span><span class="py-punc">(</span><span class="py-num">100</span><span class="py-punc">)</span>
-<span class="py-out">0 1 1 2 3 5 8 13 21 34 55 89</span></pre>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">f</span><span class="py-punc">(</span><span class="py-num">1</span><span class="py-punc">))</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">f</span><span class="py-punc">(</span><span class="py-num">2</span><span class="py-punc">))</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">f</span><span class="py-punc">(</span><span class="py-num">3</span><span class="py-punc">))</span>
+
+<span class="py-out"># [1]</span>
+<span class="py-out"># [1, 2]</span>
+<span class="py-out"># [1, 2, 3]</span></pre>
     </div>
 
     <div class="note-box">
-      <code>f = fib</code> doesn't copy the function — it just makes <code>f</code> a second name pointing at the exact same function object as <code>fib</code>. Calling <code>f(100)</code> and <code>fib(100)</code> do exactly the same thing.
+Imagine writing today's tasks in a notebook, then expecting a brand-new notebook tomorrow—but Python quietly hands you yesterday's notebook again. Mutable default arguments behave exactly like that: the same list or dictionary keeps getting reused unless you create a fresh one yourself.
+</div>
+
+    <p>Notice that <code>L</code> is never reset to an empty list between calls. The <em>same</em> list object created once, when <code>f</code> was defined, is being appended to on every call — which is almost never the behavior a beginner expects when they write <code>L=[]</code> in a function signature.</p>
+
+    <h4>Kiddo extra — the same trap with a running total</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">def</span> <span class="py-bi">add_note</span><span class="py-punc">(</span><span class="py-var">note</span><span class="py-punc">,</span> <span class="py-var">notebook</span><span class="py-punc">={}):</span>
+    <span class="py-var">notebook</span><span class="py-punc">[</span><span class="py-bi">len</span><span class="py-punc">(</span><span class="py-var">notebook</span><span class="py-punc">)]</span> <span class="py-punc">=</span> <span class="py-var">note</span>
+    <span class="py-kw">return</span> <span class="py-var">notebook</span>
+
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">add_note</span><span class="py-punc">(</span><span class="py-str">"Buy milk"</span><span class="py-punc">))</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">add_note</span><span class="py-punc">(</span><span class="py-str">"Call Sarah"</span><span class="py-punc">))</span>
+
+<span class="py-out"># {0: 'Buy milk'}</span>
+<span class="py-out"># {0: 'Buy milk', 1: 'Call Sarah'}</span>
+<span class="py-cmt"># The second call's "empty" notebook already had the first note in it!</span></pre>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 07 -->
-    <h2 id="return">Return Values and None</h2>
-    <p>Every function in Python returns a value — even if you never write a <code>return</code> statement. If a function falls off the end without hitting <code>return</code>, or uses a bare <code>return</code> with no expression, it hands back <code>None</code>, Python's built-in "nothing here" value.</p>
-
-    <div class="doc-block">
-      <span class="doc-block-label">From the Python docs</span>
-      <p>Even functions without a return statement do return a value, albeit a rather boring one. This value is called None. Writing the value None is normally suppressed by the interpreter if it would be the only value written. The return statement returns with a value from a function; return without an expression argument returns None, and falling off the end of a function also returns None.</p>
-    </div>
+    <h2 id="the-fix">The Fix — Default to None Instead</h2>
+    <p>The standard workaround is to default the parameter to <code>None</code> — an immutable sentinel value — and create a fresh mutable object inside the function body every time it's actually needed.</p>
 
     <div class="code-container">
       <div class="code-header">
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-bi">fib</span><span class="py-punc">(</span><span class="py-num">0</span><span class="py-punc">)</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">fib</span><span class="py-punc">(</span><span class="py-num">0</span><span class="py-punc">))</span>
-<span class="py-out">None</span></pre>
+      <pre><span class="py-kw">def</span> <span class="py-bi">f</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">,</span> <span class="py-var">L</span><span class="py-punc">=</span><span class="py-kw">None</span><span class="py-punc">):</span>
+    <span class="py-kw">if</span> <span class="py-var">L</span> <span class="py-kw">is</span> <span class="py-kw">None</span><span class="py-punc">:</span>
+        <span class="py-var">L</span> <span class="py-punc">= []</span>
+    <span class="py-var">L</span><span class="py-punc">.</span><span class="py-bi">append</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">)</span>
+    <span class="py-kw">return</span> <span class="py-var">L</span></pre>
     </div>
 
-    <div class="warn-box">
-      <strong>fib is a procedure, not a "function" in the math sense.</strong> It prints values but never returns any of them — so wrapping it in <code>print()</code> shows <code>None</code>, since that's what it actually returns. This surprises a lot of beginners who assume printing inside a function is the same as returning.
+    <p>Now every call that doesn't pass its own <code>L</code> gets a brand-new empty list created fresh inside the function body — instead of sharing one list object across every call forever.</p>
+
+    <h4>Kiddo extra — the fixed notebook function</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">def</span> <span class="py-bi">add_note</span><span class="py-punc">(</span><span class="py-var">note</span><span class="py-punc">,</span> <span class="py-var">notebook</span><span class="py-punc">=</span><span class="py-kw">None</span><span class="py-punc">):</span>
+    <span class="py-kw">if</span> <span class="py-var">notebook</span> <span class="py-kw">is</span> <span class="py-kw">None</span><span class="py-punc">:</span>
+        <span class="py-var">notebook</span> <span class="py-punc">= {}</span>
+    <span class="py-var">notebook</span><span class="py-punc">[</span><span class="py-bi">len</span><span class="py-punc">(</span><span class="py-var">notebook</span><span class="py-punc">)]</span> <span class="py-punc">=</span> <span class="py-var">note</span>
+    <span class="py-kw">return</span> <span class="py-var">notebook</span>
+
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">add_note</span><span class="py-punc">(</span><span class="py-str">"Buy milk"</span><span class="py-punc">))</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">add_note</span><span class="py-punc">(</span><span class="py-str">"Call Sarah"</span><span class="py-punc">))</span>
+
+<span class="py-out"># {0: 'Buy milk'}</span>
+<span class="py-out"># {0: 'Call Sarah'}</span>
+<span class="py-cmt"># Each call now gets its own fresh notebook, as expected</span></pre>
+    </div>
+
+    <div class="callout">
+      <strong>Rule of thumb:</strong> if a default value is a list, dict, set, or any other mutable object, default it to <code>None</code> and build the real value inside the function body instead. This one habit avoids the entire class of bug.
     </div>
 
     <div class="section-divider"></div>
-<h2 id="real-world">Real-World Uses of Python Functions</h2>
-
-<p>
-Functions are everywhere in real Python programs. Instead of writing the same code repeatedly, developers place reusable logic inside functions and call them whenever it's needed.
-</p>
-
-<div class="prop-grid">
-
-<div class="prop-card">
-<strong>Web Development</strong>
-<span>Handle user login, registration, payments, and API requests.</span>
-</div>
-
-<div class="prop-card">
-<strong>Data Analysis</strong>
-<span>Clean data, calculate statistics, and generate charts.</span>
-</div>
-
-<div class="prop-card">
-<strong>Game Development</strong>
-<span>Move characters, detect collisions, update scores, and spawn enemies.</span>
-</div>
-
-<div class="prop-card">
-<strong>AI & Machine Learning</strong>
-<span>Preprocess data, train models, and make predictions.</span>
-</div>
-
-</div>
-<div class="section-divider"></div>
 
     <!-- 08 -->
-    <h2 id="fib-vs-fib2">fib() vs fib2() — Printing vs Returning</h2>
-    <p>The docs follow up with a second version of the same function — one that builds and returns a list instead of printing directly. This is the difference between a function with a side effect and a function that hands back usable data.</p>
-
-    <div class="code-container">
-      <div class="code-header">
-        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
-        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-      </div>
-      <pre><span class="py-kw">def</span> <span class="py-bi">fib2</span><span class="py-punc">(</span><span class="py-var">n</span><span class="py-punc">):</span>  <span class="py-cmt"># return Fibonacci series up to n</span>
-    <span class="py-str">"""Return a list containing the Fibonacci series up to n."""</span>
-    <span class="py-var">result</span> <span class="py-punc">= []</span>
-    <span class="py-var">a</span><span class="py-punc">,</span> <span class="py-var">b</span> <span class="py-punc">=</span> <span class="py-num">0</span><span class="py-punc">,</span> <span class="py-num">1</span>
-    <span class="py-kw">while</span> <span class="py-var">a</span> <span class="py-punc">&lt;</span> <span class="py-var">n</span><span class="py-punc">:</span>
-        <span class="py-var">result</span><span class="py-punc">.</span><span class="py-bi">append</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">)</span>    <span class="py-cmt"># see below</span>
-        <span class="py-var">a</span><span class="py-punc">,</span> <span class="py-var">b</span> <span class="py-punc">=</span> <span class="py-var">b</span><span class="py-punc">,</span> <span class="py-var">a</span><span class="py-punc">+</span><span class="py-var">b</span>
-    <span class="py-kw">return</span> <span class="py-var">result</span>
-
-<span class="py-var">f100</span> <span class="py-punc">=</span> <span class="py-bi">fib2</span><span class="py-punc">(</span><span class="py-num">100</span><span class="py-punc">)</span>    <span class="py-cmt"># call it</span>
-<span class="py-var">f100</span>                <span class="py-cmt"># write the result</span>
-<span class="py-out">[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]</span></pre>
-    </div>
-
-    <table class="param-table">
-      <thead><tr><th>Version</th><th>What it does</th><th>Result of calling it</th></tr></thead>
-      <tbody>
-        <tr><td><code>fib(n)</code></td><td>Prints each number directly as it goes</td><td>Returns None — the printed output isn't usable data</td></tr>
-        <tr><td><code>fib2(n)</code></td><td>Builds a list and returns it</td><td>Returns a real list you can store, loop over, or pass elsewhere</td></tr>
-      </tbody>
-    </table>
-
-    <div class="note-box">
-      <code>result.append(a)</code> calls a method that "belongs" to the <code>result</code> list object — written as <code>obj.methodname</code>. This is equivalent to <code>result = result + [a]</code>, but more efficient, since <code>append()</code> modifies the list in place instead of building a whole new one each time.
+    <h2 id="mistakes">Common Default Argument Mistakes</h2>
+    <div class="mistake-list">
+      <div class="mistake-item"><div class="mi-body"><strong>Using a mutable object as a default value</strong><p><code>def f(a, L=[])</code> shares the exact same list across every call that relies on the default. Default to <code>None</code> and create the list inside the function instead.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Expecting a variable-based default to update after definition</strong><p><code>def f(arg=i)</code> locks in whatever <code>i</code> was at definition time. Changing <code>i</code> afterward has no effect on future calls to <code>f()</code> — the default was already evaluated once and stored.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Putting a required argument after a default one</strong><p><code>def f(a=1, b)</code> raises a <code>SyntaxError</code>. Once a parameter has a default, every parameter after it must also have a default — required parameters always come first.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Forgetting that all optional parameters need their own default</strong><p>If a function has three optional parameters, all three need a default value defined, even if you expect most calls to only override the first one.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Assuming this bug only affects lists</strong><p>Dictionaries, sets, and instances of most custom classes are just as mutable as lists and fall into exactly the same trap. The fix — defaulting to <code>None</code> — applies to all of them.</p></div></div>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 09 -->
-    <h2 id="mistakes">Common Python Function Mistakes</h2>
-    <div class="mistake-list">
-      <div class="mistake-item"><div class="mi-body"><strong>Assuming print() inside a function is the same as return</strong><p>A function that only prints its result returns <code>None</code>. If you need to use the value later — store it, pass it around, do math with it — the function must actually <code>return</code> it, not just print it.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>Trying to modify a global variable without the global keyword</strong><p>Assigning to a name inside a function always creates a new local variable, even if a global variable with the same name exists. Without <code>global squad_size</code>, the outer variable is left untouched.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>Forgetting that mutable arguments can be changed in place</strong><p>Passing a list or dict into a function passes a reference to that same object. Calling <code>.append()</code> or similar methods on it inside the function changes the original — this surprises people expecting a "copy" like some other languages provide by default.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>Skipping the docstring</strong><p>It's easy to leave the first line of a function blank, but a short docstring makes the function self-documenting and lets tools like <code>help()</code> describe it automatically. Worth building the habit early.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>Not indenting the function body correctly</strong><p>Python uses indentation, not braces, to mark where the function body starts and ends. Inconsistent indentation inside a function raises an <code>IndentationError</code> before the function even runs.</p></div></div>
+    <h2 id="interview">Default Argument Interview Questions and Answers</h2>
+    <div class="iq-list">
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> What is a default argument value in Python?</div><div class="iq-a">A value assigned to a parameter in a function's definition, used automatically when the caller doesn't supply that argument. Written as <code>def f(param=value):</code>. It lets a function be called with fewer arguments than it's technically defined to accept.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q2</span> When are default argument values evaluated?</div><div class="iq-a">Only once — at the point the function is defined, in the scope where the <code>def</code> statement runs. They are not re-evaluated on every call, which is why a default tied to a variable doesn't update even if that variable changes later.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q3</span> Why is using a mutable default argument like L=[] considered dangerous?</div><div class="iq-a">Because the list is created exactly once at definition time and reused across every call that relies on the default. Any values appended in one call remain there for the next call, causing the function to accumulate state unexpectedly instead of starting fresh.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q4</span> How do you fix the mutable default argument problem?</div><div class="iq-a">Default the parameter to <code>None</code> instead of the mutable object, then check <code>if param is None: param = []</code> (or <code>{}</code>, etc.) inside the function body. This creates a brand-new object on every call that needs one.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q5</span> Can you have a required parameter after an optional one in Python?</div><div class="iq-a">No. Once a parameter has a default value, every parameter that follows it must also have a default. Python raises a <code>SyntaxError</code> for a signature like <code>def f(a=1, b):</code>.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q6</span> What does the in keyword do in the context of the ask_ok() example?</div><div class="iq-a">It checks whether a value exists inside a sequence or set — <code>reply in {'y', 'ye', 'yes'}</code> is <code>True</code> if <code>reply</code> matches any one of those three values, replacing a longer chain of <code>or</code>-joined equality checks.</div></div>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 10 -->
-    <h2 id="interview">Python Function Interview Questions and Answers</h2>
-    <div class="iq-list">
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> What does a Python function return if it has no return statement?</div><div class="iq-a">It returns <code>None</code>. Every function returns something — falling off the end of the function body, or using a bare <code>return</code> with no value, both result in <code>None</code> being returned.</div></div>
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q2</span> What is a docstring and where does it go?</div><div class="iq-a">A docstring is a string literal placed as the very first statement in a function's body. It documents what the function does and is stored on the function object as <code>function.__doc__</code>, which tools like <code>help()</code> can read.</div></div>
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q3</span> How does Python decide whether a variable inside a function is local or global?</div><div class="iq-a">If a function assigns a value to a name, that name is treated as local to the function unless it's declared with <code>global</code> (or <code>nonlocal</code> for enclosing functions). Simply reading a variable without assigning to it will look outward — local, then enclosing, then global, then built-in.</div></div>
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q4</span> Are Python function arguments passed by value or by reference?</div><div class="iq-a">Neither, exactly — Python passes references to objects, sometimes called "call by object reference." The reference itself is passed by value, but since it points to the real object, mutating that object inside the function (like calling <code>.append()</code> on a list) affects the original object too.</div></div>
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q5</span> What happens when you assign a function name to another variable, like f = fib?</div><div class="iq-a"><code>f</code> becomes a second name pointing at the exact same function object as <code>fib</code>. Calling <code>f()</code> runs the identical code as calling <code>fib()</code> — nothing is copied or duplicated.</div></div>
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q6</span> Why is result.append(a) preferred over result = result + [a]?</div><div class="iq-a">Both add an item to the end of a list, but <code>append()</code> modifies the existing list object in place, while <code>result + [a]</code> builds an entirely new list and reassigns the name to it. <code>append()</code> is more efficient, especially inside a loop running many times.</div></div>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <!-- 11 -->
-    <h2 id="faq">Python Functions FAQ</h2>
+    <h2 id="faq">Default Argument Values FAQ</h2>
     <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">How do you define a function in Python? <span class="faq-icon">+</span></button><div class="faq-a">Use the <code>def</code> keyword, followed by the function name and a parenthesized parameter list, ending in a colon. The function body goes on the following lines, indented consistently.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is a docstring in Python? <span class="faq-icon">+</span></button><div class="faq-a">A docstring is an optional string literal as the first statement inside a function, describing what the function does. It's accessible via <code>function.__doc__</code> and is used by documentation tools and <code>help()</code>.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">What does a function return if there's no return statement? <span class="faq-icon">+</span></button><div class="faq-a"><code>None</code>. Every Python function returns a value — if the body finishes without hitting a <code>return</code>, or uses a bare <code>return</code>, the result is <code>None</code>.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is the difference between local and global scope in a function? <span class="faq-icon">+</span></button><div class="faq-a">Local scope holds variables created or assigned inside the function — they disappear once the function finishes. Global scope holds variables defined outside any function. A function can read a global variable freely, but assigning to it creates a new local variable instead, unless declared with <code>global</code>.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">Are Python function arguments passed by reference? <span class="faq-icon">+</span></button><div class="faq-a">Python passes object references. This means mutable objects like lists and dicts can be changed in place by the function, while reassigning the parameter name itself inside the function does not affect the caller's variable.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can two different names point to the same function in Python? <span class="faq-icon">+</span></button><div class="faq-a">Yes. A function definition just links a name to a function object. Writing <code>f = fib</code> makes <code>f</code> a second name for the exact same object — calling either name runs the same function.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is the difference between fib() and fib2() in the Python docs example? <span class="faq-icon">+</span></button><div class="faq-a"><code>fib()</code> prints the Fibonacci numbers directly and returns <code>None</code>. <code>fib2()</code> builds a list of the same numbers and returns it, so the result can be stored in a variable and reused elsewhere in the program.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is a default argument in Python? <span class="faq-icon">+</span></button><div class="faq-a">A value a function parameter falls back to when the caller doesn't provide one. Defined with <code>param=value</code> in the function signature, it makes that parameter optional for callers.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Why shouldn't you use a mutable object like a list as a default argument? <span class="faq-icon">+</span></button><div class="faq-a">Because the default is created only once, at function definition time, and that same object is reused across every call that relies on the default. Changes made in one call — like appending to a list — persist into later calls, which is rarely the intended behavior.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">How do you safely use a list or dict as a default argument? <span class="faq-icon">+</span></button><div class="faq-a">Default the parameter to <code>None</code>, then inside the function body check <code>if param is None:</code> and assign a fresh list or dict at that point. This guarantees a new object every time the default is actually used.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Are default values evaluated every time a function is called? <span class="faq-icon">+</span></button><div class="faq-a">No — only once, at the moment the function is defined. This is exactly why a default tied to a variable's value at definition time doesn't reflect later changes to that variable.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can a function have multiple default arguments? <span class="faq-icon">+</span></button><div class="faq-a">Yes. A function can have as many default parameters as needed, as long as every parameter without a default comes before all parameters that do have one, in the function's parameter list.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What happens if you call a function without its optional arguments? <span class="faq-icon">+</span></button><div class="faq-a">Python fills in each missing optional argument with its default value from the function's definition. Only arguments without a default are mandatory to supply on every call.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Is None a good default value to use in Python? <span class="faq-icon">+</span></button><div class="faq-a">Yes, and it's the standard convention specifically because <code>None</code> is immutable and safe to reuse across calls. It acts as a sentinel — a value you check for inside the function to decide whether to build a fresh mutable object.</div></div>
     </div>
 
     <div class="section-divider"></div>
@@ -644,7 +600,7 @@ Functions are everywhere in real Python programs. Instead of writing the same co
 
     <div class="callout">
       <strong>More Python topics →</strong><br><br>
-      <a href="../python/default-arguments.html">Default Arguments</a> ·
+      <a href="../python/functions.html">Functions (4.8)</a> ·
       <a href="../python/while_loop.html">While Loop</a> ·
       <a href="../python/for_loop.html">For Loop</a> ·
       <a href="../python/if_statements.html">If Statements</a> ·
