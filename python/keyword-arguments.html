@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="../assests/icon.png" />
-  <meta name="description" content="Learn Python Default Argument Values (Python Docs 4.9.1) with beginner-friendly explanations. Understand default parameters, the ask_ok() example, when defaults are evaluated, and the famous mutable default argument trap." /> 
+<meta name="description" content="Learn Python Keyword Arguments (Python Docs 4.9.2) with beginner-friendly explanations. Understand keyword arguments, kwarg=value syntax, valid and invalid function calls, *args, **kwargs, and the famous cheeseshop() example." />
   <meta property="og:type" content="article" /> 
-  <meta property="og:title" content="Python Default Argument Values Explained (Python Docs 4.9.1) | Kiddo" /> 
-  <meta property="og:description" content="The official Python default arguments docs explained simply. Learn default parameter syntax, evaluation timing, and the mutable default trap with lists and dicts." /> 
-  <meta property="og:url" content="https://kiddoedu.org/python/default-arguments.html" /> 
+  <meta property="og:title" content="Python Keyword Arguments Explained (Python Docs 4.9.2) | Kiddo" /> 
+  <meta property="og:description" content="The official Python keyword arguments docs explained simply. Learn kwarg=value syntax, valid vs invalid calls, *args, **kwargs, and the cheeseshop() example." /> 
+  <meta property="og:url" content="https://kiddoedu.org/python/keyword-arguments.html" /> 
   <meta property="og:site_name" content="Kiddo" /> 
-  <meta property="og:image" content="https://kiddoedu.org/python/default-arguments.png" /> 
+  <meta property="og:image" content="https://kiddoedu.org/python/keyword-arguments.png" /> 
   <meta name="twitter:card" content="summary_large_image" /> 
-  <meta name="twitter:title" content="Python Default Argument Values Explained (Python Docs 4.9.1) | Kiddo" /> 
-  <meta name="twitter:description" content="Beginner-friendly explanation of Python default arguments. Syntax, evaluation timing, and the mutable default trap." /> 
-  <meta name="twitter:image" content="https://kiddoedu.org/python/default-arguments.png" /> 
-  <link rel="canonical" href="https://kiddoedu.org/python/default-arguments.html" /> 
-  <title>Python Default Argument Values Explained (Python Docs 4.9.1) | Syntax, Evaluation Timing &amp; The Mutable Default Trap</title>
+  <meta name="twitter:title" content="Python Keyword Arguments Explained (Python Docs 4.9.2) | Kiddo" /> 
+  <meta name="twitter:description" content="Beginner-friendly explanation of Python keyword arguments. kwarg=value syntax, *args, **kwargs, valid and invalid calls." /> 
+  <meta name="twitter:image" content="https://kiddoedu.org/python/keyword-arguments.png" /> 
+  <link rel="canonical" href="https://kiddoedu.org/python/keyword-arguments.html" /> 
+<title>Python Keyword Arguments Explained (Python Docs 4.9.2) | *args, **kwargs, kwarg=value</title>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>
@@ -264,8 +264,8 @@ aside ul .submenu li a .dot{
     <li>
       <a href="../python/functions.html"><span class="dot"></span>Functions</a>
       <ul class="submenu">
-        <li><a href="../python/default-arguments.html" class="active"><span class="dot"></span>Default Argument Values</a></li>
-        <li><a href="../python/keyword-arguments.html"><span class="dot"></span>Keyword Arguments</a></li>
+        <li><a href="../python/default-arguments.html"><span class="dot"></span>Default Argument Values</a></li>
+        <li><a href="../python/keyword-arguments.html" class="active"><span class="dot"></span>Keyword Arguments</a></li>
       </ul>
     </li>
     <li>
@@ -294,13 +294,13 @@ aside ul .submenu li a .dot{
       <a href="../index.html">Home</a><span>›</span>
       <a href="../python/py-intro.html">Python</a><span>›</span>
       <a href="../python/functions.html">Functions</a><span>›</span>
-      4.9.1 Default Argument Values
+      4.9.2 Keyword Arguments
     </div>
 
-    <h1>Python Default Argument Values Explained (Python Docs 4.9.1) | Syntax, Evaluation Timing &amp; The Mutable Default Trap</h1>
+    <h1>Python Keyword Arguments Explained (Python Docs 4.9.2) | kwarg=value Syntax, *args &amp; **kwargs</h1>
 
     <div class="doc-ref">
-      📖 Based on <a href="https://docs.python.org/3/tutorial/controlflow.html#default-argument-values" target="_blank" rel="noopener">Python 3 official docs §4.9.1</a> — explained like a friend, with extra examples added
+      📖 Based on <a href="https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments" target="_blank" rel="noopener">Python 3 official docs §4.9.2</a> — explained like a friend, with extra examples added
     </div>
 
     <div class="meta-row">
@@ -311,285 +311,288 @@ aside ul .submenu li a .dot{
       <span class="date-badge">Updated July 2026</span>
     </div>
 
-    <p>This page explains the official Python Default Argument Values documentation (Python Docs 4.9.1) in simple language. Default arguments let you call a function with fewer arguments than it technically accepts — but they come with a genuinely famous gotcha involving lists and dictionaries that catches almost every Python developer at least once.</p>
-    <p>By the end of this guide, you'll understand the classic <code>ask_ok()</code> example line by line, exactly when a default value gets evaluated, and why a function that "remembers" values across calls is very rarely what you actually wanted.</p>
+    <p>This page explains the official Python Keyword Arguments documentation (Python Docs 4.9.2) in simple language. Keyword arguments let you call a function using <code>name=value</code> pairs instead of relying purely on position — which makes calls more readable and lets you skip arguments in any order you like, as long as you name them.</p>
+    <p>By the end of this guide, you'll understand the classic <code>parrot()</code> example line by line, exactly which calls are valid and which raise errors, and how <code>*args</code> and <code>**kwargs</code> let a function absorb an unlimited number of extra arguments through the <code>cheeseshop()</code> example.</p>
 
     <nav class="toc" aria-label="Table of contents">
       <div class="toc-label">In this guide</div>
       <div class="toc-grid">
-        <a href="#what-is"><span class="toc-num">01</span>What are default argument values?</a>
-        <a href="#syntax"><span class="toc-num">02</span>The ask_ok() example</a>
-        <a href="#calling"><span class="toc-num">03</span>Calling with fewer arguments</a>
-        <a href="#in-keyword"><span class="toc-num">04</span>The in keyword</a>
-        <a href="#evaluation"><span class="toc-num">05</span>When defaults are evaluated</a>
-        <a href="#mutable-trap"><span class="toc-num">06</span>The mutable default trap</a>
-        <a href="#the-fix"><span class="toc-num">07</span>The None fix</a>
-        <a href="#mistakes"><span class="toc-num">08</span>Common mistakes</a>
-        <a href="#interview"><span class="toc-num">09</span>Interview questions</a>
-        <a href="#faq"><span class="toc-num">10</span>FAQs</a>
+        <a href="#what-is"><span class="toc-num">01</span>What are keyword arguments?</a>
+        <a href="#parrot"><span class="toc-num">02</span>The parrot() example</a>
+        <a href="#valid-calls"><span class="toc-num">03</span>Valid ways to call parrot()</a>
+        <a href="#invalid-calls"><span class="toc-num">04</span>Invalid calls</a>
+        <a href="#ordering-rule"><span class="toc-num">05</span>Keyword args must follow positional args</a>
+        <a href="#duplicate-values"><span class="toc-num">06</span>No argument may receive a value twice</a>
+        <a href="#args-kwargs"><span class="toc-num">07</span>*args and **kwargs</a>
+        <a href="#cheeseshop"><span class="toc-num">08</span>The cheeseshop() example</a>
+        <a href="#mistakes"><span class="toc-num">09</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">10</span>Interview questions</a>
+        <a href="#faq"><span class="toc-num">11</span>FAQs</a>
       </div>
     </nav>
 
     <div class="section-divider"></div>
 
     <!-- 01 -->
-    <h2 id="what-is">What Are Default Argument Values? (Python Docs 4.9.1 Explained)</h2>
-    <p>A default argument value is a value Python automatically uses when the caller doesn't provide that argument. It lets a function have optional parameters, so callers only need to supply the information they want to change while everything else falls back to sensible defaults. Instead of forcing every caller to type out every single argument every single time, you give some parameters a sensible default — and callers only need to override it when they actually want something different.</p>
+    <h2 id="what-is">What Are Keyword Arguments? (Python Docs 4.9.2 Explained)</h2>
+    <p>A keyword argument is a way of calling a function using <code>name=value</code> instead of relying on position alone. Rather than remembering "the third argument is the action," you just write <code>action='VOOOOOM'</code> — the call reads like a sentence and can't be misread by argument order.</p>
 
     <div class="prop-grid">
-      <div class="prop-card"><strong>Fewer required arguments</strong><span>Callers can skip parameters that already have a sensible default</span></div>
-      <div class="prop-card"><strong>Set with =</strong><span>Written directly in the function signature: <code>param=value</code></span></div>
-      <div class="prop-card"><strong>Evaluated once</strong><span>At definition time, not on every call — this matters a lot</span></div>
-      <div class="prop-card"><strong>Mutable defaults are risky</strong><span>Lists and dicts as defaults can quietly persist between calls</span></div>
+      <div class="prop-card"><strong>Named, not positional</strong><span>Written as <code>kwarg=value</code> — order in the call doesn't matter</span></div>
+      <div class="prop-card"><strong>Mixable with positional args</strong><span>You can use some positional arguments and some keyword arguments together</span></div>
+      <div class="prop-card"><strong>Self-documenting calls</strong><span>Reading <code>state='pushing up the daisies'</code> tells you exactly what it sets</span></div>
+      <div class="prop-card"><strong>Strict matching rules</strong><span>Every keyword must match a real parameter name — no typos allowed</span></div>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 02 -->
-    <h2 id="syntax">The ask_ok() Example</h2>
-    <p>The Python docs introduce default arguments with a small interactive confirmation function — it asks a yes/no question, gives the user a limited number of retries, and repeats a reminder message if the answer isn't recognized:</p>
+    <h2 id="parrot">The parrot() Example</h2>
+    <p>The Python docs introduce keyword arguments with a function that has one required argument and three optional ones:</p>
 
     <div class="code-container">
       <div class="code-header">
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-kw">def</span> <span class="py-bi">ask_ok</span><span class="py-punc">(</span><span class="py-var">prompt</span><span class="py-punc">,</span> <span class="py-var">retries</span><span class="py-punc">=</span><span class="py-num">4</span><span class="py-punc">,</span> <span class="py-var">reminder</span><span class="py-punc">=</span><span class="py-str">'Please try again!'</span><span class="py-punc">):</span>
-    <span class="py-kw">while</span> <span class="py-kw">True</span><span class="py-punc">:</span>
-        <span class="py-var">reply</span> <span class="py-punc">=</span> <span class="py-bi">input</span><span class="py-punc">(</span><span class="py-var">prompt</span><span class="py-punc">)</span>
-        <span class="py-kw">if</span> <span class="py-var">reply</span> <span class="py-kw">in</span> <span class="py-punc">{</span><span class="py-str">'y'</span><span class="py-punc">,</span> <span class="py-str">'ye'</span><span class="py-punc">,</span> <span class="py-str">'yes'</span><span class="py-punc">}:</span>
-            <span class="py-kw">return</span> <span class="py-kw">True</span>
-        <span class="py-kw">if</span> <span class="py-var">reply</span> <span class="py-kw">in</span> <span class="py-punc">{</span><span class="py-str">'n'</span><span class="py-punc">,</span> <span class="py-str">'no'</span><span class="py-punc">,</span> <span class="py-str">'nop'</span><span class="py-punc">,</span> <span class="py-str">'nope'</span><span class="py-punc">}:</span>
-            <span class="py-kw">return</span> <span class="py-kw">False</span>
-        <span class="py-var">retries</span> <span class="py-punc">=</span> <span class="py-var">retries</span> <span class="py-punc">-</span> <span class="py-num">1</span>
-        <span class="py-kw">if</span> <span class="py-var">retries</span> <span class="py-punc">&lt;</span> <span class="py-num">0</span><span class="py-punc">:</span>
-            <span class="py-kw">raise</span> <span class="py-bi">ValueError</span><span class="py-punc">(</span><span class="py-str">'invalid user response'</span><span class="py-punc">)</span>
-        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">reminder</span><span class="py-punc">)</span></pre>
+      <pre><span class="py-kw">def</span> <span class="py-bi">parrot</span><span class="py-punc">(</span><span class="py-var">voltage</span><span class="py-punc">,</span> <span class="py-var">state</span><span class="py-punc">=</span><span class="py-str">'a stiff'</span><span class="py-punc">,</span> <span class="py-var">action</span><span class="py-punc">=</span><span class="py-str">'voom'</span><span class="py-punc">,</span> <span class="py-var">type</span><span class="py-punc">=</span><span class="py-str">'Norwegian Blue'</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"-- This parrot wouldn't"</span><span class="py-punc">,</span> <span class="py-var">action</span><span class="py-punc">,</span> <span class="py-kw">end</span><span class="py-punc">=</span><span class="py-str">' '</span><span class="py-punc">)</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"if you put"</span><span class="py-punc">,</span> <span class="py-var">voltage</span><span class="py-punc">,</span> <span class="py-str">"volts through it."</span><span class="py-punc">)</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"-- Lovely plumage, the"</span><span class="py-punc">,</span> <span class="py-var">type</span><span class="py-punc">)</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"-- It's"</span><span class="py-punc">,</span> <span class="py-var">state</span><span class="py-punc">,</span> <span class="py-str">"!"</span><span class="py-punc">)</span></pre>
     </div>
 
-    <p>Two parameters here have defaults: <code>retries</code> defaults to <code>4</code>, and <code>reminder</code> defaults to <code>'Please try again!'</code>. Only <code>prompt</code> is mandatory — it has no default, so every call must supply it.</p>
+    <p><code>voltage</code> is the one required argument — every call must supply it. <code>state</code>, <code>action</code>, and <code>type</code> all have defaults, so a caller only needs to override the ones they actually want to change.</p>
 
     <div class="section-divider"></div>
 
     <!-- 03 -->
-    <h2 id="calling">Calling ask_ok() in Several Ways</h2>
-    <p>Because <code>retries</code> and <code>reminder</code> both have defaults, this one function can be called with one, two, or three arguments — and Python fills in whatever you leave out.</p>
+    <h2 id="valid-calls">Valid Ways to Call parrot()</h2>
+    <p>Because keyword arguments can be named explicitly and don't have to appear in a fixed order, this one function can be called in quite a few different ways — all equally valid:</p>
 
     <div class="code-container">
       <div class="code-header">
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-cmt"># Giving only the mandatory argument — retries=4, reminder='Please try again!'</span>
-<span class="py-bi">ask_ok</span><span class="py-punc">(</span><span class="py-str">'Do you really want to quit?'</span><span class="py-punc">)</span>
+      <pre><span class="py-bi">parrot</span><span class="py-punc">(</span><span class="py-num">1000</span><span class="py-punc">)</span>                                          <span class="py-cmt"># 1 positional argument</span>
+<span class="py-bi">parrot</span><span class="py-punc">(</span><span class="py-var">voltage</span><span class="py-punc">=</span><span class="py-num">1000</span><span class="py-punc">)</span>                                  <span class="py-cmt"># 1 keyword argument</span>
+<span class="py-bi">parrot</span><span class="py-punc">(</span><span class="py-var">voltage</span><span class="py-punc">=</span><span class="py-num">1000000</span><span class="py-punc">,</span> <span class="py-var">action</span><span class="py-punc">=</span><span class="py-str">'VOOOOOM'</span><span class="py-punc">)</span>             <span class="py-cmt"># 2 keyword arguments</span>
+<span class="py-bi">parrot</span><span class="py-punc">(</span><span class="py-var">action</span><span class="py-punc">=</span><span class="py-str">'VOOOOOM'</span><span class="py-punc">,</span> <span class="py-var">voltage</span><span class="py-punc">=</span><span class="py-num">1000000</span><span class="py-punc">)</span>             <span class="py-cmt"># 2 keyword arguments</span>
+<span class="py-bi">parrot</span><span class="py-punc">(</span><span class="py-str">'a million'</span><span class="py-punc">,</span> <span class="py-str">'bereft of life'</span><span class="py-punc">,</span> <span class="py-str">'jump'</span><span class="py-punc">)</span>         <span class="py-cmt"># 3 positional arguments</span>
+<span class="py-bi">parrot</span><span class="py-punc">(</span><span class="py-str">'a thousand'</span><span class="py-punc">,</span> <span class="py-var">state</span><span class="py-punc">=</span><span class="py-str">'pushing up the daisies'</span><span class="py-punc">)</span>  <span class="py-cmt"># 1 positional, 1 keyword</span></pre>
+    </div>
 
-<span class="py-cmt"># Giving one of the optional arguments — retries=2, reminder still default</span>
-<span class="py-bi">ask_ok</span><span class="py-punc">(</span><span class="py-str">'OK to overwrite the file?'</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">)</span>
+    <div class="note-box">
+      Notice the third and fourth calls: <code>voltage=1000000, action='VOOOOOM'</code> and <code>action='VOOOOOM', voltage=1000000</code> give identical results even though the keywords are in a different order. That's the whole point of naming them — order stops mattering.
+    </div>
 
-<span class="py-cmt"># Giving all arguments — nothing falls back to a default</span>
-<span class="py-bi">ask_ok</span><span class="py-punc">(</span><span class="py-str">'OK to overwrite the file?'</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">,</span> <span class="py-str">'Come on, only yes or no!'</span><span class="py-punc">)</span></pre>
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <h2 id="invalid-calls">Invalid Calls</h2>
+    <p>Not everything is allowed, though. These four calls each break a specific rule and raise an error:</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-bi">parrot</span><span class="py-punc">()</span>                     <span class="py-cmt"># required argument missing</span>
+<span class="py-bi">parrot</span><span class="py-punc">(</span><span class="py-var">voltage</span><span class="py-punc">=</span><span class="py-num">5.0</span><span class="py-punc">,</span> <span class="py-str">'dead'</span><span class="py-punc">)</span>  <span class="py-cmt"># non-keyword argument after a keyword argument</span>
+<span class="py-bi">parrot</span><span class="py-punc">(</span><span class="py-num">110</span><span class="py-punc">,</span> <span class="py-var">voltage</span><span class="py-punc">=</span><span class="py-num">220</span><span class="py-punc">)</span>     <span class="py-cmt"># duplicate value for the same argument</span>
+<span class="py-bi">parrot</span><span class="py-punc">(</span><span class="py-var">actor</span><span class="py-punc">=</span><span class="py-str">'John Cleese'</span><span class="py-punc">)</span>  <span class="py-cmt"># unknown keyword argument</span></pre>
     </div>
 
     <table class="param-table">
-      <thead><tr><th>Call</th><th>retries</th><th>reminder</th></tr></thead>
+      <thead><tr><th>Invalid call</th><th>Why it fails</th></tr></thead>
       <tbody>
-        <tr><td><code>ask_ok('Do you really want to quit?')</code></td><td>4 (default)</td><td>'Please try again!' (default)</td></tr>
-        <tr><td><code>ask_ok('OK to overwrite the file?', 2)</code></td><td>2</td><td>'Please try again!' (default)</td></tr>
-        <tr><td><code>ask_ok('OK to overwrite the file?', 2, 'Come on, only yes or no!')</code></td><td>2</td><td>'Come on, only yes or no!'</td></tr>
+        <tr><td><code>parrot()</code></td><td><code>voltage</code> has no default and was never supplied</td></tr>
+        <tr><td><code>parrot(voltage=5.0, 'dead')</code></td><td>A positional argument appears after a keyword argument</td></tr>
+        <tr><td><code>parrot(110, voltage=220)</code></td><td><code>voltage</code> gets a value both positionally and by keyword</td></tr>
+        <tr><td><code>parrot(actor='John Cleese')</code></td><td><code>actor</code> isn't a parameter this function accepts</td></tr>
       </tbody>
     </table>
 
     <div class="section-divider"></div>
 
-    <!-- 04 -->
-    <h2 id="in-keyword">The in Keyword — Testing Sequence Membership</h2>
-    <p>The <code>ask_ok()</code> example also introduces the <code>in</code> keyword, used here to test whether the user's reply matches one of several accepted values without writing a long chain of <code>or</code> comparisons.</p>
-
-    <div class="doc-block">
-      <span class="doc-block-label">From the Python docs</span>
-      <p>This example also introduces the <code>in</code> keyword. This tests whether or not a sequence contains a certain value.</p>
-    </div>
-
-    <div class="code-container">
-      <div class="code-header">
-        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
-        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-      </div>
-      <pre><span class="py-var">reply</span> <span class="py-punc">=</span> <span class="py-str">"yes"</span>
-
-<span class="py-cmt"># Without 'in' — verbose and repetitive</span>
-<span class="py-kw">if</span> <span class="py-var">reply</span> <span class="py-punc">==</span> <span class="py-str">'y'</span> <span class="py-kw">or</span> <span class="py-var">reply</span> <span class="py-punc">==</span> <span class="py-str">'ye'</span> <span class="py-kw">or</span> <span class="py-var">reply</span> <span class="py-punc">==</span> <span class="py-str">'yes'</span><span class="py-punc">:</span>
-    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Confirmed"</span><span class="py-punc">)</span>
-
-<span class="py-cmt"># With 'in' — reads naturally and scales to any number of options</span>
-<span class="py-kw">if</span> <span class="py-var">reply</span> <span class="py-kw">in</span> <span class="py-punc">{</span><span class="py-str">'y'</span><span class="py-punc">,</span> <span class="py-str">'ye'</span><span class="py-punc">,</span> <span class="py-str">'yes'</span><span class="py-punc">}:</span>
-    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Confirmed"</span><span class="py-punc">)</span></pre>
-    </div>
-
-    <div class="section-divider"></div>
-
     <!-- 05 -->
-    <h2 id="evaluation">When Are Default Values Evaluated?</h2>
-    <p>Default values are evaluated exactly once — at the point the function is defined, in the scope where the <code>def</code> statement lives. They are not re-evaluated every time you call the function. This means a default tied to a variable captures whatever that variable's value was at definition time, even if the variable changes later.</p>
+    <h2 id="ordering-rule">Keyword Arguments Must Follow Positional Arguments</h2>
+    <p>In any single function call, every keyword argument must come after all the positional arguments. All the keywords you pass must match a real parameter name — order among the keyword arguments themselves doesn't matter, and this includes required parameters too.</p>
 
     <div class="doc-block">
       <span class="doc-block-label">From the Python docs</span>
-      <p>The default values are evaluated at the point of function definition in the defining scope.</p>
-    </div>
-
-    <div class="code-container">
-      <div class="code-header">
-        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
-        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-      </div>
-      <pre><span class="py-var">i</span> <span class="py-punc">=</span> <span class="py-num">5</span>
-
-<span class="py-kw">def</span> <span class="py-bi">f</span><span class="py-punc">(</span><span class="py-var">arg</span><span class="py-punc">=</span><span class="py-var">i</span><span class="py-punc">):</span>
-    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">arg</span><span class="py-punc">)</span>
-
-<span class="py-var">i</span> <span class="py-punc">=</span> <span class="py-num">6</span>
-<span class="py-bi">f</span><span class="py-punc">()</span>
-<span class="py-out"># prints 5 — the default was locked in when f() was defined,</span>
-<span class="py-out"># NOT when f() was called</span></pre>
-    </div>
-
-    <div class="note-box">
-      By the time <code>f()</code> is actually called, <code>i</code> has already changed to <code>6</code> — but it doesn't matter, because <code>arg</code>'s default was fixed to <code>5</code> back when <code>def f(arg=i):</code> ran. The default is baked in at definition time, not looked up fresh on every call.
+      <p>In a function call, keyword arguments must follow positional arguments. All the keyword arguments passed must match one of the arguments accepted by the function, and their order is not important. This also includes non-optional arguments — <code>parrot(voltage=1000)</code> is valid too.</p>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 06 -->
-    <h2 id="mutable-trap">The Mutable Default Argument Trap</h2>
-    <p>This is the single most famous gotcha in Python's default argument system. Because a default is evaluated only once, a mutable default — a list, a dict, or most class instances — is created once and then reused across every single call that relies on that default. Any changes made to it stick around for next time.</p>
-
-    <div class="warn-box">
-      <strong>Important warning, straight from the docs:</strong> the default value is evaluated only once. This makes a real difference when the default is a mutable object such as a list or dictionary, since that same object gets reused on every call that doesn't override it.
-    </div>
+    <h2 id="duplicate-values">No Argument May Receive a Value More Than Once</h2>
+    <p>If a positional argument and a keyword argument both try to fill the same parameter, Python raises a <code>TypeError</code> immediately — the parameter would otherwise be getting two conflicting values.</p>
 
     <div class="code-container">
       <div class="code-header">
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-kw">def</span> <span class="py-bi">f</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">,</span> <span class="py-var">L</span><span class="py-punc">=[]):</span>
-    <span class="py-var">L</span><span class="py-punc">.</span><span class="py-bi">append</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">)</span>
-    <span class="py-kw">return</span> <span class="py-var">L</span>
+      <pre><span class="py-kw">def</span> <span class="py-bi">function</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">):</span>
+    <span class="py-kw">pass</span>
 
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">f</span><span class="py-punc">(</span><span class="py-num">1</span><span class="py-punc">))</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">f</span><span class="py-punc">(</span><span class="py-num">2</span><span class="py-punc">))</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">f</span><span class="py-punc">(</span><span class="py-num">3</span><span class="py-punc">))</span>
-
-<span class="py-out"># [1]</span>
-<span class="py-out"># [1, 2]</span>
-<span class="py-out"># [1, 2, 3]</span></pre>
+<span class="py-bi">function</span><span class="py-punc">(</span><span class="py-num">0</span><span class="py-punc">,</span> <span class="py-var">a</span><span class="py-punc">=</span><span class="py-num">0</span><span class="py-punc">)</span>
+<span class="py-out">Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: function() got multiple values for argument 'a'</span></pre>
     </div>
 
-    <div class="note-box">
-Imagine writing today's tasks in a notebook, then expecting a brand-new notebook tomorrow—but Python quietly hands you yesterday's notebook again. Mutable default arguments behave exactly like that: the same list or dictionary keeps getting reused unless you create a fresh one yourself.
-</div>
-
-    <p>Notice that <code>L</code> is never reset to an empty list between calls. The <em>same</em> list object created once, when <code>f</code> was defined, is being appended to on every call — which is almost never the behavior a beginner expects when they write <code>L=[]</code> in a function signature.</p>
-
-    <h4>Kiddo extra — the same trap with a running total</h4>
+    <h4>Kiddo extra — the same clash with a Hollywood casting function</h4>
     <div class="code-container">
       <div class="code-header">
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-kw">def</span> <span class="py-bi">add_note</span><span class="py-punc">(</span><span class="py-var">note</span><span class="py-punc">,</span> <span class="py-var">notebook</span><span class="py-punc">={}):</span>
-    <span class="py-var">notebook</span><span class="py-punc">[</span><span class="py-bi">len</span><span class="py-punc">(</span><span class="py-var">notebook</span><span class="py-punc">)]</span> <span class="py-punc">=</span> <span class="py-var">note</span>
-    <span class="py-kw">return</span> <span class="py-var">notebook</span>
+      <pre><span class="py-kw">def</span> <span class="py-bi">cast_lead</span><span class="py-punc">(</span><span class="py-var">actor</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Lead role goes to </span><span class="py-var">{actor}</span><span class="py-str">"</span><span class="py-punc">)</span>
 
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">add_note</span><span class="py-punc">(</span><span class="py-str">"Buy milk"</span><span class="py-punc">))</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">add_note</span><span class="py-punc">(</span><span class="py-str">"Call Sarah"</span><span class="py-punc">))</span>
-
-<span class="py-out"># {0: 'Buy milk'}</span>
-<span class="py-out"># {0: 'Buy milk', 1: 'Call Sarah'}</span>
-<span class="py-cmt"># The second call's "empty" notebook already had the first note in it!</span></pre>
+<span class="py-bi">cast_lead</span><span class="py-punc">(</span><span class="py-str">"Tom Hanks"</span><span class="py-punc">,</span> <span class="py-var">actor</span><span class="py-punc">=</span><span class="py-str">"Denzel Washington"</span><span class="py-punc">)</span>
+<span class="py-out"># TypeError: cast_lead() got multiple values for argument 'actor'</span>
+<span class="py-cmt"># "Tom Hanks" already filled the actor slot positionally —</span>
+<span class="py-cmt"># the keyword actor='Denzel Washington' collides with it</span></pre>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 07 -->
-    <h2 id="the-fix">The Fix — Default to None Instead</h2>
-    <p>The standard workaround is to default the parameter to <code>None</code> — an immutable sentinel value — and create a fresh mutable object inside the function body every time it's actually needed.</p>
+    <h2 id="args-kwargs">*args and **kwargs — Accepting an Arbitrary Number of Arguments</h2>
+    <p>When a final formal parameter of the form <code>**name</code> is present, it collects every keyword argument that doesn't already match a named parameter, packaged up as a dictionary. This can be combined with <code>*name</code>, which collects any extra positional arguments as a tuple. <code>*name</code> must appear before <code>**name</code> in the parameter list.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>When a final formal parameter of the form <code>**name</code> is present, it receives a dictionary containing all keyword arguments except for those corresponding to a formal parameter. This may be combined with a formal parameter of the form <code>*name</code>, which receives a tuple containing the positional arguments beyond the formal parameter list. <code>*name</code> must occur before <code>**name</code>.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 -->
+    <h2 id="cheeseshop">The cheeseshop() Example</h2>
+    <p>The docs demonstrate <code>*args</code> and <code>**kwargs</code> together with the famous Cheese Shop sketch function — one required parameter, then an open-ended tuple of extra positional arguments, then an open-ended dictionary of extra keyword arguments:</p>
 
     <div class="code-container">
       <div class="code-header">
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-kw">def</span> <span class="py-bi">f</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">,</span> <span class="py-var">L</span><span class="py-punc">=</span><span class="py-kw">None</span><span class="py-punc">):</span>
-    <span class="py-kw">if</span> <span class="py-var">L</span> <span class="py-kw">is</span> <span class="py-kw">None</span><span class="py-punc">:</span>
-        <span class="py-var">L</span> <span class="py-punc">= []</span>
-    <span class="py-var">L</span><span class="py-punc">.</span><span class="py-bi">append</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">)</span>
-    <span class="py-kw">return</span> <span class="py-var">L</span></pre>
+      <pre><span class="py-kw">def</span> <span class="py-bi">cheeseshop</span><span class="py-punc">(</span><span class="py-var">kind</span><span class="py-punc">, *</span><span class="py-var">arguments</span><span class="py-punc">, **</span><span class="py-var">keywords</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"-- Do you have any"</span><span class="py-punc">,</span> <span class="py-var">kind</span><span class="py-punc">,</span> <span class="py-str">"?"</span><span class="py-punc">)</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"-- I'm sorry, we're all out of"</span><span class="py-punc">,</span> <span class="py-var">kind</span><span class="py-punc">)</span>
+    <span class="py-kw">for</span> <span class="py-var">arg</span> <span class="py-kw">in</span> <span class="py-var">arguments</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">arg</span><span class="py-punc">)</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"-"</span> <span class="py-punc">*</span> <span class="py-num">40</span><span class="py-punc">)</span>
+    <span class="py-kw">for</span> <span class="py-var">kw</span> <span class="py-kw">in</span> <span class="py-var">keywords</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">kw</span><span class="py-punc">,</span> <span class="py-str">":"</span><span class="py-punc">,</span> <span class="py-var">keywords</span><span class="py-punc">[</span><span class="py-var">kw</span><span class="py-punc">])</span></pre>
     </div>
 
-    <p>Now every call that doesn't pass its own <code>L</code> gets a brand-new empty list created fresh inside the function body — instead of sharing one list object across every call forever.</p>
+    <p>It could be called like this:</p>
 
-    <h4>Kiddo extra — the fixed notebook function</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-bi">cheeseshop</span><span class="py-punc">(</span><span class="py-str">"Limburger"</span><span class="py-punc">,</span> <span class="py-str">"It's very runny, sir."</span><span class="py-punc">,</span>
+           <span class="py-str">"It's really very, VERY runny, sir."</span><span class="py-punc">,</span>
+           <span class="py-var">shopkeeper</span><span class="py-punc">=</span><span class="py-str">"Michael Palin"</span><span class="py-punc">,</span>
+           <span class="py-var">client</span><span class="py-punc">=</span><span class="py-str">"John Cleese"</span><span class="py-punc">,</span>
+           <span class="py-var">sketch</span><span class="py-punc">=</span><span class="py-str">"Cheese Shop Sketch"</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <p>and of course it would print:</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Output</span></div>
+      </div>
+      <pre><span class="py-out">-- Do you have any Limburger ?
+-- I'm sorry, we're all out of Limburger
+It's very runny, sir.
+It's really very, VERY runny, sir.
+----------------------------------------
+shopkeeper : Michael Palin
+client : John Cleese
+sketch : Cheese Shop Sketch</span></pre>
+    </div>
+
+    <div class="note-box">
+      The order the keyword arguments are printed in is guaranteed to match the order they were passed in the function call — <code>keywords</code> preserves insertion order just like any other Python dictionary.
+    </div>
+
+    <h4>Kiddo extra — a movie booking function with *args and **kwargs</h4>
     <div class="code-container">
       <div class="code-header">
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-kw">def</span> <span class="py-bi">add_note</span><span class="py-punc">(</span><span class="py-var">note</span><span class="py-punc">,</span> <span class="py-var">notebook</span><span class="py-punc">=</span><span class="py-kw">None</span><span class="py-punc">):</span>
-    <span class="py-kw">if</span> <span class="py-var">notebook</span> <span class="py-kw">is</span> <span class="py-kw">None</span><span class="py-punc">:</span>
-        <span class="py-var">notebook</span> <span class="py-punc">= {}</span>
-    <span class="py-var">notebook</span><span class="py-punc">[</span><span class="py-bi">len</span><span class="py-punc">(</span><span class="py-var">notebook</span><span class="py-punc">)]</span> <span class="py-punc">=</span> <span class="py-var">note</span>
-    <span class="py-kw">return</span> <span class="py-var">notebook</span>
+      <pre><span class="py-kw">def</span> <span class="py-bi">book_premiere</span><span class="py-punc">(</span><span class="py-var">movie</span><span class="py-punc">, *</span><span class="py-var">costars</span><span class="py-punc">, **</span><span class="py-var">crew</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"-- Booking the premiere for </span><span class="py-var">{movie}</span><span class="py-str">"</span><span class="py-punc">)</span>
+    <span class="py-kw">for</span> <span class="py-var">costar</span> <span class="py-kw">in</span> <span class="py-var">costars</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Also starring: </span><span class="py-var">{costar}</span><span class="py-str">"</span><span class="py-punc">)</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"-"</span> <span class="py-punc">*</span> <span class="py-num">30</span><span class="py-punc">)</span>
+    <span class="py-kw">for</span> <span class="py-var">role</span> <span class="py-kw">in</span> <span class="py-var">crew</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">role</span><span class="py-punc">,</span> <span class="py-str">":"</span><span class="py-punc">,</span> <span class="py-var">crew</span><span class="py-punc">[</span><span class="py-var">role</span><span class="py-punc">])</span>
 
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">add_note</span><span class="py-punc">(</span><span class="py-str">"Buy milk"</span><span class="py-punc">))</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">add_note</span><span class="py-punc">(</span><span class="py-str">"Call Sarah"</span><span class="py-punc">))</span>
+<span class="py-bi">book_premiere</span><span class="py-punc">(</span>
+    <span class="py-str">"Inception 2"</span><span class="py-punc">,</span>
+    <span class="py-str">"Leonardo DiCaprio"</span><span class="py-punc">,</span>
+    <span class="py-str">"Scarlett Johansson"</span><span class="py-punc">,</span>
+    <span class="py-var">director</span><span class="py-punc">=</span><span class="py-str">"Christopher Nolan"</span><span class="py-punc">,</span>
+    <span class="py-var">composer</span><span class="py-punc">=</span><span class="py-str">"Hans Zimmer"</span>
+<span class="py-punc">)</span>
 
-<span class="py-out"># {0: 'Buy milk'}</span>
-<span class="py-out"># {0: 'Call Sarah'}</span>
-<span class="py-cmt"># Each call now gets its own fresh notebook, as expected</span></pre>
-    </div>
-
-    <div class="callout">
-      <strong>Rule of thumb:</strong> if a default value is a list, dict, set, or any other mutable object, default it to <code>None</code> and build the real value inside the function body instead. This one habit avoids the entire class of bug.
-    </div>
-
-    <div class="section-divider"></div>
-
-    <!-- 08 -->
-    <h2 id="mistakes">Common Default Argument Mistakes</h2>
-    <div class="mistake-list">
-      <div class="mistake-item"><div class="mi-body"><strong>Using a mutable object as a default value</strong><p><code>def f(a, L=[])</code> shares the exact same list across every call that relies on the default. Default to <code>None</code> and create the list inside the function instead.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>Expecting a variable-based default to update after definition</strong><p><code>def f(arg=i)</code> locks in whatever <code>i</code> was at definition time. Changing <code>i</code> afterward has no effect on future calls to <code>f()</code> — the default was already evaluated once and stored.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>Putting a required argument after a default one</strong><p><code>def f(a=1, b)</code> raises a <code>SyntaxError</code>. Once a parameter has a default, every parameter after it must also have a default — required parameters always come first.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>Forgetting that all optional parameters need their own default</strong><p>If a function has three optional parameters, all three need a default value defined, even if you expect most calls to only override the first one.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>Assuming this bug only affects lists</strong><p>Dictionaries, sets, and instances of most custom classes are just as mutable as lists and fall into exactly the same trap. The fix — defaulting to <code>None</code> — applies to all of them.</p></div></div>
+<span class="py-out"># -- Booking the premiere for Inception 2
+# Also starring: Leonardo DiCaprio
+# Also starring: Scarlett Johansson
+# ------------------------------
+# director : Christopher Nolan
+# composer : Hans Zimmer</span></pre>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 09 -->
-    <h2 id="interview">Default Argument Interview Questions and Answers</h2>
-    <div class="iq-list">
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> What is a default argument value in Python?</div><div class="iq-a">A value assigned to a parameter in a function's definition, used automatically when the caller doesn't supply that argument. Written as <code>def f(param=value):</code>. It lets a function be called with fewer arguments than it's technically defined to accept.</div></div>
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q2</span> When are default argument values evaluated?</div><div class="iq-a">Only once — at the point the function is defined, in the scope where the <code>def</code> statement runs. They are not re-evaluated on every call, which is why a default tied to a variable doesn't update even if that variable changes later.</div></div>
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q3</span> Why is using a mutable default argument like L=[] considered dangerous?</div><div class="iq-a">Because the list is created exactly once at definition time and reused across every call that relies on the default. Any values appended in one call remain there for the next call, causing the function to accumulate state unexpectedly instead of starting fresh.</div></div>
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q4</span> How do you fix the mutable default argument problem?</div><div class="iq-a">Default the parameter to <code>None</code> instead of the mutable object, then check <code>if param is None: param = []</code> (or <code>{}</code>, etc.) inside the function body. This creates a brand-new object on every call that needs one.</div></div>
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q5</span> Can you have a required parameter after an optional one in Python?</div><div class="iq-a">No. Once a parameter has a default value, every parameter that follows it must also have a default. Python raises a <code>SyntaxError</code> for a signature like <code>def f(a=1, b):</code>.</div></div>
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q6</span> What does the in keyword do in the context of the ask_ok() example?</div><div class="iq-a">It checks whether a value exists inside a sequence or set — <code>reply in {'y', 'ye', 'yes'}</code> is <code>True</code> if <code>reply</code> matches any one of those three values, replacing a longer chain of <code>or</code>-joined equality checks.</div></div>
+    <h2 id="mistakes">Common Keyword Argument Mistakes</h2>
+    <div class="mistake-list">
+      <div class="mistake-item"><div class="mi-body"><strong>Putting a positional argument after a keyword argument</strong><p><code>parrot(voltage=5.0, 'dead')</code> raises a <code>SyntaxError</code>. Once you use a keyword argument in a call, every argument after it must also be a keyword argument.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Passing the same parameter twice</strong><p><code>function(0, a=0)</code> raises <code>TypeError: function() got multiple values for argument 'a'</code> — the positional <code>0</code> already filled <code>a</code>, so the keyword <code>a=0</code> conflicts with it.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Using a keyword that doesn't exist</strong><p><code>parrot(actor='John Cleese')</code> fails because <code>actor</code> isn't one of <code>parrot</code>'s parameters. Python checks every keyword against the real parameter names — typos included.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Forgetting *args must come before **kwargs</strong><p>In a function definition, <code>*name</code> (extra positional arguments) must appear before <code>**name</code> (extra keyword arguments) — writing them in the reverse order raises a <code>SyntaxError</code>.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Assuming **kwargs preserves no particular order</strong><p>It actually does — since Python 3.7, dictionaries (including the one built by <code>**kwargs</code>) preserve insertion order, and the docs explicitly guarantee the printed order matches the order arguments were passed in the call.</p></div></div>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 10 -->
-    <h2 id="faq">Default Argument Values FAQ</h2>
+    <h2 id="interview">Keyword Argument Interview Questions and Answers</h2>
+    <div class="iq-list">
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> What is a keyword argument in Python?</div><div class="iq-a">An argument passed to a function call in the form <code>name=value</code>, matched to a parameter by name instead of by position. It lets calls skip optional parameters and pass the ones they need in any order.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q2</span> Can positional arguments come after keyword arguments in a function call?</div><div class="iq-a">No. Once a keyword argument appears in a call, every argument after it must also be a keyword argument. Positional arguments must always come first.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q3</span> What happens if a parameter receives a value both positionally and by keyword?</div><div class="iq-a">Python raises a <code>TypeError</code> saying the function "got multiple values" for that argument. Each parameter may only be assigned a value once per call.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q4</span> What does **kwargs do in a function definition?</div><div class="iq-a">It collects every keyword argument that doesn't match a named parameter into a dictionary, using the keyword names as dict keys. It must be the last parameter in the function's signature.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q5</span> What is the difference between *args and **kwargs?</div><div class="iq-a"><code>*args</code> collects extra positional arguments into a tuple. <code>**kwargs</code> collects extra keyword arguments into a dictionary. Both let a function accept an arbitrary number of extra arguments, and <code>*args</code> must be defined before <code>**kwargs</code> in the parameter list.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q6</span> Is the order of keyword arguments in a function call guaranteed when iterating over **kwargs?</div><div class="iq-a">Yes. The dictionary built from <code>**kwargs</code> preserves the order the keyword arguments were passed in the original call, so looping over it prints them back in that same order.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 11 -->
+    <h2 id="faq">Keyword Arguments FAQ</h2>
     <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is a default argument in Python? <span class="faq-icon">+</span></button><div class="faq-a">A value a function parameter falls back to when the caller doesn't provide one. Defined with <code>param=value</code> in the function signature, it makes that parameter optional for callers.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">Why shouldn't you use a mutable object like a list as a default argument? <span class="faq-icon">+</span></button><div class="faq-a">Because the default is created only once, at function definition time, and that same object is reused across every call that relies on the default. Changes made in one call — like appending to a list — persist into later calls, which is rarely the intended behavior.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">How do you safely use a list or dict as a default argument? <span class="faq-icon">+</span></button><div class="faq-a">Default the parameter to <code>None</code>, then inside the function body check <code>if param is None:</code> and assign a fresh list or dict at that point. This guarantees a new object every time the default is actually used.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">Are default values evaluated every time a function is called? <span class="faq-icon">+</span></button><div class="faq-a">No — only once, at the moment the function is defined. This is exactly why a default tied to a variable's value at definition time doesn't reflect later changes to that variable.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can a function have multiple default arguments? <span class="faq-icon">+</span></button><div class="faq-a">Yes. A function can have as many default parameters as needed, as long as every parameter without a default comes before all parameters that do have one, in the function's parameter list.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">What happens if you call a function without its optional arguments? <span class="faq-icon">+</span></button><div class="faq-a">Python fills in each missing optional argument with its default value from the function's definition. Only arguments without a default are mandatory to supply on every call.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">Is None a good default value to use in Python? <span class="faq-icon">+</span></button><div class="faq-a">Yes, and it's the standard convention specifically because <code>None</code> is immutable and safe to reuse across calls. It acts as a sentinel — a value you check for inside the function to decide whether to build a fresh mutable object.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is a keyword argument in Python? <span class="faq-icon">+</span></button><div class="faq-a">An argument passed to a function using the form <code>name=value</code>, matched by parameter name rather than position. It makes function calls more explicit and lets you skip default parameters you don't need to override.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can you mix positional and keyword arguments in one call? <span class="faq-icon">+</span></button><div class="faq-a">Yes, as long as all positional arguments come first and all keyword arguments come after them. <code>parrot('a thousand', state='pushing up the daisies')</code> is a valid mix of one positional and one keyword argument.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Why does parrot(actor='John Cleese') raise an error? <span class="faq-icon">+</span></button><div class="faq-a">Because <code>actor</code> is not one of the parameters <code>parrot()</code> accepts. Every keyword argument passed must match a real parameter name defined in the function, or Python raises a <code>TypeError</code>.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What does *args mean in a Python function definition? <span class="faq-icon">+</span></button><div class="faq-a">It collects any extra positional arguments beyond the named parameters into a tuple. Inside the function, you can loop over <code>args</code> just like any other tuple.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What does **kwargs mean in a Python function definition? <span class="faq-icon">+</span></button><div class="faq-a">It collects any extra keyword arguments — ones that don't match a named parameter — into a dictionary, with the keyword names as keys and the passed values as values.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can *args and **kwargs be used in the same function? <span class="faq-icon">+</span></button><div class="faq-a">Yes, and it's a common pattern. <code>*args</code> must be defined before <code>**kwargs</code> in the parameter list — for example, <code>def cheeseshop(kind, *arguments, **keywords):</code>.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Does the order of keyword arguments in a function call matter? <span class="faq-icon">+</span></button><div class="faq-a">No, not for how the function behaves — <code>parrot(voltage=1000000, action='VOOOOOM')</code> and <code>parrot(action='VOOOOOM', voltage=1000000)</code> do exactly the same thing. The order is only preserved for iteration purposes when using <code>**kwargs</code>.</div></div>
     </div>
 
     <div class="section-divider"></div>
@@ -602,6 +605,7 @@ Imagine writing today's tasks in a notebook, then expecting a brand-new notebook
     <div class="callout">
       <strong>More Python topics →</strong><br><br>
       <a href="../python/functions.html">Functions (4.8)</a> ·
+      <a href="../python/default-arguments.html">Default Argument Values (4.9.1)</a> ·
       <a href="../python/while_loop.html">While Loop</a> ·
       <a href="../python/for_loop.html">For Loop</a> ·
       <a href="../python/if_statements.html">If Statements</a> ·
@@ -609,11 +613,7 @@ Imagine writing today's tasks in a notebook, then expecting a brand-new notebook
       <a href="../python/dictionary.html">Dictionaries (5.5)</a> ·
       <a href="../python/tuples.html">Tuples (5.3)</a> ·
       <a href="../python/sets.html">Sets (5.4)</a> ·
-      <a href="../python/list-comp.html">List Comprehensions</a> ·
-      <a href="../python/looping-techniques.html">Looping Techniques</a>
-      <a href="../python/list-stack-queue.html">Lists as Stack and Queue</a> ·
-      <a href="../python/nested-list-comp.html">Nested List Comprehensions</a> ·
-      <a href="../python/keyword-arguments.html">Keyword Arguments</a> ·
+      <a href="../python/list-comp.html">List Comprehensions</a>
     </div>
   </main>
 </div>
