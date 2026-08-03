@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="../assests/icon.png" />
+  <meta name="description" content="Learn Python Special Parameters (Python Docs 4.9.3) with beginner-friendly explanations. Understand positional-only parameters (/), keyword-only arguments (*), the combined_example() function, and the name/**kwds collision problem." /> 
+  <meta property="og:type" content="article" /> 
+  <meta property="og:title" content="Python Special Parameters Explained (Python Docs 4.9.3) | Kiddo" /> 
+  <meta property="og:description" content="The official Python special parameters docs explained simply. Learn positional-only (/), keyword-only (*), and when to use each in your own functions." /> 
+  <meta property="og:url" content="https://kiddoedu.org/python/special-parameters.html" /> 
+  <meta property="og:site_name" content="Kiddo" /> 
+  <meta property="og:image" content="https://kiddoedu.org/python/special-parameters.png" /> 
+  <meta name="twitter:card" content="summary_large_image" /> 
+  <meta name="twitter:title" content="Python Special Parameters Explained (Python Docs 4.9.3) | Kiddo" /> 
+  <meta name="twitter:description" content="Beginner-friendly explanation of Python special parameters. Positional-only /, keyword-only *, and combined signatures." /> 
+  <meta name="twitter:image" content="https://kiddoedu.org/python/special-parameters.png" /> 
+  <link rel="canonical" href="https://kiddoedu.org/python/special-parameters.html" /> 
+  <title>Python Special Parameters Explained (Python Docs 4.9.3) | Positional-Only (/) &amp; Keyword-Only (*)</title>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ESNWS8F9HE');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 4px 24px rgba(0,0,0,0.07);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    body.dark {
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
+      --border: rgba(255,255,255,0.07);
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 999; width: 0%; transition: width 0.1s linear; }
+
+    header { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark header { background: rgba(15,14,12,0.82); }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
+    .logo span em { font-style: normal; color: var(--accent); }
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
+    nav a:hover { color: var(--text); background: var(--surface2); }
+    .theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background var(--transition), transform var(--transition); margin-left: 8px; }
+    .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
+
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 20px; height: var(--header-h); background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark .mobile-header { background: rgba(15,14,12,0.82); }
+    .mobile-right { display: flex; align-items: center; gap: 8px; }
+    .hamburger { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; position: relative; }
+    .menu-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); padding: 8px; min-width: 160px; flex-direction: column; gap: 2px; }
+    .menu-dropdown.open { display: flex; }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
+    .menu-dropdown a:hover { background: var(--surface2); }
+
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+
+    aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px); }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    aside ul li a { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.4; }
+    aside ul li a:hover { background: var(--surface2); color: var(--text); }
+    aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; margin-top: 6px; }
+
+    main { min-width: 0; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { opacity: 0.4; }
+    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
+    .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
+    .meta-pill.blue { background: rgba(61,90,254,0.08); color: var(--accent2); border-color: rgba(61,90,254,0.2); }
+    .meta-pill.orange { background: rgba(232,108,47,0.08); color: var(--accent); border-color: rgba(232,108,47,0.2); }
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
+
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+    .doc-ref { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; }
+    .doc-ref a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .doc-ref a:hover { text-decoration: underline; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 18px; margin-bottom: 8px; color: var(--text-muted); }
+    main p { font-size: 0.95rem; line-height: 1.78; color: var(--text); margin-bottom: 14px; }
+    main code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
+    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
+
+    aside ul li { position: relative; }
+aside ul .submenu{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  margin:2px 0 2px 14px;
+  padding-left:10px;
+  border-left:1px solid var(--border);
+}
+aside ul .submenu li a{
+  font-size:0.8rem;
+  padding:6px 10px;
+}
+aside ul .submenu li a .dot{
+  width:4px;
+  height:4px;
+}
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
+    .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
+    .toc-grid a:hover { background: var(--surface2); color: var(--text); }
+    .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
+
+    .prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0 24px; }
+    .prop-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
+    .prop-card strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 4px; }
+    .prop-card span { font-size: 0.81rem; color: var(--text-muted); line-height: 1.45; display: block; }
+
+    .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
+    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
+    .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
+    .doc-block code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .note-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .warn-box { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.2); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .warn-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
+    .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .callout a:hover { text-decoration: underline; }
+
+    .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 26px; font-size: 0.875rem; }
+    .param-table th { text-align: left; padding: 8px 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+    .param-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); line-height: 1.5; vertical-align: top; }
+    .param-table tr:last-child td { border-bottom: none; }
+    .param-table tr:hover td { background: var(--surface2); }
+    .param-table td:last-child { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* Signature anatomy */
+    .syntax-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 20px 0 24px; font-family: 'Fira Code', monospace; font-size: 0.95rem; line-height: 2.1; overflow-x: auto; }
+    .sy-pos { color: var(--accent); font-weight: 600; }
+    .sy-both { color: var(--accent2); font-weight: 600; }
+    .sy-kwd { color: #9c27b0; font-weight: 600; }
+    .sy-punc { color: var(--text-muted); }
+    .sy-label { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-left: 14px; vertical-align: middle; }
+
+    /* VS Code dark code blocks */
+    .code-container { border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: #2d2d2d; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
+    .code-header-left { display: flex; align-items: center; gap: 10px; }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .code-dot.red    { background: #ff5f57; }
+    .code-dot.yellow { background: #febc2e; }
+    .code-dot.green  { background: #28c840; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Fira Code', monospace; }
+    .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
+    .copy-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); padding: 3px 10px; cursor: pointer; font-size: 0.72rem; font-family: 'DM Sans', sans-serif; transition: all 0.2s; position: relative; border-radius: 4px; }
+    .copy-btn:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.1); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: #3a3a3a; color: #d4d4d4; padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .tooltip.show { opacity: 1; }
+    pre { margin: 0; padding: 20px; overflow-x: auto; font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.88rem; line-height: 1.7; background: #1e1e1e; white-space: pre; tab-size: 4; }
+    /* VS Code Dark+ token colours */
+    .py-kw   { color: #569cd6; }
+    .py-bi   { color: #dcdcaa; }
+    .py-str  { color: #ce9178; }
+    .py-num  { color: #b5cea8; }
+    .py-cmt  { color: #6a9955; font-style: italic; }
+    .py-punc { color: #d4d4d4; }
+    .py-var  { color: #9cdcfe; }
+    .py-out  { color: #4ec9b0; }
+
+    .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 26px; }
+    .vs-card { border-radius: var(--radius-sm); padding: 18px 20px; }
+    .vs-card.yes { background: rgba(0,184,148,0.07); border: 1px solid rgba(0,184,148,0.2); }
+    .vs-card.no  { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.18); }
+    .vs-head { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+    .vs-card.yes .vs-head { color: var(--accent3); }
+    .vs-card.no  .vs-head { color: var(--accent); }
+    .vs-card ul { margin: 0; }
+    .vs-card ul li { font-size: 0.875rem; line-height: 1.55; color: var(--text); }
+
+    .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 26px; }
+    .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
+    .mi-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
+    .mi-body p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+    .mi-body code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .iq-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+    .iq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .iq-q { padding: 14px 18px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
+    .iq-badge { background: rgba(232,108,47,0.1); color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; padding: 2px 8px; flex-shrink: 0; margin-top: 2px; }
+    .iq-a { padding: 0 18px 14px 18px; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+    .iq-a code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 18px 0; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; padding: 14px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
+    .faq-a.open { max-height: 300px; padding: 2px 18px 15px; }
+    .faq-a code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .author-info { font-size: 0.85rem; line-height: 1.5; }
+    .author-info strong { font-weight: 600; display: block; }
+    .author-info span { color: var(--text-muted); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+    .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      header { display: none; } .mobile-header { display: flex; }
+      .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
+      aside { position: static; } .toc-grid { grid-template-columns: 1fr; }
+      .vs-grid { grid-template-columns: 1fr; } .prop-grid { grid-template-columns: 1fr 1fr; }
+      footer { padding: 20px; } .footer-container { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) { main h1 { font-size: 1.6rem; } .prop-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <a class="logo" href="../index.html"><img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" /><span>Kid<em>do</em></span></a>
+  <nav><a href="../index.html">Home</a><a href="../info/about.html">About</a><a href="../info/contact.html">Contact</a><button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button></nav>
+</header>
+
+<div class="mobile-header">
+  <a class="logo" href="../index.html"><img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" /><span>Kid<em>do</em></span></a>
+  <div class="mobile-right"><button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button><button class="hamburger" id="hamburgerBtn">☰<div class="menu-dropdown" id="menuDropdown"><a href="../index.html">Home</a><a href="../info/about.html">About</a><a href="../info/contact.html">Contact</a></div></button></div>
+</div>
+
+<div class="page-wrap">
+  <aside>
+  <div class="aside-label">Python Topics</div>
+  <ul>
+    <li><a href="../python/py-intro.html"><span class="dot"></span>Introduction</a></li>
+    <li><a href="../python/user_input.html"><span class="dot"></span>User Input</a></li>
+    <li><a href="../python/if_statements.html"><span class="dot"></span>If Statements</a></li>
+    <li><a href="../python/for_loop.html"><span class="dot"></span>For Loop</a></li>
+    <li>
+      <a href="../python/functions.html"><span class="dot"></span>Functions</a>
+      <ul class="submenu">
+        <li><a href="../python/default-arguments.html"><span class="dot"></span>Default Argument Values</a></li>
+        <li><a href="../python/keyword-arguments.html"><span class="dot"></span>Keyword Arguments</a></li>
+        <li><a href="../python/special-parameters.html" class="active"><span class="dot"></span>Special Parameters</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="../python/list.html"><span class="dot"></span>Lists</a>
+      <ul class="submenu">
+        <li><a href="../python/list-stack-queue.html"><span class="dot"></span>Stack &amp; Queue</a></li>
+        <li><a href="../python/list-comp.html"><span class="dot"></span>List Comprehension</a></li>
+        <li><a href="../python/nested-list-comp.html"><span class="dot"></span>Nested List Comprehension</a></li>
+      </ul>
+    </li>
+    <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
+    <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
+    <li><a href="../python/sets.html"><span class="dot"></span>Sets</a></li>
+    <li><a href="../python/looping-techniques.html"><span class="dot"></span>Looping Techniques</a></li>
+    <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
+  </ul>
+
+  <div class="aside-label" style="margin-top:24px;">Mini Projects</div>
+  <ul>
+    <li><a href="../python/password.html"><span class="dot"></span>Password Generator</a></li>
+  </ul>
+</aside>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../python/py-intro.html">Python</a><span>›</span>
+      <a href="../python/functions.html">Functions</a><span>›</span>
+      4.9.3 Special Parameters
+    </div>
+
+    <h1>Python Special Parameters Explained (Python Docs 4.9.3) | Positional-Only (/), Keyword-Only (*) &amp; Combined Signatures</h1>
+
+    <div class="doc-ref">
+      📖 Based on <a href="https://docs.python.org/3/tutorial/controlflow.html#special-parameters" target="_blank" rel="noopener">Python 3 official docs §4.9.3</a> — explained like a friend, with extra examples added
+    </div>
+
+    <div class="meta-row">
+      <span class="meta-pill">Python</span>
+      <span class="meta-pill blue">Functions</span>
+      <span class="meta-pill green">Intermediate</span>
+      <span class="meta-pill orange">Official Docs</span>
+      <span class="date-badge">Updated July 2026</span>
+    </div>
+
+    <p>This page explains the official Python Special Parameters documentation (Python Docs 4.9.3) in simple language. By default, arguments can be passed either by position or by keyword — but sometimes you want to restrict that, so callers can't rely on a parameter name that might change, or can't skip naming something that really needs to be explicit.</p>
+    <p>By the end of this guide, you'll understand exactly what <code>/</code> and <code>*</code> do in a function signature, walk through all four example functions from the docs, and see the one genuinely tricky collision between a positional parameter name and <code>**kwargs</code> that <code>/</code> was specifically designed to solve.</p>
+
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">In this guide</div>
+      <div class="toc-grid">
+        <a href="#what-is"><span class="toc-num">01</span>What are special parameters?</a>
+        <a href="#anatomy"><span class="toc-num">02</span>Reading a function signature</a>
+        <a href="#pos-or-kwd"><span class="toc-num">03</span>Positional-or-keyword (the default)</a>
+        <a href="#pos-only"><span class="toc-num">04</span>Positional-only parameters (/)</a>
+        <a href="#kwd-only"><span class="toc-num">05</span>Keyword-only arguments (*)</a>
+        <a href="#examples"><span class="toc-num">06</span>The four example functions</a>
+        <a href="#combined"><span class="toc-num">07</span>combined_example() in detail</a>
+        <a href="#collision"><span class="toc-num">08</span>The name / **kwds collision</a>
+        <a href="#recap"><span class="toc-num">09</span>Recap — which to use when</a>
+        <a href="#mistakes"><span class="toc-num">10</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">11</span>Interview questions</a>
+        <a href="#faq"><span class="toc-num">12</span>FAQs</a>
+      </div>
+    </nav>
+
+    <div class="section-divider"></div>
+
+    <!-- 01 -->
+    <h2 id="what-is">What Are Special Parameters? (Python Docs 4.9.3 Explained)</h2>
+    <p>By default, every argument in Python can be passed either by position or by keyword — whichever the caller prefers. Special parameters let a function's author restrict that, so a developer only has to look at the function definition to know exactly how each argument is meant to be passed.</p>
+
+    <div class="prop-grid">
+      <div class="prop-card"><strong>/ marks positional-only</strong><span>Parameters before it can never be passed by keyword</span></div>
+      <div class="prop-card"><strong>* marks keyword-only</strong><span>Parameters after it can never be passed by position</span></div>
+      <div class="prop-card"><strong>Both are optional</strong><span>A signature with neither behaves exactly as before — position or keyword, freely</span></div>
+      <div class="prop-card"><strong>Improves readability</strong><span>The signature itself documents how each argument must be called</span></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 -->
+    <h2 id="anatomy">Reading a Function Signature With / and *</h2>
+    <p>A function signature using both markers looks like this. Everything before <code>/</code> is positional-only, everything between <code>/</code> and <code>*</code> can be either, and everything after <code>*</code> is keyword-only:</p>
+
+    <div class="syntax-box">
+      <div>
+        <span class="sy-punc">def f(</span><span class="sy-pos">pos1, pos2</span><span class="sy-punc">, / , </span><span class="sy-both">pos_or_kwd</span><span class="sy-punc">, * , </span><span class="sy-kwd">kwd1, kwd2</span><span class="sy-punc">):</span>
+      </div>
+      <div>
+        <span class="sy-pos">└── Positional only</span>
+        <span class="sy-label">must be passed by position</span>
+      </div>
+      <div>
+        <span class="sy-both">└── Positional or keyword</span>
+        <span class="sy-label">either way works</span>
+      </div>
+      <div>
+        <span class="sy-kwd">└── Keyword only</span>
+        <span class="sy-label">must be named explicitly</span>
+      </div>
+    </div>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>Where <code>/</code> and <code>*</code> are optional. If used, these symbols indicate the kind of parameter by how the arguments may be passed to the function: positional-only, positional-or-keyword, and keyword-only. Keyword parameters are also referred to as named parameters.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 -->
+    <h2 id="pos-or-kwd">Positional-or-Keyword Arguments — The Default</h2>
+    <p>If a function definition has no <code>/</code> and no <code>*</code>, every argument may be passed either by position or by keyword — this is the behavior you've been using all along in every function so far.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>If / and * are not present in the function definition, arguments may be passed to a function by position or by keyword.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <h2 id="pos-only">Positional-Only Parameters</h2>
+    <p>Parameters placed before a <code>/</code> in the signature are positional-only — their order matters, and they can never be passed by keyword, no matter what name they have.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>It is possible to mark certain parameters as positional-only. If positional-only, the parameters' order matters, and the parameters cannot be passed by keyword. Positional-only parameters are placed before a / (forward-slash), which is used to logically separate the positional-only parameters from the rest. If there is no / in the function definition, there are no positional-only parameters. Parameters following the / may be positional-or-keyword or keyword-only.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 -->
+    <h2 id="kwd-only">Keyword-Only Arguments</h2>
+    <p>To force parameters to be passed by keyword, place a <code>*</code> in the parameter list just before the first keyword-only parameter. Everything after that <code>*</code> must be named explicitly in any call.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>To mark parameters as keyword-only, indicating the parameters must be passed by keyword argument, place an * in the arguments list just before the first keyword-only parameter.</p>
+    </div>
+
+    <h4>Kiddo extra — forcing a substitution reason to be named</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">def</span> <span class="py-bi">make_substitution</span><span class="py-punc">(</span><span class="py-var">player_off</span><span class="py-punc">,</span> <span class="py-var">player_on</span><span class="py-punc">, *,</span> <span class="py-var">reason</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{player_off}</span><span class="py-str"> off, </span><span class="py-var">{player_on}</span><span class="py-str"> on — </span><span class="py-var">{reason}</span><span class="py-str">"</span><span class="py-punc">)</span>
+
+<span class="py-cmt"># player_off and player_on can be positional or keyword — no * before them</span>
+<span class="py-bi">make_substitution</span><span class="py-punc">(</span><span class="py-str">"Haaland"</span><span class="py-punc">,</span> <span class="py-str">"Foden"</span><span class="py-punc">,</span> <span class="py-var">reason</span><span class="py-punc">=</span><span class="py-str">"tactical"</span><span class="py-punc">)</span>
+<span class="py-out"># Haaland off, Foden on — tactical</span>
+
+<span class="py-cmt"># But reason MUST be named — it comes after the *</span>
+<span class="py-bi">make_substitution</span><span class="py-punc">(</span><span class="py-str">"Haaland"</span><span class="py-punc">,</span> <span class="py-str">"Foden"</span><span class="py-punc">,</span> <span class="py-str">"tactical"</span><span class="py-punc">)</span>
+<span class="py-out"># TypeError: make_substitution() takes 2 positional arguments but 3 were given</span></pre>
+    </div>
+
+    <div class="note-box">
+      Forcing <code>reason</code> to be keyword-only here isn't arbitrary — <code>make_substitution("Haaland", "Foden", "tactical")</code> reads ambiguously (which string is which?), while <code>reason="tactical"</code> makes the call self-explanatory at a glance. That's the whole motivation for <code>*</code>, seen in a one-line example before the docs' own four functions make the same point more formally.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 -->
+    <h2 id="examples">The Four Example Functions</h2>
+    <p>The docs walk through four small functions, each demonstrating one calling convention at a time:</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">def</span> <span class="py-bi">standard_arg</span><span class="py-punc">(</span><span class="py-var">arg</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">arg</span><span class="py-punc">)</span>
+
+<span class="py-kw">def</span> <span class="py-bi">pos_only_arg</span><span class="py-punc">(</span><span class="py-var">arg</span><span class="py-punc">, /):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">arg</span><span class="py-punc">)</span>
+
+<span class="py-kw">def</span> <span class="py-bi">kwd_only_arg</span><span class="py-punc">(*,</span> <span class="py-var">arg</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">arg</span><span class="py-punc">)</span>
+
+<span class="py-kw">def</span> <span class="py-bi">combined_example</span><span class="py-punc">(</span><span class="py-var">pos_only</span><span class="py-punc">, /,</span> <span class="py-var">standard</span><span class="py-punc">, *,</span> <span class="py-var">kwd_only</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">pos_only</span><span class="py-punc">,</span> <span class="py-var">standard</span><span class="py-punc">,</span> <span class="py-var">kwd_only</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <h4>standard_arg — no restrictions</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-bi">standard_arg</span><span class="py-punc">(</span><span class="py-num">2</span><span class="py-punc">)</span>
+<span class="py-out">2</span>
+
+<span class="py-bi">standard_arg</span><span class="py-punc">(</span><span class="py-var">arg</span><span class="py-punc">=</span><span class="py-num">2</span><span class="py-punc">)</span>
+<span class="py-out">2</span></pre>
+    </div>
+
+    <h4>pos_only_arg — the / forbids keyword calls</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-bi">pos_only_arg</span><span class="py-punc">(</span><span class="py-num">1</span><span class="py-punc">)</span>
+<span class="py-out">1</span>
+
+<span class="py-bi">pos_only_arg</span><span class="py-punc">(</span><span class="py-var">arg</span><span class="py-punc">=</span><span class="py-num">1</span><span class="py-punc">)</span>
+<span class="py-out">Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: pos_only_arg() got some positional-only arguments passed as keyword arguments: 'arg'</span></pre>
+    </div>
+
+    <h4>kwd_only_arg — the * forbids positional calls</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-bi">kwd_only_arg</span><span class="py-punc">(</span><span class="py-num">3</span><span class="py-punc">)</span>
+<span class="py-out">Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: kwd_only_arg() takes 0 positional arguments but 1 was given</span>
+
+<span class="py-bi">kwd_only_arg</span><span class="py-punc">(</span><span class="py-var">arg</span><span class="py-punc">=</span><span class="py-num">3</span><span class="py-punc">)</span>
+<span class="py-out">3</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 -->
+    <h2 id="combined">combined_example() — All Three Conventions Together</h2>
+    <p><code>combined_example(pos_only, /, standard, *, kwd_only)</code> uses every rule at once: <code>pos_only</code> must be positional, <code>standard</code> can be either, and <code>kwd_only</code> must be named.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-bi">combined_example</span><span class="py-punc">(</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">,</span> <span class="py-num">3</span><span class="py-punc">)</span>
+<span class="py-out">Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: combined_example() takes 2 positional arguments but 3 were given</span>
+
+<span class="py-bi">combined_example</span><span class="py-punc">(</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">,</span> <span class="py-var">kwd_only</span><span class="py-punc">=</span><span class="py-num">3</span><span class="py-punc">)</span>
+<span class="py-out">1 2 3</span>
+
+<span class="py-bi">combined_example</span><span class="py-punc">(</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-var">standard</span><span class="py-punc">=</span><span class="py-num">2</span><span class="py-punc">,</span> <span class="py-var">kwd_only</span><span class="py-punc">=</span><span class="py-num">3</span><span class="py-punc">)</span>
+<span class="py-out">1 2 3</span>
+
+<span class="py-bi">combined_example</span><span class="py-punc">(</span><span class="py-var">pos_only</span><span class="py-punc">=</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-var">standard</span><span class="py-punc">=</span><span class="py-num">2</span><span class="py-punc">,</span> <span class="py-var">kwd_only</span><span class="py-punc">=</span><span class="py-num">3</span><span class="py-punc">)</span>
+<span class="py-out">Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: combined_example() got some positional-only arguments passed as keyword arguments: 'pos_only'</span></pre>
+    </div>
+
+    <table class="param-table">
+      <thead><tr><th>Call</th><th>Result</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td><code>combined_example(1, 2, 3)</code></td><td>Fails</td><td>kwd_only must be named — it can't be filled positionally</td></tr>
+        <tr><td><code>combined_example(1, 2, kwd_only=3)</code></td><td>1 2 3</td><td>pos_only and standard given positionally, kwd_only named</td></tr>
+        <tr><td><code>combined_example(1, standard=2, kwd_only=3)</code></td><td>1 2 3</td><td>standard is flexible, so naming it works fine too</td></tr>
+        <tr><td><code>combined_example(pos_only=1, standard=2, kwd_only=3)</code></td><td>Fails</td><td>pos_only can never be passed by keyword, regardless of name</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 -->
+    <h2 id="collision">The name / **kwds Collision Problem</h2>
+    <p>Here's the scenario <code>/</code> was specifically built to solve. If a function has a positional parameter called <code>name</code> and also accepts <code>**kwds</code>, there's no way to pass <code>'name'</code> as a key inside <code>**kwds</code> — Python always binds it to the parameter first, causing a conflict.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">def</span> <span class="py-bi">foo</span><span class="py-punc">(</span><span class="py-var">name</span><span class="py-punc">, **</span><span class="py-var">kwds</span><span class="py-punc">):</span>
+    <span class="py-kw">return</span> <span class="py-str">'name'</span> <span class="py-kw">in</span> <span class="py-var">kwds</span>
+
+<span class="py-bi">foo</span><span class="py-punc">(</span><span class="py-num">1</span><span class="py-punc">, **{</span><span class="py-str">'name'</span><span class="py-punc">:</span> <span class="py-num">2</span><span class="py-punc">})</span>
+<span class="py-out">Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: foo() got multiple values for argument 'name'</span></pre>
+    </div>
+
+    <p>There is no possible call that makes <code>foo</code> return <code>True</code> as written — the keyword <code>'name'</code> always binds to the first parameter. But marking <code>name</code> as positional-only frees up <code>'name'</code> as a key inside <code>**kwds</code>:</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">def</span> <span class="py-bi">foo</span><span class="py-punc">(</span><span class="py-var">name</span><span class="py-punc">, /, **</span><span class="py-var">kwds</span><span class="py-punc">):</span>
+    <span class="py-kw">return</span> <span class="py-str">'name'</span> <span class="py-kw">in</span> <span class="py-var">kwds</span>
+
+<span class="py-bi">foo</span><span class="py-punc">(</span><span class="py-num">1</span><span class="py-punc">, **{</span><span class="py-str">'name'</span><span class="py-punc">:</span> <span class="py-num">2</span><span class="py-punc">})</span>
+<span class="py-out">True</span></pre>
+    </div>
+
+    <div class="note-box">
+      In other words, the names of positional-only parameters can be used inside <code>**kwds</code> without ambiguity — since <code>name</code> can never be matched by keyword, the string <code>'name'</code> is free to be treated as just another entry in the keyword dictionary.
+    </div>
+
+    <h4>Kiddo extra — the same fix on a player lookup function</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># Without / — colliding with a 'club' key in extra_info</span>
+<span class="py-kw">def</span> <span class="py-bi">show_player</span><span class="py-punc">(</span><span class="py-var">club</span><span class="py-punc">, **</span><span class="py-var">extra_info</span><span class="py-punc">):</span>
+    <span class="py-kw">return</span> <span class="py-var">club</span><span class="py-punc">,</span> <span class="py-var">extra_info</span>
+
+<span class="py-cmt"># This fails — 'club' collides with the positional parameter</span>
+<span class="py-cmt"># show_player("Real Madrid", **{"club": "on loan"})</span>
+
+<span class="py-cmt"># With / — club is now positional-only, so 'club' is free in kwargs</span>
+<span class="py-kw">def</span> <span class="py-bi">show_player</span><span class="py-punc">(</span><span class="py-var">club</span><span class="py-punc">, /, **</span><span class="py-var">extra_info</span><span class="py-punc">):</span>
+    <span class="py-kw">return</span> <span class="py-var">club</span><span class="py-punc">,</span> <span class="py-var">extra_info</span>
+
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">show_player</span><span class="py-punc">(</span><span class="py-str">"Real Madrid"</span><span class="py-punc">, **{</span><span class="py-str">"club"</span><span class="py-punc">:</span> <span class="py-str">"on loan"</span><span class="py-punc">}))</span>
+<span class="py-out"># ('Real Madrid', {'club': 'on loan'})</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 09 -->
+    <h2 id="recap">Recap — Which One to Use, and When</h2>
+    <p>The use case decides which parameters to make positional-only, keyword-only, or leave flexible:</p>
+
+    <div class="vs-grid">
+      <div class="vs-card yes">
+        <div class="vs-head">Use positional-only when</div>
+        <ul>
+          <li>The parameter name has no real meaning to the caller</li>
+          <li>You want to enforce a strict argument order</li>
+          <li>You need to accept positional parameters alongside arbitrary keywords, avoiding name collisions</li>
+          <li>You're building a public API and don't want a future rename to break callers</li>
+        </ul>
+      </div>
+      <div class="vs-card no">
+        <div class="vs-head">Use keyword-only when</div>
+        <ul>
+          <li>The name carries real meaning and makes the call clearer</li>
+          <li>You want to prevent callers from depending on argument position</li>
+          <li>The function has several optional flags that read better named</li>
+          <li>You want to be free to reorder parameters later without breaking callers</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>For an API, use positional-only to prevent breaking API changes if the parameter's name is modified in the future.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 10 -->
+    <h2 id="mistakes">Common Special Parameter Mistakes</h2>
+    <div class="mistake-list">
+      <div class="mistake-item"><div class="mi-body"><strong>Trying to pass a positional-only parameter by keyword</strong><p><code>pos_only_arg(arg=1)</code> fails with <code>got some positional-only arguments passed as keyword arguments</code>, even though the parameter is literally named <code>arg</code>. The <code>/</code> makes the name irrelevant to callers.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Trying to pass a keyword-only argument by position</strong><p><code>kwd_only_arg(3)</code> fails with <code>takes 0 positional arguments but 1 was given</code>. Everything after <code>*</code> must always be named in the call.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Putting * before / in a signature</strong><p><code>/</code> must come before <code>*</code> if both appear — positional-only parameters, then flexible ones, then keyword-only ones, in that left-to-right order. Reversing them is a <code>SyntaxError</code>.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Not realizing why a **kwargs collision happens</strong><p><code>def foo(name, **kwds)</code> called as <code>foo(1, **{'name': 2})</code> fails, because Python always binds a keyword argument to a matching parameter name first — regardless of whether it came from <code>**kwds</code> unpacking. Making <code>name</code> positional-only removes the collision.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Overusing keyword-only or positional-only everywhere</strong><p>These markers are useful tools for API design, but forcing them onto every small internal helper function adds friction without much benefit. Reach for them deliberately, not by default.</p></div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 11 -->
+    <h2 id="interview">Special Parameters Interview Questions and Answers</h2>
+    <div class="iq-list">
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> What do the / and * symbols mean in a Python function signature?</div><div class="iq-a">A <code>/</code> marks every parameter before it as positional-only — it cannot be passed by keyword. A <code>*</code> marks every parameter after it as keyword-only — it cannot be passed by position. Both are optional and can appear together in the same signature.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q2</span> What error do you get if you call a positional-only parameter by keyword?</div><div class="iq-a">A <code>TypeError</code> saying the function "got some positional-only arguments passed as keyword arguments," naming the offending parameter — even though the parameter genuinely has that name in the definition.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q3</span> Why would a library author choose positional-only parameters?</div><div class="iq-a">Mainly to protect an API from future breakage — if the parameter's internal name changes later, callers who never named it explicitly are unaffected. It's also useful to enforce a specific argument order, or to free up a name for use inside **kwargs.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q4</span> Explain the foo(name, **kwds) collision problem.</div><div class="iq-a">If <code>name</code> is an ordinary positional-or-keyword parameter, any keyword argument named <code>name</code> in a call always binds to that parameter first — even one unpacked from <code>**{'name': 2}</code> — causing a <code>TypeError</code> for "multiple values." Marking <code>name</code> positional-only with <code>/</code> resolves this, since it can never be matched by keyword, leaving <code>'name'</code> free to land inside <code>**kwds</code>.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q5</span> In def f(pos_only, /, standard, *, kwd_only), which calling styles are valid for each parameter?</div><div class="iq-a"><code>pos_only</code> must be passed positionally only. <code>standard</code> can be passed either positionally or by keyword. <code>kwd_only</code> must always be passed by keyword.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q6</span> Can a function signature use / without *, or * without /?</div><div class="iq-a">Yes — both are independent and optional. A signature can have positional-only parameters with no keyword-only ones, keyword-only parameters with no positional-only ones, both together, or neither.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 12 -->
+    <h2 id="faq">Special Parameters FAQ</h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What does a forward slash (/) mean in a Python function definition? <span class="faq-icon">+</span></button><div class="faq-a">It marks every parameter before it as positional-only, meaning those arguments must be supplied by position and can never be passed using the parameter's name.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What does an asterisk (*) mean in a Python function definition? <span class="faq-icon">+</span></button><div class="faq-a">It marks every parameter after it as keyword-only, meaning those arguments must be passed using <code>name=value</code> syntax and cannot be supplied purely by position.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Are / and * required in every function definition? <span class="faq-icon">+</span></button><div class="faq-a">No, both are entirely optional. Without them, every parameter can be passed either by position or keyword — the default, flexible behavior most Python functions use.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Why does foo(1, **{'name': 2}) fail for def foo(name, **kwds)? <span class="faq-icon">+</span></button><div class="faq-a">Because the keyword <code>'name'</code> from the unpacked dictionary always binds to the parameter named <code>name</code> first, which already received <code>1</code> positionally — creating a duplicate value conflict and raising a <code>TypeError</code>.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">How do you fix the name / **kwds collision? <span class="faq-icon">+</span></button><div class="faq-a">Mark the parameter as positional-only by adding <code>/</code> right after it: <code>def foo(name, /, **kwds):</code>. This means <code>name</code> can never be matched by a keyword, freeing up <code>'name'</code> to be used as a regular key inside <code>**kwds</code>.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">When should I use keyword-only arguments in my own functions? <span class="faq-icon">+</span></button><div class="faq-a">When a parameter's meaning is much clearer when it's named explicitly in the call, or when you want to prevent callers from depending on a specific argument order that might change later.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can positional-only and keyword-only parameters appear in the same function? <span class="faq-icon">+</span></button><div class="faq-a">Yes. A signature like <code>def f(pos_only, /, standard, *, kwd_only):</code> uses all three calling conventions together — positional-only, flexible, and keyword-only — in a single function.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="author-strip">
+      <div class="author-avatar">PM</div>
+      <div class="author-info"><strong>Palak Mishra</strong><span>Backend developer · Building beginner-friendly Python docs at Kiddo</span></div>
+    </div>
+
+    <div class="callout">
+      <strong>More Python topics →</strong><br><br>
+      <a href="../python/functions.html">Functions (4.8)</a> ·
+      <a href="../python/while_loop.html">While Loop</a> ·
+      <a href="../python/for_loop.html">For Loop</a> ·
+      <a href="../python/if_statements.html">If Statements</a> ·
+      <a href="../python/list.html">Lists</a> ·
+      <a href="../python/dictionary.html">Dictionaries (5.5)</a> ·
+      <a href="../python/tuples.html">Tuples (5.3)</a> ·
+      <a href="../python/sets.html">Sets (5.4)</a> ·
+      <a href="../python/list-comp.html">List Comprehensions</a> ·
+      <a href="../python/looping-techniques.html">Looping Techniques</a>
+      <a href="../python/list-stack-queue.html">Lists as Stack and Queue</a> ·
+      <a href="../python/nested-list-comp.html">Nested List Comprehensions</a> ·
+      <a href="../python/keyword-arguments.html">Keyword Arguments</a> ·
+      <a href="../python/user_input.html">User Input</a> ·
+      <a href="../python/default-arguments.html">Default Arguments</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
+    <div class="footer-links"><a href="../info/privacy.html">Privacy</a><a href="../info/terms.html">Terms</a><a href="../info/contact.html">Contact</a></div>
+  </div>
+</footer>
+
+<script>
+  const desktopToggle = document.getElementById('desktopToggleTheme');
+  const mobileToggle  = document.getElementById('mobileToggleTheme');
+  const applyTheme = (dark) => {
+    document.body.classList.toggle('dark', dark);
+    const icon = dark ? '☀️' : '🌙';
+    if (desktopToggle) desktopToggle.textContent = icon;
+    if (mobileToggle)  mobileToggle.textContent  = icon;
+  };
+  applyTheme(localStorage.getItem('theme') === 'dark');
+  const toggleTheme = () => {
+    const isDark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  };
+  if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+  if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+
+  const hamburger    = document.getElementById('hamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  hamburger?.addEventListener('click', (e) => { e.stopPropagation(); menuDropdown.classList.toggle('open'); });
+  document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.querySelectorAll('.code-container').forEach(container => {
+    const btn = container.querySelector('.copy-btn');
+    const tip = container.querySelector('.tooltip');
+    const pre = container.querySelector('pre');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(pre.innerText.trim()).then(() => {
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
+      });
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans    = btn.nextElementSibling;
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+</script>
+</body>
+</html>
