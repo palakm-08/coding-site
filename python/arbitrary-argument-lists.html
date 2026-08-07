@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="../assests/icon.png" />
-<meta name="description" content="Learn Python Lambda Functions (Python Docs 4.9.6) with beginner-friendly explanations. Understand lambda syntax, anonymous functions, closures, the make_incrementor() example, sort keys, and when to use lambda vs def." />
+<meta name="description" content="Learn Python *args and Arbitrary Argument Lists (Python Docs 4.9.4) with beginner-friendly explanations. Understand *args, variable-length arguments, the write_multiple_items() example, and keyword-only parameters after *args."/>
   <meta property="og:type" content="article" /> 
-  <meta property="og:title" content="Python Lambda Expressions Explained (Python Docs 4.9.6) | Kiddo" /> 
-  <meta property="og:description" content="The official Python lambda docs explained simply. Learn lambda syntax, closures, using lambda as a sort key, and lambda vs def." /> 
-  <meta property="og:url" content="https://kiddoedu.org/python/lambda-expressions.html" /> 
+  <meta property="og:title" content="Python Arbitrary Argument Lists Explained (Python Docs 4.9.4) | Kiddo" /> 
+  <meta property="og:description" content="The official Python *args docs explained simply. Learn arbitrary argument lists, write_multiple_items(), and keyword-only parameters after *args." /> 
+  <meta property="og:url" content="https://kiddoedu.org/python/arbitrary-argument-lists.html" /> 
   <meta property="og:site_name" content="Kiddo" /> 
-  <meta property="og:image" content="https://kiddoedu.org/python/lambda-expressions.png" /> 
+  <meta property="og:image" content="https://kiddoedu.org/python/arbitrary-argument-lists.png" /> 
   <meta name="twitter:card" content="summary_large_image" /> 
-  <meta name="twitter:title" content="Python Lambda Expressions Explained (Python Docs 4.9.6) | Kiddo" /> 
-  <meta name="twitter:description" content="Beginner-friendly explanation of Python lambda expressions. Syntax, closures, sort keys, lambda vs def." /> 
-  <meta name="twitter:image" content="https://kiddoedu.org/python/lambda-expressions.png" /> 
-  <link rel="canonical" href="https://kiddoedu.org/python/lambda-expressions.html" /> 
-<title>Python Lambda Functions Explained (Python Docs 4.9.6) | Syntax, Closures &amp; Sort Keys</title>
+  <meta name="twitter:title" content="Python Arbitrary Argument Lists Explained (Python Docs 4.9.4) | Kiddo" /> 
+  <meta name="twitter:description" content="Beginner-friendly explanation of Python *args. write_multiple_items(), concat(), and keyword-only params after *args." /> 
+  <meta name="twitter:image" content="https://kiddoedu.org/python/arbitrary-argument-lists.png" /> 
+  <link rel="canonical" href="https://kiddoedu.org/python/arbitrary-argument-lists.html" /> 
+  <title>Python Arbitrary Argument Lists Explained (Python Docs 4.9.4) | *args &amp; Keyword-Only Params</title>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>
@@ -141,8 +141,8 @@ aside ul .submenu li a .dot{
     /* Syntax anatomy */
     .syntax-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 20px 0 24px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 2.2; overflow-x: auto; }
     .sy-kw { color: var(--accent2); font-weight: 600; }
-    .sy-arg { color: var(--accent3); font-weight: 600; }
-    .sy-expr { color: var(--accent); font-weight: 600; }
+    .sy-args { color: var(--accent); font-weight: 600; }
+    .sy-kwd { color: #9c27b0; font-weight: 600; }
     .sy-punc { color: var(--text-muted); }
     .sy-label { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-left: 14px; vertical-align: middle; }
 
@@ -192,16 +192,6 @@ aside ul .submenu li a .dot{
     .py-var  { color: #9cdcfe; }
     .py-out  { color: #4ec9b0; }
 
-    .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 26px; }
-    .vs-card { border-radius: var(--radius-sm); padding: 18px 20px; }
-    .vs-card.yes { background: rgba(0,184,148,0.07); border: 1px solid rgba(0,184,148,0.2); }
-    .vs-card.no  { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.18); }
-    .vs-head { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
-    .vs-card.yes .vs-head { color: var(--accent3); }
-    .vs-card.no  .vs-head { color: var(--accent); }
-    .vs-card ul { margin: 0; }
-    .vs-card ul li { font-size: 0.875rem; line-height: 1.55; color: var(--text); }
-
     .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 26px; }
     .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
     .mi-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
@@ -242,7 +232,7 @@ aside ul .submenu li a .dot{
       header { display: none; } .mobile-header { display: flex; }
       .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
       aside { position: static; } .toc-grid { grid-template-columns: 1fr; }
-      .vs-grid { grid-template-columns: 1fr; } .prop-grid { grid-template-columns: 1fr 1fr; }
+      .prop-grid { grid-template-columns: 1fr 1fr; }
       footer { padding: 20px; } .footer-container { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 480px) { main h1 { font-size: 1.6rem; } .prop-grid { grid-template-columns: 1fr; } }
@@ -275,8 +265,8 @@ aside ul .submenu li a .dot{
         <li><a href="../python/default-arguments.html"><span class="dot"></span>Default Argument Values</a></li>
         <li><a href="../python/keyword-arguments.html"><span class="dot"></span>Keyword Arguments</a></li>
         <li><a href="../python/special-parameters.html"><span class="dot"></span>Special Parameters</a></li>
-        <li><a href="../python/arbitrary-argument-lists.html"><span class="dot"></span>Arbitrary Argument Lists</a></li>
-        <li><a href="../python/lambda-functions.html" class="active"><span class="dot"></span>Lambda Expressions</a></li>
+        <li><a href="../python/arbitrary-argument-lists.html" class="active"><span class="dot"></span>Arbitrary Argument Lists</a></li>
+        <li><a href="../python/lambda-expressions.html"><span class="dot"></span>Lambda Expressions</a></li>
       </ul>
     </li>
     <li>
@@ -305,13 +295,13 @@ aside ul .submenu li a .dot{
       <a href="../index.html">Home</a><span>›</span>
       <a href="../python/py-intro.html">Python</a><span>›</span>
       <a href="../python/functions.html">Functions</a><span>›</span>
-      4.9.6 Lambda Expressions
+      4.9.4 Arbitrary Argument Lists
     </div>
 
-    <h1>Python Lambda Expressions Explained (Python Docs 4.9.6) | Syntax, Closures &amp; Sort Keys</h1>
+    <h1>Python Arbitrary Argument Lists Explained (Python Docs 4.9.4) | *args &amp; Keyword-Only Params After It</h1>
 
     <div class="doc-ref">
-      📖 Based on <a href="https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions" target="_blank" rel="noopener">Python 3 official docs §4.9.6</a> — explained like a friend, with extra examples added
+      📖 Based on <a href="https://docs.python.org/3/tutorial/controlflow.html#arbitrary-argument-lists" target="_blank" rel="noopener">Python 3 official docs §4.9.4</a> — explained like a friend, with extra examples added
     </div>
 
     <div class="meta-row">
@@ -322,55 +312,58 @@ aside ul .submenu li a .dot{
       <span class="date-badge">Updated July 2026</span>
     </div>
 
-    <p>This page explains the official Python Lambda Expressions documentation (Python Docs 4.9.6) in simple language. A lambda is a small, anonymous function — no name, no <code>def</code>, just one expression — used in exactly the spots where writing a whole named function would feel like overkill.</p>
-    <p>By the end of this guide, you'll understand the <code>make_incrementor()</code> closure example line by line, how lambdas get used as sort keys, and when reaching for a lambda is the right call versus when it just makes code harder to read.</p>
+    <p>This page explains the official Python Arbitrary Argument Lists documentation (Python Docs 4.9.4) in simple language. Sometimes you don't know ahead of time how many arguments a function will need to accept — <code>*args</code> lets a function scoop up any number of extra positional arguments into a single tuple.</p>
+    <p>By the end of this guide, you'll understand the <code>write_multiple_items()</code> example, exactly why <code>*args</code> almost always goes last in a parameter list, and how anything defined after it automatically becomes keyword-only — demonstrated with the <code>concat()</code> example straight from the docs.</p>
 
     <nav class="toc" aria-label="Table of contents">
       <div class="toc-label">In this guide</div>
       <div class="toc-grid">
-        <a href="#what-is"><span class="toc-num">01</span>What is a lambda expression?</a>
-        <a href="#syntax"><span class="toc-num">02</span>Basic lambda syntax</a>
-        <a href="#single-expr"><span class="toc-num">03</span>Restricted to a single expression</a>
-        <a href="#make-incrementor"><span class="toc-num">04</span>The make_incrementor() example</a>
-        <a href="#sort-key"><span class="toc-num">05</span>Using lambda as a sort key</a>
-        <a href="#lambda-vs-def"><span class="toc-num">06</span>lambda vs def</a>
-        <a href="#mistakes"><span class="toc-num">07</span>Common mistakes</a>
-        <a href="#interview"><span class="toc-num">08</span>Interview questions</a>
-        <a href="#faq"><span class="toc-num">09</span>FAQs</a>
+        <a href="#what-is"><span class="toc-num">01</span>What are arbitrary argument lists?</a>
+        <a href="#syntax"><span class="toc-num">02</span>The write_multiple_items() example</a>
+        <a href="#scooping"><span class="toc-num">03</span>Why *args scoops up remaining arguments</a>
+        <a href="#kwd-only-after"><span class="toc-num">04</span>Parameters after *args are keyword-only</a>
+        <a href="#concat"><span class="toc-num">05</span>The concat() example</a>
+        <a href="#mistakes"><span class="toc-num">06</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">07</span>Interview questions</a>
+        <a href="#faq"><span class="toc-num">08</span>FAQs</a>
       </div>
     </nav>
 
     <div class="section-divider"></div>
 
     <!-- 01 -->
-    <h2 id="what-is">What Is a Lambda Expression? (Python Docs 4.9.6 Explained)</h2>
-    <p>A lambda expression is a small anonymous function created with the <code>lambda</code> keyword instead of <code>def</code>. It has no name of its own, and it can only contain a single expression — but that expression gets evaluated and returned automatically, without a <code>return</code> keyword.</p>
+    <h2 id="what-is">What Are Arbitrary Argument Lists? (Python Docs 4.9.4 Explained)</h2>
+    <p>An arbitrary argument list lets a function accept any number of positional arguments — zero, one, or a hundred — without needing to define a fixed set of parameter names for each one. The docs call this the least frequently used of the special parameter options, but it's genuinely useful whenever the exact number of inputs can't be known in advance.</p>
 
     <div class="doc-block">
       <span class="doc-block-label">From the Python docs</span>
-      <p>Small anonymous functions can be created with the lambda keyword. Lambda functions can be used wherever function objects are required. They are syntactically restricted to a single expression. Semantically, they are just syntactic sugar for a normal function definition.</p>
+      <p>The least frequently used option is to specify that a function can be called with an arbitrary number of arguments. These arguments will be wrapped up in a tuple. Before the variable number of arguments, zero or more normal arguments may occur.</p>
     </div>
 
     <div class="prop-grid">
-      <div class="prop-card"><strong>Anonymous</strong><span>No function name — created inline, right where it's needed</span></div>
-      <div class="prop-card"><strong>One expression only</strong><span>No statements, no multiple lines — just a single expression</span></div>
-      <div class="prop-card"><strong>Implicit return</strong><span>The expression's result is automatically returned</span></div>
-      <div class="prop-card"><strong>Just sugar for def</strong><span>Semantically identical to a normal function definition</span></div>
+      <div class="prop-card"><strong>Written as *args</strong><span>A single asterisk before the parameter name</span></div>
+      <div class="prop-card"><strong>Collected as a tuple</strong><span>Every extra positional argument lands inside one tuple</span></div>
+      <div class="prop-card"><strong>Can follow normal arguments</strong><span>Zero or more regular parameters may come before it</span></div>
+      <div class="prop-card"><strong>Usually goes last</strong><span>It scoops up everything remaining, so little sense comes after it</span></div>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 02 -->
-    <h2 id="syntax">Basic Lambda Syntax</h2>
-    <p>The docs' first example is about as simple as a lambda gets — a function that returns the sum of its two arguments:</p>
+    <h2 id="syntax">The write_multiple_items() Example</h2>
+    <p>The docs introduce <code>*args</code> with a small function that writes any number of strings to a file, joined by a separator:</p>
 
     <div class="syntax-box">
       <div>
-        <span class="sy-kw">lambda</span>
-        <span class="sy-arg"> a, b</span>
-        <span class="sy-punc">:</span>
-        <span class="sy-expr"> a+b</span>
-        <span class="sy-label">← the whole function, in one line</span>
+        <span class="sy-punc">def write_multiple_items(</span><span class="sy-kw">file, separator</span><span class="sy-punc">, </span><span class="sy-args">*args</span><span class="sy-punc">):</span>
+      </div>
+      <div>
+        <span class="sy-kw">└── normal arguments</span>
+        <span class="sy-label">zero or more, come first</span>
+      </div>
+      <div>
+        <span class="sy-args">└── *args</span>
+        <span class="sy-label">collects everything else into a tuple</span>
       </div>
     </div>
 
@@ -379,194 +372,136 @@ aside ul .submenu li a .dot{
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-kw">lambda</span> <span class="py-var">a</span><span class="py-punc">,</span> <span class="py-var">b</span><span class="py-punc">:</span> <span class="py-var">a</span><span class="py-punc">+</span><span class="py-var">b</span></pre>
+      <pre><span class="py-kw">def</span> <span class="py-bi">write_multiple_items</span><span class="py-punc">(</span><span class="py-var">file</span><span class="py-punc">,</span> <span class="py-var">separator</span><span class="py-punc">, *</span><span class="py-var">args</span><span class="py-punc">):</span>
+    <span class="py-var">file</span><span class="py-punc">.</span><span class="py-bi">write</span><span class="py-punc">(</span><span class="py-var">separator</span><span class="py-punc">.</span><span class="py-bi">join</span><span class="py-punc">(</span><span class="py-var">args</span><span class="py-punc">))</span></pre>
     </div>
 
-    <p>This is directly equivalent to writing a named function with <code>def</code> — just without giving it a name:</p>
+    <p><code>file</code> and <code>separator</code> are ordinary required parameters. Everything else passed to the function — however many items — lands inside the tuple <code>args</code>, ready for <code>separator.join(args)</code> to stitch together.</p>
 
+    <h4>Kiddo extra — announcing an arbitrary number of Hawkins residents</h4>
     <div class="code-container">
       <div class="code-header">
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-cmt"># A lambda, assigned to a name for comparison</span>
-<span class="py-var">add</span> <span class="py-punc">=</span> <span class="py-kw">lambda</span> <span class="py-var">a</span><span class="py-punc">,</span> <span class="py-var">b</span><span class="py-punc">:</span> <span class="py-var">a</span><span class="py-punc">+</span><span class="py-var">b</span>
+      <pre><span class="py-kw">def</span> <span class="py-bi">announce_party</span><span class="py-punc">(</span><span class="py-var">mission</span><span class="py-punc">, *</span><span class="py-var">members</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Mission: </span><span class="py-var">{mission}</span><span class="py-str">"</span><span class="py-punc">)</span>
+    <span class="py-kw">for</span> <span class="py-var">member</span> <span class="py-kw">in</span> <span class="py-var">members</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"- </span><span class="py-var">{member}</span><span class="py-str"> is in"</span><span class="py-punc">)</span>
 
-<span class="py-cmt"># The equivalent def function</span>
-<span class="py-kw">def</span> <span class="py-bi">add</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">,</span> <span class="py-var">b</span><span class="py-punc">):</span>
-    <span class="py-kw">return</span> <span class="py-var">a</span> <span class="py-punc">+</span> <span class="py-var">b</span>
+<span class="py-bi">announce_party</span><span class="py-punc">(</span><span class="py-str">"Find Will"</span><span class="py-punc">,</span> <span class="py-str">"Mike"</span><span class="py-punc">,</span> <span class="py-str">"Dustin"</span><span class="py-punc">,</span> <span class="py-str">"Lucas"</span><span class="py-punc">)</span>
+<span class="py-out"># Mission: Find Will
+# - Mike is in
+# - Dustin is in
+# - Lucas is in</span>
 
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">add</span><span class="py-punc">(</span><span class="py-num">3</span><span class="py-punc">,</span> <span class="py-num">4</span><span class="py-punc">))</span>
-<span class="py-out"># 7</span></pre>
+<span class="py-cmt"># Works with any number of members — even just one, or none at all</span>
+<span class="py-bi">announce_party</span><span class="py-punc">(</span><span class="py-str">"Scout the Upside Down"</span><span class="py-punc">,</span> <span class="py-str">"Eleven"</span><span class="py-punc">)</span>
+<span class="py-out"># Mission: Scout the Upside Down
+# - Eleven is in</span></pre>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 03 -->
-    <h2 id="single-expr">Restricted to a Single Expression</h2>
-    <p>A lambda's body can only ever be one expression — no <code>if</code> blocks, no loops, no multiple statements, no assignments. This is a deliberate restriction: lambdas are meant for small, throwaway logic, not full function bodies.</p>
+    <h2 id="scooping">Why *args Scoops Up Remaining Arguments</h2>
+    <p>Because <code>*args</code> collects every positional argument that isn't already claimed by a named parameter, it's normally placed last in the parameter list — anything else placed after it would only ever receive its value by keyword, since there's no way to know where the variadic input ends.</p>
 
-    <div class="code-container">
-      <div class="code-header">
-        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
-        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-      </div>
-      <pre><span class="py-cmt"># A conditional expression IS allowed — it's still one expression</span>
-<span class="py-var">is_starting</span> <span class="py-punc">=</span> <span class="py-kw">lambda</span> <span class="py-var">minutes</span><span class="py-punc">:</span> <span class="py-str">"starting"</span> <span class="py-kw">if</span> <span class="py-var">minutes</span> <span class="py-punc">></span> <span class="py-num">60</span> <span class="py-kw">else</span> <span class="py-str">"benched"</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">is_starting</span><span class="py-punc">(</span><span class="py-num">75</span><span class="py-punc">))</span>
-<span class="py-out"># starting</span>
-
-<span class="py-cmt"># A real if/else statement is NOT allowed inside a lambda — this is invalid:</span>
-<span class="py-cmt"># lambda minutes:
-#     if minutes > 60:
-#         return "starting"
-# SyntaxError</span></pre>
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>Normally, these variadic arguments will be last in the list of formal parameters, because they scoop up all remaining input arguments that are passed to the function.</p>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 04 -->
-    <h2 id="make-incrementor">The make_incrementor() Example — Lambdas and Closures</h2>
-    <p>Like nested <code>def</code> functions, a lambda can reference variables from the scope it was created in. The docs demonstrate this with a function that builds and returns a customized lambda:</p>
+    <h2 id="kwd-only-after">Parameters After *args Are Keyword-Only</h2>
+    <p>This is the detail that surprises a lot of people the first time they see it: any parameter defined after <code>*args</code> automatically becomes keyword-only. You don't need to add a separate <code>*</code> — <code>*args</code> itself already acts as that dividing line.</p>
 
-    <div class="code-container">
-      <div class="code-header">
-        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
-        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-      </div>
-      <pre><span class="py-kw">def</span> <span class="py-bi">make_incrementor</span><span class="py-punc">(</span><span class="py-var">n</span><span class="py-punc">):</span>
-    <span class="py-kw">return</span> <span class="py-kw">lambda</span> <span class="py-var">x</span><span class="py-punc">:</span> <span class="py-var">x</span> <span class="py-punc">+</span> <span class="py-var">n</span>
-
-<span class="py-var">f</span> <span class="py-punc">=</span> <span class="py-bi">make_incrementor</span><span class="py-punc">(</span><span class="py-num">42</span><span class="py-punc">)</span>
-<span class="py-var">f</span><span class="py-punc">(</span><span class="py-num">0</span><span class="py-punc">)</span>
-<span class="py-out">42</span>
-<span class="py-var">f</span><span class="py-punc">(</span><span class="py-num">1</span><span class="py-punc">)</span>
-<span class="py-out">43</span></pre>
-    </div>
-
-    <p>Every time <code>make_incrementor()</code> runs, it returns a brand-new lambda that "remembers" the value of <code>n</code> from that specific call. <code>f</code> keeps that memory permanently — calling <code>f(0)</code> or <code>f(1)</code> always adds the same <code>42</code>, no matter how many times you call <code>f</code>.</p>
-
-    <div class="note-box">
-      This is called a <strong>closure</strong> — the lambda "closes over" the variable <code>n</code> from its enclosing scope, carrying it along even after <code>make_incrementor()</code> has already finished running and returned.
-    </div>
-
-    <h4>Kiddo extra — a customized goal-bonus calculator</h4>
-    <div class="code-container">
-      <div class="code-header">
-        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
-        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-      </div>
-      <pre><span class="py-kw">def</span> <span class="py-bi">make_bonus_calculator</span><span class="py-punc">(</span><span class="py-var">bonus_per_goal</span><span class="py-punc">):</span>
-    <span class="py-kw">return</span> <span class="py-kw">lambda</span> <span class="py-var">goals</span><span class="py-punc">:</span> <span class="py-var">goals</span> <span class="py-punc">*</span> <span class="py-var">bonus_per_goal</span>
-
-<span class="py-var">striker_bonus</span> <span class="py-punc">=</span> <span class="py-bi">make_bonus_calculator</span><span class="py-punc">(</span><span class="py-num">50000</span><span class="py-punc">)</span>
-<span class="py-var">winger_bonus</span> <span class="py-punc">=</span> <span class="py-bi">make_bonus_calculator</span><span class="py-punc">(</span><span class="py-num">30000</span><span class="py-punc">)</span>
-
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">striker_bonus</span><span class="py-punc">(</span><span class="py-num">20</span><span class="py-punc">))</span>   <span class="py-cmt"># 20 goals at 50000 each</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">winger_bonus</span><span class="py-punc">(</span><span class="py-num">10</span><span class="py-punc">))</span>    <span class="py-cmt"># 10 goals at 30000 each</span>
-<span class="py-out"># 1000000
-# 300000</span></pre>
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>Any formal parameters which occur after the *args parameter are 'keyword-only' arguments, meaning that they can only be used as keywords rather than positional arguments.</p>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 05 -->
-    <h2 id="sort-key">Using lambda as a Sort Key</h2>
-    <p>Beyond returning functions, a common use for lambdas is passing a small function as an argument to something else. <code>list.sort()</code> accepts a <code>key</code> function that decides what each item should be compared by — a lambda is perfect here, since you rarely need that comparison logic anywhere else.</p>
+    <h2 id="concat">The concat() Example</h2>
+    <p>The docs demonstrate this exact rule with a function that joins any number of strings using a configurable separator — <code>sep</code> comes after <code>*args</code>, so it can only ever be passed by keyword:</p>
 
     <div class="code-container">
       <div class="code-header">
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-var">pairs</span> <span class="py-punc">= [(</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-str">'one'</span><span class="py-punc">), (</span><span class="py-num">2</span><span class="py-punc">,</span> <span class="py-str">'two'</span><span class="py-punc">), (</span><span class="py-num">3</span><span class="py-punc">,</span> <span class="py-str">'three'</span><span class="py-punc">), (</span><span class="py-num">4</span><span class="py-punc">,</span> <span class="py-str">'four'</span><span class="py-punc">)]</span>
-<span class="py-var">pairs</span><span class="py-punc">.</span><span class="py-bi">sort</span><span class="py-punc">(</span><span class="py-kw">key</span><span class="py-punc">=</span><span class="py-kw">lambda</span> <span class="py-var">pair</span><span class="py-punc">:</span> <span class="py-var">pair</span><span class="py-punc">[</span><span class="py-num">1</span><span class="py-punc">])</span>
-<span class="py-var">pairs</span>
-<span class="py-out">[(4, 'four'), (1, 'one'), (3, 'three'), (2, 'two')]</span></pre>
+      <pre><span class="py-kw">def</span> <span class="py-bi">concat</span><span class="py-punc">(*</span><span class="py-var">args</span><span class="py-punc">,</span> <span class="py-var">sep</span><span class="py-punc">=</span><span class="py-str">"/"</span><span class="py-punc">):</span>
+    <span class="py-kw">return</span> <span class="py-var">sep</span><span class="py-punc">.</span><span class="py-bi">join</span><span class="py-punc">(</span><span class="py-var">args</span><span class="py-punc">)</span>
+
+<span class="py-bi">concat</span><span class="py-punc">(</span><span class="py-str">"earth"</span><span class="py-punc">,</span> <span class="py-str">"mars"</span><span class="py-punc">,</span> <span class="py-str">"venus"</span><span class="py-punc">)</span>
+<span class="py-out">'earth/mars/venus'</span>
+
+<span class="py-bi">concat</span><span class="py-punc">(</span><span class="py-str">"earth"</span><span class="py-punc">,</span> <span class="py-str">"mars"</span><span class="py-punc">,</span> <span class="py-str">"venus"</span><span class="py-punc">,</span> <span class="py-var">sep</span><span class="py-punc">=</span><span class="py-str">"."</span><span class="py-punc">)</span>
+<span class="py-out">'earth.mars.venus'</span></pre>
     </div>
 
-    <p>The lambda <code>lambda pair: pair[1]</code> tells <code>sort()</code> to compare each tuple by its second element — the word — rather than the number. That's why the result ends up alphabetically sorted by word: four, one, three, two.</p>
+    <p>Notice that <code>sep</code> has a default value, so calls that don't need a custom separator can leave it out entirely — but if you do want to change it, you have no choice but to name it explicitly. <code>concat("earth", "mars", "venus", ".")</code> would not set the separator; it would just get swallowed into <code>args</code> as a fourth string.</p>
 
-    <h4>Kiddo extra — sorting a squad by goals scored</h4>
+    <h4>Kiddo extra — joining a list of names with a custom separator</h4>
     <div class="code-container">
       <div class="code-header">
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-var">squad</span> <span class="py-punc">= [(</span><span class="py-str">"Haaland"</span><span class="py-punc">,</span> <span class="py-num">36</span><span class="py-punc">), (</span><span class="py-str">"Foden"</span><span class="py-punc">,</span> <span class="py-num">19</span><span class="py-punc">), (</span><span class="py-str">"Rodri"</span><span class="py-punc">,</span> <span class="py-num">4</span><span class="py-punc">)]</span>
+      <pre><span class="py-kw">def</span> <span class="py-bi">campaign_crew</span><span class="py-punc">(*</span><span class="py-var">names</span><span class="py-punc">,</span> <span class="py-var">joiner</span><span class="py-punc">=</span><span class="py-str">" and "</span><span class="py-punc">):</span>
+    <span class="py-kw">return</span> <span class="py-var">joiner</span><span class="py-punc">.</span><span class="py-bi">join</span><span class="py-punc">(</span><span class="py-var">names</span><span class="py-punc">)</span>
 
-<span class="py-cmt"># Sort by goals scored, highest first</span>
-<span class="py-var">squad</span><span class="py-punc">.</span><span class="py-bi">sort</span><span class="py-punc">(</span><span class="py-kw">key</span><span class="py-punc">=</span><span class="py-kw">lambda</span> <span class="py-var">player</span><span class="py-punc">:</span> <span class="py-var">player</span><span class="py-punc">[</span><span class="py-num">1</span><span class="py-punc">],</span> <span class="py-kw">reverse</span><span class="py-punc">=</span><span class="py-kw">True</span><span class="py-punc">)</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">squad</span><span class="py-punc">)</span>
-<span class="py-out"># [('Haaland', 36), ('Foden', 19), ('Rodri', 4)]</span></pre>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">campaign_crew</span><span class="py-punc">(</span><span class="py-str">"Robin"</span><span class="py-punc">,</span> <span class="py-str">"Steve"</span><span class="py-punc">,</span> <span class="py-str">"Nancy"</span><span class="py-punc">))</span>
+<span class="py-out"># Robin and Steve and Nancy</span>
+
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">campaign_crew</span><span class="py-punc">(</span><span class="py-str">"Robin"</span><span class="py-punc">,</span> <span class="py-str">"Steve"</span><span class="py-punc">,</span> <span class="py-str">"Nancy"</span><span class="py-punc">,</span> <span class="py-var">joiner</span><span class="py-punc">=</span><span class="py-str">", "</span><span class="py-punc">))</span>
+<span class="py-out"># Robin, Steve, Nancy</span></pre>
     </div>
 
-    <div class="callout">
-      <strong>Same pattern shows up everywhere:</strong> <code>sorted()</code>, <code>max()</code>, <code>min()</code>, and <code>filter()</code> all accept a <code>key</code> or condition function the same way <code>sort()</code> does — a lambda is almost always the natural fit when that function is only needed in this one spot.
+    <div class="warn-box">
+      <strong>joiner must be named.</strong> Because <code>joiner</code> comes after <code>*names</code>, writing <code>campaign_crew("Robin", "Steve", ", ")</code> would not set the separator — <code>", "</code> would just become a third name inside <code>names</code>, and <code>joiner</code> would quietly stay at its default.
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 06 -->
-    <h2 id="lambda-vs-def">lambda vs def — When to Use Which</h2>
-    <div class="vs-grid">
-      <div class="vs-card yes">
-        <div class="vs-head">Use lambda when</div>
-        <ul>
-          <li>The logic is a single, simple expression</li>
-          <li>You need a quick function passed directly as an argument — like a sort key</li>
-          <li>You're generating a function from within another function, as in make_incrementor()</li>
-          <li>Giving it a name would add clutter without adding clarity</li>
-        </ul>
-      </div>
-      <div class="vs-card no">
-        <div class="vs-head">Use def when</div>
-        <ul>
-          <li>The logic needs more than one expression or statement</li>
-          <li>You want a docstring explaining what the function does</li>
-          <li>The function will be reused in several places, so it deserves a name</li>
-          <li>Debugging matters — named functions show up clearly in tracebacks, lambdas just say &lt;lambda&gt;</li>
-        </ul>
-      </div>
+    <h2 id="mistakes">Common *args Mistakes</h2>
+    <div class="mistake-list">
+      <div class="mistake-item"><div class="mi-body"><strong>Trying to pass a value after *args positionally</strong><p>Any parameter following <code>*args</code> is keyword-only. Passing it positionally doesn't raise an error — it just silently gets absorbed into <code>args</code> instead, which can be a confusing bug to track down.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Assuming *args works with any iterable directly</strong><p><code>*args</code> collects positional arguments passed at call time — it doesn't automatically unpack a list or tuple you already have. To spread an existing sequence into separate arguments, use <code>*my_list</code> at the call site: <code>func(*my_list)</code>.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Putting *args somewhere other than near the end</strong><p>While technically only parameters after it are affected, putting <code>*args</code> anywhere but near the end of the signature usually signals confused design — everything meaningful after it has to be keyword-only, which is easy to forget while writing the call.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Forgetting args is a tuple, not a list</strong><p>Inside the function, <code>args</code> is a tuple — it supports indexing and iteration just fine, but you can't <code>.append()</code> to it directly. Convert with <code>list(args)</code> first if you need to modify it.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Using *args when a fixed signature would be clearer</strong><p>If a function realistically only ever takes two or three specific things, naming them explicitly is clearer than an open-ended <code>*args</code>. Reach for <code>*args</code> when the count is genuinely unknown or unbounded, not as a shortcut to skip naming parameters.</p></div></div>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 07 -->
-    <h2 id="mistakes">Common Lambda Mistakes</h2>
-    <div class="mistake-list">
-      <div class="mistake-item"><div class="mi-body"><strong>Trying to fit a statement inside a lambda</strong><p>Lambdas can only contain a single expression. Writing an <code>if</code> statement, a <code>for</code> loop, or an assignment inside one raises a <code>SyntaxError</code> — use a conditional expression, or switch to <code>def</code>.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>Adding return inside a lambda</strong><p>A lambda's expression is returned automatically — writing <code>lambda x: return x + 1</code> is invalid syntax. Just write <code>lambda x: x + 1</code>.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>Overusing lambda for anything with real logic</strong><p>A lambda crammed with nested conditional expressions becomes genuinely hard to read. If it takes more than a few seconds to parse, it's a sign to write a named function with <code>def</code> instead.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>Assigning a lambda to a variable just to name it</strong><p><code>square = lambda x: x**2</code> works, but style guides generally recommend <code>def square(x): return x**2</code> instead — if a lambda needs a name, it usually deserves to be a real function with a proper traceback name.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>Forgetting a lambda still needs a colon</strong><p><code>lambda a, b a+b</code> without the colon between the parameters and the expression is a <code>SyntaxError</code>. The correct form is <code>lambda a, b: a+b</code>.</p></div></div>
+    <h2 id="interview">Arbitrary Argument List Interview Questions and Answers</h2>
+    <div class="iq-list">
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> What does *args do in a Python function definition?</div><div class="iq-a">It lets the function accept any number of extra positional arguments, which get collected into a single tuple named <code>args</code> (the name itself is just a convention — any valid identifier works after the <code>*</code>).</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q2</span> Why is *args usually placed at the end of a parameter list?</div><div class="iq-a">Because it scoops up every remaining positional argument passed to the function. Since there's no way to know in advance how many values it will absorb, placing normal positional parameters after it wouldn't make sense.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q3</span> What happens to parameters defined after *args in the function signature?</div><div class="iq-a">They automatically become keyword-only — they can only be supplied by explicitly naming them in the call, exactly as if a bare <code>*</code> had been placed before them.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q4</span> In def concat(*args, sep="/"), can you call concat("a", "b", "c", ".") to set sep to "."?</div><div class="iq-a">No. <code>"."</code> in that position is still a positional argument, so it gets absorbed into <code>args</code> as a fourth item rather than setting <code>sep</code>. You must call it as <code>concat("a", "b", "c", sep=".")</code> instead.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q5</span> What data type does *args produce inside the function body?</div><div class="iq-a">A tuple. All the extra positional arguments passed to the call are collected into this tuple in the order they were given, and the function can iterate over or index into it like any other tuple.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q6</span> Can a function combine normal parameters, *args, and keyword-only parameters together?</div><div class="iq-a">Yes — this is exactly the pattern the docs demonstrate. Normal parameters come first, <code>*args</code> follows to catch any extra positional values, and any parameters after that are automatically keyword-only, like <code>sep="/"</code> in the <code>concat()</code> example.</div></div>
     </div>
 
     <div class="section-divider"></div>
 
     <!-- 08 -->
-    <h2 id="interview">Lambda Interview Questions and Answers</h2>
-    <div class="iq-list">
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> What is a lambda expression in Python?</div><div class="iq-a">A small, anonymous function created with the <code>lambda</code> keyword instead of <code>def</code>. It's restricted to a single expression, which is evaluated and returned automatically — it's semantically just syntactic sugar for a normal function definition.</div></div>
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q2</span> Can a lambda contain multiple statements?</div><div class="iq-a">No. A lambda's body must be exactly one expression — no loops, no multiple statements, no assignments. Conditional expressions are allowed since they're still a single expression, but full <code>if</code> statements are not.</div></div>
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q3</span> What is a closure, and how does make_incrementor() demonstrate it?</div><div class="iq-a">A closure is a function that remembers variables from the scope it was created in, even after that outer scope has finished executing. <code>make_incrementor(n)</code> returns <code>lambda x: x + n</code>, and each returned lambda keeps its own captured value of <code>n</code> — calling <code>make_incrementor(42)</code> and <code>make_incrementor(1)</code> produces two independent functions.</div></div>
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q4</span> Why would you use lambda with list.sort() instead of a regular function?</div><div class="iq-a">Because the sorting logic is usually only needed in that one call and doesn't deserve a permanent name elsewhere in the program. A lambda keeps the sort key inline and readable right where it's used, instead of scattering a tiny one-off function elsewhere in the file.</div></div>
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q5</span> Is a lambda function faster than an equivalent def function?</div><div class="iq-a">No — there's no inherent performance difference. A lambda compiles to the same kind of function object as one defined with <code>def</code>; the only real difference is that a lambda has no name and is restricted to a single expression.</div></div>
-      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q6</span> What does pairs.sort(key=lambda pair: pair[1]) actually do?</div><div class="iq-a">It sorts the list <code>pairs</code> in place, using the second element of each tuple as the comparison value instead of the whole tuple. Every item still stays in the list — only the ordering changes, based on whatever the lambda returns for each item.</div></div>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <!-- 09 -->
-    <h2 id="faq">Lambda Expressions FAQ</h2>
+    <h2 id="faq">Arbitrary Argument Lists FAQ</h2>
     <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is the syntax for a lambda expression in Python? <span class="faq-icon">+</span></button><div class="faq-a"><code>lambda arguments: expression</code>. For example, <code>lambda a, b: a+b</code> takes two arguments and returns their sum. No parentheses around the arguments, no <code>return</code> keyword, and no colon-indented body like a normal function.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can a lambda function have no arguments? <span class="faq-icon">+</span></button><div class="faq-a">Yes. <code>lambda: 42</code> is a valid lambda that takes no arguments and always returns <code>42</code>. The parameter list before the colon can be empty.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is the difference between lambda and def in Python? <span class="faq-icon">+</span></button><div class="faq-a">A lambda is anonymous and restricted to a single expression with an implicit return. A function defined with <code>def</code> has a name, can contain multiple statements, and can include a docstring. Semantically they're otherwise equivalent — lambdas are just syntactic sugar for simple function definitions.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can lambda functions access variables from the enclosing scope? <span class="faq-icon">+</span></button><div class="faq-a">Yes — just like nested <code>def</code> functions, lambdas can reference variables from the scope where they were created. This is exactly what makes <code>make_incrementor()</code> work, with each returned lambda remembering its own captured value.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">Why is lambda commonly used with sort() or sorted()? <span class="faq-icon">+</span></button><div class="faq-a">Because the <code>key</code> parameter expects a small function describing what to compare items by, and that logic is rarely needed anywhere else in the program. A lambda keeps it compact and inline, right where the sort happens.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">Is it bad practice to assign a lambda to a variable name? <span class="faq-icon">+</span></button><div class="faq-a">It's discouraged by most style guides. If a lambda needs a name, it's usually clearer and easier to debug as a proper function defined with <code>def</code>, since named functions show up with their real name in tracebacks instead of <code>&lt;lambda&gt;</code>.</div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can you use an if statement inside a lambda? <span class="faq-icon">+</span></button><div class="faq-a">Not a full <code>if</code> statement — but a conditional expression (Python's ternary form) is allowed, since it's still a single expression: <code>lambda x: "even" if x % 2 == 0 else "odd"</code> is valid.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is *args in Python? <span class="faq-icon">+</span></button><div class="faq-a">A parameter prefixed with a single asterisk that collects any number of extra positional arguments passed to a function into a tuple. It lets a function accept a variable, unknown number of inputs.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Does the parameter have to be named args? <span class="faq-icon">+</span></button><div class="faq-a">No — <code>args</code> is just a widely used convention. What actually matters is the single asterisk before the name; you could write <code>*values</code> or <code>*items</code> and it would work identically.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can regular parameters come before *args? <span class="faq-icon">+</span></button><div class="faq-a">Yes. Zero or more normal parameters may appear before the variable-length parameter, exactly as in <code>write_multiple_items(file, separator, *args)</code>, where <code>file</code> and <code>separator</code> are ordinary required parameters.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Why do parameters after *args have to be passed by keyword? <span class="faq-icon">+</span></button><div class="faq-a">Because <code>*args</code> already claims every remaining positional argument in the call. Python has no way to tell where the variadic arguments stop and a later positional parameter begins, so anything defined after <code>*args</code> is treated as keyword-only automatically.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">How is *args different from **kwargs? <span class="faq-icon">+</span></button><div class="faq-a"><code>*args</code> collects extra positional arguments into a tuple. <code>**kwargs</code> collects extra keyword arguments into a dictionary. They solve different problems and can be used together in the same function, with <code>*args</code> always defined before <code>**kwargs</code>.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can you call a function with zero arguments if it only has *args? <span class="faq-icon">+</span></button><div class="faq-a">Yes. If a function's only parameter is <code>*args</code>, calling it with no arguments at all is perfectly valid — <code>args</code> will simply be an empty tuple inside the function.</div></div>
     </div>
 
     <div class="section-divider"></div>
@@ -595,7 +530,6 @@ aside ul .submenu li a .dot{
       <a href="../python/default-arguments.html">Default Arguments</a> ·
       <a href="../python/lambda-functions.html">Lambda Functions</a> ·
       <a href="../python/special-parameters.html">Special Parameters</a> ·
-      <a href="../python/arbitrary-argument-lists.html">Arbitrary Arguments List</a> ·
     </div>
   </main>
 </div>
