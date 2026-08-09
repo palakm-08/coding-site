@@ -230,11 +230,40 @@ aside ul .submenu li a .dot{
     .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
     .footer-links a:hover { color: var(--accent); }
 
+    /* Interactive playground components */
+    .playground { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 24px; margin: 16px 0 26px; box-shadow: var(--shadow); }
+    .playground-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .playground-controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+    .playground-input { flex: 1; min-width: 140px; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); font-family: 'Fira Code', monospace; font-size: 0.88rem; transition: border-color var(--transition); }
+    .playground-input:focus { outline: none; border-color: var(--accent); }
+    .run-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: var(--transition); white-space: nowrap; }
+    .run-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .playground-output { background: #1e1e1e; border-radius: 8px; padding: 14px 18px; font-family: 'Fira Code', monospace; font-size: 0.88rem; color: #4ec9b0; min-height: 22px; white-space: pre-line; line-height: 1.6; }
+    .playground-output.empty { color: rgba(255,255,255,0.3); font-style: italic; }
+
+    .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+    .scope-box { border-radius: var(--radius-sm); padding: 16px 18px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .scope-box.global { background: rgba(61,90,254,0.08); border: 1px solid rgba(61,90,254,0.2); }
+    .scope-box.local { background: rgba(232,108,47,0.07); border: 1px solid rgba(232,108,47,0.2); }
+    .scope-box-label { font-family: 'Fira Code', monospace; font-size: 0.78rem; color: var(--text-muted); }
+    .scope-box-arrow { font-size: 0.9rem; color: var(--text-muted); opacity: 0.6; }
+    .scope-box-value { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; }
+    .scope-box.global .scope-box-value { color: var(--accent2); }
+    .scope-box.local .scope-box-value { color: var(--accent); }
+
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .compare-col { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; }
+    .compare-col-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 10px; }
+    .compare-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 6px 0; font-size: 0.85rem; }
+    .compare-row span { color: var(--text-muted); }
+    .compare-row strong { font-family: 'Fira Code', monospace; color: var(--accent); font-size: 0.85rem; }
+
     @media (max-width: 768px) {
       header { display: none; } .mobile-header { display: flex; }
       .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
       aside { position: static; } .toc-grid { grid-template-columns: 1fr; }
       .vs-grid { grid-template-columns: 1fr; } .prop-grid { grid-template-columns: 1fr 1fr; }
+      .scope-grid { grid-template-columns: 1fr; } .compare-grid { grid-template-columns: 1fr; }
       footer { padding: 20px; } .footer-container { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 480px) { main h1 { font-size: 1.6rem; } .prop-grid { grid-template-columns: 1fr; } }
@@ -321,16 +350,20 @@ aside ul .submenu li a .dot{
       <div class="toc-grid">
         <a href="#what-is"><span class="toc-num">01</span>What is a function?</a>
         <a href="#syntax"><span class="toc-num">02</span>Defining a function — def syntax</a>
-        <a href="#docstrings"><span class="toc-num">03</span>Docstrings</a>
-        <a href="#scope"><span class="toc-num">04</span>Local vs global scope</a>
-        <a href="#arguments"><span class="toc-num">05</span>Arguments — call by object reference</a>
-        <a href="#objects"><span class="toc-num">06</span>Functions as objects</a>
-        <a href="#return"><span class="toc-num">07</span>Return values and None</a>
-        <a href="#real-world"><span class="toc-num">08</span>Real-world examples</a>
-        <a href="#fib-vs-fib2"><span class="toc-num">09</span>fib() vs fib2()</a>
-        <a href="#mistakes"><span class="toc-num">10</span>Common mistakes</a>
-        <a href="#interview"><span class="toc-num">11</span>Interview questions</a>
-        <a href="#faq"><span class="toc-num">12</span>FAQs</a>
+        <a href="#playground"><span class="toc-num">03</span>Try It Yourself: Function Playground</a>
+        <a href="#docstrings"><span class="toc-num">04</span>Docstrings</a>
+        <a href="#scope"><span class="toc-num">05</span>Local vs global scope</a>
+        <a href="#scope-demo"><span class="toc-num">06</span>See Scope in Action</a>
+        <a href="#arguments"><span class="toc-num">07</span>Arguments — call by object reference</a>
+        <a href="#objects"><span class="toc-num">08</span>Functions as objects</a>
+        <a href="#return"><span class="toc-num">09</span>Return values and None</a>
+        <a href="#print-vs-return"><span class="toc-num">10</span>Try It Yourself: print() vs return</a>
+        <a href="#real-world"><span class="toc-num">11</span>Real-world examples</a>
+        <a href="#fib-vs-fib2"><span class="toc-num">12</span>fib() vs fib2()</a>
+        <a href="#miniproject"><span class="toc-num">13</span>Mini Project: Student Result Calculator</a>
+        <a href="#mistakes"><span class="toc-num">14</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">15</span>Interview questions</a>
+        <a href="#faq"><span class="toc-num">16</span>FAQs</a>
       </div>
     </nav>
 
@@ -386,9 +419,33 @@ aside ul .submenu li a .dot{
 <span class="py-out"># Mbappe has signed for Real Madrid!</span></pre>
     </div>
 
+    <!-- 03 : Interactive Function Playground -->
+    <h2 id="playground">Try It Yourself: Function Playground</h2>
+    <p>Here's the same idea in a small, editable form. This mirrors a simple function that takes one argument and returns a greeting — enter a name, hit run, and watch the argument travel in and the return value come back out.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">def</span> <span class="py-bi">greet</span><span class="py-punc">(</span><span class="py-var">name</span><span class="py-punc">):</span>
+    <span class="py-kw">return</span> <span class="py-str">f"Hello, </span><span class="py-var">{name}</span><span class="py-str">!"</span></pre>
+    </div>
+
+    <div class="playground">
+      <div class="playground-label">▶ Function Playground</div>
+      <div class="playground-controls">
+        <input type="text" class="playground-input" id="greetInput" value="Wanda" placeholder="Enter a name" />
+        <button class="run-btn" id="greetRunBtn">Run greet()</button>
+      </div>
+      <div class="playground-output empty" id="greetOutput">Click Run to see the output</div>
+    </div>
+
+    <p>Change the input and run the function to see how an argument travels into the function and how the return value comes back out.</p>
+
     <div class="section-divider"></div>
 
-    <!-- 03 -->
+    <!-- 04 -->
     <h2 id="docstrings">Docstrings — The Function's Own Documentation</h2>
     <p>The first statement in a function body can optionally be a string literal — that's the function's docstring. Tools can pull this string out automatically to generate documentation, so it's good practice to include one in every function you write.</p>
 
@@ -417,7 +474,7 @@ aside ul .submenu li a .dot{
 
     <div class="section-divider"></div>
 
-    <!-- 04 -->
+    <!-- 05 -->
     <h2 id="scope">Local vs Global Scope</h2>
     <p>Every time a function runs, Python creates a fresh local symbol table just for that call. Assignments inside the function go into that local table. Looking up a name works outward — first the local table, then any enclosing function's table, then the global table, and finally the built-in names.</p>
 
@@ -452,9 +509,50 @@ aside ul .submenu li a .dot{
       <strong>To actually modify a global from inside a function</strong>, you need to explicitly say so with a <code>global</code> statement (or <code>nonlocal</code> for a variable in an enclosing function). Without it, any assignment inside the function just creates a brand-new local variable with the same name.
     </div>
 
+    <!-- 06 : Interactive scope demo -->
+    <h2 id="scope-demo">See Scope in Action</h2>
+    <p>Same idea, one more time, side by side. Run the snippet below and watch the global and local <code>score</code> report their own values.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">score</span> <span class="py-punc">=</span> <span class="py-num">100</span>
+
+<span class="py-kw">def</span> <span class="py-bi">game</span><span class="py-punc">():</span>
+    <span class="py-var">score</span> <span class="py-punc">=</span> <span class="py-num">50</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">score</span><span class="py-punc">)</span>
+
+<span class="py-bi">game</span><span class="py-punc">()</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">score</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <div class="playground">
+      <div class="playground-label">▶ Scope Demo</div>
+      <div class="playground-controls">
+        <button class="run-btn" id="scopeRunBtn">Run game()</button>
+      </div>
+      <div class="scope-grid">
+        <div class="scope-box global">
+          <span class="scope-box-label">global score</span>
+          <span class="scope-box-arrow">↓</span>
+          <span class="scope-box-value" id="scopeGlobalValue">—</span>
+        </div>
+        <div class="scope-box local">
+          <span class="scope-box-label">local score inside game()</span>
+          <span class="scope-box-arrow">↓</span>
+          <span class="scope-box-value" id="scopeLocalValue">—</span>
+        </div>
+      </div>
+      <div class="playground-output empty" id="scopeOutput">Click Run to see the output</div>
+    </div>
+
+    <p>The two variables have the same name, but they belong to different scopes.</p>
+
     <div class="section-divider"></div>
 
-    <!-- 05 -->
+    <!-- 07 -->
     <h2 id="arguments">Arguments — Call by Object Reference</h2>
     <p>When you call a function, the arguments you pass get placed into that function's local symbol table. Python's model here is sometimes called "call by object reference" — you're not copying the value itself, you're passing a reference to the same object.</p>
 
@@ -482,7 +580,7 @@ aside ul .submenu li a .dot{
 
     <div class="section-divider"></div>
 
-    <!-- 06 -->
+    <!-- 08 -->
     <h2 id="objects">Functions as Objects</h2>
     <p>A function definition just associates a name with a function object in the current symbol table. That means other names can point to the exact same function object — calling either name calls the same underlying function.</p>
 
@@ -510,7 +608,7 @@ aside ul .submenu li a .dot{
 
     <div class="section-divider"></div>
 
-    <!-- 07 -->
+    <!-- 09 -->
     <h2 id="return">Return Values and None</h2>
     <p>Every function in Python returns a value — even if you never write a <code>return</code> statement. If a function falls off the end without hitting <code>return</code>, or uses a bare <code>return</code> with no expression, it hands back <code>None</code>, Python's built-in "nothing here" value.</p>
 
@@ -531,6 +629,53 @@ aside ul .submenu li a .dot{
 
     <div class="warn-box">
       <strong>fib is a procedure, not a "function" in the math sense.</strong> It prints values but never returns any of them — so wrapping it in <code>print()</code> shows <code>None</code>, since that's what it actually returns. This surprises a lot of beginners who assume printing inside a function is the same as returning.
+    </div>
+
+    <!-- 10 : Interactive print vs return -->
+    <h2 id="print-vs-return">Try It Yourself: print() vs return</h2>
+    <p>These two functions look almost identical, but they behave very differently. Enter a number and run both to see the difference between what gets <strong>printed to the screen</strong> and what actually gets <strong>returned to the caller</strong>.</p>
+
+    <div class="vs-grid">
+      <div class="vs-card yes">
+        <div class="vs-head">print() version</div>
+        <div class="code-container" style="margin:0;">
+          <div class="code-header">
+            <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span></div>
+          </div>
+          <pre><span class="py-kw">def</span> <span class="py-bi">double</span><span class="py-punc">(</span><span class="py-var">x</span><span class="py-punc">):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">x</span> <span class="py-punc">*</span> <span class="py-num">2</span><span class="py-punc">)</span></pre>
+        </div>
+      </div>
+      <div class="vs-card no">
+        <div class="vs-head">return version</div>
+        <div class="code-container" style="margin:0;">
+          <div class="code-header">
+            <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span></div>
+          </div>
+          <pre><span class="py-kw">def</span> <span class="py-bi">double</span><span class="py-punc">(</span><span class="py-var">x</span><span class="py-punc">):</span>
+    <span class="py-kw">return</span> <span class="py-var">x</span> <span class="py-punc">*</span> <span class="py-num">2</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="playground">
+      <div class="playground-label">▶ print() vs return</div>
+      <div class="playground-controls">
+        <input type="number" class="playground-input" id="doubleInput" value="5" placeholder="Enter a number" />
+        <button class="run-btn" id="doubleRunBtn">Run both versions</button>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-col">
+          <span class="compare-col-label">print() version</span>
+          <div class="compare-row"><span>Printed to the screen</span><strong id="printDisplayed">—</strong></div>
+          <div class="compare-row"><span>Returned to the caller</span><strong id="printReturned">—</strong></div>
+        </div>
+        <div class="compare-col">
+          <span class="compare-col-label">return version</span>
+          <div class="compare-row"><span>Printed to the screen</span><strong id="returnDisplayed">—</strong></div>
+          <div class="compare-row"><span>Returned to the caller</span><strong id="returnReturned">—</strong></div>
+        </div>
+      </div>
     </div>
 
     <div class="section-divider"></div>
@@ -565,7 +710,7 @@ Functions are everywhere in real Python programs. Instead of writing the same co
 </div>
 <div class="section-divider"></div>
 
-    <!-- 08 -->
+    <!-- 12 -->
     <h2 id="fib-vs-fib2">fib() vs fib2() — Printing vs Returning</h2>
     <p>The docs follow up with a second version of the same function — one that builds and returns a list instead of printing directly. This is the difference between a function with a side effect and a function that hands back usable data.</p>
 
@@ -602,7 +747,61 @@ Functions are everywhere in real Python programs. Instead of writing the same co
 
     <div class="section-divider"></div>
 
-    <!-- 09 -->
+    <!-- 13 : Mini Project -->
+    <h2 id="miniproject">Mini Project: Student Result Calculator</h2>
+    <p>Time to combine everything from this page — defining functions, passing arguments, returning values, calling one function from another, and basic <code>if</code>/<code>elif</code>/<code>else</code> logic — into one small, useful program.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">The brief</span>
+      <p>Write three small functions that work together: one calculates an average from a list of marks, one converts that average into a letter grade, and one combines both to build a final result message for a student.</p>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">def</span> <span class="py-bi">calculate_average</span><span class="py-punc">(</span><span class="py-var">marks</span><span class="py-punc">):</span>
+    <span class="py-kw">return</span> <span class="py-bi">sum</span><span class="py-punc">(</span><span class="py-var">marks</span><span class="py-punc">)</span> <span class="py-punc">/</span> <span class="py-bi">len</span><span class="py-punc">(</span><span class="py-var">marks</span><span class="py-punc">)</span>
+
+<span class="py-kw">def</span> <span class="py-bi">get_grade</span><span class="py-punc">(</span><span class="py-var">average</span><span class="py-punc">):</span>
+    <span class="py-kw">if</span> <span class="py-var">average</span> <span class="py-punc">&gt;=</span> <span class="py-num">90</span><span class="py-punc">:</span>
+        <span class="py-kw">return</span> <span class="py-str">"A"</span>
+    <span class="py-kw">elif</span> <span class="py-var">average</span> <span class="py-punc">&gt;=</span> <span class="py-num">75</span><span class="py-punc">:</span>
+        <span class="py-kw">return</span> <span class="py-str">"B"</span>
+    <span class="py-kw">elif</span> <span class="py-var">average</span> <span class="py-punc">&gt;=</span> <span class="py-num">60</span><span class="py-punc">:</span>
+        <span class="py-kw">return</span> <span class="py-str">"C"</span>
+    <span class="py-kw">else</span><span class="py-punc">:</span>
+        <span class="py-kw">return</span> <span class="py-str">"F"</span>
+
+<span class="py-kw">def</span> <span class="py-bi">show_result</span><span class="py-punc">(</span><span class="py-var">name</span><span class="py-punc">,</span> <span class="py-var">marks</span><span class="py-punc">):</span>
+    <span class="py-var">average</span> <span class="py-punc">=</span> <span class="py-bi">calculate_average</span><span class="py-punc">(</span><span class="py-var">marks</span><span class="py-punc">)</span>
+    <span class="py-var">grade</span> <span class="py-punc">=</span> <span class="py-bi">get_grade</span><span class="py-punc">(</span><span class="py-var">average</span><span class="py-punc">)</span>
+    <span class="py-kw">return</span> <span class="py-str">f"</span><span class="py-var">{name}</span><span class="py-str">: Average = </span><span class="py-var">{average:.1f}</span><span class="py-str">, Grade = </span><span class="py-var">{grade}</span><span class="py-str">"</span></pre>
+    </div>
+
+    <div class="playground">
+      <div class="playground-label">▶ Student Result Calculator</div>
+      <div class="playground-controls">
+        <input type="text" class="playground-input" id="studentNameInput" value="Wanda" placeholder="Student name" />
+        <input type="text" class="playground-input" id="studentMarksInput" value="88, 91, 76, 84" placeholder="Marks, comma-separated" />
+        <button class="run-btn" id="calcResultBtn">Calculate Result</button>
+      </div>
+      <div class="playground-output empty" id="resultOutput">Click Calculate Result to see the output</div>
+    </div>
+
+    <h4>What you just practiced</h4>
+    <ul>
+      <li>Defining functions</li>
+      <li>Passing arguments</li>
+      <li>Returning values</li>
+      <li>Calling one function from another</li>
+      <li>Using conditions</li>
+    </ul>
+
+    <div class="section-divider"></div>
+
+    <!-- 14 -->
     <h2 id="mistakes">Common Python Function Mistakes</h2>
     <div class="mistake-list">
       <div class="mistake-item"><div class="mi-body"><strong>Assuming print() inside a function is the same as return</strong><p>A function that only prints its result returns <code>None</code>. If you need to use the value later — store it, pass it around, do math with it — the function must actually <code>return</code> it, not just print it.</p></div></div>
@@ -614,7 +813,7 @@ Functions are everywhere in real Python programs. Instead of writing the same co
 
     <div class="section-divider"></div>
 
-    <!-- 10 -->
+    <!-- 15 -->
     <h2 id="interview">Python Function Interview Questions and Answers</h2>
     <div class="iq-list">
       <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> What does a Python function return if it has no return statement?</div><div class="iq-a">It returns <code>None</code>. Every function returns something — falling off the end of the function body, or using a bare <code>return</code> with no value, both result in <code>None</code> being returned.</div></div>
@@ -627,7 +826,7 @@ Functions are everywhere in real Python programs. Instead of writing the same co
 
     <div class="section-divider"></div>
 
-    <!-- 11 -->
+    <!-- 16 -->
     <h2 id="faq">Python Functions FAQ</h2>
     <div class="faq-list">
       <div class="faq-item"><button class="faq-q" aria-expanded="false">How do you define a function in Python? <span class="faq-icon">+</span></button><div class="faq-a">Use the <code>def</code> keyword, followed by the function name and a parenthesized parameter list, ending in a colon. The function body goes on the following lines, indented consistently.</div></div>
@@ -724,6 +923,66 @@ Functions are everywhere in real Python programs. Instead of writing the same co
       document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
       if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
     });
+  });
+</script>
+
+<!-- Interactive playground logic — client-side only, no Python execution, no backend -->
+<script>
+  // 1. Function Playground — greet(name)
+  document.getElementById('greetRunBtn')?.addEventListener('click', () => {
+    const nameField = document.getElementById('greetInput');
+    const out = document.getElementById('greetOutput');
+    const name = nameField.value.trim() || 'friend';
+    out.textContent = `Hello, ${name}!`;
+    out.classList.remove('empty');
+  });
+
+  // 2. Scope demo — global vs local score
+  document.getElementById('scopeRunBtn')?.addEventListener('click', () => {
+    document.getElementById('scopeGlobalValue').textContent = '100';
+    document.getElementById('scopeLocalValue').textContent = '50';
+    const out = document.getElementById('scopeOutput');
+    out.textContent = 'Inside function → 50\nOutside function → 100';
+    out.classList.remove('empty');
+  });
+
+  // 3. print() vs return — double(x)
+  document.getElementById('doubleRunBtn')?.addEventListener('click', () => {
+    const raw = document.getElementById('doubleInput').value;
+    const n = Number(raw);
+    const val = isNaN(n) ? 0 : n;
+    const doubled = val * 2;
+    document.getElementById('printDisplayed').textContent = String(doubled);
+    document.getElementById('printReturned').textContent  = 'None';
+    document.getElementById('returnDisplayed').textContent = '(nothing)';
+    document.getElementById('returnReturned').textContent  = String(doubled);
+  });
+
+  // 4. Mini Project — Student Result Calculator
+  document.getElementById('calcResultBtn')?.addEventListener('click', () => {
+    const name = document.getElementById('studentNameInput').value.trim() || 'Student';
+    const marksRaw = document.getElementById('studentMarksInput').value;
+    const marks = marksRaw
+      .split(',')
+      .map(m => parseFloat(m.trim()))
+      .filter(m => !isNaN(m));
+    const out = document.getElementById('resultOutput');
+
+    if (marks.length === 0) {
+      out.textContent = 'Enter at least one valid mark, separated by commas.';
+      out.classList.remove('empty');
+      return;
+    }
+
+    const average = marks.reduce((sum, m) => sum + m, 0) / marks.length;
+    let grade;
+    if (average >= 90) grade = 'A';
+    else if (average >= 75) grade = 'B';
+    else if (average >= 60) grade = 'C';
+    else grade = 'F';
+
+    out.textContent = `${name}\nAverage: ${average.toFixed(1)}\nGrade: ${grade}`;
+    out.classList.remove('empty');
   });
 </script>
 </body>

@@ -39,7 +39,7 @@
     gtag('config', 'G-ESNWS8F9HE');
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -159,16 +159,31 @@
     .param-table tr:last-child td { border-bottom: none; }
     .param-table tr:hover td { background: var(--surface2); }
 
-    /* Code blocks */
-    .code-container { background: #1e1e1e; border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid var(--border); }
-    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
-    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; text-transform: uppercase; }
+    /* Code blocks — VS Code Dark+ style */
+    .code-container { border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: #2d2d2d; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
+    .code-header-left { display: flex; align-items: center; gap: 10px; }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .code-dot.red    { background: #ff5f57; }
+    .code-dot.yellow { background: #febc2e; }
+    .code-dot.green  { background: #28c840; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Fira Code', monospace; }
     .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
-    .copy-btn { background: none; border: none; color: rgba(255,255,255,0.35); padding: 2px 0; cursor: pointer; font-size: 0.75rem; font-family: 'DM Sans', sans-serif; transition: color var(--transition); position: relative; margin-left: auto; }
-    .copy-btn:hover { color: rgba(255,255,255,0.75); }
-    .tooltip { position: absolute; top: -28px; right: 0; background: var(--surface2); color: var(--text); padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .copy-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); padding: 3px 10px; cursor: pointer; font-size: 0.72rem; font-family: 'DM Sans', sans-serif; transition: all 0.2s; position: relative; border-radius: 4px; }
+    .copy-btn:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.1); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: #3a3a3a; color: #d4d4d4; padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
     .tooltip.show { opacity: 1; }
-    pre { margin: 0; padding: 18px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.875rem; line-height: 1.65; color: #d4d4d4; background: transparent; white-space: pre; tab-size: 2; }
+    pre { margin: 0; padding: 20px; overflow-x: auto; font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.88rem; line-height: 1.7; background: #1e1e1e; white-space: pre; tab-size: 4; }
+    /* VS Code Dark+ token colours */
+    .py-kw   { color: #569cd6; }
+    .py-bi   { color: #dcdcaa; }
+    .py-str  { color: #ce9178; }
+    .py-num  { color: #b5cea8; }
+    .py-cmt  { color: #6a9955; font-style: italic; }
+    .py-punc { color: #d4d4d4; }
+    .py-var  { color: #9cdcfe; }
+    .py-out  { color: #4ec9b0; }
 
     aside ul li { position: relative; }
 aside ul .submenu{
@@ -340,9 +355,10 @@ By the end of this guide, you'll know how Python evaluates conditions, when to u
     <a href="#logical"><span class="toc-num">04</span>Logical operators</a>
     <a href="#nested"><span class="toc-num">05</span>Nested if statements</a>
     <a href="#examples"><span class="toc-num">06</span>Real-world examples</a>
-    <a href="#mistakes"><span class="toc-num">07</span>Common mistakes</a>
-    <a href="#interview"><span class="toc-num">08</span>Interview questions</a>
-    <a href="#faq"><span class="toc-num">09</span>FAQs</a>
+    <a href="#miniproject"><span class="toc-num">07</span>Mini Project</a>
+    <a href="#mistakes"><span class="toc-num">08</span>Common mistakes</a>
+    <a href="#interview"><span class="toc-num">09</span>Interview questions</a>
+    <a href="#faq"><span class="toc-num">10</span>FAQs</a>
   </div>
 </nav>
 
@@ -353,21 +369,24 @@ By the end of this guide, you'll know how Python evaluates conditions, when to u
     <p>An <code>if</code> statement checks a condition. If it's <code>True</code>, the indented block runs. If it's <code>False</code>, Python skips it entirely.</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>x = int(input("Please enter an integer: "))
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">x</span> <span class="py-punc">=</span> <span class="py-bi">int</span><span class="py-punc">(</span><span class="py-bi">input</span><span class="py-punc">(</span><span class="py-str">"Please enter an integer: "</span><span class="py-punc">))</span>
 
-if x < 0:
-    x = 0
-    print('Negative changed to zero')
-elif x == 0:
-    print('Zero')
-elif x == 1:
-    print('Single')
-else:
-    print('More')
+<span class="py-kw">if</span> <span class="py-var">x</span> <span class="py-punc">&lt;</span> <span class="py-num">0</span><span class="py-punc">:</span>
+    <span class="py-var">x</span> <span class="py-punc">=</span> <span class="py-num">0</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">'Negative changed to zero'</span><span class="py-punc">)</span>
+<span class="py-kw">elif</span> <span class="py-var">x</span> <span class="py-punc">==</span> <span class="py-num">0</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">'Zero'</span><span class="py-punc">)</span>
+<span class="py-kw">elif</span> <span class="py-var">x</span> <span class="py-punc">==</span> <span class="py-num">1</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">'Single'</span><span class="py-punc">)</span>
+<span class="py-kw">else</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">'More'</span><span class="py-punc">)</span>
 
-# If you enter 42, the output is:
-# More</code></pre>
+<span class="py-cmt"># If you enter 42, the output is:</span>
+<span class="py-out"># More</span></pre>
     </div>
 
     <div class="doc-block">
@@ -382,20 +401,23 @@ else:
     <p>Python checks conditions from top to bottom and stops at the first one that's <code>True</code>. The <code>else</code> block is the fallback — it runs only if every condition above it was <code>False</code>.</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>score = 74
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">score</span> <span class="py-punc">=</span> <span class="py-num">74</span>
 
-if score >= 90:
-    print("Grade: A")
-elif score >= 75:
-    print("Grade: B")
-elif score >= 60:
-    print("Grade: C")
-else:
-    print("Grade: F")
+<span class="py-kw">if</span> <span class="py-var">score</span> <span class="py-punc">&gt;=</span> <span class="py-num">90</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Grade: A"</span><span class="py-punc">)</span>
+<span class="py-kw">elif</span> <span class="py-var">score</span> <span class="py-punc">&gt;=</span> <span class="py-num">75</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Grade: B"</span><span class="py-punc">)</span>
+<span class="py-kw">elif</span> <span class="py-var">score</span> <span class="py-punc">&gt;=</span> <span class="py-num">60</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Grade: C"</span><span class="py-punc">)</span>
+<span class="py-kw">else</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Grade: F"</span><span class="py-punc">)</span>
 
-# Output: Grade: C
-# Python stops as soon as score >= 60 is True — it doesn't check further</code></pre>
+<span class="py-cmt"># Output: Grade: C</span>
+<span class="py-cmt"># Python stops as soon as score &gt;= 60 is True — it doesn't check further</span></pre>
     </div>
 
     <div class="note-box">
@@ -406,14 +428,17 @@ else:
     <p>Both <code>elif</code> and <code>else</code> are optional. A standalone <code>if</code> is perfectly valid when you only need to act on one condition:</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>name = "Palak"
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">name</span> <span class="py-punc">=</span> <span class="py-str">"Wanda"</span>
 
-# No elif, no else — just a simple guard
-if name == "Palak":
-    print("Welcome back, Palak!")
+<span class="py-cmt"># No elif, no else — just a simple guard</span>
+<span class="py-kw">if</span> <span class="py-var">name</span> <span class="py-punc">==</span> <span class="py-str">"Wanda"</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Welcome back, Wanda!"</span><span class="py-punc">)</span>
 
-# This still works fine — if the condition is False, nothing happens</code></pre>
+<span class="py-cmt"># This still works fine — if the condition is False, nothing happens</span></pre>
     </div>
 
     <div class="section-divider"></div>
@@ -433,7 +458,7 @@ if name == "Palak":
         <tr><td><code>&lt;</code></td><td>Less than</td><td><code>x &lt; 10</code></td></tr>
         <tr><td><code>&gt;=</code></td><td>Greater than or equal to</td><td><code>x &gt;= 18</code></td></tr>
         <tr><td><code>&lt;=</code></td><td>Less than or equal to</td><td><code>x &lt;= 100</code></td></tr>
-        <tr><td><code>in</code></td><td>Value exists in a sequence</td><td><code>"a" in "Palak"</code></td></tr>
+        <tr><td><code>in</code></td><td>Value exists in a sequence</td><td><code>"a" in "Wanda"</code></td></tr>
         <tr><td><code>not in</code></td><td>Value not in a sequence</td><td><code>x not in [1, 2, 3]</code></td></tr>
         <tr><td><code>is</code></td><td>Same object in memory</td><td><code>x is None</code></td></tr>
         <tr><td><code>is not</code></td><td>Not the same object</td><td><code>x is not None</code></td></tr>
@@ -451,27 +476,30 @@ if name == "Palak":
     <p>You can combine multiple conditions in one <code>if</code> using logical operators:</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>age  = 20
-city = "Delhi"
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">age</span>  <span class="py-punc">=</span> <span class="py-num">20</span>
+<span class="py-var">city</span> <span class="py-punc">=</span> <span class="py-str">"Delhi"</span>
 
-# and — both conditions must be True
-if age >= 18 and city == "Delhi":
-    print("Eligible Delhi voter")
+<span class="py-cmt"># and — both conditions must be True</span>
+<span class="py-kw">if</span> <span class="py-var">age</span> <span class="py-punc">&gt;=</span> <span class="py-num">18</span> <span class="py-kw">and</span> <span class="py-var">city</span> <span class="py-punc">==</span> <span class="py-str">"Delhi"</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Eligible Delhi voter"</span><span class="py-punc">)</span>
 
-# or — at least one condition must be True
-if age < 13 or age > 60:
-    print("Special pricing applies")
+<span class="py-cmt"># or — at least one condition must be True</span>
+<span class="py-kw">if</span> <span class="py-var">age</span> <span class="py-punc">&lt;</span> <span class="py-num">13</span> <span class="py-kw">or</span> <span class="py-var">age</span> <span class="py-punc">&gt;</span> <span class="py-num">60</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Special pricing applies"</span><span class="py-punc">)</span>
 
-# not — flips True to False and vice versa
-logged_in = False
-if not logged_in:
-    print("Please log in first")
+<span class="py-cmt"># not — flips True to False and vice versa</span>
+<span class="py-var">logged_in</span> <span class="py-punc">=</span> <span class="py-kw">False</span>
+<span class="py-kw">if</span> <span class="py-kw">not</span> <span class="py-var">logged_in</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Please log in first"</span><span class="py-punc">)</span>
 
-# Chaining comparisons — Python allows this naturally
-marks = 75
-if 60 <= marks < 80:
-    print("B grade")   # True — marks is between 60 and 80</code></pre>
+<span class="py-cmt"># Chaining comparisons — Python allows this naturally</span>
+<span class="py-var">marks</span> <span class="py-punc">=</span> <span class="py-num">75</span>
+<span class="py-kw">if</span> <span class="py-num">60</span> <span class="py-punc">&lt;=</span> <span class="py-var">marks</span> <span class="py-punc">&lt;</span> <span class="py-num">80</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"B grade"</span><span class="py-punc">)</span>   <span class="py-cmt"># True — marks is between 60 and 80</span></pre>
     </div>
 
     <div class="section-divider"></div>
@@ -481,17 +509,20 @@ if 60 <= marks < 80:
     <p>You can put an <code>if</code> inside another <code>if</code>. Python uses indentation to know which block belongs to which condition — so get the spacing right.</p>
 
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>score    = 85
-attended = True
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">score</span>    <span class="py-punc">=</span> <span class="py-num">85</span>
+<span class="py-var">attended</span> <span class="py-punc">=</span> <span class="py-kw">True</span>
 
-if score >= 50:
-    if attended:
-        print("Passed — attendance confirmed")
-    else:
-        print("Score ok, but attendance too low")
-else:
-    print("Failed")</code></pre>
+<span class="py-kw">if</span> <span class="py-var">score</span> <span class="py-punc">&gt;=</span> <span class="py-num">50</span><span class="py-punc">:</span>
+    <span class="py-kw">if</span> <span class="py-var">attended</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Passed — attendance confirmed"</span><span class="py-punc">)</span>
+    <span class="py-kw">else</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Score ok, but attendance too low"</span><span class="py-punc">)</span>
+<span class="py-kw">else</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Failed"</span><span class="py-punc">)</span></pre>
     </div>
 
     <div class="note-box">
@@ -512,6 +543,43 @@ else:
   <li><strong>E-commerce websites:</strong> Apply discounts only if the cart value exceeds a certain amount.</li>
   <li><strong>Weather apps:</strong> Recommend carrying an umbrella if rain is expected.</li>
 </ul>
+<div class="section-divider"></div>
+
+
+<!-- Mini Project -->
+<h2 id="miniproject">Mini Project — Avengers Assemble Access Checker</h2>
+<p>Put everything from this page to work — <code>if</code>, <code>elif</code>, <code>else</code>, comparison operators, and logical operators — in one small interactive program. No AI, no libraries, just conditionals doing real decision-making.</p>
+
+<div class="meta-row">
+  <span class="meta-pill green">Beginner</span>
+  <span class="meta-pill blue">if / elif / else</span>
+  <span class="meta-pill orange">Interactive — input()</span>
+</div>
+
+<div class="doc-block">
+  <span class="doc-block-label">The brief</span>
+  <p>Build a program that decides whether someone can join the Avengers roster. Ask the user for their <strong>hero name</strong>, <strong>power level</strong> (a number from 1–100), and whether they have <strong>combat training</strong> (yes/no). Based on their answers, the program should sort them into one of four outcomes — using nothing but conditionals.</p>
+</div>
+
+<h4>Requirements</h4>
+<ul>
+  <li>Power level 90 and above → "Founding Avenger material" — no other checks needed</li>
+  <li>Power level 60–89 <em>and</em> combat training is yes → "Cleared for active duty"</li>
+  <li>Power level 60–89 but no combat training → "Needs training before deployment"</li>
+  <li>Power level below 60 → "Not ready yet — keep training"</li>
+  <li>Print a final message using the hero's name, e.g. <code>"Verdict for Wanda: Cleared for active duty"</code></li>
+</ul>
+
+<h4>Stretch goals</h4>
+<ul>
+  <li>Reject the input and ask again if power level isn't between 1 and 100</li>
+  <li>Add a fifth tier for power level exactly 100 → "Reality-bending — proceed with caution"</li>
+  <li>Use chained comparison (<code>60 <= power < 90</code>) instead of two separate conditions</li>
+</ul>
+
+<div class="note-box">
+  <strong>Think before you code:</strong> which condition should you check first — the highest tier or the lowest? Get the order wrong and a founding-tier hero might get caught by an earlier, broader check.
+</div>
 <div class="section-divider"></div>
 
     <!-- 06 -->
@@ -670,12 +738,12 @@ else:
   });
 
   document.querySelectorAll('.code-container').forEach(container => {
-    const btn  = container.querySelector('.copy-btn');
-    const tip  = container.querySelector('.tooltip');
-    const code = container.querySelector('pre code');
+    const btn = container.querySelector('.copy-btn');
+    const tip = container.querySelector('.tooltip');
+    const pre = container.querySelector('pre');
     if (!btn) return;
     btn.addEventListener('click', () => {
-      navigator.clipboard.writeText(code.innerText.trim()).then(() => {
+      navigator.clipboard.writeText(pre.innerText.trim()).then(() => {
         tip.classList.add('show');
         setTimeout(() => tip.classList.remove('show'), 2000);
       });
