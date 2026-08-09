@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="../assests/icon.png" />
-<meta name="description" content="Learn Python while loops with beginner-friendly explanations based on Python Docs 3.2, 4.4, 4.5, and 4.6. Understand while syntax, truthy and falsy values, break, continue, while-else, pass, and avoid common infinite loop mistakes." />
+<meta name="description" content="Learn Python while loops with beginner-friendly examples based on the official Python docs. Understand while loop syntax, truthy and falsy values, break, continue, while-else, pass, and how to avoid infinite loops." />
   <meta property="og:type" content="article" /> 
   <meta property="og:title" content="Python While Loops Explained (Python Docs) | Kiddo" /> 
   <meta property="og:description" content="The official Python while loop docs explained simply. Learn syntax, truthy values, comparison operators, break, continue, while-else, and pass." /> 
@@ -16,7 +16,7 @@
   <meta name="twitter:description" content="Beginner-friendly explanation of Python while loops. Syntax, truthy values, break, continue, while-else, and pass." /> 
   <meta name="twitter:image" content="https://kiddoedu.org/python/while_loop.png" /> 
   <link rel="canonical" href="https://kiddoedu.org/python/while_loop.html" /> 
- <title>Python While Loop Explained (Python Docs) | Syntax, break, continue, while-else &amp; pass</title>
+<title>Python While Loop: Syntax, break, continue, while-else &amp; pass</title>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>
@@ -127,7 +127,8 @@ aside ul .submenu li a .dot{
   height:4px;
 }
     .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
-    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
+    .toc-collapse-btn { display: none; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 3px 10px; font-size: 0.68rem; font-weight: 700; color: var(--text-muted); cursor: pointer; text-transform: none; letter-spacing: 0; }
     .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
     .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
     .toc-grid a:hover { background: var(--surface2); color: var(--text); }
@@ -139,9 +140,11 @@ aside ul .submenu li a .dot{
     .prop-card span { font-size: 0.81rem; color: var(--text-muted); line-height: 1.45; display: block; }
 
     .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
-    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
+    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
     .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
     .doc-block code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+
+    .kiddo-tag { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent); margin: 14px 0 6px; display: flex; align-items: center; gap: 6px; }
 
     .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
     .note-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
@@ -157,6 +160,7 @@ aside ul .submenu li a .dot{
     .param-table tr:last-child td { border-bottom: none; }
     .param-table tr:hover td { background: var(--surface2); }
     .param-table td:last-child { color: var(--text-muted); font-size: 0.85rem; }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
     /* VS Code dark code blocks */
     .code-container { border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
@@ -171,9 +175,10 @@ aside ul .submenu li a .dot{
     .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
     .copy-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); padding: 3px 10px; cursor: pointer; font-size: 0.72rem; font-family: 'DM Sans', sans-serif; transition: all 0.2s; position: relative; border-radius: 4px; }
     .copy-btn:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.1); }
+    .copy-btn:focus-visible, .run-btn:focus-visible, .step-btn:focus-visible, .tf-chip:focus-visible, .bc-toggle button:focus-visible, .flow-example-toggle button:focus-visible, .playground-input:focus-visible, .toc-collapse-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
     .tooltip { position: absolute; top: -28px; right: 0; background: #3a3a3a; color: #d4d4d4; padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
     .tooltip.show { opacity: 1; }
-    pre { margin: 0; padding: 20px; overflow-x: auto; font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.88rem; line-height: 1.7; background: #1e1e1e; white-space: pre; tab-size: 4; }
+    pre { margin: 0; padding: 20px; overflow-x: auto; font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.88rem; line-height: 1.7; background: #1e1e1e; white-space: pre; tab-size: 4; -webkit-overflow-scrolling: touch; }
     /* VS Code Dark+ token colours */
     .py-kw   { color: #569cd6; }
     .py-bi   { color: #dcdcaa; }
@@ -230,11 +235,93 @@ aside ul .submenu li a .dot{
     .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
     .footer-links a:hover { color: var(--accent); }
 
+    /* ===== Interactive components ===== */
+    .playground { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 24px; margin: 16px 0 26px; box-shadow: var(--shadow); }
+    .playground-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .playground-controls { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 14px; }
+    .playground-field { display: flex; flex-direction: column; gap: 5px; font-size: 0.72rem; color: var(--text-muted); font-weight: 600; }
+    .playground-input { padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); font-family: 'Fira Code', monospace; font-size: 0.88rem; transition: border-color var(--transition); width: 100px; }
+    .playground-controls .playground-input:not([id^="wl"]) { flex: 1; min-width: 140px; width: auto; }
+    .playground-input:focus { outline: none; border-color: var(--accent); }
+    .run-btn { background: var(--accent); color: #fff; border: none; padding: 11px 20px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: var(--transition); white-space: nowrap; }
+    .run-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .playground-output { background: #1e1e1e; border-radius: 8px; padding: 14px 18px; font-family: 'Fira Code', monospace; font-size: 0.88rem; color: #4ec9b0; min-height: 22px; white-space: pre-line; line-height: 1.6; overflow-x: auto; }
+    .playground-output.empty { color: rgba(255,255,255,0.3); font-style: italic; }
+
+    .stat-grid { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+    .stat-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 18px; text-align: center; flex: 1; min-width: 130px; }
+    .stat-card .stat-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); display: block; margin-bottom: 4px; }
+    .stat-card .stat-value { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--accent); }
+
+    .step-visualizer { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 20px 22px; margin: 16px 0 26px; box-shadow: var(--shadow); }
+    .step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; }
+    .step-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; }
+    .step-controls { display: flex; gap: 8px; flex-wrap: wrap; }
+    .step-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 16px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: var(--transition); }
+    .step-btn:hover:not(:disabled) { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .step-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .step-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .step-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .step-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+    .step-box-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); display: block; margin-bottom: 6px; }
+    .step-box-value { font-family: 'Fira Code', monospace; font-size: 0.95rem; }
+    .step-condition-true { color: var(--accent3); font-weight: 700; }
+    .step-condition-false { color: var(--accent); font-weight: 700; }
+
+    .tf-selector { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .tf-chip { background: var(--surface2); border: 1px solid var(--border); padding: 7px 14px; border-radius: 999px; font-family: 'Fira Code', monospace; font-size: 0.82rem; cursor: pointer; transition: var(--transition); color: var(--text); }
+    .tf-chip:hover { border-color: var(--accent); }
+    .tf-chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .tf-result { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .tf-badge { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.8rem; padding: 6px 16px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .tf-badge.truthy { background: rgba(0,184,148,0.12); color: var(--accent3); }
+    .tf-badge.falsy { background: rgba(232,108,47,0.12); color: var(--accent); }
+
+    .bc-toggle { display: flex; gap: 8px; margin-bottom: 16px; }
+    .bc-toggle button { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); font-weight: 600; font-size: 0.85rem; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: var(--transition); color: var(--text); }
+    .bc-toggle button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .bc-timeline { display: flex; gap: 6px; flex-wrap: wrap; margin: 4px 0 16px; }
+    .bc-node { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Fira Code', monospace; font-weight: 600; font-size: 0.85rem; background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted); transition: var(--transition); }
+    .bc-node.printed { background: rgba(0,184,148,0.12); border-color: rgba(0,184,148,0.3); color: var(--accent3); }
+    .bc-node.skipped { background: rgba(232,108,47,0.1); border-color: rgba(232,108,47,0.3); color: var(--accent); text-decoration: line-through; }
+    .bc-node.stopped { background: var(--surface2); border-color: var(--border); color: var(--text-muted); opacity: 0.35; }
+
+    .flow-diagram { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 6px 0 18px; font-family: 'Fira Code', monospace; font-size: 0.85rem; }
+    .flow-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 18px; text-align: center; transition: var(--transition); color: var(--text); }
+    .flow-arrow { color: var(--text-muted); opacity: 0.6; }
+    .flow-branches { display: flex; gap: 40px; margin: 6px 0; }
+    .flow-branch { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .flow-branch-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; font-family: 'DM Sans', sans-serif; }
+    .flow-box.highlight { background: rgba(232,108,47,0.1); border-color: var(--accent); color: var(--accent); font-weight: 700; }
+    .flow-box.highlight-green { background: rgba(0,184,148,0.1); border-color: var(--accent3); color: var(--accent3); font-weight: 700; }
+    .flow-example-toggle { display: flex; gap: 8px; margin-top: 4px; }
+    .flow-example-toggle button { flex: 1; padding: 9px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); font-weight: 600; font-size: 0.8rem; cursor: pointer; font-family: 'DM Sans', sans-serif; color: var(--text); transition: var(--transition); }
+    .flow-example-toggle button.active { background: var(--accent2); color: #fff; border-color: var(--accent2); }
+
+    .game-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 24px; margin: 16px 0 20px; box-shadow: var(--shadow); }
+    .game-controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+    .game-controls .playground-input { flex: 1; min-width: 140px; width: auto; }
+    .game-feedback { padding: 14px 18px; border-radius: 8px; background: var(--surface2); font-size: 0.9rem; font-weight: 600; min-height: 20px; color: var(--text); }
+    .game-feedback.too-low, .game-feedback.too-high { background: rgba(232,108,47,0.1); color: var(--accent); }
+    .game-feedback.correct { background: rgba(0,184,148,0.12); color: var(--accent3); }
+    .game-history { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+    .game-history span { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; font-family: 'Fira Code', monospace; font-size: 0.8rem; color: var(--text); }
+    .uses-panel { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .uses-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 6px 14px; font-size: 0.8rem; color: var(--text); }
+
     @media (max-width: 768px) {
       header { display: none; } .mobile-header { display: flex; }
       .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
-      aside { position: static; } .toc-grid { grid-template-columns: 1fr; }
+      aside { position: static; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .toc-collapse-btn { display: inline-block; }
+      .toc.collapsed .toc-grid { display: none; }
       .vs-grid { grid-template-columns: 1fr; } .prop-grid { grid-template-columns: 1fr 1fr; }
+      .step-grid { grid-template-columns: 1fr; }
+      .flow-branches { flex-direction: column; gap: 18px; align-items: center; }
+      .playground-controls { flex-direction: column; align-items: stretch; }
+      .playground-controls .playground-input { width: 100%; }
+      .game-controls { flex-direction: column; align-items: stretch; }
       footer { padding: 20px; } .footer-container { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 480px) { main h1 { font-size: 1.6rem; } .prop-grid { grid-template-columns: 1fr; } }
@@ -316,8 +403,8 @@ aside ul .submenu li a .dot{
     <p>Python's official tutorial doesn't have one single "while loops" chapter — it introduces <code>while</code> quietly in §3.2 with the classic Fibonacci example, then comes back to loop control in §4.4 through §4.6 while covering <code>for</code> loops too. This guide pulls every one of those pieces together into one place, focused entirely on <code>while</code>.</p>
     <p>By the end, you'll understand the Fibonacci example line by line, what Python actually considers "true" and "false," how <code>break</code>, <code>continue</code>, the <code>while...else</code> clause, and <code>pass</code> all behave inside a <code>while</code> loop — plus the small habits that prevent an accidental infinite loop.</p>
 
-    <nav class="toc" aria-label="Table of contents">
-      <div class="toc-label">In this guide</div>
+    <nav class="toc" aria-label="Table of contents" id="tocNav">
+      <div class="toc-label">In this guide <button class="toc-collapse-btn" id="tocCollapseBtn" aria-expanded="true">Hide</button></div>
       <div class="toc-grid">
         <a href="#what-is"><span class="toc-num">01</span>What is a while loop?</a>
         <a href="#fibonacci"><span class="toc-num">02</span>The Fibonacci example</a>
@@ -377,9 +464,46 @@ aside ul .submenu li a .dot{
       <div class="prop-card"><strong>Needs its own progress</strong><span>Something inside the loop must eventually make the condition false</span></div>
     </div>
 
+    <div class="note-box">
+      💡 <strong>Key idea:</strong> A while loop keeps running as long as its condition is true.
+    </div>
+
     <div class="warn-box">
       <strong>Beginner tip:</strong> Every <code>while</code> loop should have a way to stop. If the condition never becomes false — or you forget to update the variable being checked — the loop will continue forever until you interrupt the program.
     </div>
+
+    <!-- Interactive: While Loop Playground -->
+    <h2 id="while-playground">Try It Yourself: While Loop Playground</h2>
+    <p>Change the start, end, and step values below, then run the loop to see exactly what it prints — and how many times it actually executes.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">count</span> <span class="py-punc">=</span> <span class="py-num">1</span>
+
+<span class="py-kw">while</span> <span class="py-var">count</span> <span class="py-punc">&lt;=</span> <span class="py-num">3</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">count</span><span class="py-punc">)</span>
+    <span class="py-var">count</span> <span class="py-punc">+=</span> <span class="py-num">1</span></pre>
+    </div>
+
+    <div class="playground">
+      <div class="playground-label">▶ While Loop Playground</div>
+      <div class="playground-controls">
+        <label class="playground-field">Start<input type="number" class="playground-input" id="wlStart" value="1" aria-label="Start value" /></label>
+        <label class="playground-field">End<input type="number" class="playground-input" id="wlEnd" value="3" aria-label="End value" /></label>
+        <label class="playground-field">Step<input type="number" class="playground-input" id="wlStep" value="1" aria-label="Step value" /></label>
+        <button class="run-btn" id="wlRunBtn">▶ Run Loop</button>
+      </div>
+      <div class="playground-output empty" id="wlOutput" aria-live="polite">Click Run Loop to see the output</div>
+      <div class="stat-grid" id="wlStats" hidden>
+        <div class="stat-card"><span class="stat-label">Iterations</span><span class="stat-value" id="wlIterations">—</span></div>
+        <div class="stat-card"><span class="stat-label">Final count</span><span class="stat-value" id="wlFinal">—</span></div>
+      </div>
+    </div>
+
+    <p>The condition is checked before every iteration. When <code>count &lt;= end</code> becomes false, the loop stops.</p>
 
     <div class="section-divider"></div>
 
@@ -431,6 +555,29 @@ aside ul .submenu li a .dot{
 # Full time!</span></pre>
     </div>
 
+    <!-- Interactive: Fibonacci step visualizer -->
+    <h2 id="fib-visualizer">See the while Loop Step by Step</h2>
+    <p>Step through the exact same Fibonacci loop from above, one iteration at a time, and watch the condition, output, and variables change.</p>
+
+    <div class="step-visualizer">
+      <div class="step-header">
+        <span class="step-title" id="fibStepTitle">Iteration 1</span>
+        <div class="step-controls">
+          <button class="step-btn" id="fibPrevBtn" aria-label="Previous iteration">← Previous</button>
+          <button class="step-btn primary" id="fibNextBtn" aria-label="Next iteration">Next Iteration →</button>
+          <button class="step-btn" id="fibResetBtn" aria-label="Reset visualizer">Reset</button>
+        </div>
+      </div>
+      <div class="step-grid">
+        <div class="step-box"><span class="step-box-label">Condition</span><span class="step-box-value" id="fibCondition" aria-live="polite">—</span></div>
+        <div class="step-box"><span class="step-box-label">Output</span><span class="step-box-value" id="fibOutput" aria-live="polite">—</span></div>
+      </div>
+      <div class="step-box" style="margin-top:12px;">
+        <span class="step-box-label">Variables after this pass</span>
+        <span class="step-box-value" id="fibVars" style="white-space:pre-line; display:block;">—</span>
+      </div>
+    </div>
+
     <div class="section-divider"></div>
 
     <!-- 03 -->
@@ -438,10 +585,11 @@ aside ul .submenu li a .dot{
     <p>The Fibonacci example's first line, <code>a, b = 0, 1</code>, assigns both variables at once. The last line, <code>a, b = b, a+b</code>, reuses the same trick — and this is exactly what makes the classic swap-without-a-temp-variable pattern work.</p>
 
     <div class="doc-block">
-      <span class="doc-block-label">From the Python docs</span>
+      <span class="doc-block-label">📖 From the Python Docs</span>
       <p>The first line contains a multiple assignment: the variables <code>a</code> and <code>b</code> simultaneously get the new values 0 and 1. On the last line this is used again, demonstrating that the expressions on the right-hand side are all evaluated first before any of the assignments take place. The right-hand side expressions are evaluated from left to right.</p>
     </div>
 
+    <div class="kiddo-tag">🧡 Kiddo explains it</div>
     <div class="note-box">
       In <code>a, b = b, a+b</code>, Python first computes both <code>b</code> and <code>a+b</code> using the <em>old</em> values of <code>a</code> and <code>b</code> — only after both are calculated does it assign them to <code>a</code> and <code>b</code>. That ordering is exactly why this line correctly advances the Fibonacci sequence instead of corrupting it.
     </div>
@@ -453,7 +601,7 @@ aside ul .submenu li a .dot{
     <p>A <code>while</code> loop's condition doesn't have to be a plain comparison — Python is flexible about what counts as "true" here. Any non-zero number is true, zero is false. And it goes further: strings, lists, and any other sequence count too, based purely on whether they have any length at all.</p>
 
     <div class="doc-block">
-      <span class="doc-block-label">From the Python docs</span>
+      <span class="doc-block-label">📖 From the Python Docs</span>
       <p>The while loop executes as long as the condition remains true. In Python, like in C, any non-zero integer value is true; zero is false. The condition may also be a string or list value, in fact any sequence; anything with a non-zero length is true, empty sequences are false.</p>
     </div>
 
@@ -477,6 +625,28 @@ aside ul .submenu li a .dot{
 <span class="py-cmt"># Once substitutes becomes [], it's falsy — the loop stops on its own</span></pre>
     </div>
 
+    <!-- Interactive: Truthy vs Falsy -->
+    <h3 id="truthy-demo" style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; margin-top:22px; margin-bottom:10px;">Try Truthy vs Falsy</h3>
+    <p>Pick a value below to see whether Python treats it as truthy or falsy inside a <code>while</code> condition.</p>
+
+    <div class="playground">
+      <div class="playground-label">▶ Truthy vs Falsy</div>
+      <div class="tf-selector" id="tfSelector" role="group" aria-label="Choose a value to test">
+        <button class="tf-chip active" data-tf="zero">0</button>
+        <button class="tf-chip" data-tf="one">1</button>
+        <button class="tf-chip" data-tf="empty-str">""</button>
+        <button class="tf-chip" data-tf="str">"Python"</button>
+        <button class="tf-chip" data-tf="empty-list">[]</button>
+        <button class="tf-chip" data-tf="list">[1, 2, 3]</button>
+        <button class="tf-chip" data-tf="none">None</button>
+      </div>
+      <div class="tf-result">
+        <span class="step-box-label">Value: <strong id="tfValue" style="font-family:'Fira Code',monospace; color:var(--text); text-transform:none; letter-spacing:0;">0</strong></span>
+        <span class="tf-badge falsy" id="tfBadge" aria-live="polite">Falsy</span>
+      </div>
+      <p style="margin-top:10px; margin-bottom:0;" id="tfExplanation" aria-live="polite">Zero is treated as False in Python — there's nothing there for it to count as "on."</p>
+    </div>
+
     <div class="section-divider"></div>
 
     <!-- 05 -->
@@ -484,10 +654,11 @@ aside ul .submenu li a .dot{
     <p>Most <code>while</code> conditions are simple comparisons, and Python's comparison operators look exactly like the ones from C:</p>
 
     <div class="doc-block">
-      <span class="doc-block-label">From the Python docs</span>
+      <span class="doc-block-label">📖 From the Python Docs</span>
       <p>The test used in the example is a simple comparison. The standard comparison operators are written the same as in C: <code>&lt;</code> (less than), <code>&gt;</code> (greater than), <code>==</code> (equal to), <code>&lt;=</code> (less than or equal to), <code>&gt;=</code> (greater than or equal to) and <code>!=</code> (not equal to).</p>
     </div>
 
+    <div class="table-scroll">
     <table class="param-table">
       <thead><tr><th>Operator</th><th>Meaning</th></tr></thead>
       <tbody>
@@ -499,6 +670,7 @@ aside ul .submenu li a .dot{
         <tr><td><code>!=</code></td><td>Not equal to</td></tr>
       </tbody>
     </table>
+    </div>
 
     <div class="warn-box">
       <strong>Indentation groups the loop body.</strong> The docs note that indentation is Python's way of grouping statements — every line inside the loop must be indented by the same amount, or Python raises an <code>IndentationError</code>.
@@ -542,7 +714,7 @@ aside ul .submenu li a .dot{
     <p><code>break</code> exits the nearest enclosing <code>while</code> or <code>for</code> loop immediately. <code>continue</code> skips the rest of the current pass and jumps straight back to re-checking the loop's condition.</p>
 
     <div class="doc-block">
-      <span class="doc-block-label">From the Python docs</span>
+      <span class="doc-block-label">📖 From the Python Docs</span>
       <p>The break statement breaks out of the innermost enclosing for or while loop. The continue statement continues with the next iteration of the loop.</p>
     </div>
 
@@ -594,6 +766,45 @@ aside ul .submenu li a .dot{
       <strong>Update your counter before continue.</strong> Notice <code>i = i + 1</code> runs before the <code>continue</code> check above. In a <code>while</code> loop, forgetting to update your loop variable before a <code>continue</code> creates an infinite loop — <code>for</code> loops don't have this risk since the next item is handled automatically.
     </div>
 
+    <div class="note-box">
+      <strong>Remember:</strong> continue skips an iteration. break exits the loop.
+    </div>
+
+    <!-- Interactive: break vs continue -->
+    <h2 id="break-continue-demo">Try It Yourself: break vs continue</h2>
+    <p>Same loop, same starting point — only the keyword changes. Toggle between <code>continue</code> and <code>break</code> to see how differently the loop behaves once <code>i</code> reaches 3.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">i</span> <span class="py-punc">=</span> <span class="py-num">0</span>
+
+<span class="py-kw">while</span> <span class="py-var">i</span> <span class="py-punc">&lt;</span> <span class="py-num">6</span><span class="py-punc">:</span>
+    <span class="py-var">i</span> <span class="py-punc">+=</span> <span class="py-num">1</span>
+
+    <span class="py-kw">if</span> <span class="py-var">i</span> <span class="py-punc">==</span> <span class="py-num">3</span><span class="py-punc">:</span>
+        <span class="py-kw">continue</span>  <span class="py-cmt"># or: break</span>
+
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">i</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <div class="playground">
+      <div class="playground-label">▶ break vs continue</div>
+      <div class="bc-toggle" role="group" aria-label="Choose continue or break">
+        <button id="bcContinueBtn" class="active" aria-pressed="true">continue</button>
+        <button id="bcBreakBtn" aria-pressed="false">break</button>
+      </div>
+      <div class="bc-timeline" id="bcTimeline" aria-hidden="true"></div>
+      <div class="playground-output" id="bcOutput" aria-live="polite">1
+2
+4
+5
+6</div>
+      <p style="margin-top:10px; margin-bottom:0;" id="bcExplanation" aria-live="polite">When i becomes 3, continue skips the rest of that iteration and the loop moves to the next condition check.</p>
+    </div>
+
     <div class="section-divider"></div>
 
     <!-- 08 -->
@@ -601,7 +812,7 @@ aside ul .submenu li a .dot{
     <p>A <code>while</code> loop can have an <code>else</code> clause, just like a <code>for</code> loop. It runs once the loop's condition becomes false naturally — but is skipped entirely if the loop exits early via <code>break</code> (or a <code>return</code>, or a raised exception).</p>
 
     <div class="doc-block">
-      <span class="doc-block-label">From the Python docs</span>
+      <span class="doc-block-label">📖 From the Python Docs</span>
       <p>In a while loop, the else clause is executed after the loop's condition becomes false. In either kind of loop, the else clause is not executed if the loop was terminated by a break. Other ways of ending the loop early, such as a return or a raised exception, will also skip execution of the else clause.</p>
     </div>
 
@@ -635,8 +846,42 @@ aside ul .submenu li a .dot{
 9 equals 3 * 3</span></pre>
     </div>
 
+    <div class="kiddo-tag">🧡 Kiddo explains it</div>
     <div class="note-box">
       <strong>One way to think about it:</strong> imagine the <code>else</code> paired with the <code>if</code> inside the loop, running a sequence like if/if/if/else. Each time the inner <code>if</code> fires, a <code>break</code> happens. If the condition is never true across the whole loop, the <code>else</code> outside the loop finally runs.
+    </div>
+
+    <!-- Interactive: while-else flow -->
+    <h3 id="while-else-flow" style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; margin-top:22px; margin-bottom:10px;">See while...else Visually</h3>
+    <p>The <code>else</code> block is easy to misread as "runs if the condition is false" — it's really "runs once the loop finishes without a break." Toggle between the two example endings below to see the difference.</p>
+
+    <div class="playground">
+      <div class="playground-label">▶ while...else Flow</div>
+      <div class="flow-diagram">
+        <div class="flow-box">while condition</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">True?</div>
+        <div class="flow-branches">
+          <div class="flow-branch">
+            <span class="flow-branch-label">Yes</span>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box" id="flowLoopBox">Loop body</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box" id="flowBreakBox">break?</div>
+          </div>
+          <div class="flow-branch">
+            <span class="flow-branch-label">No</span>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box" id="flowElseBox">else</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-example-toggle" role="group" aria-label="Choose an example">
+        <button id="flowNormalBtn" class="active" aria-pressed="true">Loop finishes normally</button>
+        <button id="flowBreakExampleBtn" aria-pressed="false">Loop exits with break</button>
+      </div>
+      <p style="margin-top:12px; margin-bottom:0;" id="flowExplanation" aria-live="polite">The condition eventually becomes false on its own — no break was ever hit, so <strong>else runs</strong>.</p>
     </div>
 
     <div class="section-divider"></div>
@@ -646,7 +891,7 @@ aside ul .submenu li a .dot{
     <p><code>pass</code> does nothing at all. It exists because Python requires a statement anywhere a block is opened — a completely empty <code>while</code> body, function, or class would otherwise be a syntax error.</p>
 
     <div class="doc-block">
-      <span class="doc-block-label">From the Python docs</span>
+      <span class="doc-block-label">📖 From the Python Docs</span>
       <p>The pass statement does nothing. It can be used when a statement is required syntactically but the program requires no action.</p>
     </div>
 
@@ -673,8 +918,52 @@ aside ul .submenu li a .dot{
     <span class="py-kw">pass</span>   <span class="py-cmt"># Remember to implement this!</span></pre>
     </div>
 
+    <div class="kiddo-tag">🧡 Kiddo explains it</div>
     <div class="note-box">
       For the placeholder-function case, many people write the ellipsis literal <code>...</code> instead of <code>pass</code>. It has no special meaning to Python and isn't part of the language definition — but it's used conventionally as a placeholder body just the same.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- Mini Project -->
+    <h2 id="miniproject">Mini Project: Number Guessing Game</h2>
+    <p>Put <code>while</code>, conditions, and repeated execution to work in a tiny number-guessing game — the same structure as the code below, simulated safely right here in the browser.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">secret</span> <span class="py-punc">=</span> <span class="py-num">7</span>
+<span class="py-var">guess</span> <span class="py-punc">=</span> <span class="py-num">0</span>
+
+<span class="py-kw">while</span> <span class="py-var">guess</span> <span class="py-punc">!=</span> <span class="py-var">secret</span><span class="py-punc">:</span>
+    <span class="py-var">guess</span> <span class="py-punc">=</span> <span class="py-bi">int</span><span class="py-punc">(</span><span class="py-bi">input</span><span class="py-punc">(</span><span class="py-str">"Guess the number: "</span><span class="py-punc">))</span>
+
+    <span class="py-kw">if</span> <span class="py-var">guess</span> <span class="py-punc">&lt;</span> <span class="py-var">secret</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Too low!"</span><span class="py-punc">)</span>
+    <span class="py-kw">elif</span> <span class="py-var">guess</span> <span class="py-punc">&gt;</span> <span class="py-var">secret</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Too high!"</span><span class="py-punc">)</span>
+    <span class="py-kw">else</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Correct!"</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <div class="game-panel">
+      <div class="playground-label">▶ Number Guessing Game</div>
+      <div class="game-controls">
+        <input type="number" class="playground-input" id="gameGuessInput" placeholder="Enter a guess (1–20)" aria-label="Your guess" />
+        <button class="run-btn" id="gameGuessBtn">Guess</button>
+        <button class="step-btn" id="gameResetBtn">Reset Game</button>
+      </div>
+      <div class="game-feedback" id="gameFeedback" aria-live="polite">Enter a number between 1 and 20 and hit Guess.</div>
+      <div class="game-history" id="gameHistory" aria-hidden="true"></div>
+      <div class="uses-panel">
+        <span class="uses-item">✓ while loop</span>
+        <span class="uses-item">✓ conditions</span>
+        <span class="uses-item">✓ variables</span>
+        <span class="uses-item">✓ user input</span>
+        <span class="uses-item">✓ repeated execution</span>
+      </div>
     </div>
 
     <div class="section-divider"></div>
@@ -804,6 +1093,251 @@ aside ul .submenu li a .dot{
       if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
     });
   });
+
+  // Collapsible TOC on mobile
+  const tocBtn = document.getElementById('tocCollapseBtn');
+  const tocNav = document.getElementById('tocNav');
+  tocBtn?.addEventListener('click', () => {
+    const collapsed = tocNav.classList.toggle('collapsed');
+    tocBtn.textContent = collapsed ? 'Show' : 'Hide';
+    tocBtn.setAttribute('aria-expanded', String(!collapsed));
+  });
+</script>
+
+<!-- Interactive learning components — vanilla JS, client-side only, no backend, no arbitrary code execution -->
+<script>
+  // 1. While Loop Playground
+  document.getElementById('wlRunBtn')?.addEventListener('click', () => {
+    const start = Number(document.getElementById('wlStart').value);
+    const end   = Number(document.getElementById('wlEnd').value);
+    const step  = Number(document.getElementById('wlStep').value);
+    const out   = document.getElementById('wlOutput');
+    const statsBox = document.getElementById('wlStats');
+
+    if (isNaN(start) || isNaN(end) || isNaN(step) || step === 0) {
+      out.textContent = 'Enter valid numbers, and make sure step is not 0.';
+      out.classList.add('empty');
+      statsBox.hidden = true;
+      return;
+    }
+
+    const lines = [];
+    let count = start;
+    let iterations = 0;
+    const MAX_ITER = 1000;
+
+    while ((step > 0 ? count <= end : count >= end) && iterations < MAX_ITER) {
+      lines.push(String(count));
+      count += step;
+      iterations++;
+    }
+    if (iterations === MAX_ITER) lines.push('… stopped after 1000 iterations (safety limit)');
+
+    out.textContent = lines.length ? lines.join('\n') : '(loop never ran — condition was false immediately)';
+    out.classList.remove('empty');
+    document.getElementById('wlIterations').textContent = String(iterations);
+    document.getElementById('wlFinal').textContent = String(count);
+    statsBox.hidden = false;
+  });
+
+  // 2. Fibonacci step-by-step visualizer
+  function computeFibSteps() {
+    const steps = [];
+    let a = 0, b = 1, iter = 0;
+    while (a < 10) {
+      iter++;
+      const newA = b, newB = a + b;
+      steps.push({ iteration: iter, conditionText: `${a} < 10`, result: true, output: a, aAfter: newA, bAfter: newB });
+      a = newA; b = newB;
+    }
+    steps.push({ iteration: iter + 1, conditionText: `${a} < 10`, result: false, stopped: true });
+    return steps;
+  }
+  const fibSteps = computeFibSteps();
+  let fibIndex = 0;
+
+  function renderFibStep() {
+    const step = fibSteps[fibIndex];
+    const title = document.getElementById('fibStepTitle');
+    const condEl = document.getElementById('fibCondition');
+    const outEl = document.getElementById('fibOutput');
+    const varsEl = document.getElementById('fibVars');
+    const prevBtn = document.getElementById('fibPrevBtn');
+    const nextBtn = document.getElementById('fibNextBtn');
+    if (!title) return;
+
+    title.textContent = `Iteration ${step.iteration}`;
+    if (step.stopped) {
+      condEl.innerHTML = `${step.conditionText} <span class="step-condition-false">✗</span>`;
+      outEl.textContent = 'Loop stopped.';
+      varsEl.textContent = '—';
+    } else {
+      condEl.innerHTML = `${step.conditionText} <span class="step-condition-true">✓</span>`;
+      outEl.textContent = String(step.output);
+      varsEl.textContent = `a = ${step.aAfter}\nb = ${step.bAfter}`;
+    }
+    prevBtn.disabled = fibIndex === 0;
+    nextBtn.disabled = fibIndex === fibSteps.length - 1;
+  }
+  document.getElementById('fibNextBtn')?.addEventListener('click', () => { if (fibIndex < fibSteps.length - 1) { fibIndex++; renderFibStep(); } });
+  document.getElementById('fibPrevBtn')?.addEventListener('click', () => { if (fibIndex > 0) { fibIndex--; renderFibStep(); } });
+  document.getElementById('fibResetBtn')?.addEventListener('click', () => { fibIndex = 0; renderFibStep(); });
+  renderFibStep();
+
+  // 3. Truthy vs Falsy demo
+  const tfData = {
+    'zero':       { value: '0',           truthy: false, explanation: 'Zero is treated as False in Python — there\u2019s nothing there for it to count as "on."' },
+    'one':        { value: '1',           truthy: true,  explanation: 'Any non-zero number is treated as True.' },
+    'empty-str':  { value: '""',          truthy: false, explanation: 'An empty string has no characters, so Python treats it as False in a condition.' },
+    'str':        { value: '"Python"',    truthy: true,  explanation: 'A non-empty string has characters, so Python treats it as True.' },
+    'empty-list': { value: '[]',          truthy: false, explanation: 'An empty list has no elements, so Python treats it as False in a condition.' },
+    'list':       { value: '[1, 2, 3]',   truthy: true,  explanation: 'A non-empty list has elements, so Python treats it as True.' },
+    'none':       { value: 'None',        truthy: false, explanation: 'None represents "nothing" — Python always treats it as False.' }
+  };
+  document.querySelectorAll('.tf-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.tf-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const data = tfData[chip.dataset.tf];
+      document.getElementById('tfValue').textContent = data.value;
+      const badge = document.getElementById('tfBadge');
+      badge.textContent = data.truthy ? 'Truthy' : 'Falsy';
+      badge.className = 'tf-badge ' + (data.truthy ? 'truthy' : 'falsy');
+      document.getElementById('tfExplanation').textContent = data.explanation;
+    });
+  });
+
+  // 4. break vs continue demo
+  function renderBC(mode) {
+    const timeline = document.getElementById('bcTimeline');
+    const out = document.getElementById('bcOutput');
+    const explanation = document.getElementById('bcExplanation');
+    if (!timeline) return;
+    timeline.innerHTML = '';
+    const values = [1, 2, 3, 4, 5, 6];
+
+    values.forEach(v => {
+      const node = document.createElement('div');
+      node.className = 'bc-node';
+      node.textContent = v;
+      if (mode === 'continue') {
+        node.classList.add(v === 3 ? 'skipped' : 'printed');
+      } else {
+        if (v < 3) node.classList.add('printed');
+        else if (v === 3) node.classList.add('skipped');
+        else node.classList.add('stopped');
+      }
+      timeline.appendChild(node);
+    });
+
+    if (mode === 'continue') {
+      out.textContent = '1\n2\n4\n5\n6';
+      explanation.textContent = 'When i becomes 3, continue skips the rest of that iteration and the loop moves to the next condition check.';
+    } else {
+      out.textContent = '1\n2';
+      explanation.textContent = 'When i becomes 3, break immediately exits the loop.';
+    }
+  }
+  document.getElementById('bcContinueBtn')?.addEventListener('click', function () {
+    this.classList.add('active'); this.setAttribute('aria-pressed', 'true');
+    const b = document.getElementById('bcBreakBtn'); b.classList.remove('active'); b.setAttribute('aria-pressed', 'false');
+    renderBC('continue');
+  });
+  document.getElementById('bcBreakBtn')?.addEventListener('click', function () {
+    this.classList.add('active'); this.setAttribute('aria-pressed', 'true');
+    const c = document.getElementById('bcContinueBtn'); c.classList.remove('active'); c.setAttribute('aria-pressed', 'false');
+    renderBC('break');
+  });
+  renderBC('continue');
+
+  // 5. while...else flow diagram
+  function renderFlow(mode) {
+    const loopBox = document.getElementById('flowLoopBox');
+    const breakBox = document.getElementById('flowBreakBox');
+    const elseBox = document.getElementById('flowElseBox');
+    const explanation = document.getElementById('flowExplanation');
+    if (!loopBox) return;
+    [loopBox, breakBox, elseBox].forEach(b => b.classList.remove('highlight', 'highlight-green'));
+
+    if (mode === 'normal') {
+      elseBox.classList.add('highlight-green');
+      explanation.innerHTML = 'The condition eventually becomes false on its own — no break was ever hit, so <strong>else runs</strong>.';
+    } else {
+      breakBox.classList.add('highlight');
+      explanation.innerHTML = '<code>break</code> exits the loop early — so <strong>else is skipped entirely</strong>.';
+    }
+  }
+  document.getElementById('flowNormalBtn')?.addEventListener('click', function () {
+    this.classList.add('active'); this.setAttribute('aria-pressed', 'true');
+    const b = document.getElementById('flowBreakExampleBtn'); b.classList.remove('active'); b.setAttribute('aria-pressed', 'false');
+    renderFlow('normal');
+  });
+  document.getElementById('flowBreakExampleBtn')?.addEventListener('click', function () {
+    this.classList.add('active'); this.setAttribute('aria-pressed', 'true');
+    const n = document.getElementById('flowNormalBtn'); n.classList.remove('active'); n.setAttribute('aria-pressed', 'false');
+    renderFlow('break');
+  });
+  renderFlow('normal');
+
+  // 6. Mini Project — Number Guessing Game
+  const SECRET_NUMBER = 7;
+  let gameHistory = [];
+  let gameWon = false;
+
+  function renderGameHistory() {
+    const el = document.getElementById('gameHistory');
+    if (!el) return;
+    el.innerHTML = '';
+    gameHistory.forEach(g => {
+      const span = document.createElement('span');
+      span.textContent = g;
+      el.appendChild(span);
+    });
+  }
+
+  document.getElementById('gameGuessBtn')?.addEventListener('click', () => {
+    if (gameWon) return;
+    const input = document.getElementById('gameGuessInput');
+    const feedback = document.getElementById('gameFeedback');
+    const guess = Number(input.value);
+
+    if (input.value.trim() === '' || isNaN(guess)) {
+      feedback.textContent = 'Enter a valid number first.';
+      feedback.className = 'game-feedback';
+      return;
+    }
+
+    gameHistory.push(guess);
+    renderGameHistory();
+
+    if (guess < SECRET_NUMBER) {
+      feedback.textContent = 'Too low! Try again.';
+      feedback.className = 'game-feedback too-low';
+    } else if (guess > SECRET_NUMBER) {
+      feedback.textContent = 'Too high! Try again.';
+      feedback.className = 'game-feedback too-high';
+    } else {
+      feedback.textContent = '🎉 Correct! You found the number.';
+      feedback.className = 'game-feedback correct';
+      gameWon = true;
+    }
+    input.value = '';
+  });
+
+  document.getElementById('gameResetBtn')?.addEventListener('click', () => {
+    gameHistory = [];
+    gameWon = false;
+    renderGameHistory();
+    const feedback = document.getElementById('gameFeedback');
+    feedback.textContent = 'Enter a number between 1 and 20 and hit Guess.';
+    feedback.className = 'game-feedback';
+    const input = document.getElementById('gameGuessInput');
+    if (input) input.value = '';
+  });
+
+  // Allow Enter key to submit in playgrounds
+  document.getElementById('wlStep')?.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('wlRunBtn').click(); });
+  document.getElementById('gameGuessInput')?.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('gameGuessBtn').click(); });
 </script>
 </body>
 </html>
