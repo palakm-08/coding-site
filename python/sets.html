@@ -387,7 +387,13 @@ aside ul .submenu li a .dot{
     </li>
     <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
     <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
-    <li><a href="../python/sets.html" class="active"><span class="dot"></span>Sets</a></li>
+    <li>
+      <a href="../python/sets.html" class="active"><span class="dot"></span>Sets</a>
+      <ul class="submenu">
+        <li><a href="../python/sets.html" class="active"><span class="dot"></span>Basics</a></li>
+        <li><a href="../python/advanced/sets-adv.html"><span class="dot"></span>Advanced</a></li>
+      </ul>
+    </li>
     <li><a href="../python/looping-techniques.html"><span class="dot"></span>Looping Techniques</a></li>
     <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
   </ul>
@@ -405,7 +411,7 @@ aside ul .submenu li a .dot{
       5.4 Sets
     </div>
 
-<h1>Python Sets Documentation Explained (Python Docs 5.4) | set(), Union, Intersection, Difference, Comprehensions &amp; Beginner Guide</h1>
+<h1>Python Sets Documentation Explained (Python Docs 5.4) | set(), Union, Intersection, Difference &amp; Beginner Guide</h1>
 
     <div class="doc-ref">
       📖 Based on <a href="https://docs.python.org/3/tutorial/datastructures.html#sets" target="_blank" rel="noopener">Python 3 official docs 5.4</a> — explained like a friend, with extra examples added
@@ -416,11 +422,12 @@ aside ul .submenu li a .dot{
       <span class="meta-pill green">Beginner</span>
       <span class="meta-pill blue">Data Structures</span>
       <span class="meta-pill orange">Official Docs</span>
-      <span class="date-badge">Updated June 2026</span>
+      <span class="meta-pill" style="font-weight:700;">Part 1 · Basics</span>
+      <span class="date-badge">Updated August 2026</span>
     </div>
 
     <p>
-This page explains the official Python Sets documentation (Python Docs 5.4) in simple, beginner-friendly language. Learn how Python sets work, how they automatically remove duplicates, and how to use membership testing, union, intersection, difference, symmetric difference, set comprehensions, and frozensets with practical examples and real-world use cases.
+This page explains the official Python Sets documentation (Python Docs 5.4) in simple, beginner-friendly language. Learn how Python sets work, how they automatically remove duplicates, and how to use membership testing and the four main set operations, with practical examples and real-world use cases.
 </p>
 
 <p>
@@ -428,29 +435,34 @@ If the official Python documentation feels too technical, this guide breaks down
 </p>
 
 <p>
-By the end of this guide, you'll understand when to use sets, how set operations work, how to write set comprehensions, how to improve lookup performance using sets, and how sets compare to lists and dictionaries in real Python projects.
+By the end of this guide, you'll understand when to use sets, how set operations work, how to improve lookup performance using sets, and how sets compare to lists and dictionaries in real Python projects.
+</p>
+
+<p>
+This guide is split into two parts so it's easier to work through. <strong>Part 1 (this page)</strong> covers everything you need to start using sets confidently — creation, membership testing, the four main set operations, comparison methods, looping, and when to reach for a set. <strong>Part 2</strong> then goes deeper into <a href="../python/advanced/sets-adv.html>set comprehensions, frozenset, and time complexity</a> once you're comfortable with the basics.
 </p>
 
     <nav class="toc" aria-label="Table of contents">
-      <div class="toc-label">In this guide</div>
+      <div class="toc-label">In this guide — Part 1: Basics</div>
       <div class="toc-grid">
         <a href="#what-is"><span class="toc-num">01</span>What is a Python set?</a>
         <a href="#create"><span class="toc-num">02</span>Creating a set</a>
         <a href="#membership"><span class="toc-num">03</span>Membership testing</a>
         <a href="#operations"><span class="toc-num">04</span>Set operations</a>
         <a href="#methods"><span class="toc-num">05</span>All set methods</a>
-        <a href="#comprehensions"><span class="toc-num">06</span>Set comprehensions</a>
-        <a href="#looping"><span class="toc-num">07</span>Looping through a set</a>
-        <a href="#set-vs-list"><span class="toc-num">08</span>Set vs list vs dict</a>
-<a href="#when-use"><span class="toc-num">09</span>When should you use a set?</a>
-<a href="#frozenset"><span class="toc-num">10</span>frozenset explained</a>
-<a href="#complexity"><span class="toc-num">11</span>Time complexity</a>
-<a href="#mistakes"><span class="toc-num">12</span>Common mistakes</a>
-<a href="#interview"><span class="toc-num">13</span>Interview questions</a>
-<a href="#project"><span class="toc-num">14</span>Mini project</a>
-<a href="#faq"><span class="toc-num">15</span>FAQs</a>
+        <a href="#looping"><span class="toc-num">06</span>Looping through a set</a>
+        <a href="#set-vs-list"><span class="toc-num">07</span>Set vs list vs dict</a>
+        <a href="#when-use"><span class="toc-num">08</span>When should you use a set?</a>
+        <a href="#mistakes"><span class="toc-num">09</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">10</span>Interview questions</a>
+        <a href="#project"><span class="toc-num">11</span>Mini project</a>
+        <a href="#faq"><span class="toc-num">12</span>FAQs</a>
       </div>
     </nav>
+
+    <div class="callout">
+      <strong>Continue to Part 2 →</strong> Once you're comfortable with the basics on this page, <a href="../python/sets-advanced.html">head to Part 2: Advanced Concepts</a> for set comprehensions, frozenset, and time complexity — plus its own interview questions, FAQ, and mini project.
+    </div>
 
     <div class="section-divider"></div>
 
@@ -469,11 +481,11 @@ By the end of this guide, you'll understand when to use sets, how set operations
       </div>
       <div class="prop-card">
         <strong>Fast membership test</strong>
-        <span><code>x in s</code> is O(1) — instant, regardless of how large the set is</span>
+        <span><code>x in s</code> is O(1) on average, making membership checks very fast even for large sets</span>
       </div>
       <div class="prop-card">
         <strong>Mutable</strong>
-        <span>Add and remove elements after creation — but elements themselves must be immutable</span>
+        <span>Add and remove elements after creation — but the elements themselves must be hashable</span>
       </div>
     </div>
 
@@ -523,16 +535,14 @@ By the end of this guide, you'll understand when to use sets, how set operations
 
     <!-- 03 -->
     <h2 id="membership">Python Set Membership Testing — in and not in</h2>
-    <p>Checking if something is in a set is O(1) — instant — no matter how many elements are in it. This is one of the two things sets are built for (the other being set operations). Compare this to a list, where <code>x in list</code> has to scan every element:</p>
+    <p><code>x in s</code> is O(1) on average, making membership checks very fast even as the set grows. This is one of the two things sets are built for (the other being set operations). Compare this to a list, where <code>x in list</code> may need to scan each element in the worst case:</p>
 
     <div class="code-container">
       <div class="code-header">
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-var">basket</span> <span class="py-punc">= {</span><span class="py-str">'apple'</span><span class="py-punc">,</span> <span class="py-str">'orange'</span><span class="py-punc">,</span> <span class="py-str">'apple'</span><span class="py-punc">,</span> <span class="py-str">'pear'</span><span class="py-punc">,</span> <span class="py-str">'orange'</span><span class="py-punc">,</span> <span class="py-str">'banana'</span><span class="py-punc">}</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">basket</span><span class="py-punc">)</span>
-<span class="py-out"># {'orange', 'banana', 'pear', 'apple'}  ← duplicates auto-removed</span>
+      <pre><span class="py-var">basket</span> <span class="py-punc">= {</span><span class="py-str">'apple'</span><span class="py-punc">,</span> <span class="py-str">'orange'</span><span class="py-punc">,</span> <span class="py-str">'pear'</span><span class="py-punc">,</span> <span class="py-str">'banana'</span><span class="py-punc">}</span>
 
 <span class="py-str">'orange'</span> <span class="py-kw">in</span> <span class="py-var">basket</span>      <span class="py-cmt"># True</span>
 <span class="py-str">'crabgrass'</span> <span class="py-kw">in</span> <span class="py-var">basket</span>   <span class="py-cmt"># False</span></pre>
@@ -544,13 +554,13 @@ By the end of this guide, you'll understand when to use sets, how set operations
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-cmt"># With a list — Python scans every element (O(n))</span>
+      <pre><span class="py-cmt"># With a list — membership testing is O(n) in the worst case</span>
 <span class="py-var">banned_list</span> <span class="py-punc">= [</span><span class="py-str">'spam@bad.com'</span><span class="py-punc">,</span> <span class="py-str">'hack@evil.com'</span><span class="py-punc">,</span> <span class="py-str">'phish@fake.com'</span><span class="py-punc">]</span>
 <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">'spam@bad.com'</span> <span class="py-kw">in</span> <span class="py-var">banned_list</span><span class="py-punc">)</span>   <span class="py-cmt"># True, but slow on large lists</span>
 
-<span class="py-cmt"># With a set — instant lookup (O(1))</span>
+<span class="py-cmt"># With a set — O(1) on average lookup</span>
 <span class="py-var">banned_set</span> <span class="py-punc">= {</span><span class="py-str">'spam@bad.com'</span><span class="py-punc">,</span> <span class="py-str">'hack@evil.com'</span><span class="py-punc">,</span> <span class="py-str">'phish@fake.com'</span><span class="py-punc">}</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">'spam@bad.com'</span> <span class="py-kw">in</span> <span class="py-var">banned_set</span><span class="py-punc">)</span>    <span class="py-cmt"># True, and instant</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">'spam@bad.com'</span> <span class="py-kw">in</span> <span class="py-var">banned_set</span><span class="py-punc">)</span>    <span class="py-cmt"># True, and very fast</span>
 
 <span class="py-cmt"># Real-world: checking usernames against a blocklist</span>
 <span class="py-var">blocked</span> <span class="py-punc">= {</span><span class="py-str">'admin'</span><span class="py-punc">,</span> <span class="py-str">'root'</span><span class="py-punc">,</span> <span class="py-str">'system'</span><span class="py-punc">,</span> <span class="py-str">'null'</span><span class="py-punc">,</span> <span class="py-str">'undefined'</span><span class="py-punc">}</span>
@@ -564,7 +574,7 @@ By the end of this guide, you'll understand when to use sets, how set operations
 
     <!-- 04 -->
     <h2 id="operations">Python Set Operations — Union, Intersection, Difference, Symmetric Difference</h2>
-    <p>This is where sets get genuinely powerful. The Python docs demonstrate all four operations with letters from two words — here's the exact example, plus real-world uses:</p>
+    <p>This is where sets get genuinely powerful. The Python documentation demonstrates all four operations with letters from two words — here's the example used in the docs, plus real-world uses:</p>
 
     <div class="code-container">
       <div class="code-header">
@@ -652,16 +662,16 @@ By the end of this guide, you'll understand when to use sets, how set operations
         <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
         <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
       </div>
-      <pre><span class="py-var">python_class</span> <span class="py-punc">= {</span><span class="py-str">"Palak"</span><span class="py-punc">,</span> <span class="py-str">"Rohan"</span><span class="py-punc">,</span> <span class="py-str">"Sneha"</span><span class="py-punc">,</span> <span class="py-str">"Arjun"</span><span class="py-punc">,</span> <span class="py-str">"Mehak"</span><span class="py-punc">}</span>
-<span class="py-var">web_class</span>    <span class="py-punc">= {</span><span class="py-str">"Rohan"</span><span class="py-punc">,</span> <span class="py-str">"Mehak"</span><span class="py-punc">,</span> <span class="py-str">"Priya"</span><span class="py-punc">,</span> <span class="py-str">"Dev"</span><span class="py-punc">}</span>
+      <pre><span class="py-var">python_class</span> <span class="py-punc">= {</span><span class="py-str">"Peter"</span><span class="py-punc">,</span> <span class="py-str">"Harry"</span><span class="py-punc">,</span> <span class="py-str">"Lily"</span><span class="py-punc">,</span> <span class="py-str">"Vin"</span><span class="py-punc">,</span> <span class="py-str">"MJ"</span><span class="py-punc">}</span>
+<span class="py-var">web_class</span>    <span class="py-punc">= {</span><span class="py-str">"Harry"</span><span class="py-punc">,</span> <span class="py-str">"MJ"</span><span class="py-punc">,</span> <span class="py-str">"Gwen"</span><span class="py-punc">,</span> <span class="py-str">"Miles"</span><span class="py-punc">}</span>
 
 <span class="py-cmt"># Students in both</span>
 <span class="py-var">both</span> <span class="py-punc">=</span> <span class="py-var">python_class</span> <span class="py-punc">&amp;</span> <span class="py-var">web_class</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"In both classes: </span><span class="py-var">{both}</span><span class="py-str">"</span><span class="py-punc">)</span>        <span class="py-cmt"># {'Rohan', 'Mehak'}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"In both classes: </span><span class="py-var">{both}</span><span class="py-str">"</span><span class="py-punc">)</span>        <span class="py-cmt"># {'Harry', 'MJ'}</span>
 
 <span class="py-cmt"># Students in Python but not web</span>
 <span class="py-var">only_python</span> <span class="py-punc">=</span> <span class="py-var">python_class</span> <span class="py-punc">-</span> <span class="py-var">web_class</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Python only: </span><span class="py-var">{only_python}</span><span class="py-str">"</span><span class="py-punc">)</span>     <span class="py-cmt"># {'Palak', 'Sneha', 'Arjun'}</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Python only: </span><span class="py-var">{only_python}</span><span class="py-str">"</span><span class="py-punc">)</span>     <span class="py-cmt"># {'Peter', 'Lily', 'Vin'}</span>
 
 <span class="py-cmt"># All students enrolled in anything</span>
 <span class="py-var">all_students</span> <span class="py-punc">=</span> <span class="py-var">python_class</span> <span class="py-punc">|</span> <span class="py-var">web_class</span>
@@ -675,7 +685,7 @@ By the end of this guide, you'll understand when to use sets, how set operations
     <div class="section-divider"></div>
 
     <!-- 05 -->
-    <h2 id="methods">Python Set Methods Cheat Sheet</h2>
+    <h2 id="methods">Python Set Methods & Operators Cheat Sheet</h2>
 
     <table class="param-table">
       <thead>
@@ -695,7 +705,7 @@ By the end of this guide, you'll understand when to use sets, how set operations
         <tr><td><code>s.issubset(t)</code></td><td>True if every element of s is in t</td><td>bool</td></tr>
         <tr><td><code>s.issuperset(t)</code></td><td>True if s contains every element of t</td><td>bool</td></tr>
         <tr><td><code>s.isdisjoint(t)</code></td><td>True if s and t share no elements</td><td>bool</td></tr>
-        <tr><td><code>x in s</code></td><td>True if x is in the set (O(1))</td><td>bool</td></tr>
+        <tr><td><code>x in s</code></td><td>True if x is in the set (O(1) on average)</td><td>bool</td></tr>
         <tr><td><code>x not in s</code></td><td>True if x is NOT in the set</td><td>bool</td></tr>
         <tr><td><code>len(s)</code></td><td>Number of elements in the set</td><td>int</td></tr>
       </tbody>
@@ -704,62 +714,8 @@ By the end of this guide, you'll understand when to use sets, how set operations
     <div class="section-divider"></div>
 
     <!-- 06 -->
-    <h2 id="comprehensions">Python Set Comprehensions Explained</h2>
-    <p>Set comprehensions create a set from any expression — in one line. They work exactly like list comprehensions but produce a set instead, which means duplicates vanish automatically. The Python docs show this example directly:</p>
-
-    <div class="code-container">
-      <div class="code-header">
-        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
-        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-      </div>
-      <pre><span class="py-cmt"># From the Python docs §5.4</span>
-<span class="py-var">a</span> <span class="py-punc">= {</span><span class="py-var">x</span> <span class="py-kw">for</span> <span class="py-var">x</span> <span class="py-kw">in</span> <span class="py-str">'abracadabra'</span> <span class="py-kw">if</span> <span class="py-var">x</span> <span class="py-kw">not</span> <span class="py-kw">in</span> <span class="py-str">'abc'</span><span class="py-punc">}</span>
-<span class="py-var">a</span>
-<span class="py-out"># {'r', 'd'}</span></pre>
-    </div>
-
-    <div class="doc-block">
-      <span class="doc-block-label">From the Python docs</span>
-      <p>Similarly to list comprehensions, set comprehensions are also supported: <code>{x for x in 'abracadabra' if x not in 'abc'}</code> gives <code>{'r', 'd'}</code>.</p>
-    </div>
-
-    <h4>Kiddo extras — more set comprehension patterns</h4>
-    <div class="code-container">
-      <div class="code-header">
-        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
-        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-      </div>
-      <pre><span class="py-cmt"># Syntax: {expression for item in iterable if condition}</span>
-
-<span class="py-cmt"># 1 — Unique squares (duplicates in input get merged)</span>
-<span class="py-var">nums</span> <span class="py-punc">= [</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">,</span> <span class="py-num">3</span><span class="py-punc">,</span> <span class="py-num">3</span><span class="py-punc">,</span> <span class="py-num">3</span><span class="py-punc">,</span> <span class="py-num">4</span><span class="py-punc">]</span>
-<span class="py-var">squares</span> <span class="py-punc">= {</span><span class="py-var">n</span><span class="py-punc">**</span><span class="py-num">2</span> <span class="py-kw">for</span> <span class="py-var">n</span> <span class="py-kw">in</span> <span class="py-var">nums</span><span class="py-punc">}</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">squares</span><span class="py-punc">)</span>   <span class="py-cmt"># {1, 4, 9, 16}</span>
-
-<span class="py-cmt"># 2 — Unique first letters from a word list</span>
-<span class="py-var">words</span> <span class="py-punc">= [</span><span class="py-str">"apple"</span><span class="py-punc">,</span> <span class="py-str">"avocado"</span><span class="py-punc">,</span> <span class="py-str">"banana"</span><span class="py-punc">,</span> <span class="py-str">"blueberry"</span><span class="py-punc">,</span> <span class="py-str">"cherry"</span><span class="py-punc">]</span>
-<span class="py-var">first_letters</span> <span class="py-punc">= {</span><span class="py-var">word</span><span class="py-punc">[</span><span class="py-num">0</span><span class="py-punc">]</span> <span class="py-kw">for</span> <span class="py-var">word</span> <span class="py-kw">in</span> <span class="py-var">words</span><span class="py-punc">}</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">first_letters</span><span class="py-punc">)</span>   <span class="py-cmt"># {'a', 'b', 'c'}</span>
-
-<span class="py-cmt"># 3 — Even numbers only</span>
-<span class="py-var">evens</span> <span class="py-punc">= {</span><span class="py-var">n</span> <span class="py-kw">for</span> <span class="py-var">n</span> <span class="py-kw">in</span> <span class="py-bi">range</span><span class="py-punc">(</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">11</span><span class="py-punc">)</span> <span class="py-kw">if</span> <span class="py-var">n</span> <span class="py-punc">%</span> <span class="py-num">2</span> <span class="py-punc">==</span> <span class="py-num">0</span><span class="py-punc">}</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">evens</span><span class="py-punc">)</span>   <span class="py-cmt"># {2, 4, 6, 8, 10}</span>
-
-<span class="py-cmt"># 4 — Unique domain names from an email list</span>
-<span class="py-var">emails</span> <span class="py-punc">= [</span><span class="py-str">"user@gmail.com"</span><span class="py-punc">,</span> <span class="py-str">"admin@yahoo.com"</span><span class="py-punc">,</span> <span class="py-str">"palak@gmail.com"</span><span class="py-punc">,</span> <span class="py-str">"test@gmail.com"</span><span class="py-punc">]</span>
-<span class="py-var">domains</span> <span class="py-punc">= {</span><span class="py-var">email</span><span class="py-punc">.</span><span class="py-bi">split</span><span class="py-punc">(</span><span class="py-str">'@'</span><span class="py-punc">)[</span><span class="py-num">1</span><span class="py-punc">]</span> <span class="py-kw">for</span> <span class="py-var">email</span> <span class="py-kw">in</span> <span class="py-var">emails</span><span class="py-punc">}</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">domains</span><span class="py-punc">)</span>   <span class="py-cmt"># {'gmail.com', 'yahoo.com'}</span></pre>
-    </div>
-
-    <div class="callout">
-      <strong>Comprehension vs constructor:</strong> <code>{x for x in items}</code> is a set comprehension. <code>set(items)</code> creates a set directly. For simple deduplication, <code>set(items)</code> is cleaner. Use comprehensions when you need to transform or filter while building the set.
-    </div>
-
-    <div class="section-divider"></div>
-
-    <!-- 07 -->
     <h2 id="looping">Looping Through a Python Set</h2>
-    <p>You can loop over a set, but the order is not guaranteed. If you need consistent output, convert to a sorted list first:</p>
+    <p>Sets are unordered collections — they don't support indexing or guarantee a meaningful iteration order, so you shouldn't rely on the order elements appear in when looping. If you need consistent output, convert to a sorted list first:</p>
 
     <div class="code-container">
       <div class="code-header">
@@ -789,12 +745,12 @@ By the end of this guide, you'll understand when to use sets, how set operations
     </div>
 
     <div class="note-box">
-      <strong>No indexing on sets.</strong> <code>fruits[0]</code> throws a <code>TypeError: 'set' object is not subscriptable</code>. If you need indexing, convert first: <code>list(fruits)[0]</code> — but remember the order isn't guaranteed until you sort.
+      <strong>No indexing on sets.</strong> <code>fruits[0]</code> throws a <code>TypeError: 'set' object is not subscriptable</code>. If you need indexing, convert the set to a list — but sort it first if you need a predictable order, e.g. <code>sorted(fruits)[0]</code>, since <code>list(fruits)[0]</code> on its own isn't a reliable way to get a particular element.
     </div>
 
     <div class="section-divider"></div>
 
-    <!-- 08 -->
+    <!-- 07 -->
     <h2 id="vs">Python Set vs List vs Dict — Which One to Use?</h2>
 
     <div class="vs-grid">
@@ -802,7 +758,7 @@ By the end of this guide, you'll understand when to use sets, how set operations
         <div class="vs-head">Use a set when</div>
         <ul>
           <li>You need to remove duplicates from a collection</li>
-          <li>You need fast membership checking (O(1))</li>
+          <li>You need fast membership checking (O(1) on average)</li>
           <li>You're doing union, intersection, or difference operations</li>
           <li>Order doesn't matter and values are unique</li>
           <li>Building a blocklist, allowlist, or seen-items tracker</li>
@@ -815,7 +771,7 @@ By the end of this guide, you'll understand when to use sets, how set operations
           <li>You need duplicates — use a list</li>
           <li>You need key-value mapping — use a dict</li>
           <li>You need indexing like <code>s[0]</code> — use a list</li>
-          <li>Elements must be mutable (lists, dicts) — can't go in a set</li>
+          <li>Elements must be hashable — mutable objects like lists and dicts can't go in a set</li>
         </ul>
       </div>
     </div>
@@ -828,9 +784,9 @@ By the end of this guide, you'll understand when to use sets, how set operations
         <tr><td>Duplicates</td><td>Not allowed</td><td>Allowed</td><td>Keys are unique</td></tr>
         <tr><td>Order</td><td>Unordered</td><td>Ordered</td><td>Insertion order (3.7+)</td></tr>
         <tr><td>Indexing</td><td>No</td><td>Yes</td><td>By key</td></tr>
-        <tr><td>Membership test</td><td>O(1) — instant</td><td>O(n) — scans all</td><td>O(1) by key</td></tr>
+        <tr><td>Membership test</td><td>O(1) on average</td><td>O(n) — scans all</td><td>O(1) on average by key</td></tr>
         <tr><td>Set operations</td><td>Yes</td><td>No</td><td>No</td></tr>
-        <tr><td>Element type</td><td>Immutable only</td><td>Any</td><td>Keys immutable, values any</td></tr>
+        <tr><td>Element type</td><td>Hashable only</td><td>Any</td><td>Keys hashable, values any</td></tr>
       </tbody>
     </table>
 
@@ -853,70 +809,7 @@ By the end of this guide, you'll understand when to use sets, how set operations
 </section>
     <div class="section-divider"></div>
 
-    <section id="frozenset">
-<h2>Python frozenset Explained</h2>
-
-<p>A <code>frozenset</code> is an immutable version of a set. Once created, elements cannot be added, removed, or changed.</p>
-
-<div class="code-container">
-  <div class="code-header">
-    <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
-    <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
-  </div>
-  <pre><span class="py-var">colors</span> <span class="py-punc">=</span> <span class="py-bi">frozenset</span><span class="py-punc">({</span><span class="py-str">"red"</span><span class="py-punc">,</span> <span class="py-str">"green"</span><span class="py-punc">,</span> <span class="py-str">"blue"</span><span class="py-punc">})</span>
-<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">colors</span><span class="py-punc">)</span></pre>
-</div>
-
-<p>Because frozensets are immutable, they can be used as dictionary keys or elements inside another set.</p>
-
-<div class="note-box">
-<strong>Python Docs Tip:</strong> Use a normal set when data changes. Use a frozenset when the collection should never change.
-</div>
-</section>
-<div class="section-divider"></div>
-
-<section id="complexity">
-<h2>Python Set Time Complexity</h2>
-
-<table class="param-table">
-<thead>
-<tr>
-<th>Operation</th>
-<th>Average Complexity</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>x in s</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>s.add(x)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>s.remove(x)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>s | t</td>
-<td>O(n + m)</td>
-</tr>
-<tr>
-<td>s &amp; t</td>
-<td>O(min(n,m))</td>
-</tr>
-<tr>
-<td>s - t</td>
-<td>O(n)</td>
-</tr>
-</tbody>
-</table>
-
-<p>This speed is why sets are commonly used for lookups, filtering, duplicate removal, and recommendation systems.</p>
-</section>
-<div class="section-divider"></div>
-    <!-- 09 -->
+    <!-- 08 -->
     <h2 id="mistakes">Common Python Set Mistakes</h2>
 
     <div class="mistake-list">
@@ -940,8 +833,8 @@ By the end of this guide, you'll understand when to use sets, how set operations
       </div>
       <div class="mistake-item">
         <div class="mi-body">
-          <strong>Adding a mutable element (list or dict)</strong>
-          <p><code>s.add([1, 2])</code> throws <code>TypeError: unhashable type: 'list'</code>. Set elements must be immutable. Use a tuple instead: <code>s.add((1, 2))</code>.</p>
+          <strong>Adding an unhashable element (list or dict)</strong>
+          <p><code>s.add([1, 2])</code> throws <code>TypeError: unhashable type: 'list'</code>. Set elements must be hashable. Use a tuple instead: <code>s.add((1, 2))</code>.</p>
         </div>
       </div>
       <div class="mistake-item">
@@ -958,26 +851,26 @@ By the end of this guide, you'll understand when to use sets, how set operations
       </div>
       <div class="mistake-item">
         <div class="mi-body">
-          <strong>Forgetting the fastest deduplication trick</strong>
-          <p><code>unique = list(set(my_list))</code> removes duplicates in one line. Just note that order is not preserved — if order matters, use <code>list(dict.fromkeys(my_list))</code> instead.</p>
+          <strong>Forgetting the simple deduplication trick</strong>
+          <p>A simple way to remove duplicates is <code>list(set(my_list))</code>. However, this does not preserve the original order. If order matters, use <code>list(dict.fromkeys(my_list))</code> instead.</p>
         </div>
       </div>
     </div>
 
     <div class="section-divider"></div>
 
-    <!-- 10 -->
+    <!-- 09 -->
     <h2 id="interview">Python Set Interview Questions and Answers</h2>
     <p>These come up regularly in Python interviews — from beginner screens to technical rounds:</p>
 
     <div class="iq-list">
       <div class="iq-item">
         <div class="iq-q"><span class="iq-badge">Q1</span> What is a Python set and how is it different from a list?</div>
-        <div class="iq-a">A set is an unordered collection with no duplicate elements. A list is ordered and allows duplicates. Sets support O(1) membership testing and mathematical set operations. Lists support indexing and ordering. Use a set when uniqueness and fast lookups matter; use a list when order and duplicates matter.</div>
+        <div class="iq-a">A set is an unordered collection with no duplicate elements. A list is ordered and allows duplicates. Sets support O(1)-on-average membership testing and mathematical set operations. Lists support indexing and ordering. Use a set when uniqueness and fast lookups matter; use a list when order and duplicates matter.</div>
       </div>
       <div class="iq-item">
         <div class="iq-q"><span class="iq-badge">Q2</span> How do you remove duplicates from a list in Python?</div>
-        <div class="iq-a">Convert to a set and back: <code>unique = list(set(my_list))</code>. This is O(n) and the fastest approach. Caveat: insertion order is not preserved. If you need to keep order, use <code>list(dict.fromkeys(my_list))</code> instead.</div>
+        <div class="iq-a">Converting a list to a set and back is a simple O(n)-average approach for removing duplicates. However, it does not preserve the original order. If order matters, use <code>list(dict.fromkeys(my_list))</code>.</div>
       </div>
       <div class="iq-item">
         <div class="iq-q"><span class="iq-badge">Q3</span> What are the four set operations and what do they do?</div>
@@ -985,7 +878,7 @@ By the end of this guide, you'll understand when to use sets, how set operations
       </div>
       <div class="iq-item">
         <div class="iq-q"><span class="iq-badge">Q4</span> Why can't you use a list as a set element?</div>
-        <div class="iq-a">Set elements must be hashable (immutable). Lists are mutable — their contents can change, so Python can't compute a stable hash for them. Use a tuple instead. The same rule applies to using lists as dictionary keys.</div>
+        <div class="iq-a">Set elements must be hashable. Lists are mutable — their contents can change, so Python can't compute a stable hash for them. Use a tuple instead. The same rule applies to using lists as dictionary keys.</div>
       </div>
       <div class="iq-item">
         <div class="iq-q"><span class="iq-badge">Q5</span> What is the difference between remove() and discard() in Python sets?</div>
@@ -1003,31 +896,31 @@ By the end of this guide, you'll understand when to use sets, how set operations
 
     <div class="section-divider"></div>
 
-    <!-- 11 -->
-    <h2 id="project">Mini Project — Build a Student Interest Matcher Using Python Sets</h2>
-    <p>A classic set use case — given a group of people and their interests, find who shares what. This is essentially how recommendation engines work at a basic level, and it's a great way to see all four set operations in action together.</p>
+    <!-- 10 -->
+    <h2 id="project">Mini Project — Build a Spider-Verse Powers Matcher Using Python Sets</h2>
+    <p>A classic set use case — given a group of Spider-People and their powers, find who shares what. This is essentially how recommendation engines work at a basic level, and it's a great way to see all four set operations in action together.</p>
 
     <div class="checklist">
-      <div class="check-item"><div><strong>Build the data</strong><p>Store each person's interests as a set. Sets are perfect here — someone can't be interested in "Python" twice, and membership checks are instant.</p></div></div>
-      <div class="check-item"><div><strong>Find common interests</strong><p>Use intersection (<code>&amp;</code>) to find what two people share. The result is a set of topics both people have listed.</p></div></div>
-      <div class="check-item"><div><strong>Find unique interests</strong><p>Use difference (<code>-</code>) to find what one person has that the other doesn't — useful for spotting gaps in someone's knowledge.</p></div></div>
-      <div class="check-item"><div><strong>Recommend new interests</strong><p>Use symmetric difference (<code>^</code>) to surface everything that isn't shared — things each person hasn't discovered from the other's list.</p></div></div>
-      <div class="check-item"><div><strong>Find the most popular interest</strong><p>Loop over all sets, take a union to get every unique topic, then use membership testing to count how many people listed each one.</p></div></div>
+      <div class="check-item"><div><strong>Build the data</strong><p>Store each Spider-Person's powers as a set. Sets are perfect here — a hero can't have "wall-crawling" listed twice, and membership checks are very fast.</p></div></div>
+      <div class="check-item"><div><strong>Find shared powers</strong><p>Use intersection (<code>&amp;</code>) to find what two Spider-People have in common. The result is a set of abilities both of them share.</p></div></div>
+      <div class="check-item"><div><strong>Find unique powers</strong><p>Use difference (<code>-</code>) to find what one Spider-Person has that the other doesn't — useful for spotting what makes each version of Spider-Man stand out.</p></div></div>
+      <div class="check-item"><div><strong>Discover complementary powers</strong><p>Use symmetric difference (<code>^</code>) to surface everything that isn't shared — the abilities each hero hasn't picked up from the other, across every season of the Spider-Verse.</p></div></div>
+      <div class="check-item"><div><strong>Find the most common power</strong><p>Loop over every hero's power set, take a union to get every unique ability across the Spider-Verse, then use membership testing to count how many heroes share each one.</p></div></div>
     </div>
 
     <div class="callout">
-      <strong>Level up:</strong> add a similarity score — <code>len(a &amp; b) / len(a | b)</code> — called the Jaccard similarity. It gives a 0–1 score of how similar two people's interest sets are. This exact formula is what basic recommendation algorithms use to match users.
+      <strong>Level up:</strong> add a similarity score — <code>len(a &amp; b) / len(a | b)</code> — called the Jaccard similarity. It gives a 0–1 score of how similar two Spider-People's power sets are. This exact formula is what basic recommendation algorithms use to match users.
     </div>
 
     <div class="section-divider"></div>
 
-    <!-- 12 -->
+    <!-- 11 -->
     <h2 id="faq">Python Sets FAQ</h2>
 
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What is a set in Python? <span class="faq-icon">+</span></button>
-        <div class="faq-a">A Python set is an unordered collection with no duplicate elements. Defined with curly braces <code>{1, 2, 3}</code> or <code>set()</code>, it is mutable, unordered, and supports fast O(1) membership testing and mathematical set operations like union, intersection, and difference. Elements must be immutable.</div>
+        <div class="faq-a">A Python set is an unordered collection with no duplicate elements. Defined with curly braces <code>{1, 2, 3}</code> or <code>set()</code>, it is mutable, unordered, and supports O(1)-on-average membership testing and mathematical set operations like union, intersection, and difference. Elements must be hashable.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How do you create an empty set in Python? <span class="faq-icon">+</span></button>
@@ -1038,20 +931,16 @@ By the end of this guide, you'll understand when to use sets, how set operations
         <div class="faq-a">Union (<code>a | b</code>): everything in either set. Intersection (<code>a &amp; b</code>): only what both share. Difference (<code>a - b</code>): what's in a but not in b. Symmetric difference (<code>a ^ b</code>): what's in a or b but not both — everything except the overlap.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">What is a set comprehension in Python? <span class="faq-icon">+</span></button>
-        <div class="faq-a">A set comprehension creates a set from an expression in one line. From the Python docs: <code>{x for x in 'abracadabra' if x not in 'abc'}</code> gives <code>{'r', 'd'}</code>. Same syntax as list comprehensions but with curly braces, and duplicates are removed automatically.</div>
-      </div>
-      <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Can Python sets contain duplicate elements? <span class="faq-icon">+</span></button>
         <div class="faq-a">No — sets automatically remove duplicates. <code>{'apple', 'orange', 'apple'}</code> becomes <code>{'apple', 'orange'}</code>. This is the whole point of using a set for deduplication tasks.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What types can be stored in a Python set? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Set elements must be immutable (hashable) — strings, numbers, tuples containing only immutable items. Lists, dicts, and other sets cannot be stored because they are mutable. Adding a list throws <code>TypeError: unhashable type: 'list'</code>.</div>
+        <div class="faq-a">Set elements must be hashable — strings, numbers, and tuples containing only hashable items all work. Lists, dicts, and other sets cannot be stored because they are mutable and unhashable. Adding a list throws <code>TypeError: unhashable type: 'list'</code>.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How is a Python set different from a list? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Sets are unordered (no index), contain no duplicates, and support set math. Lists maintain order, allow duplicates, and support indexing. Membership testing is O(1) in a set vs O(n) in a list. Use a set for uniqueness and fast lookup; use a list when order and position matter.</div>
+        <div class="faq-a">Sets are unordered (no index), contain no duplicates, and support set math. Lists maintain order, allow duplicates, and support indexing. Membership testing is O(1) on average in a set vs O(n) in a list. Use a set for uniqueness and fast lookup; use a list when order and position matter.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What is the difference between remove() and discard() in Python sets? <span class="faq-icon">+</span></button>
@@ -1063,33 +952,22 @@ By the end of this guide, you'll understand when to use sets, how set operations
 </div>
 
 <div class="faq-item">
-  <button class="faq-q" aria-expanded="false">Can Python sets contain duplicate values? <span class="faq-icon">+</span></button>
-  <div class="faq-a">No. Sets automatically remove duplicate elements. For example, <code>{1, 2, 2, 3}</code> becomes <code>{1, 2, 3}</code>. This makes sets useful for removing duplicates from lists.</div>
-</div>
-
-<div class="faq-item">
   <button class="faq-q" aria-expanded="false">How do you remove duplicates from a list using a set? <span class="faq-icon">+</span></button>
   <div class="faq-a">Convert the list to a set and then back to a list: <code>list(set(my_list))</code>. This is one of the fastest ways to remove duplicates, though it does not preserve the original order.</div>
-</div>
-
-<div class="faq-item">
-  <button class="faq-q" aria-expanded="false">What is a frozenset in Python? <span class="faq-icon">+</span></button>
-  <div class="faq-a">A <code>frozenset</code> is an immutable version of a set. After creation, you cannot add or remove elements. Because it is immutable, a frozenset can be used as a dictionary key or as an element inside another set.</div>
 </div>
 
 <div class="faq-item">
   <button class="faq-q" aria-expanded="false">When should I use a set instead of a list? <span class="faq-icon">+</span></button>
   <div class="faq-a">Use a set when you need unique values, fast membership testing with <code>in</code>, or set operations such as union and intersection. Use a list when order, indexing, or duplicate values are important.</div>
 </div>
-
-<div class="faq-item">
-  <button class="faq-q" aria-expanded="false">Can a Python set contain lists or dictionaries? <span class="faq-icon">+</span></button>
-  <div class="faq-a">No. Lists and dictionaries are mutable and therefore unhashable, so they cannot be stored inside a set. Use immutable types such as strings, numbers, tuples, or frozensets instead.</div>
-</div>
       
     </div>
 
     <div class="section-divider"></div>
+
+    <div class="callout">
+      <strong>Ready to go deeper? →</strong> <a href="../python/advanced/sets-adv.html">Part 2: Advanced Concepts</a> covers set comprehensions, frozenset, and time complexity — plus its own interview questions, FAQ (including "What is a set comprehension?", "What is a frozenset?", and "Can a set contain lists or dictionaries?"), and mini project.
+    </div>
 
     <div class="author-strip">
       <div class="author-avatar">K</div>
@@ -1101,6 +979,7 @@ By the end of this guide, you'll understand when to use sets, how set operations
 
     <div class="callout">
       <strong>More Python topics →</strong><br><br>
+      <a href="../python/advanced/sets-adv.html">Sets — Advanced (Part 2)</a> ·
       <a href="../python/functions.html">Functions (4.8)</a> ·
       <a href="../python/while_loop.html">While Loop</a> ·
       <a href="../python/for_loop.html">For Loop</a> ·
@@ -1122,7 +1001,7 @@ By the end of this guide, you'll understand when to use sets, how set operations
 
 <footer>
   <div class="footer-container">
-    <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
+    <p>© 2026 Kiddo. Built with ♥ for curious minds.</p>
     <div class="footer-links">
       <a href="../info/privacy.html">Privacy</a>
       <a href="../info/terms.html">Terms</a>
