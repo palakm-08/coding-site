@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="../assests/icon.png" />
+
+<meta name="description" content="Python String Methods explained for beginners (Python Docs) — Part 1: Basics. Learn changing case (capitalize, lower, upper, title), checking string content (isalpha, isdigit, isnumeric), finding and counting text (find, index, count), prefixes and suffixes (startswith, endswith), and basic string cleaning (strip, lstrip, rstrip) with examples, interview questions, and a mini project." />
+<meta name="keywords" content="Python String Methods, Python Docs String Methods, str.capitalize, str.lower, str.upper, str.title, str.isalpha, str.isdigit, str.find, str.index, str.count, str.startswith, str.endswith, str.strip, Python Interview Questions, Python Documentation Explained">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Python String Methods Explained (Python Docs) | Part 1: Basics" />
+<meta property="og:description" content="Learn Python string methods the easy way — changing case, checking content, finding and counting text, prefixes/suffixes, and cleaning strings, with examples and interview questions." />
+<meta property="og:url" content="https://kiddoedu.org/python/strings.html" />
+<meta property="og:site_name" content="Kiddo" />
+<meta property="og:image" content="https://kiddoedu.org/python/strings.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Python String Methods Explained (Python Docs) | Part 1: Basics" />
+<meta name="twitter:description" content="Python string methods explained for beginners — changing case, checking content, finding/counting text, prefixes/suffixes, and cleaning strings." />
+<meta name="twitter:image" content="https://kiddoedu.org/python/strings.png" />
+<title>Python String Methods Explained (Python Docs) | Part 1: Basics — Case, Content, Find, Strip &amp; More</title>
+
+<link rel="canonical" href="https://kiddoedu.org/python/strings.html" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Python String Methods Explained (Python Docs) | Part 1: Basics",
+  "description": "Beginner-friendly explanation of Python string methods — changing case, checking string content, finding and counting text, prefixes and suffixes, and basic string cleaning, with examples, interview questions, and a mini project.",
+  "keywords": [
+    "Python String Methods",
+    "Python Docs String Methods",
+    "str.capitalize",
+    "str.lower",
+    "str.upper",
+    "str.title",
+    "str.isalpha",
+    "str.isdigit",
+    "str.find",
+    "str.index",
+    "str.count",
+    "str.startswith",
+    "str.endswith",
+    "str.strip",
+    "Python Interview Questions",
+    "Python Documentation Explained"
+  ],
+  "url": "https://kiddoedu.org/python/strings.html",
+  "datePublished": "2025-01-01",
+  "dateModified": "2026-08-15",
+  "author": {
+    "@type": "Person",
+    "name": "Palak Mishra"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kiddo",
+    "url": "https://kiddoedu.org"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://kiddoedu.org/python/strings.html"
+  }
+}
+</script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ESNWS8F9HE');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 4px 24px rgba(0,0,0,0.07);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    body.dark {
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
+      --border: rgba(255,255,255,0.07);
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 999; width: 0%; transition: width 0.1s linear; }
+
+    header { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark header { background: rgba(15,14,12,0.82); }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
+    .logo span em { font-style: normal; color: var(--accent); }
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
+    nav a:hover { color: var(--text); background: var(--surface2); }
+    .theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background var(--transition), transform var(--transition); margin-left: 8px; }
+    .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
+
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 20px; height: var(--header-h); background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark .mobile-header { background: rgba(15,14,12,0.82); }
+    .mobile-right { display: flex; align-items: center; gap: 8px; }
+    .hamburger { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; position: relative; }
+    .menu-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); padding: 8px; min-width: 160px; flex-direction: column; gap: 2px; }
+    .menu-dropdown.open { display: flex; }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
+    .menu-dropdown a:hover { background: var(--surface2); }
+
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+
+    aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px); }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    aside ul li a { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.4; }
+    aside ul li a:hover { background: var(--surface2); color: var(--text); }
+    aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; margin-top: 6px; }
+
+    main { min-width: 0; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { opacity: 0.4; }
+    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
+    .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
+    .meta-pill.blue { background: rgba(61,90,254,0.08); color: var(--accent2); border-color: rgba(61,90,254,0.2); }
+    .meta-pill.orange { background: rgba(232,108,47,0.08); color: var(--accent); border-color: rgba(232,108,47,0.2); }
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
+
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+    .doc-ref { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; }
+    .doc-ref a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .doc-ref a:hover { text-decoration: underline; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-top: 24px; margin-bottom: 10px; color: var(--text); }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 18px; margin-bottom: 8px; color: var(--text-muted); }
+    main p { font-size: 0.95rem; line-height: 1.78; color: var(--text); margin-bottom: 14px; }
+    main code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
+    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
+
+    /* TOC */
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
+    .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
+    .toc-grid a:hover { background: var(--surface2); color: var(--text); }
+    .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
+
+    /* Prop grid */
+    .prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0 24px; }
+    .prop-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
+    .prop-card strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 4px; }
+    .prop-card span { font-size: 0.81rem; color: var(--text-muted); line-height: 1.45; display: block; }
+
+    /* Doc block */
+    .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
+    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
+    .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
+    .doc-block code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+
+    /* Warning box */
+    .warn-box { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.2); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .warn-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Note box */
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .note-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Reference table */
+    .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 26px; font-size: 0.875rem; }
+    .param-table th { text-align: left; padding: 8px 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+    .param-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); line-height: 1.5; vertical-align: top; }
+    .param-table tr:last-child td { border-bottom: none; }
+    .param-table tr:hover td { background: var(--surface2); }
+    .param-table td:last-child { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* VS Code dark code blocks */
+    .code-container { border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: #2d2d2d; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
+    .code-header-left { display: flex; align-items: center; gap: 10px; }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .code-dot.red    { background: #ff5f57; }
+    .code-dot.yellow { background: #febc2e; }
+    .code-dot.green  { background: #28c840; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Fira Code', monospace; }
+    .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
+    .copy-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); padding: 3px 10px; cursor: pointer; font-size: 0.72rem; font-family: 'DM Sans', sans-serif; transition: all 0.2s; position: relative; border-radius: 4px; }
+    .copy-btn:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.1); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: #3a3a3a; color: #d4d4d4; padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .tooltip.show { opacity: 1; }
+    pre { margin: 0; padding: 20px; overflow-x: auto; font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.88rem; line-height: 1.7; background: #1e1e1e; white-space: pre; tab-size: 4; }
+    /* VS Code Dark+ token colours */
+    .py-kw   { color: #569cd6; }
+    .py-bi   { color: #dcdcaa; }
+    .py-str  { color: #ce9178; }
+    .py-num  { color: #b5cea8; }
+    .py-cmt  { color: #6a9955; font-style: italic; }
+    .py-punc { color: #d4d4d4; }
+    .py-var  { color: #9cdcfe; }
+    .py-out  { color: #4ec9b0; }
+
+    /* Callout */
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
+    .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .callout a:hover { text-decoration: underline; }
+
+    aside ul li { position: relative; }
+aside ul .submenu{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  margin:2px 0 2px 14px;
+  padding-left:10px;
+  border-left:1px solid var(--border);
+}
+aside ul .submenu li a{
+  font-size:0.8rem;
+  padding:6px 10px;
+}
+aside ul .submenu li a .dot{
+  width:4px;
+  height:4px;
+}
+    /* Mistake list */
+    .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 26px; }
+    .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
+    .mi-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
+    .mi-body p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+    .mi-body code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Interview Qs */
+    .iq-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+    .iq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .iq-q { padding: 14px 18px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
+    .iq-badge { background: rgba(232,108,47,0.1); color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; padding: 2px 8px; flex-shrink: 0; margin-top: 2px; }
+    .iq-a { padding: 0 18px 14px 18px; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+    .iq-a code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Checklist */
+    .checklist { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+    .check-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; }
+    .check-item div strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.87rem; display: block; margin-bottom: 2px; }
+    .check-item div p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+
+    /* FAQ accordion */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 18px 0; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; padding: 14px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
+    .faq-a.open { max-height: 280px; padding: 2px 18px 15px; }
+    .faq-a code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Author strip */
+    .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .author-info { font-size: 0.85rem; line-height: 1.5; }
+    .author-info strong { font-weight: 600; display: block; }
+    .author-info span { color: var(--text-muted); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+    .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      header { display: none; }
+      .mobile-header { display: flex; }
+      .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
+      aside { position: static; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .prop-grid { grid-template-columns: 1fr 1fr; }
+      footer { padding: 20px; }
+      .footer-container { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) { main h1 { font-size: 1.6rem; } .prop-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../info/about.html">About</a>
+    <a href="../info/contact.html">Contact</a>
+    <button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button>
+  </nav>
+</header>
+
+<div class="mobile-header">
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <div class="mobile-right">
+    <button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button>
+    <button class="hamburger" id="hamburgerBtn">☰
+      <div class="menu-dropdown" id="menuDropdown">
+        <a href="../index.html">Home</a>
+        <a href="../info/about.html">About</a>
+        <a href="../info/contact.html">Contact</a>
+      </div>
+    </button>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <aside>
+  <div class="aside-label">Python Topics</div>
+  <ul>
+    <li><a href="../python/py-intro.html"><span class="dot"></span>Introduction</a></li>
+    <li><a href="../python/user_input.html"><span class="dot"></span>User Input</a></li>
+    <li>
+      <a href="../python/strings.html" class="active"><span class="dot"></span>Strings</a>
+      <ul class="submenu">
+        <li><a href="../python/strings.html" class="active"><span class="dot"></span>Basics</a></li>
+        <li><a href="../python/strings-advanced.html"><span class="dot"></span>Advanced</a></li>
+      </ul>
+    </li>
+    <li><a href="../python/if_statements.html"><span class="dot"></span>If Statements</a></li>
+    <li><a href="../python/for_loop.html"><span class="dot"></span>For Loop</a></li>
+    <li>
+      <a href="../python/functions.html"><span class="dot"></span>Functions</a>
+      <ul class="submenu">
+        <li><a href="../python/default-arguments.html"><span class="dot"></span>Default Argument Values</a></li>
+        <li><a href="../python/keyword-arguments.html"><span class="dot"></span>Keyword Arguments</a></li>
+        <li><a href="../python/special-parameters.html"><span class="dot"></span>Special Parameters</a></li>
+        <li><a href="../python/arbitrary-argument-lists.html"><span class="dot"></span>Arbitrary Argument Lists</a></li>
+        <li><a href="../python/lambda-functions.html"><span class="dot"></span>Lambda Functions</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="../python/list.html"><span class="dot"></span>Lists</a>
+      <ul class="submenu">
+        <li><a href="../python/list-stack-queue.html"><span class="dot"></span>Stack &amp; Queue</a></li>
+        <li><a href="../python/list-comp.html"><span class="dot"></span>List Comprehension</a></li>
+        <li><a href="../python/nested-list-comp.html"><span class="dot"></span>Nested List Comprehension</a></li>
+      </ul>
+    </li>
+    <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
+    <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
+    <li>
+      <a href="../python/sets.html"><span class="dot"></span>Sets</a>
+      <ul class="submenu">
+        <li><a href="../python/sets.html"><span class="dot"></span>Basics</a></li>
+        <li><a href="../python/sets-advanced.html"><span class="dot"></span>Advanced</a></li>
+      </ul>
+    </li>
+    <li><a href="../python/looping-techniques.html"><span class="dot"></span>Looping Techniques</a></li>
+    <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
+  </ul>
+
+  <div class="aside-label" style="margin-top:24px;">Mini Projects</div>
+  <ul>
+    <li><a href="../python/password.html"><span class="dot"></span>Password Generator</a></li>
+  </ul>
+</aside>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../python/py-intro.html">Python</a><span>›</span>
+      String Methods — Part 1
+    </div>
+
+<h1>Python String Methods Explained (Python Docs) | Part 1: Basics — Changing Case, Checking Content, Finding Text &amp; Cleaning Strings</h1>
+
+    <div class="doc-ref">
+      📖 Based on <a href="https://docs.python.org/3/library/stdtypes.html#string-methods" target="_blank" rel="noopener">Python 3 official docs — String Methods</a> — explained like a friend, with extra examples added
+    </div>
+
+    <div class="meta-row">
+      <span class="meta-pill">Python</span>
+      <span class="meta-pill green">Beginner</span>
+      <span class="meta-pill blue">Strings</span>
+      <span class="meta-pill orange">Official Docs</span>
+      <span class="meta-pill" style="font-weight:700;">Part 1 · Basics</span>
+      <span class="date-badge">Updated August 2026</span>
+    </div>
+
+    <p>
+Python strings come with a huge toolbox of built-in methods, and the official docs list all of them in one long alphabetical page. That's great as a reference, but not the friendliest way to actually learn them. This guide groups the most-used string methods by what they're <em>for</em> — changing case, checking what's inside a string, finding and counting text, checking prefixes and suffixes, and cleaning up whitespace — and explains each one in plain language, with the exact examples from the Python docs plus a few extra ones.
+</p>
+
+<p>
+By the end of this guide you'll be comfortable with 28 of the most common string methods, know the small gotchas that trip up beginners (like <code>strip()</code> not doing what its name suggests), and be able to build a small text-cleaning project using nothing but these methods.
+</p>
+
+<p>
+This guide is split into two parts. <strong>Part 1 (this page)</strong> covers the string methods you'll reach for constantly — case conversion, content checks, searching, and cleaning. <strong>Part 2</strong> will go further into formatting, splitting/joining, translation tables, and encoding once you're comfortable with these basics.
+</p>
+
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">In this guide — Part 1: Basics</div>
+      <div class="toc-grid">
+        <a href="#what-is"><span class="toc-num">01</span>What are string methods?</a>
+        <a href="#case"><span class="toc-num">02</span>Changing case</a>
+        <a href="#content"><span class="toc-num">03</span>Checking string content</a>
+        <a href="#finding"><span class="toc-num">04</span>Finding &amp; counting text</a>
+        <a href="#prefixes"><span class="toc-num">05</span>Prefixes &amp; suffixes</a>
+        <a href="#cleaning"><span class="toc-num">06</span>Basic string cleaning</a>
+        <a href="#mistakes"><span class="toc-num">07</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">08</span>Interview questions</a>
+        <a href="#project"><span class="toc-num">09</span>Mini project</a>
+        <a href="#faq"><span class="toc-num">10</span>FAQs</a>
+      </div>
+    </nav>
+
+    <div class="section-divider"></div>
+
+    <!-- 01 -->
+    <h2 id="what-is">What Are String Methods? (Python Docs Explained)</h2>
+    <p>A string method is a function that "belongs" to a string and is called with dot notation — <code>my_string.method()</code>. A string method never changes the original string. Depending on the method, it can return a new string, a Boolean, a number, a list, a tuple, or another object. That single fact explains almost every beginner surprise you'll run into with strings.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>Strings implement all of the common sequence operations, along with the additional methods described below.</p>
+    </div>
+
+    <div class="note-box">
+      String methods don't modify the original string because strings in Python are immutable. Depending on the method, they can return a new string, a number, a Boolean value, or another object — <code>"hello".count("l")</code> returns an <code>int</code>, <code>split()</code> returns a list, and <code>partition()</code> returns a tuple.
+    </div>
+
+    <div class="prop-grid">
+      <div class="prop-card"><strong>Never modify in place</strong><span>A string method never edits the original — the original string is untouched</span></div>
+      <div class="prop-card"><strong>Case & Unicode aware</strong><span>Methods like casefold() and isalpha() understand more than plain ASCII</span></div>
+      <div class="prop-card"><strong>Chainable</strong><span><code>s.strip().lower()</code> runs left to right on each result</span></div>
+      <div class="prop-card"><strong>Consistent naming</strong><span>is* methods return True/False; the rest return strings, numbers, or lists</span></div>
+    </div>
+
+    <div class="warn-box">
+      <strong>Strings never change in place.</strong> <code>name.upper()</code> does not modify <code>name</code> — it returns a new, uppercased string. If you want to keep the result, you have to assign it: <code>name = name.upper()</code>.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 -->
+    <h2 id="case">Changing Case — capitalize(), casefold(), lower(), upper(), swapcase(), title()</h2>
+    <p>Six methods for converting a string's case. They look similar but behave differently in ways that matter once you're dealing with more than plain English text.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs examples</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># lower() — straightforward lowercasing</span>
+<span class="py-str">'Lower Method Example'</span><span class="py-punc">.</span><span class="py-bi">lower</span><span class="py-punc">()</span>
+<span class="py-out"># 'lower method example'</span>
+
+<span class="py-cmt"># casefold() is more aggressive than lower() — built for caseless matching</span>
+<span class="py-str">'straße'</span><span class="py-punc">.</span><span class="py-bi">lower</span><span class="py-punc">()</span>
+<span class="py-out"># 'straße'   ← unchanged, ß has no simple lowercase form</span>
+<span class="py-str">'straße'</span><span class="py-punc">.</span><span class="py-bi">casefold</span><span class="py-punc">()</span>
+<span class="py-out"># 'strasse'  ← casefold() expands ß to 'ss'</span>
+
+<span class="py-cmt"># swapcase() — flips every character's case</span>
+<span class="py-str">'Hello World'</span><span class="py-punc">.</span><span class="py-bi">swapcase</span><span class="py-punc">()</span>
+<span class="py-out"># 'hELLO wORLD'</span>
+
+<span class="py-cmt"># title() — capitalizes the first letter of every word</span>
+<span class="py-str">'Hello world'</span><span class="py-punc">.</span><span class="py-bi">title</span><span class="py-punc">()</span>
+<span class="py-out"># 'Hello World'</span></pre>
+    </div>
+
+    <h4>Kiddo extra — capitalize() and upper()</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">player</span> <span class="py-punc">=</span> <span class="py-str">"mbappe"</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">player</span><span class="py-punc">.</span><span class="py-bi">capitalize</span><span class="py-punc">())</span>   <span class="py-cmt"># Mbappe — only the first letter is capitalized</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">player</span><span class="py-punc">.</span><span class="py-bi">upper</span><span class="py-punc">())</span>        <span class="py-cmt"># MBAPPE — every letter uppercased</span>
+
+<span class="py-var">shout</span> <span class="py-punc">=</span> <span class="py-str">"GOOOOAL"</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">shout</span><span class="py-punc">.</span><span class="py-bi">capitalize</span><span class="py-punc">())</span>    <span class="py-cmt"># Goooooal — capitalize() lowercases the rest too</span></pre>
+    </div>
+
+    <div class="warn-box">
+      <strong>title() has a well-known apostrophe quirk — from the Python docs:</strong> <code>"they're bill's friends".title()</code> gives <code>"They'Re Bill'S Friends"</code>, not <code>"They're Bill's Friends"</code>. The algorithm treats an apostrophe as a word boundary, so the letter right after it gets capitalized too.
+    </div>
+
+    <table class="param-table">
+      <thead><tr><th>Method</th><th>What it does</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><code>s.capitalize()</code></td><td>First character uppercase, rest lowercase</td><td><code>'python'.capitalize()</code> → <code>'Python'</code></td></tr>
+        <tr><td><code>s.casefold()</code></td><td>Aggressive lowercasing for caseless matching</td><td><code>'straße'.casefold()</code> → <code>'strasse'</code></td></tr>
+        <tr><td><code>s.lower()</code></td><td>All characters to lowercase</td><td><code>'PYTHON'.lower()</code> → <code>'python'</code></td></tr>
+        <tr><td><code>s.upper()</code></td><td>All characters to uppercase</td><td><code>'python'.upper()</code> → <code>'PYTHON'</code></td></tr>
+        <tr><td><code>s.swapcase()</code></td><td>Flips upper ↔ lower for every character</td><td><code>'Hello'.swapcase()</code> → <code>'hELLO'</code></td></tr>
+        <tr><td><code>s.title()</code></td><td>Capitalizes the first letter of each word</td><td><code>'hello world'.title()</code> → <code>'Hello World'</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 -->
+    <h2 id="content">Checking String Content — the is* Methods</h2>
+    <p>These twelve methods all answer a yes/no question about what's inside a string, and every one of them returns <code>True</code> or <code>False</code>. They're the backbone of input validation — checking whether something looks like a number, a valid variable name, or plain whitespace before you act on it.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs examples</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># isalnum() — letters AND numbers, no punctuation or spaces</span>
+<span class="py-str">'abc123'</span><span class="py-punc">.</span><span class="py-bi">isalnum</span><span class="py-punc">()</span>       <span class="py-out"># True</span>
+<span class="py-str">'abc123!@#'</span><span class="py-punc">.</span><span class="py-bi">isalnum</span><span class="py-punc">()</span>    <span class="py-out"># False</span>
+
+<span class="py-cmt"># isalpha() — letters only</span>
+<span class="py-str">'LettersOnly'</span><span class="py-punc">.</span><span class="py-bi">isalpha</span><span class="py-punc">()</span>  <span class="py-out"># True</span>
+<span class="py-str">'Letters and spaces'</span><span class="py-punc">.</span><span class="py-bi">isalpha</span><span class="py-punc">()</span>  <span class="py-out"># False — spaces aren't letters</span>
+
+<span class="py-cmt"># isascii() — every character fits in basic ASCII</span>
+<span class="py-str">'ASCII characters'</span><span class="py-punc">.</span><span class="py-bi">isascii</span><span class="py-punc">()</span>  <span class="py-out"># True</span>
+<span class="py-str">'µ'</span><span class="py-punc">.</span><span class="py-bi">isascii</span><span class="py-punc">()</span>              <span class="py-out"># False</span>
+
+<span class="py-cmt"># islower() / isupper()</span>
+<span class="py-str">'banana'</span><span class="py-punc">.</span><span class="py-bi">islower</span><span class="py-punc">()</span>       <span class="py-out"># True</span>
+<span class="py-str">'BANANA'</span><span class="py-punc">.</span><span class="py-bi">isupper</span><span class="py-punc">()</span>       <span class="py-out"># True</span>
+<span class="py-str">'baNana'</span><span class="py-punc">.</span><span class="py-bi">isupper</span><span class="py-punc">()</span>       <span class="py-out"># False — mixed case</span>
+
+<span class="py-cmt"># istitle()</span>
+<span class="py-str">'Spam, Spam, Spam'</span><span class="py-punc">.</span><span class="py-bi">istitle</span><span class="py-punc">()</span>  <span class="py-out"># True</span>
+<span class="py-str">'spam, spam, spam'</span><span class="py-punc">.</span><span class="py-bi">istitle</span><span class="py-punc">()</span>  <span class="py-out"># False</span>
+
+<span class="py-cmt"># isspace()</span>
+<span class="py-str">' '</span><span class="py-punc">.</span><span class="py-bi">isspace</span><span class="py-punc">()</span>              <span class="py-out"># True</span>
+<span class="py-str">'\t\n'</span><span class="py-punc">.</span><span class="py-bi">isspace</span><span class="py-punc">()</span>          <span class="py-out"># True</span>
+<span class="py-str">''</span><span class="py-punc">.</span><span class="py-bi">isspace</span><span class="py-punc">()</span>               <span class="py-out"># False — needs at least one character</span>
+
+<span class="py-cmt"># isprintable()</span>
+<span class="py-str">' '</span><span class="py-punc">.</span><span class="py-bi">isprintable</span><span class="py-punc">()</span>          <span class="py-out"># True</span>
+<span class="py-str">'\n'</span><span class="py-punc">.</span><span class="py-bi">isprintable</span><span class="py-punc">()</span>         <span class="py-out"># False — a newline isn't "printable"</span>
+
+<span class="py-cmt"># isidentifier() — would this be a legal variable name?</span>
+<span class="py-str">'hello'</span><span class="py-punc">.</span><span class="py-bi">isidentifier</span><span class="py-punc">()</span>     <span class="py-out"># True</span>
+<span class="py-str">'def'</span><span class="py-punc">.</span><span class="py-bi">isidentifier</span><span class="py-punc">()</span>       <span class="py-out"># True — looks valid, even though it's a reserved keyword</span></pre>
+    </div>
+
+    <div class="warn-box">
+      <strong>isdecimal() vs isdigit() vs isnumeric() — from the Python docs:</strong> these three overlap but aren't identical. <code>'²'.isdecimal()</code> is <code>False</code>, but <code>'²'.isdigit()</code> and <code>'²'.isnumeric()</code> are both <code>True</code> — a superscript "2" isn't a plain decimal digit, but it does count as a digit and a numeric character. For everyday validation of typed-in numbers, <code>isdecimal()</code> is usually what you want.
+    </div>
+
+    <table class="param-table">
+      <thead><tr><th>Method</th><th>Returns True when the string is…</th></tr></thead>
+      <tbody>
+        <tr><td><code>s.isalnum()</code></td><td>Made only of letters and/or numbers, and non-empty</td></tr>
+        <tr><td><code>s.isalpha()</code></td><td>Made only of letters, and non-empty</td></tr>
+        <tr><td><code>s.isascii()</code></td><td>Empty, or every character fits in ASCII (U+0000–U+007F)</td></tr>
+        <tr><td><code>s.isdecimal()</code></td><td>Made only of base-10 decimal digits, and non-empty</td></tr>
+        <tr><td><code>s.isdigit()</code></td><td>Made only of digit characters (a superset of decimal), and non-empty</td></tr>
+        <tr><td><code>s.isnumeric()</code></td><td>Made only of numeric characters, including fractions like ⅕</td></tr>
+        <tr><td><code>s.islower()</code></td><td>All cased characters are lowercase, with at least one cased character</td></tr>
+        <tr><td><code>s.isupper()</code></td><td>All cased characters are uppercase, with at least one cased character</td></tr>
+        <tr><td><code>s.istitle()</code></td><td>Title-cased — each word starts uppercase, rest lowercase</td></tr>
+        <tr><td><code>s.isspace()</code></td><td>Made only of whitespace characters, and non-empty</td></tr>
+        <tr><td><code>s.isprintable()</code></td><td>Empty, or contains no non-printable characters (like <code>\n</code> or <code>\t</code>)</td></tr>
+        <tr><td><code>s.isidentifier()</code></td><td>Syntactically valid as a Python variable/identifier name</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <h2 id="finding">Finding &amp; Counting Text — count(), find(), rfind(), index(), rindex()</h2>
+    <p>Five methods for locating a substring inside a string, or counting how often it shows up. The key distinction to remember: <code>find()</code> and <code>index()</code> do the same job, but they disagree on what happens when nothing is found.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs examples</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># count() — how many times does 'spam' appear?</span>
+<span class="py-str">'spam, spam, spam'</span><span class="py-punc">.</span><span class="py-bi">count</span><span class="py-punc">(</span><span class="py-str">'spam'</span><span class="py-punc">)</span>          <span class="py-out"># 3</span>
+<span class="py-str">'spam, spam, spam'</span><span class="py-punc">.</span><span class="py-bi">count</span><span class="py-punc">(</span><span class="py-str">'spam'</span><span class="py-punc">,</span> <span class="py-num">5</span><span class="py-punc">)</span>       <span class="py-out"># 2 — start searching from index 5</span>
+
+<span class="py-cmt"># find() — returns the lowest index, or -1 if not found</span>
+<span class="py-str">'spam, spam, spam'</span><span class="py-punc">.</span><span class="py-bi">find</span><span class="py-punc">(</span><span class="py-str">'sp'</span><span class="py-punc">)</span>            <span class="py-out"># 0</span>
+<span class="py-str">'spam, spam, spam'</span><span class="py-punc">.</span><span class="py-bi">find</span><span class="py-punc">(</span><span class="py-str">'sp'</span><span class="py-punc">,</span> <span class="py-num">5</span><span class="py-punc">)</span>         <span class="py-out"># 6</span>
+
+<span class="py-cmt"># index() — same as find(), but raises ValueError instead of returning -1</span>
+<span class="py-str">'spam, spam, spam'</span><span class="py-punc">.</span><span class="py-bi">index</span><span class="py-punc">(</span><span class="py-str">'spam'</span><span class="py-punc">)</span>         <span class="py-out"># 0</span>
+<span class="py-str">'spam, spam, spam'</span><span class="py-punc">.</span><span class="py-bi">index</span><span class="py-punc">(</span><span class="py-str">'eggs'</span><span class="py-punc">)</span>
+<span class="py-out"># ValueError: substring not found</span>
+
+<span class="py-cmt"># rfind() / rindex() — search from the right instead</span>
+<span class="py-str">'spam, spam, spam'</span><span class="py-punc">.</span><span class="py-bi">rfind</span><span class="py-punc">(</span><span class="py-str">'sp'</span><span class="py-punc">)</span>           <span class="py-out"># 12 — the last match</span>
+<span class="py-str">'spam, spam, spam'</span><span class="py-punc">.</span><span class="py-bi">rindex</span><span class="py-punc">(</span><span class="py-str">'spam'</span><span class="py-punc">)</span>         <span class="py-out"># 12</span></pre>
+    </div>
+
+    <div class="note-box">
+      <strong>From the Python docs:</strong> the <code>find()</code> method should be used only if you need to know the <em>position</em> of a substring. To simply check whether one string contains another, use the <code>in</code> operator instead: <code>'Py' in 'Python'</code> → <code>True</code>. It's clearer to read and doesn't tempt you to compare a return value to <code>-1</code>.
+    </div>
+
+    <table class="param-table">
+      <thead><tr><th>Method</th><th>What it does</th><th>If not found</th></tr></thead>
+      <tbody>
+        <tr><td><code>s.count(sub)</code></td><td>Counts non-overlapping occurrences of sub</td><td>Returns 0</td></tr>
+        <tr><td><code>s.find(sub)</code></td><td>Lowest index where sub starts</td><td>Returns -1</td></tr>
+        <tr><td><code>s.rfind(sub)</code></td><td>Highest index where sub starts</td><td>Returns -1</td></tr>
+        <tr><td><code>s.index(sub)</code></td><td>Lowest index where sub starts</td><td>Raises <code>ValueError</code></td></tr>
+        <tr><td><code>s.rindex(sub)</code></td><td>Highest index where sub starts</td><td>Raises <code>ValueError</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 -->
+    <h2 id="prefixes">Checking Prefixes &amp; Suffixes — startswith(), endswith()</h2>
+    <p>Two methods for checking how a string begins or ends — cleaner and safer than slicing the string yourself and comparing it manually. Both accept a tuple of options, so you can check for several prefixes or suffixes in one call.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs examples</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># startswith()</span>
+<span class="py-str">'Python'</span><span class="py-punc">.</span><span class="py-bi">startswith</span><span class="py-punc">(</span><span class="py-str">'Py'</span><span class="py-punc">)</span>                       <span class="py-out"># True</span>
+<span class="py-str">'a tuple of prefixes'</span><span class="py-punc">.</span><span class="py-bi">startswith</span><span class="py-punc">((</span><span class="py-str">'at'</span><span class="py-punc">,</span> <span class="py-str">'a'</span><span class="py-punc">))</span>  <span class="py-out"># True — matches any item in the tuple</span>
+<span class="py-str">'Python is amazing'</span><span class="py-punc">.</span><span class="py-bi">startswith</span><span class="py-punc">(</span><span class="py-str">'is'</span><span class="py-punc">,</span> <span class="py-num">7</span><span class="py-punc">)</span>    <span class="py-out"># True — start checking from index 7</span>
+
+<span class="py-cmt"># endswith()</span>
+<span class="py-str">'Python'</span><span class="py-punc">.</span><span class="py-bi">endswith</span><span class="py-punc">(</span><span class="py-str">'on'</span><span class="py-punc">)</span>                         <span class="py-out"># True</span>
+<span class="py-str">'a tuple of suffixes'</span><span class="py-punc">.</span><span class="py-bi">endswith</span><span class="py-punc">((</span><span class="py-str">'at'</span><span class="py-punc">,</span> <span class="py-str">'es'</span><span class="py-punc">))</span>  <span class="py-out"># True</span>
+<span class="py-str">'Python is amazing'</span><span class="py-punc">.</span><span class="py-bi">endswith</span><span class="py-punc">(</span><span class="py-str">'is'</span><span class="py-punc">,</span> <span class="py-num">0</span><span class="py-punc">,</span> <span class="py-num">9</span><span class="py-punc">)</span>  <span class="py-out"># True — only looks within s[0:9]</span></pre>
+    </div>
+
+    <h4>Kiddo extra — checking a file type by extension</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">filename</span> <span class="py-punc">=</span> <span class="py-str">"squad_photo.PNG"</span>
+
+<span class="py-kw">if</span> <span class="py-var">filename</span><span class="py-punc">.</span><span class="py-bi">lower</span><span class="py-punc">().</span><span class="py-bi">endswith</span><span class="py-punc">((</span><span class="py-str">".png"</span><span class="py-punc">,</span> <span class="py-str">".jpg"</span><span class="py-punc">,</span> <span class="py-str">".jpeg"</span><span class="py-punc">)):</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Valid image file"</span><span class="py-punc">)</span>
+<span class="py-out"># Valid image file</span>
+<span class="py-cmt"># .lower() first makes the check case-insensitive — .PNG still matches</span></pre>
+    </div>
+
+    <table class="param-table">
+      <thead><tr><th>Method</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>s.startswith(prefix)</code></td><td>True if s begins with prefix — prefix can be a tuple</td></tr>
+        <tr><td><code>s.endswith(suffix)</code></td><td>True if s ends with suffix — suffix can be a tuple</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 -->
+    <h2 id="cleaning">Basic String Cleaning — strip(), lstrip(), rstrip()</h2>
+    <p>Three methods for removing unwanted characters from the ends of a string — most often whitespace left over from user input. The name "strip" is a little misleading, and the Python docs are careful to explain exactly what it does.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs examples</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># With no argument — strips whitespace from both ends</span>
+<span class="py-str">'   spacious   '</span><span class="py-punc">.</span><span class="py-bi">strip</span><span class="py-punc">()</span>     <span class="py-out"># 'spacious'</span>
+<span class="py-str">'   spacious   '</span><span class="py-punc">.</span><span class="py-bi">lstrip</span><span class="py-punc">()</span>    <span class="py-out"># 'spacious   '</span>
+<span class="py-str">'   spacious   '</span><span class="py-punc">.</span><span class="py-bi">rstrip</span><span class="py-punc">()</span>    <span class="py-out"># '   spacious'</span>
+
+<span class="py-cmt"># With a chars argument — removes any of those characters, in any order</span>
+<span class="py-str">'www.example.com'</span><span class="py-punc">.</span><span class="py-bi">strip</span><span class="py-punc">(</span><span class="py-str">'cmowz.'</span><span class="py-punc">)</span>   <span class="py-out"># 'example'</span>
+
+<span class="py-cmt"># A real-world cleanup case, straight from the docs</span>
+<span class="py-var">comment_string</span> <span class="py-punc">=</span> <span class="py-str">'#....... Section 3.2.1 Issue #32 .......'</span>
+<span class="py-var">comment_string</span><span class="py-punc">.</span><span class="py-bi">strip</span><span class="py-punc">(</span><span class="py-str">'.#! '</span><span class="py-punc">)</span>
+<span class="py-out"># 'Section 3.2.1 Issue #32'</span></pre>
+    </div>
+
+    <div class="warn-box">
+      <strong>chars is a set of characters, not a prefix — from the Python docs:</strong> <code>'mississippi'.rstrip('ipz')</code> gives <code>'mississ'</code>. Python doesn't remove the literal string <code>'ipz'</code> — it keeps stripping characters from the end as long as they're <em>any</em> of <code>i</code>, <code>p</code>, or <code>z</code>, in whatever order they appear. This is the single most common surprise with <code>strip()</code>.
+    </div>
+
+    <table class="param-table">
+      <thead><tr><th>Method</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>s.strip(chars=None)</code></td><td>Removes matching characters from both ends (whitespace by default)</td></tr>
+        <tr><td><code>s.lstrip(chars=None)</code></td><td>Removes matching characters from the left end only</td></tr>
+        <tr><td><code>s.rstrip(chars=None)</code></td><td>Removes matching characters from the right end only</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 -->
+    <h2 id="mistakes">Common String Method Mistakes</h2>
+    <div class="mistake-list">
+      <div class="mistake-item"><div class="mi-body"><strong>Forgetting that string methods return a new string</strong><p><code>name.strip()</code> on its own does nothing useful — the cleaned string is thrown away unless you store it: <code>name = name.strip()</code>. Strings can't be changed in place.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Treating strip()'s argument as a prefix or suffix</strong><p><code>'Monty Python'.strip(' Python')</code> gives <code>'M'</code>, not <code>'Monty'</code> — every character in <code>' Python'</code> gets stripped from both ends. Use <code>removeprefix()</code>/<code>removesuffix()</code> when you want to remove one exact string instead.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Using find() and checking against 0 for "not found"</strong><p><code>find()</code> returns <code>-1</code> when nothing is found, not <code>0</code> — a match at the very start of the string legitimately returns <code>0</code>. Check <code>if s.find(sub) != -1:</code>, or better, just use <code>if sub in s:</code>.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Assuming isdigit() and isdecimal() always agree</strong><p>Superscript digits, Roman numerals, and fraction characters can make <code>isdigit()</code> or <code>isnumeric()</code> return <code>True</code> while <code>isdecimal()</code> returns <code>False</code>. For validating plain typed-in numbers, <code>isdecimal()</code> is the safest choice.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Expecting title() to handle apostrophes gracefully</strong><p><code>"bill's".title()</code> gives <code>"Bill'S"</code>, capitalizing the letter right after the apostrophe. It's a known quirk of the simple word-boundary rule <code>title()</code> uses.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Forgetting startswith()/endswith() are case-sensitive</strong><p><code>"Python".startswith("py")</code> is <code>False</code> — the cases must match exactly. Call <code>.lower()</code> on both sides first if the check should ignore case.</p></div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 -->
+    <h2 id="interview">Python String Method Interview Questions and Answers</h2>
+    <div class="iq-list">
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> Why don't string methods modify the original string?</div><div class="iq-a">Strings are immutable in Python — once created, a string object's contents can never change. Every string method returns a brand-new string with the result, leaving the original untouched. That's why <code>s.upper()</code> alone has no visible effect unless you assign the result back to a variable.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q2</span> What is the difference between find() and index()?</div><div class="iq-a">Both return the lowest index where a substring starts. The difference is what happens on failure: <code>find()</code> returns <code>-1</code>, while <code>index()</code> raises a <code>ValueError</code>. Use <code>find()</code> when "not found" is a normal case you'll handle; use <code>index()</code> when not finding it should be treated as an error.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q3</span> What does strip() actually remove?</div><div class="iq-a">By default, whitespace from both ends. When given a <code>chars</code> argument, it removes any character that appears in that argument — treating it as a set of characters, not a literal prefix or suffix — until it hits a character not in the set.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q4</span> How would you check if a string contains only digits typed by a user?</div><div class="iq-a"><code>s.isdecimal()</code> is the most appropriate check for typed input, since it's limited to base-10 digit characters. <code>isdigit()</code> and <code>isnumeric()</code> are broader and would also accept characters like superscripts or fractions that <code>int()</code> can't actually convert.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q5</span> What's the difference between lower() and casefold()?</div><div class="iq-a"><code>lower()</code> does simple lowercasing. <code>casefold()</code> is more aggressive and is specifically designed for caseless string comparison — it can change a character's length, like turning the German <code>ß</code> into <code>ss</code>, which <code>lower()</code> leaves untouched.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q6</span> How do startswith() and endswith() accept multiple options at once?</div><div class="iq-a">Both accept a tuple instead of a single string: <code>s.startswith(('Mr.', 'Mrs.', 'Dr.'))</code> returns <code>True</code> if the string starts with any item in the tuple. This avoids writing several separate <code>or</code>-chained checks.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 09 -->
+    <h2 id="project">Mini Project — Build a Player Signup Cleaner Using String Methods</h2>
+    <p>A classic real-world use case for string methods — cleaning up messy, inconsistent user input before it gets stored anywhere. Signup forms are never typed perfectly, and this project uses every category from this page to fix that.</p>
+
+    <div class="checklist">
+      <div class="check-item"><div><strong>Clean the whitespace</strong><p>Use <code>strip()</code> on every field first. Stray leading/trailing spaces from copy-pasted input are the most common source of "why doesn't this match?" bugs.</p></div></div>
+      <div class="check-item"><div><strong>Normalize the name's case</strong><p>Run the player's name through <code>title()</code> so <code>"kevin de bruyne"</code> and <code>"KEVIN DE BRUYNE"</code> both become <code>"Kevin De Bruyne"</code> before saving.</p></div></div>
+      <div class="check-item"><div><strong>Validate the username</strong><p>Use <code>isidentifier()</code> as a Python-specific validation example. It accepts strings that follow Python's identifier rules and rejects names with spaces, leading digits, or invalid characters. For real usernames, use validation rules designed for your application's requirements.</p></div></div>
+      <div class="check-item"><div><strong>Check the email domain</strong><p>Use <code>endswith()</code> with a tuple of allowed domains to confirm the email looks legitimate before accepting the form.</p></div></div>
+      <div class="check-item"><div><strong>Count repeated submissions</strong><p>Use <code>count()</code> on a log of past usernames to flag anyone who has tried to sign up under a slightly different casing of the same name.</p></div></div>
+    </div>
+
+    <div class="callout">
+      <strong>Level up:</strong> chain the methods together — <code>name.strip().title()</code> cleans and formats in a single line. Chaining is one of the most useful habits to build once you're comfortable with individual string methods.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 10 -->
+    <h2 id="faq">Python String Methods FAQ</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do Python string methods modify the string in place? <span class="faq-icon">+</span></button>
+        <div class="faq-a">No. Strings are immutable, so every string method returns a new string rather than changing the original. You need to assign the result back to a variable to keep it: <code>s = s.strip()</code>.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is the difference between capitalize() and title()? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><code>capitalize()</code> uppercases only the very first character of the whole string and lowercases the rest. <code>title()</code> uppercases the first character of every word. <code>"hello world".capitalize()</code> gives <code>"Hello world"</code>; <code>"hello world".title()</code> gives <code>"Hello World"</code>.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is the difference between find() and index() in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Both locate a substring and return its position. <code>find()</code> returns <code>-1</code> if the substring isn't found, while <code>index()</code> raises a <code>ValueError</code> instead. Choose based on whether "not found" should be treated as a normal result or an error.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do you remove whitespace from a string in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Use <code>strip()</code> to remove whitespace from both ends, <code>lstrip()</code> for the left end only, or <code>rstrip()</code> for the right end only. None of them touch whitespace in the middle of the string.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is the difference between isdigit(), isdecimal(), and isnumeric()? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><code>isdecimal()</code> is the strictest — only base-10 digit characters. <code>isdigit()</code> is broader, also accepting things like superscript digits. <code>isnumeric()</code> is broadest, also accepting fraction characters like ⅕. For validating typed numeric input, <code>isdecimal()</code> is usually the right choice.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do you check if a string starts or ends with certain text? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Use <code>s.startswith(text)</code> or <code>s.endswith(text)</code>. Both also accept a tuple of options, so <code>s.endswith(('.jpg', '.png'))</code> checks multiple suffixes in a single call.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Why does strip() remove more than expected sometimes? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Because the <code>chars</code> argument to <code>strip()</code> is treated as a set of individual characters to remove, not a literal string to cut off. <code>'mississippi'.rstrip('ipz')</code> keeps stripping <code>i</code>, <code>p</code>, and <code>z</code> characters from the end, giving <code>'mississ'</code> rather than removing just the substring <code>'ipz'</code>.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Are Python string methods case-sensitive? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes, by default. <code>"Python".startswith("py")</code> is <code>False</code> because the cases don't match exactly. To compare case-insensitively, normalize both sides first with <code>.lower()</code> or <code>.casefold()</code>.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What does isidentifier() check for? <span class="faq-icon">+</span></button>
+        <div class="faq-a">It checks whether a string follows Python's syntax rules for an identifier, such as a variable, function, or class name. It does not check whether the name is a reserved keyword; 'def'<code>.isidentifier()</code> is <code>True</code> even though def cannot be used as a variable name.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="callout">
+      <strong>Coming up in Part 2 →</strong> string formatting, splitting and joining, translation tables, and encoding — plus its own interview questions, FAQ, and mini project.
+    </div>
+
+    <div class="author-strip">
+      <div class="author-avatar">K</div>
+      <div class="author-info">
+        <strong>Kiddo Documentation Team</strong>
+        <span>We simplify official documentation with beginner-friendly explanations, examples, interview questions, and practical insights.</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>More Python topics →</strong><br><br>
+      <a href="../python/functions.html">Functions (4.8)</a> ·
+      <a href="../python/while_loop.html">While Loop</a> ·
+      <a href="../python/for_loop.html">For Loop</a> ·
+      <a href="../python/if_statements.html">If Statements</a> ·
+      <a href="../python/list.html">Lists</a> ·
+      <a href="../python/dictionary.html">Dictionaries (5.5)</a> ·
+      <a href="../python/tuples.html">Tuples (5.3)</a> ·
+      <a href="../python/sets.html">Sets (5.4)</a> ·
+      <a href="../python/strings.html">String Methods</a> .
+      <a href="../python/advanced/sets-adv.html">Sets Advanced</a> .
+      <a href="../python/list-comp.html">List Comprehensions</a> ·
+      <a href="../python/looping-techniques.html">Looping Techniques</a>
+      <a href="../python/list-stack-queue.html">Lists as Stack and Queue</a> ·
+      <a href="../python/nested-list-comp.html">Nested List Comprehensions</a> ·
+      <a href="../python/keyword-arguments.html">Keyword Arguments</a> ·
+      <a href="../python/default-arguments.html">Default Arguments</a> ·
+      <a href="../python/lambda-functions.html">Lambda Functions</a> ·
+      <a href="../python/special-parameters.html">Special Parameters</a> ·
+      <a href="../python/arbitrary-argument-lists.html">Arbitrary Arguments List</a> ·
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2026 Kiddo. Built with ♥ for curious minds.</p>
+    <div class="footer-links">
+      <a href="../info/privacy.html">Privacy</a>
+      <a href="../info/terms.html">Terms</a>
+      <a href="../info/contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const desktopToggle = document.getElementById('desktopToggleTheme');
+  const mobileToggle  = document.getElementById('mobileToggleTheme');
+  const applyTheme = (dark) => {
+    document.body.classList.toggle('dark', dark);
+    const icon = dark ? '☀️' : '🌙';
+    if (desktopToggle) desktopToggle.textContent = icon;
+    if (mobileToggle)  mobileToggle.textContent  = icon;
+  };
+  applyTheme(localStorage.getItem('theme') === 'dark');
+  const toggleTheme = () => {
+    const isDark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  };
+  if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+  if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+
+  const hamburger    = document.getElementById('hamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  hamburger?.addEventListener('click', (e) => { e.stopPropagation(); menuDropdown.classList.toggle('open'); });
+  document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.querySelectorAll('.code-container').forEach(container => {
+    const btn = container.querySelector('.copy-btn');
+    const tip = container.querySelector('.tooltip');
+    const pre = container.querySelector('pre');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(pre.innerText.trim()).then(() => {
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
+      });
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans    = btn.nextElementSibling;
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+</script>
+</body>
+</html>
