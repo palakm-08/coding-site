@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="../../assests/icon.png" />
+
+<meta name="description" content="Learn Python string methods like split(), join(), replace(), partition(), translate(), and format() with beginner-friendly examples, common mistakes, interview questions, and a practical mini project." />
+<meta name="keywords" content="Python String Methods Advanced, Python Docs String Methods, str.split, str.rsplit, str.splitlines, str.partition, str.rpartition, str.join, str.replace, str.removeprefix, str.removesuffix, str.center, str.ljust, str.rjust, str.zfill, str.encode, str.translate, str.maketrans, str.format, str.format_map, Python Interview Questions">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Python String Methods Explained (Python Docs) | Part 2: Advanced" />
+<meta property="og:description" content="Splitting, joining, replacing, padding, translation tables, and string formatting — Part 2 of the Kiddo Python String Methods guide." />
+<meta property="og:url" content="https://kiddoedu.org/python/strings-advanced.html" />
+<meta property="og:site_name" content="Kiddo" />
+<meta property="og:image" content="https://kiddoedu.org/python/strings-advanced.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Python String Methods Explained (Python Docs) | Part 2: Advanced" />
+<meta name="twitter:description" content="Splitting, joining, replacing, padding, translation tables, and string formatting, explained for beginners moving past the basics." />
+<meta name="twitter:image" content="https://kiddoedu.org/python/strings-advanced.png" />
+<title>Python String Methods Explained (Python Docs) | Part 2: Split, Join, Replace &amp; Format</title>
+
+<link rel="canonical" href="https://kiddoedu.org/python/strings-advanced.html" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Python String Methods Explained (Python Docs) | Part 2: Advanced",
+  "description": "Part 2 of the Python String Methods guide: splitting, partitioning, joining, replacing, padding, encoding, translation tables, and string formatting, with examples, interview questions, and a mini project.",
+  "keywords": [
+    "Python String Methods Advanced",
+    "Python Docs String Methods",
+    "str.split",
+    "str.rsplit",
+    "str.splitlines",
+    "str.partition",
+    "str.rpartition",
+    "str.join",
+    "str.replace",
+    "str.removeprefix",
+    "str.removesuffix",
+    "str.center",
+    "str.ljust",
+    "str.rjust",
+    "str.zfill",
+    "str.encode",
+    "str.translate",
+    "str.maketrans",
+    "str.format",
+    "str.format_map",
+    "Python Interview Questions"
+  ],
+  "url": "https://kiddoedu.org/python/strings-advanced.html",
+  "datePublished": "2025-01-01",
+  "dateModified": "2026-08-15",
+  "author": {
+    "@type": "Person",
+    "name": "Palak Mishra"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kiddo",
+    "url": "https://kiddoedu.org"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://kiddoedu.org/python/strings-advanced.html"
+  },
+  "isPartOf": {
+    "@type": "TechArticle",
+    "headline": "Python String Methods Explained (Python Docs) | Part 1: Basics",
+    "url": "https://kiddoedu.org/python/strings.html"
+  }
+}
+</script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ESNWS8F9HE');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 4px 24px rgba(0,0,0,0.07);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    body.dark {
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
+      --border: rgba(255,255,255,0.07);
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 999; width: 0%; transition: width 0.1s linear; }
+
+    header { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark header { background: rgba(15,14,12,0.82); }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
+    .logo span em { font-style: normal; color: var(--accent); }
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
+    nav a:hover { color: var(--text); background: var(--surface2); }
+    .theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background var(--transition), transform var(--transition); margin-left: 8px; }
+    .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
+
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 20px; height: var(--header-h); background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark .mobile-header { background: rgba(15,14,12,0.82); }
+    .mobile-right { display: flex; align-items: center; gap: 8px; }
+    .hamburger { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; position: relative; }
+    .menu-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); padding: 8px; min-width: 160px; flex-direction: column; gap: 2px; }
+    .menu-dropdown.open { display: flex; }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
+    .menu-dropdown a:hover { background: var(--surface2); }
+
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+
+    aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px); }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    aside ul li a { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.4; }
+    aside ul li a:hover { background: var(--surface2); color: var(--text); }
+    aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; margin-top: 6px; }
+
+    main { min-width: 0; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { opacity: 0.4; }
+    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
+    .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
+    .meta-pill.blue { background: rgba(61,90,254,0.08); color: var(--accent2); border-color: rgba(61,90,254,0.2); }
+    .meta-pill.orange { background: rgba(232,108,47,0.08); color: var(--accent); border-color: rgba(232,108,47,0.2); }
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
+
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+    .doc-ref { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; }
+    .doc-ref a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .doc-ref a:hover { text-decoration: underline; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-top: 24px; margin-bottom: 10px; color: var(--text); }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 18px; margin-bottom: 8px; color: var(--text-muted); }
+    main p { font-size: 0.95rem; line-height: 1.78; color: var(--text); margin-bottom: 14px; }
+    main code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
+    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
+
+    /* TOC */
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
+    .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
+    .toc-grid a:hover { background: var(--surface2); color: var(--text); }
+    .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
+
+    /* Prop grid */
+    .prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0 24px; }
+    .prop-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
+    .prop-card strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 4px; }
+    .prop-card span { font-size: 0.81rem; color: var(--text-muted); line-height: 1.45; display: block; }
+
+    /* Doc block */
+    .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
+    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
+    .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
+    .doc-block code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+
+    /* Warning box */
+    .warn-box { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.2); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .warn-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Note box */
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .note-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Reference table */
+    .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 26px; font-size: 0.875rem; }
+    .param-table th { text-align: left; padding: 8px 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+    .param-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); line-height: 1.5; vertical-align: top; }
+    .param-table tr:last-child td { border-bottom: none; }
+    .param-table tr:hover td { background: var(--surface2); }
+    .param-table td:last-child { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* VS Code dark code blocks */
+    .code-container { border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: #2d2d2d; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
+    .code-header-left { display: flex; align-items: center; gap: 10px; }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .code-dot.red    { background: #ff5f57; }
+    .code-dot.yellow { background: #febc2e; }
+    .code-dot.green  { background: #28c840; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Fira Code', monospace; }
+    .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
+    .copy-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); padding: 3px 10px; cursor: pointer; font-size: 0.72rem; font-family: 'DM Sans', sans-serif; transition: all 0.2s; position: relative; border-radius: 4px; }
+    .copy-btn:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.1); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: #3a3a3a; color: #d4d4d4; padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .tooltip.show { opacity: 1; }
+    pre { margin: 0; padding: 20px; overflow-x: auto; font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.88rem; line-height: 1.7; background: #1e1e1e; white-space: pre; tab-size: 4; }
+    /* VS Code Dark+ token colours */
+    .py-kw   { color: #569cd6; }
+    .py-bi   { color: #dcdcaa; }
+    .py-str  { color: #ce9178; }
+    .py-num  { color: #b5cea8; }
+    .py-cmt  { color: #6a9955; font-style: italic; }
+    .py-punc { color: #d4d4d4; }
+    .py-var  { color: #9cdcfe; }
+    .py-out  { color: #4ec9b0; }
+
+    /* Callout */
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
+    .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .callout a:hover { text-decoration: underline; }
+
+    aside ul li { position: relative; }
+aside ul .submenu{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  margin:2px 0 2px 14px;
+  padding-left:10px;
+  border-left:1px solid var(--border);
+}
+aside ul .submenu li a{
+  font-size:0.8rem;
+  padding:6px 10px;
+}
+aside ul .submenu li a .dot{
+  width:4px;
+  height:4px;
+}
+    /* Mistake list */
+    .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 26px; }
+    .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
+    .mi-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
+    .mi-body p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+    .mi-body code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Interview Qs */
+    .iq-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+    .iq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .iq-q { padding: 14px 18px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
+    .iq-badge { background: rgba(232,108,47,0.1); color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; padding: 2px 8px; flex-shrink: 0; margin-top: 2px; }
+    .iq-a { padding: 0 18px 14px 18px; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+    .iq-a code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Checklist */
+    .checklist { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+    .check-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; }
+    .check-item div strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.87rem; display: block; margin-bottom: 2px; }
+    .check-item div p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+
+    /* FAQ accordion */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 18px 0; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; padding: 14px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
+    .faq-a.open { max-height: 280px; padding: 2px 18px 15px; }
+    .faq-a code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    /* Author strip */
+    .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .author-info { font-size: 0.85rem; line-height: 1.5; }
+    .author-info strong { font-weight: 600; display: block; }
+    .author-info span { color: var(--text-muted); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+    .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      header { display: none; }
+      .mobile-header { display: flex; }
+      .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
+      aside { position: static; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .prop-grid { grid-template-columns: 1fr 1fr; }
+      footer { padding: 20px; }
+      .footer-container { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) { main h1 { font-size: 1.6rem; } .prop-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../info/about.html">About</a>
+    <a href="../info/contact.html">Contact</a>
+    <button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button>
+  </nav>
+</header>
+
+<div class="mobile-header">
+  <a class="logo" href="../index.html">
+    <img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" />
+    <span>Kid<em>do</em></span>
+  </a>
+  <div class="mobile-right">
+    <button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button>
+    <button class="hamburger" id="hamburgerBtn">☰
+      <div class="menu-dropdown" id="menuDropdown">
+        <a href="../index.html">Home</a>
+        <a href="../info/about.html">About</a>
+        <a href="../info/contact.html">Contact</a>
+      </div>
+    </button>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <aside>
+  <div class="aside-label">Python Topics</div>
+  <ul>
+    <li><a href="../py-intro.html"><span class="dot"></span>Introduction</a></li>
+    <li><a href="../user_input.html"><span class="dot"></span>User Input</a></li>
+    <li>
+      <a href="../strings.html"><span class="dot"></span>Strings</a>
+      <ul class="submenu">
+        <li><a href="../strings.html"><span class="dot"></span>Basics</a></li>
+        <li><a href="../advanced/strings-adv.html" class="active"><span class="dot"></span>Advanced</a></li>
+      </ul>
+    </li>
+    <li><a href="../if_statements.html"><span class="dot"></span>If Statements</a></li>
+    <li><a href="../for_loop.html"><span class="dot"></span>For Loop</a></li>
+    <li>
+      <a href="../functions.html"><span class="dot"></span>Functions</a>
+      <ul class="submenu">
+        <li><a href="../default-arguments.html"><span class="dot"></span>Default Argument Values</a></li>
+        <li><a href="../keyword-arguments.html"><span class="dot"></span>Keyword Arguments</a></li>
+        <li><a href="../special-parameters.html"><span class="dot"></span>Special Parameters</a></li>
+        <li><a href="../arbitrary-argument-lists.html"><span class="dot"></span>Arbitrary Argument Lists</a></li>
+        <li><a href="../lambda-functions.html"><span class="dot"></span>Lambda Functions</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="../list.html"><span class="dot"></span>Lists</a>
+      <ul class="submenu">
+        <li><a href="../list-stack-queue.html"><span class="dot"></span>Stack &amp; Queue</a></li>
+        <li><a href="../list-comp.html"><span class="dot"></span>List Comprehension</a></li>
+        <li><a href="../nested-list-comp.html"><span class="dot"></span>Nested List Comprehension</a></li>
+      </ul>
+    </li>
+    <li><a href="../dictionary.html"><span class="dot"></span>Dictionaries</a></li>
+    <li><a href="../tuples.html"><span class="dot"></span>Tuples</a></li>
+    <li>
+      <a href="../sets.html"><span class="dot"></span>Sets</a>
+      <ul class="submenu">
+        <li><a href="../sets.html"><span class="dot"></span>Basics</a></li>
+        <li><a href="../advanced/sets-adv.html"><span class="dot"></span>Advanced</a></li>
+      </ul>
+    </li>
+    <li><a href="../looping-techniques.html"><span class="dot"></span>Looping Techniques</a></li>
+    <li><a href="../while_loop.html"><span class="dot"></span>While Loop</a></li>
+  </ul>
+
+  <div class="aside-label" style="margin-top:24px;">Mini Projects</div>
+  <ul>
+    <li><a href="../password.html"><span class="dot"></span>Password Generator</a></li>
+  </ul>
+</aside>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../python/py-intro.html">Python</a><span>›</span>
+      <a href="../python/strings.html">String Methods</a><span>›</span>
+      Part 2
+    </div>
+
+<h1>Python String Methods Explained (Python Docs) | Part 2: Splitting, Joining, Replacing, Padding &amp; Formatting</h1>
+
+    <div class="doc-ref">
+      📖 Based on <a href="https://docs.python.org/3/library/stdtypes.html#string-methods" target="_blank" rel="noopener">Python 3 official docs — String Methods</a> — explained like a friend, with extra examples added
+    </div>
+
+    <div class="meta-row">
+      <span class="meta-pill">Python</span>
+      <span class="meta-pill green">Intermediate</span>
+      <span class="meta-pill blue">Strings</span>
+      <span class="meta-pill orange">Official Docs</span>
+      <span class="meta-pill" style="font-weight:700;">Part 2 · Advanced</span>
+      <span class="date-badge">Updated August 2026</span>
+    </div>
+
+    <p>
+This is Part 2 of the Kiddo Python String Methods guide, continuing from <a href="../python/strings.html">Part 1: Basics</a>. If you haven't covered changing case, checking string content, finding text, and cleaning strings with <code>strip()</code> yet, start there first — this page builds on that foundation.
+</p>
+
+<p>
+Here we cover the methods you reach for once you're doing something more than a single check or cleanup — breaking a string apart with <code>split()</code>, <code>rsplit()</code>, and <code>splitlines()</code>, splitting around a separator with <code>partition()</code>/<code>rpartition()</code>, gluing pieces back together with <code>join()</code>, replacing or trimming exact text with <code>replace()</code>, <code>removeprefix()</code>, and <code>removesuffix()</code>, aligning output with <code>center()</code>/<code>ljust()</code>/<code>rjust()</code>/<code>zfill()</code>, and two less common but genuinely useful tools: <code>encode()</code> and the <code>maketrans()</code>/<code>translate()</code> pair. We'll finish with <code>format()</code> and <code>format_map()</code> for building strings out of variables.
+</p>
+
+<p>
+Same format as Part 1 — the exact examples from the docs, a few extra Kiddo examples, common mistakes, a fresh set of interview questions, a mini project, and an FAQ.
+</p>
+
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">In this guide — Part 2: Advanced</div>
+      <div class="toc-grid">
+        <a href="#splitting"><span class="toc-num">01</span>Splitting strings</a>
+        <a href="#partition"><span class="toc-num">02</span>Splitting around a separator</a>
+        <a href="#join"><span class="toc-num">03</span>Joining strings</a>
+        <a href="#replace"><span class="toc-num">04</span>Replacing &amp; removing text</a>
+        <a href="#padding"><span class="toc-num">05</span>Aligning &amp; padding</a>
+        <a href="#advanced-ops"><span class="toc-num">06</span>encode, translate &amp; maketrans</a>
+        <a href="#formatting"><span class="toc-num">07</span>String formatting</a>
+        <a href="#mistakes"><span class="toc-num">08</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">09</span>Interview questions</a>
+        <a href="#project"><span class="toc-num">10</span>Mini project</a>
+        <a href="#faq"><span class="toc-num">11</span>FAQs</a>
+      </div>
+    </nav>
+
+    <div class="callout">
+      <strong>← New here?</strong> This page assumes you're already comfortable with case conversion, the <code>is*</code> content checks, <code>find()</code>/<code>index()</code>, and <code>strip()</code>. If any of that's unfamiliar, go through <a href="../python/strings.html">Part 1: Basics</a> first.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 01 -->
+    <h2 id="splitting">Splitting Strings — split(), rsplit(), splitlines()</h2>
+    <p>Three methods for breaking one string into several. <code>split()</code> and <code>rsplit()</code> cut on a separator; <code>splitlines()</code> cuts on line boundaries, which is a different job than it might look at first.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs examples</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># split() with a separator — consecutive delimiters are NOT grouped</span>
+<span class="py-str">'1,2,3'</span><span class="py-punc">.</span><span class="py-bi">split</span><span class="py-punc">(</span><span class="py-str">','</span><span class="py-punc">)</span>              <span class="py-out"># ['1', '2', '3']</span>
+<span class="py-str">'1,2,3'</span><span class="py-punc">.</span><span class="py-bi">split</span><span class="py-punc">(</span><span class="py-str">','</span><span class="py-punc">,</span> <span class="py-var">maxsplit</span><span class="py-punc">=</span><span class="py-num">1</span><span class="py-punc">)</span> <span class="py-out"># ['1', '2,3']</span>
+<span class="py-str">'1,2,,3,'</span><span class="py-punc">.</span><span class="py-bi">split</span><span class="py-punc">(</span><span class="py-str">','</span><span class="py-punc">)</span>            <span class="py-out"># ['1', '2', '', '3', '']</span>
+
+<span class="py-cmt"># split() with no separator — runs of whitespace collapse, no empty strings at the edges</span>
+<span class="py-str">'1 2 3'</span><span class="py-punc">.</span><span class="py-bi">split</span><span class="py-punc">()</span>                <span class="py-out"># ['1', '2', '3']</span>
+<span class="py-str">'   1   2   3   '</span><span class="py-punc">.</span><span class="py-bi">split</span><span class="py-punc">()</span>      <span class="py-out"># ['1', '2', '3']</span>
+
+<span class="py-cmt"># rsplit() — identical to split() unless maxsplit limits it, then it cuts from the right</span>
+<span class="py-str">'1,2,3'</span><span class="py-punc">.</span><span class="py-bi">rsplit</span><span class="py-punc">(</span><span class="py-str">','</span><span class="py-punc">,</span> <span class="py-var">maxsplit</span><span class="py-punc">=</span><span class="py-num">1</span><span class="py-punc">)</span> <span class="py-out"># ['1,2', '3']  ← compare to split() above</span></pre>
+    </div>
+
+    <div class="note-box">
+      <strong>From the Python docs:</strong> if <code>sep</code> isn't given, a different algorithm kicks in — runs of consecutive whitespace count as one separator, and leading/trailing whitespace never produces empty strings in the result. That's why <code>'   1   2   3   '.split()</code> gives a clean <code>['1', '2', '3']</code> instead of a list full of empty strings.
+    </div>
+
+    <h4>Kiddo extra — splitlines() vs split('\n')</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">text</span> <span class="py-punc">=</span> <span class="py-str">'ab c\n\nde fg\rkl\r\n'</span>
+
+<span class="py-var">text</span><span class="py-punc">.</span><span class="py-bi">splitlines</span><span class="py-punc">()</span>
+<span class="py-out"># ['ab c', '', 'de fg', 'kl']</span>
+
+<span class="py-var">text</span><span class="py-punc">.</span><span class="py-bi">splitlines</span><span class="py-punc">(</span><span class="py-var">keepends</span><span class="py-punc">=</span><span class="py-kw">True</span><span class="py-punc">)</span>
+<span class="py-out"># ['ab c\n', '\n', 'de fg\r', 'kl\r\n']</span>
+
+<span class="py-cmt"># A trailing newline does NOT create an extra empty line with splitlines()...</span>
+<span class="py-str">"One line\n"</span><span class="py-punc">.</span><span class="py-bi">splitlines</span><span class="py-punc">()</span>
+<span class="py-out"># ['One line']</span>
+
+<span class="py-cmt"># ...but split('\n') gives you that trailing empty string</span>
+<span class="py-str">'Two lines\n'</span><span class="py-punc">.</span><span class="py-bi">split</span><span class="py-punc">(</span><span class="py-str">'\n'</span><span class="py-punc">)</span>
+<span class="py-out"># ['Two lines', '']</span></pre>
+    </div>
+
+    <div class="warn-box">
+      <strong>splitlines() isn't just split('\n') — from the Python docs:</strong> it also breaks on <code>\r</code>, <code>\r\n</code>, and several less common Unicode line boundaries, and it never leaves a stray empty string at the end for a trailing newline. If you're processing text that might come from different operating systems, <code>splitlines()</code> is the safer choice.
+    </div>
+
+    <table class="param-table">
+      <thead><tr><th>Method</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>s.split(sep=None, maxsplit=-1)</code></td><td>Splits on sep (or any whitespace run if omitted), left to right</td></tr>
+        <tr><td><code>s.rsplit(sep=None, maxsplit=-1)</code></td><td>Same as split(), but maxsplit counts from the right</td></tr>
+        <tr><td><code>s.splitlines(keepends=False)</code></td><td>Splits on line boundaries; set keepends=True to keep the line-break characters</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 -->
+    <h2 id="partition">Splitting Around a Separator — partition(), rpartition()</h2>
+    <p><code>partition()</code> is a more targeted cousin of <code>split()</code> — instead of a list of every piece, it gives you exactly three things: what's before the separator, the separator itself, and what's after. Handy when you only care about the first (or last) split point.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs examples</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-str">'Monty Python'</span><span class="py-punc">.</span><span class="py-bi">partition</span><span class="py-punc">(</span><span class="py-str">' '</span><span class="py-punc">)</span>
+<span class="py-out"># ('Monty', ' ', 'Python')</span>
+
+<span class="py-str">"Monty Python's Flying Circus"</span><span class="py-punc">.</span><span class="py-bi">partition</span><span class="py-punc">(</span><span class="py-str">' '</span><span class="py-punc">)</span>
+<span class="py-out"># ('Monty', ' ', "Python's Flying Circus")</span>
+
+<span class="py-cmt"># Separator not found — original string, then two empty strings</span>
+<span class="py-str">'Monty Python'</span><span class="py-punc">.</span><span class="py-bi">partition</span><span class="py-punc">(</span><span class="py-str">'-'</span><span class="py-punc">)</span>
+<span class="py-out"># ('Monty Python', '', '')</span>
+
+<span class="py-cmt"># rpartition() — same idea, but splits at the LAST occurrence</span>
+<span class="py-str">"Monty Python's Flying Circus"</span><span class="py-punc">.</span><span class="py-bi">rpartition</span><span class="py-punc">(</span><span class="py-str">' '</span><span class="py-punc">)</span>
+<span class="py-out"># ("Monty Python's Flying", ' ', 'Circus')</span>
+
+<span class="py-cmt"># Separator not found — two empty strings, then the original string</span>
+<span class="py-str">'Monty Python'</span><span class="py-punc">.</span><span class="py-bi">rpartition</span><span class="py-punc">(</span><span class="py-str">'-'</span><span class="py-punc">)</span>
+<span class="py-out"># ('', '', 'Monty Python')</span></pre>
+    </div>
+
+    <h4>Kiddo extra — pulling apart a "key: value" line</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">header</span> <span class="py-punc">=</span> <span class="py-str">"Content-Type: text/html"</span>
+
+<span class="py-var">key</span><span class="py-punc">,</span> <span class="py-var">_</span><span class="py-punc">,</span> <span class="py-var">value</span> <span class="py-punc">=</span> <span class="py-var">header</span><span class="py-punc">.</span><span class="py-bi">partition</span><span class="py-punc">(</span><span class="py-str">": "</span><span class="py-punc">)</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">key</span><span class="py-punc">)</span>     <span class="py-cmt"># Content-Type</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">value</span><span class="py-punc">)</span>   <span class="py-cmt"># text/html</span>
+<span class="py-cmt"># The middle value (the separator) is thrown away with _ since we don't need it</span></pre>
+    </div>
+
+    <div class="note-box">
+      <strong>partition() vs split(sep, 1):</strong> both split at the first occurrence, but <code>partition()</code> always returns exactly 3 items — even when the separator isn't found — while <code>split(sep, 1)</code> returns a list that could have 1 or 2 items. <code>partition()</code> is usually the safer pick when you're about to unpack the result into named variables, like the example above.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 -->
+    <h2 id="join">Joining Strings — join()</h2>
+    <p><code>join()</code> flips the usual order around: instead of calling it on the pieces, you call it on the separator, and pass the pieces in. It's the most efficient way to glue a list of strings together in Python.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs examples</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-str">', '</span><span class="py-punc">.</span><span class="py-bi">join</span><span class="py-punc">([</span><span class="py-str">'spam'</span><span class="py-punc">,</span> <span class="py-str">'spam'</span><span class="py-punc">,</span> <span class="py-str">'spam'</span><span class="py-punc">])</span>
+<span class="py-out"># 'spam, spam, spam'</span>
+
+<span class="py-cmt"># A string is iterable too — join() will run over its characters</span>
+<span class="py-str">'-'</span><span class="py-punc">.</span><span class="py-bi">join</span><span class="py-punc">(</span><span class="py-str">'Python'</span><span class="py-punc">)</span>
+<span class="py-out"># 'P-y-t-h-o-n'</span></pre>
+    </div>
+
+    <h4>Kiddo extra — join() only accepts strings</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">scores</span> <span class="py-punc">= [</span><span class="py-num">3</span><span class="py-punc">,</span> <span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">0</span><span class="py-punc">]</span>
+
+<span class="py-cmt"># ", ".join(scores)   ← TypeError: sequence item 0: expected str instance, int found</span>
+
+<span class="py-cmt"># Convert every item to a string first</span>
+<span class="py-var">line</span> <span class="py-punc">=</span> <span class="py-str">", "</span><span class="py-punc">.</span><span class="py-bi">join</span><span class="py-punc">(</span><span class="py-bi">str</span><span class="py-punc">(</span><span class="py-var">n</span><span class="py-punc">)</span> <span class="py-kw">for</span> <span class="py-var">n</span> <span class="py-kw">in</span> <span class="py-var">scores</span><span class="py-punc">)</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">line</span><span class="py-punc">)</span>   <span class="py-cmt"># 3, 1, 0</span></pre>
+    </div>
+
+    <table class="param-table">
+      <thead><tr><th>Method</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>sep.join(iterable)</code></td><td>Joins the strings in iterable, placing sep between each pair — every item must already be a string</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <h2 id="replace">Replacing &amp; Removing Text — replace(), removeprefix(), removesuffix()</h2>
+    <p>Three ways to cut exact text out of a string, as opposed to <code>strip()</code> from Part 1, which removes a <em>set of characters</em> rather than an exact match.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs examples</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># replace() — swaps every match unless count limits it</span>
+<span class="py-str">'spam, spam, spam'</span><span class="py-punc">.</span><span class="py-bi">replace</span><span class="py-punc">(</span><span class="py-str">'spam'</span><span class="py-punc">,</span> <span class="py-str">'eggs'</span><span class="py-punc">)</span>
+<span class="py-out"># 'eggs, eggs, eggs'</span>
+<span class="py-str">'spam, spam, spam'</span><span class="py-punc">.</span><span class="py-bi">replace</span><span class="py-punc">(</span><span class="py-str">'spam'</span><span class="py-punc">,</span> <span class="py-str">'eggs'</span><span class="py-punc">,</span> <span class="py-num">1</span><span class="py-punc">)</span>
+<span class="py-out"># 'eggs, spam, spam'</span>
+
+<span class="py-cmt"># removeprefix() — removes ONE exact prefix, only if it's actually there</span>
+<span class="py-str">'TestHook'</span><span class="py-punc">.</span><span class="py-bi">removeprefix</span><span class="py-punc">(</span><span class="py-str">'Test'</span><span class="py-punc">)</span>
+<span class="py-out"># 'Hook'</span>
+<span class="py-str">'BaseTestCase'</span><span class="py-punc">.</span><span class="py-bi">removeprefix</span><span class="py-punc">(</span><span class="py-str">'Test'</span><span class="py-punc">)</span>
+<span class="py-out"># 'BaseTestCase'  ← unchanged, prefix doesn't match here</span>
+
+<span class="py-cmt"># removesuffix() — same idea, from the end</span>
+<span class="py-str">'MiscTests'</span><span class="py-punc">.</span><span class="py-bi">removesuffix</span><span class="py-punc">(</span><span class="py-str">'Tests'</span><span class="py-punc">)</span>
+<span class="py-out"># 'Misc'</span>
+<span class="py-str">'TmpDirMixin'</span><span class="py-punc">.</span><span class="py-bi">removesuffix</span><span class="py-punc">(</span><span class="py-str">'Tests'</span><span class="py-punc">)</span>
+<span class="py-out"># 'TmpDirMixin'  ← unchanged</span></pre>
+    </div>
+
+    <div class="warn-box">
+      <strong>removesuffix() vs strip() — from the Python docs:</strong> <code>'Monty Python'.rstrip(' Python')</code> gives <code>'M'</code>, because <code>rstrip()</code> treats <code>' Python'</code> as a bag of characters and keeps chewing through <code>M</code>-<code>o</code>-<code>n</code>-<code>t</code>-<code>y</code> too. <code>'Monty Python'.removesuffix(' Python')</code> correctly gives <code>'Monty'</code>, because it only removes that exact substring if it's at the end. If you know the precise text you want gone, <code>removeprefix()</code>/<code>removesuffix()</code> is almost always what you actually meant.
+    </div>
+
+    <table class="param-table">
+      <thead><tr><th>Method</th><th>What it does</th><th>If no match</th></tr></thead>
+      <tbody>
+        <tr><td><code>s.replace(old, new, count=-1)</code></td><td>Replaces occurrences of old with new (all, unless count limits it)</td><td>Returns s unchanged</td></tr>
+        <tr><td><code>s.removeprefix(prefix)</code></td><td>Removes prefix from the start, only if present</td><td>Returns s unchanged</td></tr>
+        <tr><td><code>s.removesuffix(suffix)</code></td><td>Removes suffix from the end, only if present</td><td>Returns s unchanged</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 -->
+    <h2 id="padding">Aligning &amp; Padding Strings — center(), ljust(), rjust(), zfill()</h2>
+    <p>Four methods for padding a string out to a fixed width — useful for lining up columns of text output, or formatting IDs with leading zeros. All of them leave the string untouched if it's already at or past the target width.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs examples</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># center() — pads both sides</span>
+<span class="py-str">'Python'</span><span class="py-punc">.</span><span class="py-bi">center</span><span class="py-punc">(</span><span class="py-num">10</span><span class="py-punc">)</span>          <span class="py-out"># '  Python  '</span>
+<span class="py-str">'Python'</span><span class="py-punc">.</span><span class="py-bi">center</span><span class="py-punc">(</span><span class="py-num">10</span><span class="py-punc">,</span> <span class="py-str">'-'</span><span class="py-punc">)</span>     <span class="py-out"># '--Python--'</span>
+<span class="py-str">'Python'</span><span class="py-punc">.</span><span class="py-bi">center</span><span class="py-punc">(</span><span class="py-num">4</span><span class="py-punc">)</span>           <span class="py-out"># 'Python'  ← width already smaller, unchanged</span>
+
+<span class="py-cmt"># ljust() — pads on the right, text stays left-aligned</span>
+<span class="py-str">'Python'</span><span class="py-punc">.</span><span class="py-bi">ljust</span><span class="py-punc">(</span><span class="py-num">10</span><span class="py-punc">)</span>           <span class="py-out"># 'Python    '</span>
+<span class="py-str">'Python'</span><span class="py-punc">.</span><span class="py-bi">ljust</span><span class="py-punc">(</span><span class="py-num">10</span><span class="py-punc">,</span> <span class="py-str">'.'</span><span class="py-punc">)</span>      <span class="py-out"># 'Python....'</span>
+
+<span class="py-cmt"># rjust() — pads on the left, text stays right-aligned</span>
+<span class="py-str">'Python'</span><span class="py-punc">.</span><span class="py-bi">rjust</span><span class="py-punc">(</span><span class="py-num">10</span><span class="py-punc">)</span>           <span class="py-out"># '    Python'</span>
+<span class="py-str">'Python'</span><span class="py-punc">.</span><span class="py-bi">rjust</span><span class="py-punc">(</span><span class="py-num">10</span><span class="py-punc">,</span> <span class="py-str">'.'</span><span class="py-punc">)</span>      <span class="py-out"># '....Python'</span>
+
+<span class="py-cmt"># zfill() — pads with '0' on the left, and is sign-aware</span>
+<span class="py-str">"42"</span><span class="py-punc">.</span><span class="py-bi">zfill</span><span class="py-punc">(</span><span class="py-num">5</span><span class="py-punc">)</span>              <span class="py-out"># '00042'</span>
+<span class="py-str">"-42"</span><span class="py-punc">.</span><span class="py-bi">zfill</span><span class="py-punc">(</span><span class="py-num">5</span><span class="py-punc">)</span>             <span class="py-out"># '-0042'  ← the sign stays in front, zeros go after it</span></pre>
+    </div>
+
+    <h4>Kiddo extra — a simple two-column scoreboard</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">rows</span> <span class="py-punc">= [(</span><span class="py-str">"Mbappe"</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">),</span> <span class="py-punc">(</span><span class="py-str">"Haaland"</span><span class="py-punc">,</span> <span class="py-num">14</span><span class="py-punc">)]</span>
+
+<span class="py-kw">for</span> <span class="py-var">name</span><span class="py-punc">,</span> <span class="py-var">goals</span> <span class="py-kw">in</span> <span class="py-var">rows</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">name</span><span class="py-punc">.</span><span class="py-bi">ljust</span><span class="py-punc">(</span><span class="py-num">10</span><span class="py-punc">),</span> <span class="py-bi">str</span><span class="py-punc">(</span><span class="py-var">goals</span><span class="py-punc">).</span><span class="py-bi">rjust</span><span class="py-punc">(</span><span class="py-num">3</span><span class="py-punc">))</span>
+<span class="py-out"># Mbappe       2
+# Haaland     14</span></pre>
+    </div>
+
+    <table class="param-table">
+      <thead><tr><th>Method</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>s.center(width, fillchar=' ')</code></td><td>Centers s, padding both sides equally</td></tr>
+        <tr><td><code>s.ljust(width, fillchar=' ')</code></td><td>Pads on the right — s stays left-aligned</td></tr>
+        <tr><td><code>s.rjust(width, fillchar=' ')</code></td><td>Pads on the left — s stays right-aligned</td></tr>
+        <tr><td><code>s.zfill(width)</code></td><td>Pads with '0' on the left; a leading +/- sign stays in front</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 -->
+    <h2 id="advanced-ops">encode(), translate() &amp; maketrans()</h2>
+    <p>Three less-common methods that come up when you need to go beyond plain text — turning a string into bytes, or swapping a whole set of characters for others in a single pass.</p>
+
+    <h4>encode() — turning a string into bytes</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">encoded</span> <span class="py-punc">=</span> <span class="py-str">'Python'</span><span class="py-punc">.</span><span class="py-bi">encode</span><span class="py-punc">()</span>   <span class="py-cmt"># defaults to UTF-8</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">type</span><span class="py-punc">(</span><span class="py-var">encoded</span><span class="py-punc">))</span>          <span class="py-out"># &lt;class 'bytes'&gt;</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">encoded</span><span class="py-punc">)</span>                <span class="py-out"># b'Python'</span></pre>
+    </div>
+    <div class="note-box">
+      A <code>str</code> in Python is text; <code>bytes</code> is raw data. You'll reach for <code>encode()</code> when you need to send text over a network, write it to a binary file, or hash it — anywhere the receiving end expects bytes, not a Python string.
+    </div>
+
+    <h4>maketrans() + translate() — swap many characters in one pass</h4>
+    <p>These two are meant to be used together. <code>maketrans()</code> builds a lookup table; <code>translate()</code> applies it. It's the right tool when <code>replace()</code> would mean calling it several times in a row.</p>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># Two equal-length strings — each character in the first maps to the one in the same spot in the second</span>
+<span class="py-var">table</span> <span class="py-punc">=</span> <span class="py-var">str</span><span class="py-punc">.</span><span class="py-bi">maketrans</span><span class="py-punc">(</span><span class="py-str">"abc"</span><span class="py-punc">,</span> <span class="py-str">"xyz"</span><span class="py-punc">)</span>
+<span class="py-str">"abcdef"</span><span class="py-punc">.</span><span class="py-bi">translate</span><span class="py-punc">(</span><span class="py-var">table</span><span class="py-punc">)</span>
+<span class="py-out"># 'xyzdef'</span>
+
+<span class="py-cmt"># A third argument lists characters to delete entirely</span>
+<span class="py-var">strip_table</span> <span class="py-punc">=</span> <span class="py-var">str</span><span class="py-punc">.</span><span class="py-bi">maketrans</span><span class="py-punc">(</span><span class="py-str">""</span><span class="py-punc">,</span> <span class="py-str">""</span><span class="py-punc">,</span> <span class="py-str">"aeiou"</span><span class="py-punc">)</span>
+<span class="py-str">"Mbappe scores again"</span><span class="py-punc">.</span><span class="py-bi">translate</span><span class="py-punc">(</span><span class="py-var">strip_table</span><span class="py-punc">)</span>
+<span class="py-out"># 'Mbpp scrs gn'  ← every vowel removed in one pass</span></pre>
+    </div>
+    <div class="note-box">
+      <strong>From the Python docs:</strong> <code>maketrans()</code> can also take a single dict argument, mapping Unicode ordinals or single characters to a replacement (or to <code>None</code> to delete them). The two-or-three-string form shown above is just the more common shortcut for simple substitutions.
+    </div>
+
+    <table class="param-table">
+      <thead><tr><th>Method</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>s.encode(encoding='utf-8')</code></td><td>Returns the string converted to bytes</td></tr>
+        <tr><td><code>str.maketrans(from, to, remove='')</code></td><td>Builds a character-mapping table for use with translate()</td></tr>
+        <tr><td><code>s.translate(table)</code></td><td>Applies a translation table, replacing or deleting characters</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 -->
+    <h2 id="formatting">String Formatting — format(), format_map()</h2>
+    <p><code>format()</code> builds a string by filling in placeholders wrapped in <code>{}</code>. You can reference arguments by position, by keyword, or both.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs examples</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># Positional — {0} refers to the first argument passed to format()</span>
+<span class="py-str">"The sum of 1 + 2 is {0}"</span><span class="py-punc">.</span><span class="py-bi">format</span><span class="py-punc">(</span><span class="py-num">1</span><span class="py-punc">+</span><span class="py-num">2</span><span class="py-punc">)</span>
+<span class="py-out"># 'The sum of 1 + 2 is 3'</span>
+
+<span class="py-cmt"># Keyword — {a}, {b}, {answer} match the keyword arguments by name</span>
+<span class="py-str">"The sum of {a} + {b} is {answer}"</span><span class="py-punc">.</span><span class="py-bi">format</span><span class="py-punc">(</span><span class="py-var">answer</span><span class="py-punc">=</span><span class="py-num">1</span><span class="py-punc">+</span><span class="py-num">2</span><span class="py-punc">,</span> <span class="py-var">a</span><span class="py-punc">=</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-var">b</span><span class="py-punc">=</span><span class="py-num">2</span><span class="py-punc">)</span>
+<span class="py-out"># 'The sum of 1 + 2 is 3'</span>
+
+<span class="py-cmt"># Positional args can be referenced out of order, or more than once</span>
+<span class="py-str">"{1} expects the {0} Inquisition!"</span><span class="py-punc">.</span><span class="py-bi">format</span><span class="py-punc">(</span><span class="py-str">"Spanish"</span><span class="py-punc">,</span> <span class="py-str">"Nobody"</span><span class="py-punc">)</span>
+<span class="py-out"># 'Nobody expects the Spanish Inquisition!'</span></pre>
+    </div>
+
+    <h4>format_map() — format from a dictionary directly</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">class</span> <span class="py-bi">Default</span><span class="py-punc">(</span><span class="py-bi">dict</span><span class="py-punc">):</span>
+    <span class="py-kw">def</span> <span class="py-bi">__missing__</span><span class="py-punc">(</span><span class="py-var">self</span><span class="py-punc">,</span> <span class="py-var">key</span><span class="py-punc">):</span>
+        <span class="py-kw">return</span> <span class="py-var">key</span>
+
+<span class="py-str">'{name} was born in {country}'</span><span class="py-punc">.</span><span class="py-bi">format_map</span><span class="py-punc">(</span><span class="py-bi">Default</span><span class="py-punc">(</span><span class="py-var">name</span><span class="py-punc">=</span><span class="py-str">'Guido'</span><span class="py-punc">))</span>
+<span class="py-out"># 'Guido was born in country'  ← missing 'country' key falls back to the key name itself</span></pre>
+    </div>
+
+    <div class="note-box">
+      <strong>format() vs f-strings:</strong> <code>format()</code> is the method form, and it's what the Python docs describe here — you'll see it in older code, string templates loaded from files, or anywhere the format string itself is a variable. For strings you're writing directly in your own code, an f-string like <code>f"The sum is {1+2}"</code> is the more common modern choice and does the same job with less punctuation.
+    </div>
+
+    <table class="param-table">
+      <thead><tr><th>Method</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>s.format(*args, **kwargs)</code></td><td>Fills {} placeholders from positional and/or keyword arguments</td></tr>
+        <tr><td><code>s.format_map(mapping)</code></td><td>Like format(**mapping), but uses the mapping directly — useful for dict subclasses with custom fallback behavior</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 -->
+    <h2 id="mistakes">Common Mistakes With These Methods</h2>
+    <div class="mistake-list">
+      <div class="mistake-item"><div class="mi-body"><strong>Expecting split() and rsplit() to differ without maxsplit</strong><p>With no <code>maxsplit</code> argument, <code>split()</code> and <code>rsplit()</code> return identical results. The difference only shows up once <code>maxsplit</code> limits how many cuts happen.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Using split('\n') instead of splitlines() on real-world text</strong><p><code>split('\n')</code> misses <code>\r</code>-only line endings and leaves a trailing empty string after a final newline. <code>splitlines()</code> handles both correctly.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Passing non-string items to join()</strong><p><code>", ".join([1, 2, 3])</code> raises <code>TypeError: sequence item 0: expected str instance, int found</code>. Convert each item with <code>str()</code> first, e.g. <code>", ".join(str(n) for n in nums)</code>.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Reaching for strip() when you mean removeprefix()/removesuffix()</strong><p><code>strip()</code> removes a set of characters; <code>removeprefix()</code>/<code>removesuffix()</code> remove one exact string. Mixing them up is the single most common gotcha carried over from Part 1.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Expecting center()/ljust()/rjust() to truncate</strong><p>If the string is already longer than <code>width</code>, these methods return it completely unchanged — they only ever pad, they never cut a string down.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Passing an already-formatted string as the format() argument</strong><p><code>"{0}".format(f"{name}")</code> is redundant — if you're already using an f-string, you don't need <code>.format()</code> wrapped around it. Pick one approach per string.</p></div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 09 -->
+    <h2 id="interview">Interview Questions and Answers</h2>
+    <div class="iq-list">
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> What's the difference between split() and rsplit()?</div><div class="iq-a">Without <code>maxsplit</code>, they behave identically. With <code>maxsplit</code>, <code>split()</code> counts splits from the left and <code>rsplit()</code> counts from the right — so <code>'1,2,3'.rsplit(',', 1)</code> gives <code>['1,2', '3']</code> while <code>'1,2,3'.split(',', 1)</code> gives <code>['1', '2,3']</code>.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q2</span> How is splitlines() different from split('\n')?</div><div class="iq-a">splitlines() recognizes several line-boundary characters beyond just <code>\n</code> — including <code>\r</code> and <code>\r\n</code> — and doesn't produce a trailing empty string for a final newline. split('\n') only splits on that one literal character and does leave the trailing empty string.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q3</span> What do partition() and rpartition() return when the separator isn't found?</div><div class="iq-a">partition() returns a 3-tuple of (original string, '', ''). rpartition() returns the opposite arrangement: ('', '', original string). Both always return exactly three items, which makes them safe to unpack.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q4</span> Why would you use removeprefix() instead of strip()?</div><div class="iq-a">strip() treats its argument as a set of characters and keeps removing any of them from the ends, which can eat more than intended. removeprefix() (and removesuffix()) remove one exact string, and only if it's actually present — nothing more, nothing less.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q5</span> Why does join() sometimes raise a TypeError?</div><div class="iq-a">join() requires every item in the iterable to already be a string. Passing a list containing numbers, like <code>[1, 2, 3]</code>, raises a TypeError because Python won't silently convert them — you need to call <code>str()</code> on each item first.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q6</span> How do maketrans() and translate() work together?</div><div class="iq-a">maketrans() builds a lookup table mapping characters to their replacements (or to None to delete them). translate() then applies that table to a string in a single pass, which is more efficient than chaining multiple replace() calls for the same job.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q7</span> What's the difference between format() and format_map()?</div><div class="iq-a">format(**mapping) copies the dictionary's contents into keyword arguments before filling the template. format_map(mapping) uses the mapping object directly without copying it — which matters if you're passing a custom dict subclass, like one that supplies a default value for missing keys via <code>__missing__</code>.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 10 -->
+    <h2 id="project">Mini Project — Build a Player Bio Formatter Using String Methods</h2>
+    <p>Raw sign-up data is rarely ready to display as-is. This project takes a messy, single-line player record and turns it into a clean, aligned bio — using a method from nearly every section on this page.</p>
+
+    <div class="checklist">
+      <div class="check-item"><div><strong>Parse the raw record</strong><p>Use <code>split(',')</code> to break a line like <code>"mbappe,PSG,striker,24"</code> into its individual fields.</p></div></div>
+      <div class="check-item"><div><strong>Pull the label off a tagged field</strong><p>If a field looks like <code>"team: PSG"</code>, use <code>partition(': ')</code> to separate the label from the value in one step.</p></div></div>
+      <div class="check-item"><div><strong>Clean up inconsistent text</strong><p>Use <code>replace()</code> to fix known typos or old team names in the data, and <code>removeprefix()</code>/<code>removesuffix()</code> to strip labels like <code>"Position: "</code> that sometimes appear and sometimes don't.</p></div></div>
+      <div class="check-item"><div><strong>Align the output into columns</strong><p>Use <code>ljust()</code> for the name column and <code>rjust()</code> or <code>zfill()</code> for a numeric column like squad number, so every row of the printed roster lines up.</p></div></div>
+      <div class="check-item"><div><strong>Assemble the final bio line</strong><p>Use <code>"{name} — {team}, {position}".format(...)</code> (or an f-string) to build the final human-readable line from the cleaned-up fields.</p></div></div>
+    </div>
+
+    <div class="callout">
+      <strong>Level up:</strong> read the raw records from a multi-line block of text with <code>splitlines()</code> instead of a single string, and join the finished bios back together for display with <code>"\n".join(bios)</code>. It's the same round trip — split apart, clean, join back up — that most text-processing scripts end up doing.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 11 -->
+    <h2 id="faq">FAQ</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is the difference between split() and rsplit() in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Without a maxsplit argument, they're identical. With maxsplit given, split() limits splits counting from the left, while rsplit() limits them counting from the right — so the leftover unsplit part ends up on opposite sides.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What does splitlines() do that split('\n') doesn't? <span class="faq-icon">+</span></button>
+        <div class="faq-a">splitlines() recognizes multiple line-boundary characters (\n, \r, \r\n, and a few Unicode ones) and doesn't leave a trailing empty string for a final newline. split('\n') only ever splits on that one exact character.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What do partition() and rpartition() return? <span class="faq-icon">+</span></button>
+        <div class="faq-a">A 3-tuple: the text before the separator, the separator itself, and the text after. partition() finds the first occurrence of the separator; rpartition() finds the last. If the separator isn't present, one of the outer two items becomes the whole original string and the rest are empty strings.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How does join() work in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">You call join() on the separator string, and pass it an iterable of strings to glue together: <code>", ".join(["a", "b", "c"])</code> gives <code>"a, b, c"</code>. Every item in the iterable has to already be a string, or it raises a TypeError.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What's the difference between replace() and removeprefix()/removesuffix()? <span class="faq-icon">+</span></button>
+        <div class="faq-a">replace() swaps every occurrence of a substring anywhere in the string. removeprefix() and removesuffix() only remove the given text if it's exactly at the start or end, and only remove it once.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What do center(), ljust(), and rjust() do? <span class="faq-icon">+</span></button>
+        <div class="faq-a">All three pad a string out to a fixed width. center() pads both sides, ljust() pads on the right (text stays left-aligned), and rjust() pads on the left (text stays right-aligned). None of them shorten a string that's already longer than the target width.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is zfill() used for in Python? <span class="faq-icon">+</span></button>
+        <div class="faq-a">zfill() pads a string with leading zeros up to a given width, and it's aware of a leading + or - sign, keeping it in front of the zeros rather than after. It's commonly used for formatting IDs or numbers that need a fixed digit count, like "007".</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What do maketrans() and translate() do together? <span class="faq-icon">+</span></button>
+        <div class="faq-a">maketrans() builds a character-mapping table — which characters should become which other characters, or be deleted entirely. translate() then applies that table across a string in a single pass, which is faster than chaining several replace() calls to do the same job.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is the difference between format() and format_map()? <span class="faq-icon">+</span></button>
+        <div class="faq-a">format(**mapping) unpacks a dictionary into keyword arguments before substituting them into the template. format_map(mapping) uses the mapping object as-is without unpacking it, which is useful for a custom dict subclass that supplies fallback values for missing keys.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Should I use format() or an f-string? <span class="faq-icon">+</span></button>
+        <div class="faq-a">For strings you're writing directly in your code, an f-string is generally the simpler, more modern choice. format() is still useful when the template string itself comes from somewhere else — a config file, a translation string, or user input — since an f-string has to be written directly in your source code.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="callout">
+      <strong>← Missed Part 1?</strong> Go back to <a href="../python/strings.html">Part 1: Basics</a> for changing case, checking string content with the is* methods, finding and counting text, prefixes/suffixes, and basic cleaning with strip().
+    </div>
+
+    <div class="author-strip">
+      <div class="author-avatar">K</div>
+      <div class="author-info">
+        <strong>Kiddo Documentation Team</strong>
+        <span>We simplify official documentation with beginner-friendly explanations, examples, interview questions, and practical insights.</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>More Python topics →</strong><br><br>
+      <a href="../python/strings.html">String Methods — Basics (Part 1)</a> ·
+      <a href="../python/sets.html">Sets — Basics</a> ·
+      <a href="../python/sets-advanced.html">Sets — Advanced</a> ·
+      <a href="../python/functions.html">Functions (4.8)</a> ·
+      <a href="../python/while_loop.html">While Loop</a> ·
+      <a href="../python/for_loop.html">For Loop</a> ·
+      <a href="../python/if_statements.html">If Statements</a> ·
+      <a href="../python/list.html">Lists</a> ·
+      <a href="../python/dictionary.html">Dictionaries (5.5)</a> ·
+      <a href="../python/tuples.html">Tuples (5.3)</a> ·
+      <a href="../python/default-arguments.html">Default Arguments</a> ·
+      <a href="../python/list-comp.html">List Comprehensions</a> ·
+      <a href="../python/looping-techniques.html">Looping Techniques</a>
+      <a href="../python/list-stack-queue.html">Lists as Stack and Queue</a> ·
+      <a href="../python/nested-list-comp.html">Nested List Comprehensions</a> ·
+      <a href="../python/arbitrary-argument-lists.html">Arbitrary Arguments List</a> ·
+      <a href="../python/keyword-arguments.html">Keyword Arguments</a> ·
+      <a href="../python/special-parameters.html">Special Parameters</a> ·
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2025 Kiddo. Built with ♥ for curious minds.</p>
+    <div class="footer-links">
+      <a href="../info/privacy.html">Privacy</a>
+      <a href="../info/terms.html">Terms</a>
+      <a href="../info/contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const desktopToggle = document.getElementById('desktopToggleTheme');
+  const mobileToggle  = document.getElementById('mobileToggleTheme');
+  const applyTheme = (dark) => {
+    document.body.classList.toggle('dark', dark);
+    const icon = dark ? '☀️' : '🌙';
+    if (desktopToggle) desktopToggle.textContent = icon;
+    if (mobileToggle)  mobileToggle.textContent  = icon;
+  };
+  applyTheme(localStorage.getItem('theme') === 'dark');
+  const toggleTheme = () => {
+    const isDark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  };
+  if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+  if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+
+  const hamburger    = document.getElementById('hamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  hamburger?.addEventListener('click', (e) => { e.stopPropagation(); menuDropdown.classList.toggle('open'); });
+  document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.querySelectorAll('.code-container').forEach(container => {
+    const btn = container.querySelector('.copy-btn');
+    const tip = container.querySelector('.tooltip');
+    const pre = container.querySelector('pre');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(pre.innerText.trim()).then(() => {
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
+      });
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans    = btn.nextElementSibling;
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+</script>
+</body>
+</html>
