@@ -244,14 +244,69 @@ aside ul .submenu li a .dot{
     .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
     .footer-links a:hover { color: var(--accent); }
 
+    /* Mobile "Next in Python Topics" mini-nav — replaces the full sidebar on small screens */
+    .mobile-topics-nav { display: none; }
+    .mobile-topics-nav summary { list-style: none; cursor: pointer; }
+    .mobile-topics-nav summary::-webkit-details-marker { display: none; }
+
     @media (max-width: 768px) {
       header { display: none; }
       .mobile-header { display: flex; }
       .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
-      aside { position: static; }
+      aside { display: none; }
       .toc-grid { grid-template-columns: 1fr; }
       footer { padding: 20px; }
       .footer-container { flex-direction: column; align-items: flex-start; }
+
+      .mobile-topics-nav {
+        display: block;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow);
+        margin-bottom: 24px;
+        overflow: hidden;
+      }
+      .mobile-topics-nav summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 14px 16px;
+        font-family: 'Syne', sans-serif;
+        font-weight: 700;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+        color: var(--text);
+      }
+      .mobile-topics-nav summary .mt-caret {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        transition: transform 0.2s ease;
+      }
+      .mobile-topics-nav[open] summary .mt-caret { transform: rotate(180deg); }
+      .mobile-topics-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 0 10px 10px;
+        border-top: 1px solid var(--border);
+      }
+      .mobile-topics-list li a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 10px;
+        margin-top: 6px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: none;
+      }
+      .mobile-topics-list li a:hover { background: var(--surface2); color: var(--text); }
+      .mobile-topics-list li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.5; flex-shrink: 0; }
     }
     @media (max-width: 480px) { main h1 { font-size: 1.6rem; } }
   </style>
@@ -349,6 +404,17 @@ aside ul .submenu li a .dot{
       5.1.3 List Comprehensions
     </div>
 
+    <details class="mobile-topics-nav">
+      <summary>Next in Python Topics <span class="mt-caret">▾</span></summary>
+      <ul class="mobile-topics-list">
+        <li><a href="../python/nested-list-comp.html"><span class="dot"></span>Nested List Comprehension</a></li>
+        <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
+        <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
+        <li><a href="../python/sets.html"><span class="dot"></span>Sets</a></li>
+        <li><a href="../python/looping-techniques.html"><span class="dot"></span>Looping Techniques</a></li>
+      </ul>
+    </details>
+
     <h1>Python List Comprehensions Explained (Python Docs 5.1.3) | Syntax, Filtering, Nested Comprehensions &amp; Beginner Guide</h1>
 
     <div class="doc-ref">
@@ -360,9 +426,10 @@ aside ul .submenu li a .dot{
       <span class="meta-pill green">Beginner</span>
       <span class="meta-pill blue">Data Structures</span>
       <span class="meta-pill orange">Official Docs</span>
-      <span class="date-badge">Updated June 2026</span>
+      <span class="date-badge">Updated August 2026</span>
     </div>
 
+    <p>A list comprehension is a concise way to create a new Python list from an iterable using a single line of code. It can transform values, filter items with <code>if</code>, or do both at once.</p>
     <p>This page explains the official Python List Comprehensions documentation (Python Docs 5.1.3 and 5.1.4) in simple language. Learn how Python list comprehensions work, understand the syntax, filtering, nested comprehensions, multiple for clauses, and real examples. If official Python documentation feels confusing, this guide breaks every concept into beginner-friendly explanations with practical code examples. This guide covers the syntax, filtering with <code>if</code>, multiple <code>for</code> clauses, nested comprehensions, and the classic matrix transpose example.</p>
 
     <p>By the end of this guide, you'll know when to use a list comprehension instead of a loop, how to filter and transform data in one line, and how nested comprehensions work — plus the common mistakes that trip people up.</p>
@@ -619,6 +686,7 @@ Conditional values use:
 <span class="py-var">freshfruit</span> <span class="py-punc">= [</span><span class="py-str">'  banana'</span><span class="py-punc">,</span> <span class="py-str">'  loganberry '</span><span class="py-punc">,</span> <span class="py-str">'passion fruit  '</span><span class="py-punc">]</span>
 <span class="py-punc">[</span><span class="py-var">weapon</span><span class="py-punc">.</span><span class="py-bi">strip</span><span class="py-punc">()</span> <span class="py-kw">for</span> <span class="py-var">weapon</span> <span class="py-kw">in</span> <span class="py-var">freshfruit</span><span class="py-punc">]</span>
 <span class="py-out"># ['banana', 'loganberry', 'passion fruit']</span>
+<span class="py-cmt"># Kiddo Note: weapon is just the variable name chosen by the official Python docs. It could just as well be called fruit.</span>
 
 <span class="py-cmt"># Create (number, square) tuples — tuple MUST be parenthesized</span>
 <span class="py-punc">[(</span><span class="py-var">x</span><span class="py-punc">,</span> <span class="py-var">x</span><span class="py-punc">**</span><span class="py-num">2</span><span class="py-punc">)</span> <span class="py-kw">for</span> <span class="py-var">x</span> <span class="py-kw">in</span> <span class="py-bi">range</span><span class="py-punc">(</span><span class="py-num">6</span><span class="py-punc">)]</span>
@@ -835,6 +903,9 @@ Conditional values use:
 
     <div class="section-divider"></div>
 
+    <div class="callout">
+      <strong>Related →</strong> Ready to go a level deeper? Check out <a href="../python/nested-list-comp.html">Nested List Comprehensions</a> to see how comprehensions work when you're building lists of lists, like a grid or matrix.
+    </div>
     <div class="author-strip">
       <div class="author-avatar">K</div>
       <div class="author-info">
