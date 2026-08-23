@@ -4,17 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="../assests/icon.png" />
-  <meta name="description" content="Learn Python list methods (Python Docs 5.1) with beginner-friendly explanations. Understand append(), extend(), insert(), remove(), pop(), sort(), reverse(), index(), count(), copy(), common mistakes, and interview questions." />
+<meta name="description" content="Learn Python list methods from Python Docs 5.1 with beginner-friendly examples. Understand append(), extend(), insert(), remove(), pop(), sort(), reverse(), index(), count(), copy(), and common mistakes." />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Python List Methods Explained (Python Docs 5.1) | Kiddo" />
   <meta property="og:url" content="https://kiddoedu.org/python/lists.html" />
   <meta property="og:site_name" content="Kiddo" />
   <link rel="canonical" href="https://kiddoedu.org/python/lists.html" />
-  <title>Python List Methods Explained (Python Docs 5.1) | append(), pop(), sort() & Examples</title>
+<title>Python List Methods Explained (Python Docs 5.1) | append(), extend(), sort() & Examples</title>
+
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Python List Methods Explained (Python Docs 5.1)","url":"https://kiddoedu.org/python/lists.html","author":{"@type":"Person","name":"Palak Mishra"},"publisher":{"@type":"Organization","name":"Kiddo","url":"https://kiddoedu.org"}}</script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ESNWS8F9HE');</script>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root{--bg:#f5f3ee;--surface:#ffffff;--surface2:#eceae4;--text:#1a1814;--text-muted:#6b6760;--accent:#e86c2f;--accent2:#3d5afe;--accent3:#00b894;--border:rgba(0,0,0,0.08);--shadow:0 4px 24px rgba(0,0,0,0.07);--shadow-lg:0 12px 48px rgba(0,0,0,0.13);--radius:16px;--radius-sm:10px;--header-h:70px;--transition:0.3s cubic-bezier(0.4,0,0.2,1);}
     body.dark{--bg:#0f0e0c;--surface:#1c1a17;--surface2:#252320;--text:#f0ede6;--text-muted:#918e87;--accent:#ff7d3e;--accent2:#7986cb;--accent3:#55efc4;--border:rgba(255,255,255,0.07);--shadow:0 4px 24px rgba(0,0,0,0.4);--shadow-lg:0 12px 48px rgba(0,0,0,0.6);}
@@ -68,7 +69,7 @@
     main h2{font-family:'Syne',sans-serif;font-weight:700;font-size:1.2rem;letter-spacing:-0.01em;margin-top:36px;margin-bottom:14px;}
     main h4{font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;margin-top:18px;margin-bottom:8px;color:var(--text-muted);}
     main p{font-size:0.95rem;line-height:1.78;color:var(--text);margin-bottom:14px;}
-    main code{font-family:'Courier New',monospace;font-size:0.88em;background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:2px 6px;color:var(--accent);}
+    main code{font-family:'Fira Code',monospace;font-size:0.85em;background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:2px 6px;color:var(--accent);}
     main ul{padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
     main ul li{font-size:0.95rem;line-height:1.6;padding-left:20px;position:relative;color:var(--text);}
     main ul li::before{content:'→';position:absolute;left:0;color:var(--accent);font-weight:600;}
@@ -82,9 +83,9 @@
     .doc-block{background:rgba(0,184,148,0.05);border:1px solid rgba(0,184,148,0.18);border-left:3px solid var(--accent3);border-radius:var(--radius-sm);padding:16px 20px;margin:20px 0;}
     .doc-block-label{font-family:'Syne',sans-serif;font-weight:700;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent3);margin-bottom:8px;display:block;}
     .doc-block p{margin:0;font-size:0.9rem;line-height:1.7;color:var(--text);}
-    .doc-block code{font-family:'Courier New',monospace;font-size:0.85em;background:rgba(0,184,148,0.1);border:1px solid rgba(0,184,148,0.2);border-radius:4px;padding:1px 5px;color:var(--accent3);}
+    .doc-block code{font-family:'Fira Code',monospace;font-size:0.85em;background:rgba(0,184,148,0.1);border:1px solid rgba(0,184,148,0.2);border-radius:4px;padding:1px 5px;color:var(--accent3);}
     .note-box{background:rgba(61,90,254,0.06);border:1px solid rgba(61,90,254,0.15);border-radius:var(--radius-sm);padding:14px 18px;margin:18px 0;font-size:0.9rem;color:var(--text);line-height:1.65;}
-    .note-box code{font-family:'Courier New',monospace;font-size:0.85em;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 5px;color:var(--accent);}
+    .note-box code{font-family:'Fira Code',monospace;font-size:0.85em;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 5px;color:var(--accent);}
     .callout{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius-sm);padding:16px 20px;margin:22px 0;font-size:0.9rem;line-height:1.6;}
     .callout a{color:var(--accent2);text-decoration:none;font-weight:500;}
     .callout a:hover{text-decoration:underline;}
@@ -134,26 +135,41 @@ aside ul .submenu li a .dot{
     .param-table tr:last-child td{border-bottom:none;}
     .param-table tr:hover td{background:var(--surface2);}
     .param-table td:last-child{color:var(--text-muted);font-size:0.85rem;}
-    .code-container{background:#1e1e1e;border-radius:var(--radius-sm);overflow:hidden;margin:14px 0 24px;border:1px solid var(--border);}
-    .code-header{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,0.06);gap:8px;}
-    .lang-tag{font-size:0.72rem;font-weight:600;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;}
+    /* VS Code dark code blocks */
+    .code-container{border-radius:var(--radius-sm);overflow:hidden;margin:14px 0 24px;border:1px solid rgba(255,255,255,0.06);box-shadow:0 8px 32px rgba(0,0,0,0.3);}
+    .code-header{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:#2d2d2d;border-bottom:1px solid rgba(255,255,255,0.06);gap:8px;}
+    .code-header-left{display:flex;align-items:center;gap:10px;}
+    .code-dots{display:flex;gap:6px;}
+    .code-dot{width:12px;height:12px;border-radius:50%;}
+    .code-dot.red{background:#ff5f57;}
+    .code-dot.yellow{background:#febc2e;}
+    .code-dot.green{background:#28c840;}
+    .lang-tag{font-size:0.72rem;font-weight:600;color:rgba(255,255,255,0.35);letter-spacing:0.08em;text-transform:uppercase;font-family:'Fira Code',monospace;}
     .code-src{font-size:0.68rem;color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.06);padding:2px 7px;border-radius:4px;font-weight:600;letter-spacing:0.04em;}
-    .copy-btn{background:none;border:none;color:rgba(255,255,255,0.35);padding:2px 0;cursor:pointer;font-size:0.75rem;font-family:'DM Sans',sans-serif;transition:color var(--transition);position:relative;margin-left:auto;}
-    .copy-btn:hover{color:rgba(255,255,255,0.75);}
-    .tooltip{position:absolute;top:-28px;right:0;background:var(--surface2);color:var(--text);padding:3px 8px;font-size:0.7rem;border-radius:4px;opacity:0;pointer-events:none;transition:opacity 0.2s;white-space:nowrap;}
+    .copy-btn{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.45);padding:3px 10px;cursor:pointer;font-size:0.72rem;font-family:'DM Sans',sans-serif;transition:all 0.2s;position:relative;border-radius:4px;}
+    .copy-btn:hover{color:rgba(255,255,255,0.85);background:rgba(255,255,255,0.1);}
+    .tooltip{position:absolute;top:-28px;right:0;background:#3a3a3a;color:#d4d4d4;padding:3px 8px;font-size:0.7rem;border-radius:4px;opacity:0;pointer-events:none;transition:opacity 0.2s;white-space:nowrap;}
     .tooltip.show{opacity:1;}
-    pre{margin:0;padding:18px;overflow-x:auto;font-family:'Courier New',Courier,monospace;font-size:0.875rem;line-height:1.65;color:#d4d4d4;background:transparent;white-space:pre;tab-size:2;}
+    pre{margin:0;padding:20px;overflow-x:auto;font-family:'Fira Code','Courier New',monospace;font-size:0.88rem;line-height:1.7;background:#1e1e1e;white-space:pre;tab-size:4;}
+    .py-kw{color:#569cd6;}
+    .py-bi{color:#dcdcaa;}
+    .py-str{color:#ce9178;}
+    .py-num{color:#b5cea8;}
+    .py-cmt{color:#6a9955;font-style:italic;}
+    .py-punc{color:#d4d4d4;}
+    .py-var{color:#9cdcfe;}
+    .py-out{color:#4ec9b0;}
     .mistake-list{display:flex;flex-direction:column;gap:10px;margin:16px 0 26px;}
     .mistake-item{display:flex;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;align-items:flex-start;}
     .mi-body strong{font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;display:block;margin-bottom:4px;}
     .mi-body p{font-size:0.875rem;color:var(--text-muted);margin:0;line-height:1.55;}
-    .mi-body code{font-family:'Courier New',monospace;font-size:0.82em;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 5px;color:var(--accent);}
+    .mi-body code{font-family:'Fira Code',monospace;font-size:0.82em;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 5px;color:var(--accent);}
     .iq-list{display:flex;flex-direction:column;gap:12px;margin:18px 0;}
     .iq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;}
     .iq-q{padding:14px 18px;font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;color:var(--text);display:flex;align-items:flex-start;gap:12px;line-height:1.4;}
     .iq-badge{background:rgba(232,108,47,0.1);color:var(--accent);font-size:0.7rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border-radius:5px;padding:2px 8px;flex-shrink:0;margin-top:2px;}
     .iq-a{padding:0 18px 14px 18px;font-size:0.88rem;line-height:1.7;color:var(--text-muted);}
-    .iq-a code{font-family:'Courier New',monospace;font-size:0.82em;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 5px;color:var(--accent);}
+    .iq-a code{font-family:'Fira Code',monospace;font-size:0.82em;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 5px;color:var(--accent);}
     .faq-list{display:flex;flex-direction:column;gap:8px;margin:18px 0;}
     .faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;}
     .faq-q{width:100%;background:none;border:none;padding:14px 18px;text-align:left;font-family:'Syne',sans-serif;font-weight:700;font-size:0.92rem;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:background var(--transition);line-height:1.4;}
@@ -162,7 +178,7 @@ aside ul .submenu li a .dot{
     .faq-q.open .faq-icon{transform:rotate(45deg);}
     .faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease,padding 0.3s ease;font-size:0.9rem;line-height:1.72;color:var(--text-muted);padding:0 18px;}
     .faq-a.open{max-height:280px;padding:2px 18px 15px;}
-    .faq-a code{font-family:'Courier New',monospace;font-size:0.85em;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 5px;color:var(--accent);}
+    .faq-a code{font-family:'Fira Code',monospace;font-size:0.85em;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 5px;color:var(--accent);}
     .author-strip{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;margin:32px 0;}
     .author-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;color:#fff;font-size:1rem;flex-shrink:0;}
     .author-info{font-size:0.85rem;line-height:1.5;}
@@ -174,7 +190,71 @@ aside ul .submenu li a .dot{
     .footer-links{display:flex;gap:20px;}
     .footer-links a{font-size:0.85rem;color:var(--text-muted);text-decoration:none;transition:color var(--transition);}
     .footer-links a:hover{color:var(--accent);}
-    @media(max-width:768px){header{display:none;}.mobile-header{display:flex;}.page-wrap{grid-template-columns:1fr;padding:24px 20px 60px;gap:24px;}aside{position:static;}.toc-grid{grid-template-columns:1fr;}footer{padding:20px;}.footer-container{flex-direction:column;align-items:flex-start;}}
+
+    /* Mobile "Next in Python Topics" mini-nav — replaces the full sidebar on small screens */
+    .mobile-topics-nav { display: none; }
+    .mobile-topics-nav summary { list-style: none; cursor: pointer; }
+    .mobile-topics-nav summary::-webkit-details-marker { display: none; }
+
+    @media(max-width:768px){
+      header{display:none;}
+      .mobile-header{display:flex;}
+      .page-wrap{grid-template-columns:1fr;padding:24px 20px 60px;gap:24px;}
+      aside{display:none;}
+      .toc-grid{grid-template-columns:1fr;}
+      footer{padding:20px;}
+      .footer-container{flex-direction:column;align-items:flex-start;}
+
+      .mobile-topics-nav {
+        display: block;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow);
+        margin-bottom: 24px;
+        overflow: hidden;
+      }
+      .mobile-topics-nav summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 14px 16px;
+        font-family: 'Syne', sans-serif;
+        font-weight: 700;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+        color: var(--text);
+      }
+      .mobile-topics-nav summary .mt-caret {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        transition: transform 0.2s ease;
+      }
+      .mobile-topics-nav[open] summary .mt-caret { transform: rotate(180deg); }
+      .mobile-topics-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 0 10px 10px;
+        border-top: 1px solid var(--border);
+      }
+      .mobile-topics-list li a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 10px;
+        margin-top: 6px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: none;
+      }
+      .mobile-topics-list li a:hover { background: var(--surface2); color: var(--text); }
+      .mobile-topics-list li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.5; flex-shrink: 0; }
+    }
     @media(max-width:480px){main h1{font-size:1.6rem;}}
   </style>
 </head>
@@ -242,6 +322,18 @@ aside ul .submenu li a .dot{
 
   <main>
     <div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><a href="../python/py-intro.html">Python</a><span>›</span>5.1 Lists</div>
+
+    <details class="mobile-topics-nav">
+      <summary>Next in Python Topics <span class="mt-caret">▾</span></summary>
+      <ul class="mobile-topics-list">
+        <li><a href="../python/list-stack-queue.html"><span class="dot"></span>Lists as Stack and Queue</a></li>
+        <li><a href="../python/list-comp.html"><span class="dot"></span>List Comprehensions</a></li>
+        <li><a href="../python/nested-list-comp.html"><span class="dot"></span>Nested List Comprehensions</a></li>
+        <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
+        <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
+      </ul>
+    </details>
+
     <h1>Python List Methods Explained (Python Docs 5.1) | append(), sort(), pop() & Beginner Guide</h1>
     <div class="doc-ref">📖 Based on <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists" target="_blank" rel="noopener">Python 3 official docs §5.1</a> — explained like a friend, with extra examples added</div>
     <div class="meta-row">
@@ -380,45 +472,51 @@ aside ul .submenu li a .dot{
     <h2 id="fruits">The Fruits Example — From the Python Docs</h2>
     <p>The Python docs show all the list methods in action with a single fruits list. Here it is, exactly as in the docs, with explanations for each step:</p>
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Python docs example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">fruits</span> <span class="py-punc">= [</span><span class="py-str">'orange'</span><span class="py-punc">,</span> <span class="py-str">'apple'</span><span class="py-punc">,</span> <span class="py-str">'pear'</span><span class="py-punc">,</span> <span class="py-str">'banana'</span><span class="py-punc">,</span> <span class="py-str">'kiwi'</span><span class="py-punc">,</span> <span class="py-str">'apple'</span><span class="py-punc">,</span> <span class="py-str">'banana'</span><span class="py-punc">]</span>
 
-fruits.count('apple')   # 2  ← 'apple' appears twice
-fruits.count('tangerine')  # 0  ← not in the list
+<span class="py-var">fruits</span><span class="py-punc">.</span><span class="py-bi">count</span><span class="py-punc">(</span><span class="py-str">'apple'</span><span class="py-punc">)</span>   <span class="py-cmt"># 2  ← 'apple' appears twice</span>
+<span class="py-var">fruits</span><span class="py-punc">.</span><span class="py-bi">count</span><span class="py-punc">(</span><span class="py-str">'tangerine'</span><span class="py-punc">)</span>  <span class="py-cmt"># 0  ← not in the list</span>
 
-fruits.index('banana')  # 3  ← first 'banana' is at index 3
-fruits.index('banana', 4)  # 6  ← next 'banana' starting from index 4
+<span class="py-var">fruits</span><span class="py-punc">.</span><span class="py-bi">index</span><span class="py-punc">(</span><span class="py-str">'banana'</span><span class="py-punc">)</span>  <span class="py-cmt"># 3  ← first 'banana' is at index 3</span>
+<span class="py-var">fruits</span><span class="py-punc">.</span><span class="py-bi">index</span><span class="py-punc">(</span><span class="py-str">'banana'</span><span class="py-punc">,</span> <span class="py-num">4</span><span class="py-punc">)</span>  <span class="py-cmt"># 6  ← next 'banana' starting from index 4</span>
 
-fruits.reverse()
-fruits
-# ['banana', 'apple', 'kiwi', 'banana', 'pear', 'apple', 'orange']
+<span class="py-var">fruits</span><span class="py-punc">.</span><span class="py-bi">reverse</span><span class="py-punc">()</span>
+<span class="py-var">fruits</span>
+<span class="py-out"># ['banana', 'apple', 'kiwi', 'banana', 'pear', 'apple', 'orange']</span>
 
-fruits.append('grape')
-fruits
-# ['banana', 'apple', 'kiwi', 'banana', 'pear', 'apple', 'orange', 'grape']
+<span class="py-var">fruits</span><span class="py-punc">.</span><span class="py-bi">append</span><span class="py-punc">(</span><span class="py-str">'grape'</span><span class="py-punc">)</span>
+<span class="py-var">fruits</span>
+<span class="py-out"># ['banana', 'apple', 'kiwi', 'banana', 'pear', 'apple', 'orange', 'grape']</span>
 
-fruits.sort()
-fruits
-# ['apple', 'apple', 'banana', 'banana', 'grape', 'kiwi', 'orange', 'pear']
+<span class="py-var">fruits</span><span class="py-punc">.</span><span class="py-bi">sort</span><span class="py-punc">()</span>
+<span class="py-var">fruits</span>
+<span class="py-out"># ['apple', 'apple', 'banana', 'banana', 'grape', 'kiwi', 'orange', 'pear']</span>
 
-fruits.pop()   # 'pear'  ← removes and returns last item
-# ['apple', 'apple', 'banana', 'banana', 'grape', 'kiwi', 'orange']</code></pre>
+<span class="py-var">fruits</span><span class="py-punc">.</span><span class="py-bi">pop</span><span class="py-punc">()</span>   <span class="py-cmt"># 'pear'  ← removes and returns last item</span>
+<span class="py-out"># ['apple', 'apple', 'banana', 'banana', 'grape', 'kiwi', 'orange']</span></pre>
     </div>
 
     <h4>Kiddo extra — append vs extend</h4>
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>a = [1, 2, 3]
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">a</span> <span class="py-punc">= [</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">,</span> <span class="py-num">3</span><span class="py-punc">]</span>
 
-# append() adds one item — even if it's a list
-a.append([4, 5])
-print(a)   # [1, 2, 3, [4, 5]]  ← list inside a list
+<span class="py-cmt"># append() adds one item — even if it's a list</span>
+<span class="py-var">a</span><span class="py-punc">.</span><span class="py-bi">append</span><span class="py-punc">([</span><span class="py-num">4</span><span class="py-punc">,</span> <span class="py-num">5</span><span class="py-punc">])</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">a</span><span class="py-punc">)</span>   <span class="py-out"># [1, 2, 3, [4, 5]]  ← list inside a list</span>
 
-b = [1, 2, 3]
+<span class="py-var">b</span> <span class="py-punc">= [</span><span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">2</span><span class="py-punc">,</span> <span class="py-num">3</span><span class="py-punc">]</span>
 
-# extend() unpacks the iterable and adds each item individually
-b.extend([4, 5])
-print(b)   # [1, 2, 3, 4, 5]  ← flat list</code></pre>
+<span class="py-cmt"># extend() unpacks the iterable and adds each item individually</span>
+<span class="py-var">b</span><span class="py-punc">.</span><span class="py-bi">extend</span><span class="py-punc">([</span><span class="py-num">4</span><span class="py-punc">,</span> <span class="py-num">5</span><span class="py-punc">])</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">b</span><span class="py-punc">)</span>   <span class="py-out"># [1, 2, 3, 4, 5]  ← flat list</span></pre>
     </div>
 
     <div class="section-divider"></div>
@@ -438,22 +536,25 @@ print(b)   # [1, 2, 3, 4, 5]  ← flat list</code></pre>
     </div>
     <p>This catches beginners all the time. If you write <code>new_list = my_list.sort()</code>, you get <code>None</code> back — not the sorted list. The sort happens in place on the original list.</p>
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>nums = [3, 1, 4, 1, 5, 9]
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">nums</span> <span class="py-punc">= [</span><span class="py-num">3</span><span class="py-punc">,</span> <span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">4</span><span class="py-punc">,</span> <span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">5</span><span class="py-punc">,</span> <span class="py-num">9</span><span class="py-punc">]</span>
 
-# Wrong — sort() returns None, not a list
-result = nums.sort()
-print(result)   # None
+<span class="py-cmt"># Wrong — sort() returns None, not a list</span>
+<span class="py-var">result</span> <span class="py-punc">=</span> <span class="py-var">nums</span><span class="py-punc">.</span><span class="py-bi">sort</span><span class="py-punc">()</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">result</span><span class="py-punc">)</span>   <span class="py-out"># None</span>
 
-# Right — sort in place, then use the original
-nums.sort()
-print(nums)   # [1, 1, 3, 4, 5, 9]
+<span class="py-cmt"># Right — sort in place, then use the original</span>
+<span class="py-var">nums</span><span class="py-punc">.</span><span class="py-bi">sort</span><span class="py-punc">()</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">nums</span><span class="py-punc">)</span>   <span class="py-out"># [1, 1, 3, 4, 5, 9]</span>
 
-# If you need the original untouched, use sorted() instead
-nums = [3, 1, 4, 1, 5, 9]
-sorted_nums = sorted(nums)
-print(sorted_nums)  # [1, 1, 3, 4, 5, 9]
-print(nums)         # [3, 1, 4, 1, 5, 9]  ← unchanged</code></pre>
+<span class="py-cmt"># If you need the original untouched, use sorted() instead</span>
+<span class="py-var">nums</span> <span class="py-punc">= [</span><span class="py-num">3</span><span class="py-punc">,</span> <span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">4</span><span class="py-punc">,</span> <span class="py-num">1</span><span class="py-punc">,</span> <span class="py-num">5</span><span class="py-punc">,</span> <span class="py-num">9</span><span class="py-punc">]</span>
+<span class="py-var">sorted_nums</span> <span class="py-punc">=</span> <span class="py-bi">sorted</span><span class="py-punc">(</span><span class="py-var">nums</span><span class="py-punc">)</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">sorted_nums</span><span class="py-punc">)</span>  <span class="py-out"># [1, 1, 3, 4, 5, 9]</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">nums</span><span class="py-punc">)</span>         <span class="py-out"># [3, 1, 4, 1, 5, 9]  ← unchanged</span></pre>
     </div>
 
     <div class="section-divider"></div>
@@ -471,23 +572,26 @@ print(nums)         # [3, 1, 4, 1, 5, 9]  ← unchanged</code></pre>
       </tbody>
     </table>
     <div class="code-container">
-      <div class="code-header"><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span><button class="copy-btn">Copy<div class="tooltip">Copied!</div></button></div>
-      <pre><code>students = ["Sneha", "Palak", "Rohan", "Arjun"]
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">students</span> <span class="py-punc">= [</span><span class="py-str">"Sneha"</span><span class="py-punc">,</span> <span class="py-str">"Palak"</span><span class="py-punc">,</span> <span class="py-str">"Rohan"</span><span class="py-punc">,</span> <span class="py-str">"Arjun"</span><span class="py-punc">]</span>
 
-# sort() — modifies in place, returns None
-students.sort()
-print(students)  # ['Arjun', 'Palak', 'Rohan', 'Sneha']
+<span class="py-cmt"># sort() — modifies in place, returns None</span>
+<span class="py-var">students</span><span class="py-punc">.</span><span class="py-bi">sort</span><span class="py-punc">()</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">students</span><span class="py-punc">)</span>  <span class="py-out"># ['Arjun', 'Palak', 'Rohan', 'Sneha']</span>
 
-# sorted() — leaves original alone, returns new sorted list
-scores = [88, 45, 92, 71]
-top = sorted(scores, reverse=True)
-print(top)     # [92, 88, 71, 45]
-print(scores)  # [88, 45, 92, 71]  ← unchanged
+<span class="py-cmt"># sorted() — leaves original alone, returns new sorted list</span>
+<span class="py-var">scores</span> <span class="py-punc">= [</span><span class="py-num">88</span><span class="py-punc">,</span> <span class="py-num">45</span><span class="py-punc">,</span> <span class="py-num">92</span><span class="py-punc">,</span> <span class="py-num">71</span><span class="py-punc">]</span>
+<span class="py-var">top</span> <span class="py-punc">=</span> <span class="py-bi">sorted</span><span class="py-punc">(</span><span class="py-var">scores</span><span class="py-punc">,</span> <span class="py-var">reverse</span><span class="py-punc">=</span><span class="py-kw">True</span><span class="py-punc">)</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">top</span><span class="py-punc">)</span>     <span class="py-out"># [92, 88, 71, 45]</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">scores</span><span class="py-punc">)</span>  <span class="py-out"># [88, 45, 92, 71]  ← unchanged</span>
 
-# Custom sort with key=
-words = ["banana", "apple", "kiwi", "pear"]
-words.sort(key=len)          # sort by word length
-print(words)  # ['kiwi', 'pear', 'apple', 'banana']</code></pre>
+<span class="py-cmt"># Custom sort with key=</span>
+<span class="py-var">words</span> <span class="py-punc">= [</span><span class="py-str">"banana"</span><span class="py-punc">,</span> <span class="py-str">"apple"</span><span class="py-punc">,</span> <span class="py-str">"kiwi"</span><span class="py-punc">,</span> <span class="py-str">"pear"</span><span class="py-punc">]</span>
+<span class="py-var">words</span><span class="py-punc">.</span><span class="py-bi">sort</span><span class="py-punc">(</span><span class="py-var">key</span><span class="py-punc">=</span><span class="py-bi">len</span><span class="py-punc">)</span>          <span class="py-cmt"># sort by word length</span>
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">words</span><span class="py-punc">)</span>  <span class="py-out"># ['kiwi', 'pear', 'apple', 'banana']</span></pre>
     </div>
 
     <div class="section-divider"></div>
@@ -495,7 +599,7 @@ print(words)  # ['kiwi', 'pear', 'apple', 'banana']</code></pre>
     <h2 id="mistakes">Common Python List Mistakes</h2>
     <div class="mistake-list">
       <div class="mistake-item"><div class="mi-body"><strong>Assigning sort() to a variable</strong><p><code>sorted_list = my_list.sort()</code> gives you <code>None</code>. Use <code>my_list.sort()</code> and work with <code>my_list</code>, or use <code>sorted_list = sorted(my_list)</code> instead.</p></div></div>
-      <div class="mistake-item"><div class="mi-body"><strong>Using append() instead of extend() to merge lists</strong><p><code>a.append([4, 5])</code> adds the list as a single nested element. <code>a.extend([4, 5])</code> adds each item individually. Most of the time you want <code>extend()</code>.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Using append() instead of extend() to merge lists</strong><p><code>a.append([4, 5])</code> adds the list as a single nested element. <code>a.extend([4, 5])</code> adds each item individually. Choose between them based on whether you want the iterable as one item or want to add its elements individually.</p></div></div>
       <div class="mistake-item"><div class="mi-body"><strong>pop() on an empty list</strong><p><code>a.pop()</code> raises <code>IndexError: pop from empty list</code>. Check <code>if a:</code> before popping, or use a try/except block.</p></div></div>
       <div class="mistake-item"><div class="mi-body"><strong>remove() removes only the first match</strong><p><code>a.remove(2)</code> on <code>[2, 3, 2]</code> gives <code>[3, 2]</code> — only the first <code>2</code> is removed. Loop to remove all occurrences: <code>[x for x in a if x != 2]</code>.</p></div></div>
       <div class="mistake-item"><div class="mi-body"><strong>Mixing types breaks sort()</strong><p>From the Python docs: <code>[None, 'hello', 10]</code> doesn't sort because integers can't be compared to strings. Make sure your list is homogeneous before sorting.</p></div></div>
@@ -567,7 +671,7 @@ print(words)  # ['kiwi', 'pear', 'apple', 'banana']</code></pre>
       <a href="../python/for_loop.html">For Loop</a> ·
       <a href="../python/if_statements.html">If Statements</a> ·
       <a href="../python/arbitrary-argument-lists.html">Arbitrary Arguments List</a> ·
-      <a href="../python/default-arguments.html">Default arguments/a> ·
+      <a href="../python/default-arguments.html">Default arguments</a> ·
       <a href="../python/dictionary.html">Dictionaries (5.5)</a> ·
       <a href="../python/tuples.html">Tuples (5.3)</a> ·
       <a href="../python/sets.html">Sets (5.4)</a> ·
@@ -595,7 +699,7 @@ print(words)  # ['kiwi', 'pear', 'apple', 'banana']</code></pre>
   document.addEventListener('click',()=>menuDropdown?.classList.remove('open'));
   const progressBar=document.getElementById('progressBar');
   window.addEventListener('scroll',()=>{const pct=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;progressBar.style.width=Math.min(pct,100)+'%';});
-  document.querySelectorAll('.code-container').forEach(container=>{const btn=container.querySelector('.copy-btn');const tip=container.querySelector('.tooltip');const code=container.querySelector('pre code');if(!btn)return;btn.addEventListener('click',()=>{navigator.clipboard.writeText(code.innerText.trim()).then(()=>{tip.classList.add('show');setTimeout(()=>tip.classList.remove('show'),2000);});});});
+  document.querySelectorAll('.code-container').forEach(container=>{const btn=container.querySelector('.copy-btn');const tip=container.querySelector('.tooltip');const pre=container.querySelector('pre');if(!btn)return;btn.addEventListener('click',()=>{navigator.clipboard.writeText(pre.innerText.trim()).then(()=>{tip.classList.add('show');setTimeout(()=>tip.classList.remove('show'),2000);});});});
   document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const ans=btn.nextElementSibling;const isOpen=ans.classList.contains('open');document.querySelectorAll('.faq-a').forEach(a=>a.classList.remove('open'));document.querySelectorAll('.faq-q').forEach(b=>{b.classList.remove('open');b.setAttribute('aria-expanded','false');});if(!isOpen){ans.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true');}});});
 </script>
 </body>

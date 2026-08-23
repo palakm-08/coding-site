@@ -230,12 +230,67 @@ aside ul .submenu li a .dot{
     .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
     .footer-links a:hover { color: var(--accent); }
 
+    /* Mobile "Next in Python Topics" mini-nav — replaces the full sidebar on small screens */
+    .mobile-topics-nav { display: none; }
+    .mobile-topics-nav summary { list-style: none; cursor: pointer; }
+    .mobile-topics-nav summary::-webkit-details-marker { display: none; }
+
     @media (max-width: 768px) {
       header { display: none; } .mobile-header { display: flex; }
       .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
-      aside { position: static; } .toc-grid { grid-template-columns: 1fr; }
+      aside { display: none; } .toc-grid { grid-template-columns: 1fr; }
       .vs-grid { grid-template-columns: 1fr; } .prop-grid { grid-template-columns: 1fr 1fr; }
       footer { padding: 20px; } .footer-container { flex-direction: column; align-items: flex-start; }
+
+      .mobile-topics-nav {
+        display: block;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow);
+        margin-bottom: 24px;
+        overflow: hidden;
+      }
+      .mobile-topics-nav summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 14px 16px;
+        font-family: 'Syne', sans-serif;
+        font-weight: 700;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+        color: var(--text);
+      }
+      .mobile-topics-nav summary .mt-caret {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        transition: transform 0.2s ease;
+      }
+      .mobile-topics-nav[open] summary .mt-caret { transform: rotate(180deg); }
+      .mobile-topics-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 0 10px 10px;
+        border-top: 1px solid var(--border);
+      }
+      .mobile-topics-list li a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 10px;
+        margin-top: 6px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: none;
+      }
+      .mobile-topics-list li a:hover { background: var(--surface2); color: var(--text); }
+      .mobile-topics-list li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.5; flex-shrink: 0; }
     }
     @media (max-width: 480px) { main h1 { font-size: 1.6rem; } .prop-grid { grid-template-columns: 1fr; } }
   </style>
@@ -311,6 +366,17 @@ aside ul .submenu li a .dot{
       <a href="../python/py-intro.html">Python</a><span>›</span>
       4.2 for Statements
     </div>
+
+    <details class="mobile-topics-nav">
+      <summary>Next in Python Topics <span class="mt-caret">▾</span></summary>
+      <ul class="mobile-topics-list">
+        <li><a href="../python/functions.html"><span class="dot"></span>Functions</a></li>
+        <li><a href="../python/default-arguments.html"><span class="dot"></span>Default Argument Values</a></li>
+        <li><a href="../python/keyword-arguments.html"><span class="dot"></span>keyword Arguments</a></li>
+        <li><a href="../python/special-parameters.html"><span class="dot"></span>Special Parameters</a></li>
+        <li><a href="../python/arbitrary-argument-lists.html"><span class="dot"></span>Arbitrary Argument Lists</a></li>
+      </ul>
+    </details>
 
     <h1>Python for Loops Documentation Explained (Python Docs 4.2) | The for Statement, range(), enumerate() & Nested Loops</h1>
 
@@ -780,7 +846,7 @@ Using an index when you only need the values is usually considered a code smell.
       <strong>More Python topics →</strong><br><br>
       <a href="../python/functions.html">Functions (4.8)</a> ·
       <a href="../python/while_loop.html">While Loop</a> ·
-      <a href="../python/default-arguments.html">Default Arguments/a> ·
+      <a href="../python/default-arguments.html">Default Arguments</a> ·
       <a href="../python/if_statements.html">If Statements</a> ·
       <a href="../python/list.html">Lists</a> ·
       <a href="../python/dictionary.html">Dictionaries (5.5)</a> ·
