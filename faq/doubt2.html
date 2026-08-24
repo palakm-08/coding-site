@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="../assests/icon.png">
-  <meta name="description" content="Confused by if __name__ == '__main__' in Python? Learn what it means, why it's used, and how it helps with reusable code. Clear and beginner-friendly.">
-  <title>What Does if __name__ == '__main__' Mean in Python? Explained Simply</title>
+  <meta name="description" content="What is __name__ in Python, and why do we use if __name__ == '__main__'? Learn how Python modules, scripts, and imports work, with clear beginner examples.">
+  <title>if __name__ == '__main__' in Python: What It Means &amp; Why You Need It</title>
   <link rel="canonical" href="https://kiddoedu.org/faq/doubt2.html">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
   <script>
@@ -249,6 +249,14 @@
       white-space: pre; tab-size: 2;
     }
 
+    /* ── Folder tree ── */
+    .tree-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 16px 20px; margin: 16px 0 24px;
+      font-family: 'Courier New', monospace; font-size: 0.88rem; line-height: 1.7;
+      color: var(--text);
+    }
+
     /* ── Callout / note ── */
     .callout {
       background: var(--surface); border: 1px solid var(--border);
@@ -263,6 +271,19 @@
       border-radius: var(--radius-sm); padding: 14px 18px;
       margin: 20px 0; font-size: 0.9rem; color: var(--text); line-height: 1.6;
     }
+
+    .warn-box {
+      background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.2);
+      border-left: 3px solid var(--accent); border-radius: var(--radius-sm);
+      padding: 14px 18px; margin: 20px 0; font-size: 0.9rem; color: var(--text); line-height: 1.6;
+    }
+
+    /* ── FAQ list ── */
+    .faq-list { display: flex; flex-direction: column; gap: 4px; margin: 16px 0 10px; }
+    .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-item h3 { margin-top: 0; margin-bottom: 6px; font-size: 0.95rem; }
+    .faq-item p { margin-bottom: 0; font-size: 0.9rem; color: var(--text); }
 
     /* ── Footer ── */
     footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
@@ -362,7 +383,7 @@
       <h2>What does <code>if __name__ == "__main__"</code> mean?</h2>
       <p>Imagine you're writing a Python file — maybe a fun game or a simple calculator. Now ask yourself: should this file run some code <strong>only when</strong> it's opened directly? Or stay quiet if someone else imports it into their own project?</p>
       <p>That's exactly what this line does. It's Python's way of saying: <strong>"Run this part only when the file is executed directly — not when it's imported."</strong></p>
-      <p>It checks a built-in variable called <code>__name__</code>. If you run the file directly with <code>python filename.py</code>, then <code>__name__</code> becomes <code>"__main__"</code>. But if someone imports your file into another script, <code>__name__</code> becomes the name of your file instead.</p>
+      <p>It checks a built-in variable called <code>__name__</code>. If you run the file directly with <code>python filename.py</code>, then <code>__name__</code> becomes <code>"__main__"</code>. When the file is imported instead, <code>__name__</code> is set to the module's name — not <code>"__main__"</code> — which is exactly what makes this check work.</p>
 
       <h3>So why should you care?</h3>
       <p>This small line is super useful when:</p>
@@ -370,6 +391,36 @@
         <li>You're writing utility functions that others might import.</li>
         <li>You want to test your code with print statements or small examples.</li>
         <li>You're building Python scripts and want better control of when things happen.</li>
+      </ul>
+
+      <h2>What Is <code>__name__</code> in Python?</h2>
+      <p><code>__name__</code> isn't something you create — it's a special built-in variable that Python automatically sets for every file (module) as soon as it runs. Its value depends entirely on how the file was started:</p>
+      <ul>
+        <li><strong>Run directly</strong> (<code>python greet.py</code>): <code>__name__</code> is set to <code>"__main__"</code>.</li>
+        <li><strong>Imported</strong> by another file (<code>import greet</code>): <code>__name__</code> is set to the module's name — in this case, <code>"greet"</code>.</li>
+      </ul>
+      <p>You can see this yourself with one line:</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span class="lang-tag">Python — greet.py</span>
+          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+        </div>
+        <pre><code>print(__name__)</code></pre>
+      </div>
+
+      <p>Run this file directly, and it prints <code>__main__</code>. Import it from another file instead, and it prints <code>greet</code>. Same line of code, two different outputs — because <code>__name__</code> changes depending on how Python started running the file.</p>
+
+      <div class="note-box">
+        <strong>"__main__" vs the module's name:</strong> <code>"__main__"</code> is just a fixed label Python uses for whichever file you told it to run directly. It's not related to a function called <code>main()</code> — Python doesn't require one. The module's own name (its filename, minus <code>.py</code>) is only used when that file is imported.
+      </div>
+
+      <h2>Why Do We Use <code>if __name__ == "__main__"</code>?</h2>
+      <p>The short answer: it lets one Python file work two ways — as a script you run directly, and as a module other files can safely import.</p>
+      <ul>
+        <li><strong>Separates reusable code from "run this now" code.</strong> Functions and classes at the top of a file are meant to be reused. The <code>if __name__ == "__main__":</code> block is where you put the code that should only run when this specific file is the one being executed.</li>
+        <li><strong>Stops the main logic from firing on import.</strong> Without the guard, anything you write at the top level — including function calls — runs the instant the file is imported, whether you wanted that or not.</li>
+        <li><strong>Makes the file dual-purpose.</strong> Someone can run <code>python greet.py</code> to use it standalone, or <code>import greet</code> to reuse just the functions inside it — same file, two valid uses.</li>
       </ul>
 
       <h2>Let's See It in Action</h2>
@@ -397,10 +448,123 @@ if __name__ == "__main__":
         <pre><code>import greet</code></pre>
       </div>
 
-      <p>Nothing happens. The code inside the <code>if __name__ == "__main__"</code> block is silently skipped when the file is imported. This keeps your code clean and prevents unwanted side effects when using modules.</p>
+      <p>The <code>say_hello()</code> function is now defined and ready to use inside <code>app.py</code>, but it doesn't run automatically — the code inside the <code>if __name__ == "__main__"</code> block does not execute, because <code>__name__</code> is <code>"greet"</code> here, not <code>"__main__"</code>. This keeps your code clean and prevents unwanted side effects when using modules.</p>
 
       <div class="note-box">
         <strong>Quick summary:</strong> <code>__name__ == "__main__"</code> is <code>True</code> only when you run the file directly. It's <code>False</code> when the file is imported by another script.
+      </div>
+
+      <h2>Without vs With the Guard</h2>
+      <p>The difference is easiest to see side by side. Same function, same import — one version behaves badly, the other doesn't.</p>
+
+      <h3>Without the guard</h3>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="lang-tag">Python — greet.py (no guard)</span>
+          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+        </div>
+        <pre><code>def say_hello():
+    print("Hello, world!")
+
+say_hello()</code></pre>
+      </div>
+      <p>Now import it from <code>app.py</code>:</p>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="lang-tag">Python — app.py</span>
+          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+        </div>
+        <pre><code>import greet
+# Output: Hello, world!  ← ran immediately, even though you never called it</code></pre>
+      </div>
+      <p>Just importing <code>greet</code> triggers <code>Hello, world!</code> — you didn't ask for that. If <code>say_hello()</code> did something bigger, like sending an email or writing to a file, that would fire too, purely from an import.</p>
+
+      <h3>With the guard</h3>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="lang-tag">Python — greet.py (guarded)</span>
+          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+        </div>
+        <pre><code>def say_hello():
+    print("Hello, world!")
+
+if __name__ == "__main__":
+    say_hello()</code></pre>
+      </div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="lang-tag">Python — app.py</span>
+          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+        </div>
+        <pre><code>import greet
+# No output — say_hello() is only defined, not called</code></pre>
+      </div>
+      <p>Now importing <code>greet</code> just makes <code>say_hello()</code> available to use — it doesn't run on its own. <code>app.py</code> can call <code>greet.say_hello()</code> whenever it actually wants to.</p>
+
+      <h2>Python Module vs Python Script</h2>
+      <p>These two words describe the same kind of file — a <code>.py</code> file — just used in different ways:</p>
+      <ul>
+        <li><strong>Module</strong> — a Python file meant to be imported and reused by other files. Its functions and classes are the point; it usually isn't run on its own.</li>
+        <li><strong>Script</strong> — a Python file meant to be run directly, top to bottom, to do something.</li>
+      </ul>
+      <p>Here's the thing: the exact same file can be both, depending on how it's used. A tiny project makes this clearer:</p>
+
+      <div class="tree-box">
+        project/<br>
+        ├── calculator.py<br>
+        └── app.py
+      </div>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span class="lang-tag">Python — calculator.py</span>
+          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+        </div>
+        <pre><code>def add(a, b):
+    return a + b
+
+if __name__ == "__main__":
+    print(add(2, 3))</code></pre>
+      </div>
+
+      <p><strong>1. Executed directly</strong> — running <code>python calculator.py</code> sets <code>__name__</code> to <code>"__main__"</code>, so the guarded block runs and prints <code>5</code>. Here, <code>calculator.py</code> is acting as a script.</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span class="lang-tag">Python — app.py</span>
+          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+        </div>
+        <pre><code>import calculator
+
+print(calculator.add(10, 20))   # 30</code></pre>
+      </div>
+
+      <p><strong>2. Imported into app.py</strong> — now <code>__name__</code> inside <code>calculator.py</code> is <code>"calculator"</code>, not <code>"__main__"</code>, so the guarded <code>print(add(2, 3))</code> stays silent. Only the <code>add()</code> function is used, from <code>app.py</code>. Here, <code>calculator.py</code> is acting as a module.</p>
+      <p>Same file, two roles — and <code>__name__</code> is exactly what tells Python which one applies each time.</p>
+
+      <h2>What Happens When You Import a Python File?</h2>
+      <p>A common misconception is that importing a file "does nothing" until you call something from it. That's not quite right — importing a module runs its top-level code immediately. What it <em>doesn't</em> run is anything guarded behind <code>if __name__ == "__main__":</code>, because that condition is false during an import.</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span class="lang-tag">Python — settings.py</span>
+          <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+        </div>
+        <pre><code>print("Loading settings...")   # top-level — runs on import
+
+VERSION = "1.0"
+
+def show_version():
+    print(f"Version: {VERSION}")
+
+if __name__ == "__main__":
+    show_version()   # only runs if settings.py is run directly</code></pre>
+      </div>
+
+      <p>Importing this file with <code>import settings</code> immediately prints <code>Loading settings...</code> and defines <code>VERSION</code> and <code>show_version()</code> — that's real code executing. What it skips is the guarded <code>show_version()</code> call at the bottom, because <code>__name__</code> is <code>"settings"</code>, not <code>"__main__"</code>, at that moment.</p>
+
+      <div class="warn-box">
+        <strong>Correction to a common myth:</strong> Importing a module isn't a no-op. Python runs every top-level statement in the file — print statements, variable assignments, even function calls — as soon as it's imported. The only thing skipped is code inside <code>if __name__ == "__main__":</code>, because that check simply evaluates to <code>False</code> on import.
       </div>
 
       <h2>Common Mistakes</h2>
@@ -409,15 +573,53 @@ if __name__ == "__main__":
         <li><strong>Indentation errors:</strong> The code inside the <code>if</code> block must be properly indented — 4 spaces in.</li>
         <li><strong>Expecting it to run on import:</strong> Code inside this block won't run when the file is imported. That's the whole point!</li>
         <li><strong>Forgetting the underscores:</strong> It must be <code>__name__</code> and <code>"__main__"</code> — double underscores on both sides.</li>
+        <li><strong>Assuming imports don't execute anything:</strong> Top-level code in an imported file still runs. Only the guarded block is skipped.</li>
       </ul>
 
       <h2>Wrap Up</h2>
       <p>So now you know what <code>if __name__ == "__main__"</code> means! It's not as scary as it looked. Think of it as a way to tell Python: "Only run this part when I'm executing the file directly."</p>
       <p>This little line becomes really powerful when your projects grow or when you're sharing code with others. Keep practicing, and you'll start using it without even thinking about it!</p>
 
+      <h2>FAQs</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3>What does if __name__ == "__main__" mean in Python?</h3>
+          <p>It's a check that's only <code>True</code> when the file is run directly, not when it's imported by another file. Code inside that block only runs during direct execution.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Why do we use if __name__ == "__main__"?</h3>
+          <p>It lets a Python file work both as a standalone script and as an importable module, without its "run this now" code firing every time someone imports it.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What is __name__ in Python?</h3>
+          <p>A built-in variable Python sets automatically on every file. It equals <code>"__main__"</code> when the file is run directly, or the module's name when it's imported.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What is __main__ in Python?</h3>
+          <p><code>"__main__"</code> is the fixed name Python gives to whichever file you executed directly. It's not a required function — Python doesn't need a <code>main()</code> function to run a file.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What happens when a Python file is imported?</h3>
+          <p>Its top-level code runs immediately — assignments, function definitions, print statements included. The only thing skipped is code inside <code>if __name__ == "__main__":</code>.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can I run a Python file without if __name__ == "__main__"?</h3>
+          <p>Yes — the file will still run fine on its own. The guard only matters if you also plan to import that file elsewhere and don't want its top-level calls to run automatically.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What is the difference between a Python module and a script?</h3>
+          <p>A module is a file meant to be imported and reused. A script is a file meant to be run directly. The same <code>.py</code> file can serve as either, depending on how it's used.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Why doesn't code inside if __name__ == "__main__" run when imported?</h3>
+          <p>Because <code>__name__</code> is set to the module's name during an import, not <code>"__main__"</code> — so the condition evaluates to <code>False</code> and the block is skipped.</p>
+        </div>
+      </div>
+
       <div class="callout">
         <strong>Explore more FAQs →</strong><br><br>
         <a href="../faq/doubt1.html">= vs == in Python</a> ·
+        <a href="../faq/doubt5.html">break vs pass vs continue</a> ·
         <a href="../faq/doubt3.html">Coding roadmap from scratch</a> ·
         <a href="../faq/doubt4.html">Learn coding without a CS degree?</a>
       </div>
@@ -474,6 +676,7 @@ if __name__ == "__main__":
       const btn     = container.querySelector('.copy-btn');
       const tooltip = container.querySelector('.tooltip');
       const code    = container.querySelector('pre code');
+      if (!code) return;
       btn.addEventListener('click', () => {
         navigator.clipboard.writeText(code.innerText.trim()).then(() => {
           tooltip.classList.add('show');
