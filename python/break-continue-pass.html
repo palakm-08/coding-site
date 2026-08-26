@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="../assests/icon.png" />
+  <meta name="description" content="Learn Python break, continue, and pass statements (Python Docs 4.4 & 4.6) with beginner-friendly explanations. Understand how break exits loops, continue skips iterations, and pass acts as a placeholder, with examples, mistakes, and interview questions." /> 
+  <meta property="og:type" content="article" /> 
+  <meta property="og:title" content="Python break, continue & pass Explained (Python Docs 4.4 & 4.6) | Kiddo" /> 
+  <meta property="og:description" content="The official Python break, continue, and pass docs explained simply. Learn how each keyword controls loop flow, with examples, common mistakes, and interview questions." /> 
+  <meta property="og:url" content="https://kiddoedu.org/python/break-continue-pass.html" /> 
+  <meta property="og:site_name" content="Kiddo" /> 
+  <meta property="og:image" content="https://kiddoedu.org/python/break-continue-pass.png" /> 
+  <meta name="twitter:card" content="summary_large_image" /> 
+  <meta name="twitter:title" content="Python break, continue & pass Explained (Python Docs 4.4 & 4.6) | Kiddo" /> 
+  <meta name="twitter:description" content="Beginner-friendly explanation of Python's break, continue, and pass statements with examples and interview questions." /> 
+  <meta name="twitter:image" content="https://kiddoedu.org/python/break-continue-pass.png" /> 
+  <link rel="canonical" href="https://kiddoedu.org/python/break-continue-pass.html" /> 
+  <title>Python break, continue & pass Explained (Python Docs 4.4 & 4.6) | Loop Control Statements</title>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Python break, continue & pass Explained (Python Docs 4.4 & 4.6)",
+    "description": "Beginner-friendly explanation of Python's break, continue, and pass statements with examples, common mistakes, interview questions, and a mini project.",
+    "keywords": ["Python break statement","Python continue statement","Python pass statement","Python Docs 4.4","Python Docs 4.6","loop control Python","break vs continue vs pass"],
+    "url": "https://kiddoedu.org/python/break-continue-pass.html",
+    "datePublished": "2025-01-01",
+    "dateModified": "2026-08-20",
+    "author": { "@type": "Person", "name": "Palak Mishra" },
+    "publisher": { "@type": "Organization", "name": "Kiddo", "url": "https://kiddoedu.org" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://kiddoedu.org/python/break-continue-pass.html" }
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ESNWS8F9HE');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 4px 24px rgba(0,0,0,0.07);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    body.dark {
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
+      --border: rgba(255,255,255,0.07);
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 999; width: 0%; transition: width 0.1s linear; }
+
+    header { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark header { background: rgba(15,14,12,0.82); }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
+    .logo span em { font-style: normal; color: var(--accent); }
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
+    nav a:hover { color: var(--text); background: var(--surface2); }
+    .theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background var(--transition), transform var(--transition); margin-left: 8px; }
+    .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
+
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 20px; height: var(--header-h); background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark .mobile-header { background: rgba(15,14,12,0.82); }
+    .mobile-right { display: flex; align-items: center; gap: 8px; }
+    .hamburger { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; position: relative; }
+    .menu-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); padding: 8px; min-width: 160px; flex-direction: column; gap: 2px; }
+    .menu-dropdown.open { display: flex; }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
+    .menu-dropdown a:hover { background: var(--surface2); }
+
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+
+    aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px); }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    aside ul li a { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.4; }
+    aside ul li a:hover { background: var(--surface2); color: var(--text); }
+    aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; margin-top: 6px; }
+
+    main { min-width: 0; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { opacity: 0.4; }
+    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
+    .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
+    .meta-pill.blue { background: rgba(61,90,254,0.08); color: var(--accent2); border-color: rgba(61,90,254,0.2); }
+    .meta-pill.orange { background: rgba(232,108,47,0.08); color: var(--accent); border-color: rgba(232,108,47,0.2); }
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
+
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+    .doc-ref { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; }
+    .doc-ref a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .doc-ref a:hover { text-decoration: underline; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 18px; margin-bottom: 8px; color: var(--text-muted); }
+    main p { font-size: 0.95rem; line-height: 1.78; color: var(--text); margin-bottom: 14px; }
+    main code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
+    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
+
+    aside ul li { position: relative; }
+aside ul .submenu{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  margin:2px 0 2px 14px;
+  padding-left:10px;
+  border-left:1px solid var(--border);
+}
+aside ul .submenu li a{
+  font-size:0.8rem;
+  padding:6px 10px;
+}
+aside ul .submenu li a .dot{
+  width:4px;
+  height:4px;
+}
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
+    .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
+    .toc-grid a:hover { background: var(--surface2); color: var(--text); }
+    .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
+
+    .prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0 24px; }
+    .prop-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
+    .prop-card strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 4px; }
+    .prop-card span { font-size: 0.81rem; color: var(--text-muted); line-height: 1.45; display: block; }
+
+    .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
+    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
+    .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
+    .doc-block code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .note-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .warn-box { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.2); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .warn-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
+    .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .callout a:hover { text-decoration: underline; }
+
+    .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 26px; font-size: 0.875rem; }
+    .param-table th { text-align: left; padding: 8px 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+    .param-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); line-height: 1.5; vertical-align: top; }
+    .param-table tr:last-child td { border-bottom: none; }
+    .param-table tr:hover td { background: var(--surface2); }
+    .param-table td:last-child { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* VS Code dark code blocks */
+    .code-container { border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: #2d2d2d; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
+    .code-header-left { display: flex; align-items: center; gap: 10px; }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .code-dot.red    { background: #ff5f57; }
+    .code-dot.yellow { background: #febc2e; }
+    .code-dot.green  { background: #28c840; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Fira Code', monospace; }
+    .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
+    .copy-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); padding: 3px 10px; cursor: pointer; font-size: 0.72rem; font-family: 'DM Sans', sans-serif; transition: all 0.2s; position: relative; border-radius: 4px; }
+    .copy-btn:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.1); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: #3a3a3a; color: #d4d4d4; padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .tooltip.show { opacity: 1; }
+    pre { margin: 0; padding: 20px; overflow-x: auto; font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.88rem; line-height: 1.7; background: #1e1e1e; white-space: pre; tab-size: 4; }
+    /* VS Code Dark+ token colours */
+    .py-kw   { color: #569cd6; }
+    .py-bi   { color: #dcdcaa; }
+    .py-str  { color: #ce9178; }
+    .py-num  { color: #b5cea8; }
+    .py-cmt  { color: #6a9955; font-style: italic; }
+    .py-punc { color: #d4d4d4; }
+    .py-var  { color: #9cdcfe; }
+    .py-out  { color: #4ec9b0; }
+
+    .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 26px; }
+    .vs-card { border-radius: var(--radius-sm); padding: 18px 20px; }
+    .vs-card.yes { background: rgba(0,184,148,0.07); border: 1px solid rgba(0,184,148,0.2); }
+    .vs-card.no  { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.18); }
+    .vs-head { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+    .vs-card.yes .vs-head { color: var(--accent3); }
+    .vs-card.no  .vs-head { color: var(--accent); }
+    .vs-card ul { margin: 0; }
+    .vs-card ul li { font-size: 0.875rem; line-height: 1.55; color: var(--text); }
+
+    .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 26px; }
+    .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
+    .mi-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
+    .mi-body p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+    .mi-body code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .iq-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+    .iq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .iq-q { padding: 14px 18px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
+    .iq-badge { background: rgba(232,108,47,0.1); color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; padding: 2px 8px; flex-shrink: 0; margin-top: 2px; }
+    .iq-a { padding: 0 18px 14px 18px; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+    .iq-a code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .checklist { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+    .check-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; }
+    .check-item div strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.87rem; display: block; margin-bottom: 2px; }
+    .check-item div p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 18px 0; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; padding: 14px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
+    .faq-a.open { max-height: 300px; padding: 2px 18px 15px; }
+    .faq-a code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .author-info { font-size: 0.85rem; line-height: 1.5; }
+    .author-info strong { font-weight: 600; display: block; }
+    .author-info span { color: var(--text-muted); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+    .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* Mobile "Next in Python Topics" mini-nav — replaces the full sidebar on small screens */
+    .mobile-topics-nav { display: none; }
+    .mobile-topics-nav summary { list-style: none; cursor: pointer; }
+    .mobile-topics-nav summary::-webkit-details-marker { display: none; }
+
+    @media (max-width: 768px) {
+      header { display: none; } .mobile-header { display: flex; }
+      .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
+      aside { display: none; } .toc-grid { grid-template-columns: 1fr; }
+      .vs-grid { grid-template-columns: 1fr; } .prop-grid { grid-template-columns: 1fr 1fr; }
+      footer { padding: 20px; } .footer-container { flex-direction: column; align-items: flex-start; }
+
+      .mobile-topics-nav {
+        display: block;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow);
+        margin-bottom: 24px;
+        overflow: hidden;
+      }
+      .mobile-topics-nav summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 14px 16px;
+        font-family: 'Syne', sans-serif;
+        font-weight: 700;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+        color: var(--text);
+      }
+      .mobile-topics-nav summary .mt-caret {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        transition: transform 0.2s ease;
+      }
+      .mobile-topics-nav[open] summary .mt-caret { transform: rotate(180deg); }
+      .mobile-topics-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 0 10px 10px;
+        border-top: 1px solid var(--border);
+      }
+      .mobile-topics-list li a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 10px;
+        margin-top: 6px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: none;
+      }
+      .mobile-topics-list li a:hover { background: var(--surface2); color: var(--text); }
+      .mobile-topics-list li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.5; flex-shrink: 0; }
+    }
+    @media (max-width: 480px) { main h1 { font-size: 1.6rem; } .prop-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <a class="logo" href="../index.html"><img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" /><span>Kid<em>do</em></span></a>
+  <nav><a href="../index.html">Home</a><a href="../info/about.html">About</a><a href="../info/contact.html">Contact</a><button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button></nav>
+</header>
+
+<div class="mobile-header">
+  <a class="logo" href="../index.html"><img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" /><span>Kid<em>do</em></span></a>
+  <div class="mobile-right"><button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button><button class="hamburger" id="hamburgerBtn">☰<div class="menu-dropdown" id="menuDropdown"><a href="../index.html">Home</a><a href="../info/about.html">About</a><a href="../info/contact.html">Contact</a></div></button></div>
+</div>
+
+<div class="page-wrap">
+  <aside>
+  <div class="aside-label">Python Topics</div>
+  <ul>
+    <li><a href="../python/py-intro.html"><span class="dot"></span>Introduction</a></li>
+    <li><a href="../python/user_input.html"><span class="dot"></span>User Input</a></li>
+    <li>
+      <a href="../python/strings.html"><span class="dot"></span>Strings</a>
+      <ul class="submenu">
+        <li><a href="../python/strings.html"><span class="dot"></span>Basics</a></li>
+        <li><a href="../python/advanced/strings-adv.html"><span class="dot"></span>Advanced</a></li>
+      </ul>
+    </li>
+    <li><a href="../python/if_statements.html"><span class="dot"></span>If Statements</a></li>
+    <li><a href="../python/for_loop.html"><span class="dot"></span>For Loop</a></li>
+    <li><a href="../python/break-continue-pass.html" class="active"><span class="dot"></span>break, continue &amp; pass</a></li>
+    <li>
+      <a href="../python/functions.html"><span class="dot"></span>Functions</a>
+      <ul class="submenu">
+        <li><a href="../python/default-arguments.html"><span class="dot"></span>Default Argument Values</a></li>
+        <li><a href="../python/keyword-arguments.html"><span class="dot"></span>Keyword Arguments</a></li>
+        <li><a href="../python/special-parameters.html"><span class="dot"></span>Special Parameters</a></li>
+        <li><a href="../python/arbitrary-argument-lists.html"><span class="dot"></span>Arbitrary Argument Lists</a></li>
+        <li><a href="../python/lambda-functions.html"><span class="dot"></span>Lambda Functions</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="../python/list.html"><span class="dot"></span>Lists</a>
+      <ul class="submenu">
+        <li><a href="../python/list-stack-queue.html"><span class="dot"></span>Stack &amp; Queue</a></li>
+        <li><a href="../python/list-comp.html"><span class="dot"></span>List Comprehension</a></li>
+        <li><a href="../python/nested-list-comp.html"><span class="dot"></span>Nested List Comprehension</a></li>
+      </ul>
+    </li>
+    <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
+    <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
+    <li>
+      <a href="../python/sets.html"><span class="dot"></span>Sets</a>
+      <ul class="submenu">
+        <li><a href="../python/sets.html"><span class="dot"></span>Basics</a></li>
+        <li><a href="../python/advanced/sets-adv.html"><span class="dot"></span>Advanced</a></li>
+      </ul>
+    </li>
+    <li><a href="../python/looping-techniques.html"><span class="dot"></span>Looping Techniques</a></li>
+    <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
+  </ul>
+
+  <div class="aside-label" style="margin-top:24px;">Mini Projects</div>
+  <ul>
+    <li><a href="../python/password.html"><span class="dot"></span>Password Generator</a></li>
+  </ul>
+</aside>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../python/py-intro.html">Python</a><span>›</span>
+      4.4 &amp; 4.6 break, continue, pass
+    </div>
+
+    <details class="mobile-topics-nav">
+      <summary>Next in Python Topics <span class="mt-caret">▾</span></summary>
+      <ul class="mobile-topics-list">
+        <li><a href="../python/functions.html"><span class="dot"></span>Functions</a></li>
+        <li><a href="../python/list.html"><span class="dot"></span>Lists</a></li>
+        <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
+        <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
+        <li><a href="../python/sets.html"><span class="dot"></span>Sets</a></li>
+      </ul>
+    </details>
+
+    <h1>Python break, continue &amp; pass Explained (Python Docs 4.4 &amp; 4.6) | Loop Control Statements</h1>
+
+    <div class="doc-ref">
+      📖 Based on <a href="https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements" target="_blank" rel="noopener">Python 3 official docs §4.4 &amp; §4.6</a> — explained like a friend, with extra examples added
+    </div>
+
+    <div class="meta-row">
+      <span class="meta-pill">Python</span>
+      <span class="meta-pill green">Beginner</span>
+      <span class="meta-pill blue">Control Flow</span>
+      <span class="meta-pill orange">Official Docs</span>
+      <span class="date-badge">Updated August 2026</span>
+    </div>
+
+    <p>This page explains the official Python <code>break</code>, <code>continue</code>, and <code>pass</code> documentation (Python Docs §4.4 and §4.6) in simple language. Mixing these three up is one of the most common early Python mistakes, so this guide gives each one a clear, separate explanation.</p>
+    <p>By the end, you'll know exactly when a loop stops, when it just skips ahead, and when nothing happens at all — plus the classic factor-finding example straight from the Python docs.</p>
+
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">In this guide</div>
+      <div class="toc-grid">
+        <a href="#what-is"><span class="toc-num">01</span>What are break, continue &amp; pass?</a>
+        <a href="#remember"><span class="toc-num">02</span>Remember this</a>
+        <a href="#break"><span class="toc-num">03</span>The break statement</a>
+        <a href="#continue"><span class="toc-num">04</span>The continue statement</a>
+        <a href="#predict"><span class="toc-num">05</span>Output prediction</a>
+        <a href="#together"><span class="toc-num">06</span>break and continue together</a>
+        <a href="#pass"><span class="toc-num">07</span>The pass statement</a>
+        <a href="#when"><span class="toc-num">08</span>When should I use each?</a>
+        <a href="#comparison"><span class="toc-num">09</span>break vs continue vs pass</a>
+        <a href="#mistakes"><span class="toc-num">10</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">11</span>Interview questions</a>
+        <a href="#project"><span class="toc-num">12</span>Mini project</a>
+        <a href="#faq"><span class="toc-num">13</span>FAQs</a>
+      </div>
+    </nav>
+
+    <div class="section-divider"></div>
+
+    <!-- 01 -->
+    <h2 id="what-is">What Are break, continue &amp; pass? (Python Docs Explained)</h2>
+    <p><code>break</code> and <code>continue</code> are loop-control statements — they only make sense inside a <code>for</code> or <code>while</code> loop, and each changes what the loop does next. <code>pass</code> is different: it's a no-op statement that can be written anywhere Python's syntax requires a statement, loop or not — it just tells Python "nothing happens here."</p>
+
+    <div class="prop-grid">
+      <div class="prop-card"><strong>break</strong><span>Exits the loop immediately — the rest of the iterable is never visited</span></div>
+      <div class="prop-card"><strong>continue</strong><span>Skips the rest of the current iteration, then re-checks the loop</span></div>
+      <div class="prop-card"><strong>pass</strong><span>Does absolutely nothing — a placeholder where Python requires a statement</span></div>
+      <div class="prop-card"><strong>break / continue only</strong><span>Only valid inside a loop; pass works pretty much anywhere</span></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 : NEW -->
+    <h2 id="remember">Remember This — Quick Comparison</h2>
+    <p>If you only remember one thing from this page, make it this table:</p>
+
+    <table class="param-table">
+      <thead><tr><th>Keyword</th><th>Think of it as</th><th>What happens?</th></tr></thead>
+      <tbody>
+        <tr><td><code>break</code></td><td>STOP</td><td>The loop ends completely</td></tr>
+        <tr><td><code>continue</code></td><td>SKIP</td><td>The current iteration ends and the next one begins</td></tr>
+        <tr><td><code>pass</code></td><td>NOTHING</td><td>Nothing happens; execution continues normally</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 -->
+    <h2 id="break">The break Statement (Python Docs §4.4)</h2>
+    <p><code>break</code> exits the nearest enclosing loop immediately, no matter how many iterations were left. The Python docs demonstrate it with a classic example — finding the smallest factor of every number in a range:</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>The break statement breaks out of the innermost enclosing for or while loop.</p>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">for</span> <span class="py-var">n</span> <span class="py-kw">in</span> <span class="py-bi">range</span><span class="py-punc">(</span><span class="py-num">2</span><span class="py-punc">,</span> <span class="py-num">10</span><span class="py-punc">):</span>
+    <span class="py-kw">for</span> <span class="py-var">x</span> <span class="py-kw">in</span> <span class="py-bi">range</span><span class="py-punc">(</span><span class="py-num">2</span><span class="py-punc">,</span> <span class="py-var">n</span><span class="py-punc">):</span>
+        <span class="py-kw">if</span> <span class="py-var">n</span> <span class="py-punc">%</span> <span class="py-var">x</span> <span class="py-punc">==</span> <span class="py-num">0</span><span class="py-punc">:</span>
+            <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{n}</span><span class="py-str"> equals </span><span class="py-var">{x}</span><span class="py-str"> * </span><span class="py-var">{n</span><span class="py-punc">//</span><span class="py-var">x}</span><span class="py-str">"</span><span class="py-punc">)</span>
+            <span class="py-kw">break</span>
+
+<span class="py-out">4 equals 2 * 2
+6 equals 2 * 3
+8 equals 2 * 4
+9 equals 3 * 3</span></pre>
+    </div>
+
+    <p>As soon as a factor is found for a given <code>n</code>, <code>break</code> exits the inner loop — no need to keep checking larger values of <code>x</code> once the smallest factor is known. Notice 2, 3, 5, and 7 never print anything: they're prime, so the inner loop never finds a factor and runs to completion without hitting <code>break</code>.</p>
+
+    <h4>Kiddo extra — stopping a search once you've found your player</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">squad</span> <span class="py-punc">= [</span><span class="py-str">"Mbappe"</span><span class="py-punc">,</span> <span class="py-str">"Bellingham"</span><span class="py-punc">,</span> <span class="py-str">"Vinicius Jr"</span><span class="py-punc">,</span> <span class="py-str">"Rodrygo"</span><span class="py-punc">]</span>
+
+<span class="py-kw">for</span> <span class="py-var">player</span> <span class="py-kw">in</span> <span class="py-var">squad</span><span class="py-punc">:</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Checking </span><span class="py-var">{player}</span><span class="py-str">..."</span><span class="py-punc">)</span>
+    <span class="py-kw">if</span> <span class="py-var">player</span> <span class="py-punc">==</span> <span class="py-str">"Vinicius Jr"</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Found him — stopping the search"</span><span class="py-punc">)</span>
+        <span class="py-kw">break</span>
+
+<span class="py-out"># Checking Mbappe...
+# Checking Bellingham...
+# Checking Vinicius Jr...
+# Found him — stopping the search</span>
+<span class="py-cmt"># Rodrygo is never checked — break exited the loop first</span></pre>
+    </div>
+
+    <div class="note-box">
+      <strong>break only exits the innermost loop.</strong> In the nested docs example above, <code>break</code> stops the inner <code>for x in range(2, n)</code> loop only — the outer <code>for n in range(2, 10)</code> loop keeps going to its next value of <code>n</code>.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <h2 id="continue">The continue Statement (Python Docs §4.4)</h2>
+    <p><code>continue</code> skips whatever's left in the current iteration and jumps straight back to the loop's next check — the loop keeps running, it just moves on early.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>The continue statement continues with the next iteration of the loop.</p>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">for</span> <span class="py-var">num</span> <span class="py-kw">in</span> <span class="py-bi">range</span><span class="py-punc">(</span><span class="py-num">2</span><span class="py-punc">,</span> <span class="py-num">10</span><span class="py-punc">):</span>
+    <span class="py-kw">if</span> <span class="py-var">num</span> <span class="py-punc">%</span> <span class="py-num">2</span> <span class="py-punc">==</span> <span class="py-num">0</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Found an even number </span><span class="py-var">{num}</span><span class="py-str">"</span><span class="py-punc">)</span>
+        <span class="py-kw">continue</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Found an odd number </span><span class="py-var">{num}</span><span class="py-str">"</span><span class="py-punc">)</span>
+
+<span class="py-out">Found an even number 2
+Found an odd number 3
+Found an even number 4
+Found an odd number 5
+Found an even number 6
+Found an odd number 7
+Found an even number 8
+Found an odd number 9</span></pre>
+    </div>
+
+    <p>Whenever <code>num</code> is even, the first <code>print()</code> runs and then <code>continue</code> jumps back to the top — the second <code>print()</code> is skipped for that pass. For odd numbers, <code>continue</code> never fires, so the code falls through to the second <code>print()</code> instead.</p>
+
+    <h4>Kiddo extra — skipping injured players in a squad list</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">squad_status</span> <span class="py-punc">= {</span><span class="py-str">"Haaland"</span><span class="py-punc">:</span> <span class="py-str">"fit"</span><span class="py-punc">,</span> <span class="py-str">"Foden"</span><span class="py-punc">:</span> <span class="py-str">"injured"</span><span class="py-punc">,</span> <span class="py-str">"Rodri"</span><span class="py-punc">:</span> <span class="py-str">"fit"</span><span class="py-punc">}</span>
+
+<span class="py-kw">for</span> <span class="py-var">player</span><span class="py-punc">,</span> <span class="py-var">status</span> <span class="py-kw">in</span> <span class="py-var">squad_status</span><span class="py-punc">.</span><span class="py-bi">items</span><span class="py-punc">():</span>
+    <span class="py-kw">if</span> <span class="py-var">status</span> <span class="py-punc">==</span> <span class="py-str">"injured"</span><span class="py-punc">:</span>
+        <span class="py-kw">continue</span>   <span class="py-cmt"># skip injured players entirely</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{player}</span><span class="py-str"> is available to start"</span><span class="py-punc">)</span>
+
+<span class="py-out"># Haaland is available to start
+# Rodri is available to start</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 : NEW -->
+    <h2 id="predict">Output Prediction — Test Yourself</h2>
+    <p>Before scrolling further, try to predict what this prints:</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Predict the output</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-bi">range</span><span class="py-punc">(</span><span class="py-num">5</span><span class="py-punc">):</span>
+    <span class="py-kw">if</span> <span class="py-var">i</span> <span class="py-punc">==</span> <span class="py-num">2</span><span class="py-punc">:</span>
+        <span class="py-kw">continue</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">i</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <div class="note-box">
+      <strong>Answer:</strong> <code>0</code>, <code>1</code>, <code>3</code>, <code>4</code>. When <code>i</code> reaches <code>2</code>, <code>continue</code> fires before <code>print(i)</code> ever runs — so <code>2</code> is the only number missing. The loop doesn't stop; it just skips that one iteration and keeps going through <code>3</code> and <code>4</code>.
+    </div>
+
+    <p>Now a quick one with <code>break</code>:</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Predict the output</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-bi">range</span><span class="py-punc">(</span><span class="py-num">5</span><span class="py-punc">):</span>
+    <span class="py-kw">if</span> <span class="py-var">i</span> <span class="py-punc">==</span> <span class="py-num">2</span><span class="py-punc">:</span>
+        <span class="py-kw">break</span>
+    <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">i</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <div class="note-box">
+      <strong>Answer:</strong> <code>0</code>, <code>1</code>. This time the loop doesn't just skip <code>2</code> — it stops entirely the moment <code>i == 2</code>, so <code>3</code> and <code>4</code> never even get checked.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 -->
+    <h2 id="together">break and continue in Nested Loops</h2>
+    <p>Both keywords only affect the <em>innermost</em> loop they're written inside — easy to overlook once loops start nesting.</p>
+
+    <div class="warn-box">
+      <strong>Neither break nor continue can "reach" an outer loop.</strong> If you're two loops deep and call <code>break</code>, only the inner loop stops — the outer loop moves on to its next iteration exactly as if the inner loop had finished normally. There's no built-in way to break out of multiple loops at once; the usual workaround is a flag variable or moving the logic into a function and using <code>return</code>.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 -->
+    <h2 id="pass">The pass Statement (Python Docs §4.6)</h2>
+    <p><code>pass</code> does nothing at all. It exists because Python's syntax requires a statement anywhere a block is opened — a completely empty <code>while</code> loop, function, or class would otherwise be a <code>SyntaxError</code>.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>The pass statement does nothing. It can be used when a statement is required syntactically but the program requires no action.</p>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">while</span> <span class="py-kw">True</span><span class="py-punc">:</span>
+    <span class="py-kw">pass</span>  <span class="py-cmt"># Busy-wait for keyboard interrupt (Ctrl+C)</span></pre>
+    </div>
+
+    <p><code>pass</code> shows up in a few recurring places — an empty class body, or a placeholder for logic you haven't written yet:</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># A commonly used minimal class — no attributes, no methods yet</span>
+<span class="py-kw">class</span> <span class="py-bi">MyEmptyClass</span><span class="py-punc">:</span>
+    <span class="py-kw">pass</span>
+
+<span class="py-cmt"># A placeholder function while you're still sketching out the logic</span>
+<span class="py-kw">def</span> <span class="py-bi">initlog</span><span class="py-punc">(*</span><span class="py-var">args</span><span class="py-punc">):</span>
+    <span class="py-kw">pass</span>   <span class="py-cmt"># Remember to implement this!</span></pre>
+    </div>
+
+    <div class="note-box">
+      <strong>The Python docs' own note:</strong> for the placeholder-function case, many people write the ellipsis literal <code>...</code> instead of <code>pass</code>. It has no special meaning to Python and isn't part of the language definition — but it's used conventionally as a placeholder body, just like <code>pass</code>.
+    </div>
+
+    <h4>Kiddo extra — pass as a deliberate "do nothing" branch</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">squad</span> <span class="py-punc">= [</span><span class="py-str">"Saka"</span><span class="py-punc">,</span> <span class="py-str">"Odegaard"</span><span class="py-punc">,</span> <span class="py-str">"Rice"</span><span class="py-punc">]</span>
+
+<span class="py-kw">for</span> <span class="py-var">player</span> <span class="py-kw">in</span> <span class="py-var">squad</span><span class="py-punc">:</span>
+    <span class="py-kw">if</span> <span class="py-var">player</span> <span class="py-punc">==</span> <span class="py-str">"Odegaard"</span><span class="py-punc">:</span>
+        <span class="py-kw">pass</span>   <span class="py-cmt"># TODO: handle captain-specific logic later</span>
+    <span class="py-kw">else</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-var">player</span><span class="py-punc">)</span>
+
+<span class="py-out"># Saka
+# Rice</span>
+<span class="py-cmt"># Odegaard is matched but nothing happens yet — pass is just marking the spot</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 : NEW -->
+    <h2 id="when">When Should I Use Each?</h2>
+    <ul>
+      <li><strong>Use <code>break</code></strong> when you've found what you need and want to stop the loop right away — like ending a search the moment a match turns up.</li>
+      <li><strong>Use <code>continue</code></strong> when you want to skip the current item but keep looping — like ignoring injured players while still checking everyone else on the list.</li>
+      <li><strong>Use <code>pass</code></strong> when you intentionally want no action to happen yet, or need a placeholder so your code stays syntactically valid — like an unfinished function or a branch you haven't built out.</li>
+    </ul>
+
+    <div class="section-divider"></div>
+
+    <!-- 09 -->
+    <h2 id="comparison">break vs continue vs pass — Side by Side</h2>
+
+    <div class="vs-grid">
+      <div class="vs-card yes">
+        <div class="vs-head">Changes loop flow</div>
+        <ul>
+          <li><code>break</code> — exits the loop entirely, right now</li>
+          <li><code>continue</code> — skips to the next iteration</li>
+        </ul>
+      </div>
+      <div class="vs-card no">
+        <div class="vs-head">Changes nothing</div>
+        <ul>
+          <li><code>pass</code> — a no-op; execution just continues to the next line as normal</li>
+          <li>Works outside loops too — functions, classes, if-blocks</li>
+        </ul>
+      </div>
+    </div>
+
+    <table class="param-table">
+      <thead><tr><th>Keyword</th><th>Effect on the loop</th><th>Where it's typically used</th></tr></thead>
+      <tbody>
+        <tr><td><code>break</code></td><td>Exits the loop immediately — remaining iterations never run</td><td>Stop searching once you've found what you needed</td></tr>
+        <tr><td><code>continue</code></td><td>Skips the rest of the current iteration, moves to the next</td><td>Skip items that don't meet a condition, without stopping the whole loop</td></tr>
+        <tr><td><code>pass</code></td><td>Does nothing — the loop continues normally to the next line</td><td>A placeholder for code you haven't written yet, or an intentionally empty branch</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <!-- 10 -->
+    <h2 id="mistakes">Common Mistakes With break, continue &amp; pass</h2>
+    <div class="mistake-list">
+      <div class="mistake-item"><div class="mi-body"><strong>Confusing pass with continue</strong><p><code>pass</code> doesn't skip anything — it's a no-op that lets execution fall through. If the goal is to skip the rest of the current iteration, <code>continue</code> is the statement you actually want.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Expecting break to exit an outer loop</strong><p>In nested loops, <code>break</code> only stops the innermost loop it's written inside. The outer loop keeps running its remaining iterations exactly as before.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Using break or continue outside a loop</strong><p>Both only make sense inside a <code>for</code> or <code>while</code> loop. Writing either one anywhere else — like directly inside a function with no enclosing loop — raises a <code>SyntaxError</code>.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Putting code after continue in the same block, expecting it to run</strong><p>Any code after <code>continue</code> in the same indentation block is unreachable for that iteration — <code>continue</code> jumps back to the loop check immediately.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Leaving a real pass in production code by accident</strong><p><code>pass</code> is meant as a temporary placeholder. Shipping a function that still just says <code>pass</code> silently does nothing when called — worth double-checking TODO placeholders before finishing a project.</p></div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 11 -->
+    <h2 id="interview">break, continue &amp; pass Interview Questions and Answers</h2>
+    <div class="iq-list">
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> What is the difference between break and continue?</div><div class="iq-a"><code>break</code> exits the loop entirely — no further iterations run. <code>continue</code> skips only the rest of the current iteration and moves on to the next one; the loop itself keeps running.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q2</span> Does break exit all nested loops or just one?</div><div class="iq-a">Just one — the innermost loop that directly contains the <code>break</code>. Any outer loops continue running normally. There's no single keyword to break out of multiple nested loops at once.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q3</span> What does the pass statement actually do?</div><div class="iq-a">Nothing. It's a placeholder Python requires wherever a statement is syntactically necessary but no action is needed — an empty class body, an unimplemented function, or a deliberately empty branch of an if statement.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q4</span> Can you use break or continue outside a loop?</div><div class="iq-a">No — both raise a <code>SyntaxError</code> if used outside a <code>for</code> or <code>while</code> loop. They're only meaningful in the context of loop iteration.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q5</span> What is commonly used instead of pass as a placeholder, and why?</div><div class="iq-a">The ellipsis literal <code>...</code>. It has no special meaning in the language and behaves identically to <code>pass</code> as a placeholder body, but many developers use it as a visual convention to mark "not yet implemented."</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q6</span> In the classic factor-finding example, why do prime numbers never print anything?</div><div class="iq-a">Because the inner loop only calls <code>print()</code> and <code>break</code> when it finds a factor (<code>n % x == 0</code>). For a prime number, that condition is never true for any <code>x</code> in the range, so the inner loop finishes all its iterations without ever printing or breaking.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 12 -->
+    <h2 id="project">Mini Project — Build a Transfer Window Scanner</h2>
+    <p>A small project that puts all three keywords to work together — scanning a list of transfer targets, skipping the ones that aren't available, and stopping as soon as a suitable signing is found.</p>
+
+    <div class="checklist">
+      <div class="check-item"><div><strong>Loop through the target list</strong><p>Store a list of players your club is scouting, each with a status like "available", "injured", or "not for sale".</p></div></div>
+      <div class="check-item"><div><strong>Skip unavailable targets with continue</strong><p>If a player's status isn't "available", use <code>continue</code> to move straight to the next name on the list without wasting time evaluating them further.</p></div></div>
+      <div class="check-item"><div><strong>Stop the scan with break once you sign someone</strong><p>As soon as you find an available player who fits the budget, print the signing and use <code>break</code> — there's no need to keep scanning once the transfer window's business is done.</p></div></div>
+      <div class="check-item"><div><strong>Mark future logic with pass</strong><p>Add a branch for a status you haven't handled yet — like "loan interest" — and leave it as <code>pass</code> for now, exactly like the docs' <code>initlog()</code> example.</p></div></div>
+    </div>
+
+    <div class="callout">
+      <strong>Extend it:</strong> add a nested loop that also checks each target against a list of rival bidders, and notice how a <code>break</code> inside that inner loop only stops the bidder check — the outer scan over transfer targets keeps going untouched.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 13 -->
+    <h2 id="faq">break, continue &amp; pass FAQ</h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What does break do in a Python loop? <span class="faq-icon">+</span></button><div class="faq-a">It immediately exits the nearest enclosing <code>for</code> or <code>while</code> loop. Any remaining iterations are skipped entirely, and execution continues with the first line after the loop.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What does continue do in a Python loop? <span class="faq-icon">+</span></button><div class="faq-a">It skips the rest of the current iteration's code and jumps back to re-check the loop's condition (or fetch the next item), continuing the loop as normal from there.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is the pass statement used for in Python? <span class="faq-icon">+</span></button><div class="faq-a">It's a placeholder that does nothing, used when Python's syntax requires a statement but no action is actually needed — like an empty class, an unfinished function, or an intentionally empty conditional branch.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Is pass the same as continue? <span class="faq-icon">+</span></button><div class="faq-a">No. <code>pass</code> does nothing and lets execution fall through normally. <code>continue</code> actively skips ahead to the next loop iteration. Mixing these up is one of the most common beginner mistakes with these keywords.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can break exit more than one nested loop at once? <span class="faq-icon">+</span></button><div class="faq-a">No — <code>break</code> only exits the innermost loop it's directly inside. To exit multiple nested loops at once, common workarounds include a flag variable checked in the outer loop, or moving the loops into a function and using <code>return</code>.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Why do prime numbers not print anything in the classic factor-finding example? <span class="faq-icon">+</span></button><div class="faq-a">The example only prints when it finds a factor of <code>n</code>. A prime number has no factors between 2 and itself, so the condition inside the inner loop is never true, and the loop completes without printing or hitting <code>break</code>.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What can be used instead of pass? <span class="faq-icon">+</span></button><div class="faq-a">The ellipsis literal <code>...</code> is commonly used the same way, purely as a stylistic convention. It carries no special meaning to Python itself and behaves exactly like <code>pass</code> as a placeholder.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can you use break and continue in a while loop, not just a for loop? <span class="faq-icon">+</span></button><div class="faq-a">Yes — both work identically in <code>while</code> loops as they do in <code>for</code> loops. <code>break</code> exits the <code>while</code> loop immediately, and <code>continue</code> jumps back to re-check the <code>while</code> condition.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="callout">
+      <strong>Related →</strong> Want to see these keywords in a fuller loop context? Check out <a href="https://kiddoedu.org/python/for_loop.html">For Loops</a> and <a href="https://kiddoedu.org/python/while_loop.html">While Loops</a>, which both cover <code>break</code>, <code>continue</code>, and <code>pass</code> alongside the rest of the loop syntax.
+    </div>
+
+    <div class="author-strip">
+      <div class="author-avatar">K</div>
+      <div class="author-info"><strong>Kiddo Documentation Team</strong><span>We simplify official documentation with beginner-friendly explanations, examples, interview questions, and practical insights.</span></div>
+    </div>
+
+    <div class="callout">
+      <strong>More Python topics →</strong><br><br>
+      <a href="https://kiddoedu.org/python/for_loop.html">For Loop</a> ·
+      <a href="https://kiddoedu.org/python/while_loop.html">While Loop</a> ·
+      <a href="https://kiddoedu.org/python/if_statements.html">If Statements</a> ·
+      <a href="https://kiddoedu.org/python/functions.html">Functions (4.8)</a> ·
+      <a href="https://kiddoedu.org/python/list.html">Lists</a> ·
+      <a href="https://kiddoedu.org/python/dictionary.html">Dictionaries (5.5)</a> ·
+      <a href="https://kiddoedu.org/python/tuples.html">Tuples (5.3)</a> ·
+      <a href="https://kiddoedu.org/python/sets.html">Sets (5.4)</a> ·
+      <a href="https://kiddoedu.org/python/list-comp.html">List Comprehensions</a> ·
+      <a href="https://kiddoedu.org/python/nested-list-comp.html">Nested List Comprehensions</a> ·
+      <a href="https://kiddoedu.org/python/looping-techniques.html">Looping Techniques</a> ·
+      <a href="https://kiddoedu.org/python/list-stack-queue.html">Lists as Stack and Queue</a> ·
+      <a href="https://kiddoedu.org/python/arbitrary-argument-lists.html">Arbitrary Arguments List</a> ·
+      <a href="https://kiddoedu.org/python/keyword-arguments.html">Keyword Arguments</a> ·
+      <a href="https://kiddoedu.org/python/special-parameters.html">Special Parameters</a> ·
+      <a href="https://kiddoedu.org/python/strings.html">String Methods</a> ·
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2026 Kiddo. Built with ♥ for curious minds.</p>
+    <div class="footer-links"><a href="../info/privacy.html">Privacy</a><a href="../info/terms.html">Terms</a><a href="../info/contact.html">Contact</a></div>
+  </div>
+</footer>
+
+<script>
+  const desktopToggle = document.getElementById('desktopToggleTheme');
+  const mobileToggle  = document.getElementById('mobileToggleTheme');
+  const applyTheme = (dark) => {
+    document.body.classList.toggle('dark', dark);
+    const icon = dark ? '☀️' : '🌙';
+    if (desktopToggle) desktopToggle.textContent = icon;
+    if (mobileToggle)  mobileToggle.textContent  = icon;
+  };
+  applyTheme(localStorage.getItem('theme') === 'dark');
+  const toggleTheme = () => {
+    const isDark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  };
+  if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+  if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+
+  const hamburger    = document.getElementById('hamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  hamburger?.addEventListener('click', (e) => { e.stopPropagation(); menuDropdown.classList.toggle('open'); });
+  document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.querySelectorAll('.code-container').forEach(container => {
+    const btn = container.querySelector('.copy-btn');
+    const tip = container.querySelector('.tooltip');
+    const pre = container.querySelector('pre');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(pre.innerText.trim()).then(() => {
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
+      });
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans    = btn.nextElementSibling;
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+</script>
+</body>
+</html>
