@@ -1,6 +1,6 @@
 # Kiddo
 
-Kiddo is a beginner-friendly documentation platform that simplifies programming concepts through clear explanations, practical examples, common mistakes, and interview questions.
+Kiddo is a beginner-friendly platform that simplifies official programming documentation through clear explanations, practical examples, common mistakes, and interview questions.
 
 ## About
 
