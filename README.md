@@ -1,25 +1,35 @@
 # Kiddo
 
-Welcome to Kiddo — my first website focused on teaching programming to beginners and curious learners.
+Kiddo is a beginner-friendly documentation platform that simplifies programming concepts through clear explanations, practical examples, common mistakes, and interview questions.
 
-I’m a student interested in backend development, working with Flask, FastAPI, MySQL, PostgreSQL, Python, and C++ (for data structures and problem-solving). This platform is my way of sharing what I learn in a simple and practical way.
+## About
 
-# About Kiddo
-Kiddo is a beginner-friendly platform with tutorials, tips, and small projects to help you get started with programming and build a strong foundation.
+Kiddo focuses on making official programming documentation easier to understand and apply. The current focus is Python 3 documentation, with content structured around core Python concepts and the official Python documentation.
 
-# Features
-- Easy-to-understand lessons  
-- Practical examples and mini projects  
-- Regularly updated content  
+## Features
 
-# Tech Stack
-- C and C++  
-- Python (NumPy, Pandas, Matplotlib)  
-- Backend: Flask, FastAPI  
-- Databases: MySQL, PostgreSQL  
+* Beginner-friendly explanations
+* Practical code examples
+* Common mistakes and best practices
+* Interview questions and FAQs
+* Structured learning resources
+* Regularly updated documentation
 
-# How to Use
-Open the site and start exploring the tutorials.
+## Tech Stack
 
-# Contact
-Feel free to reach out via GitHub or email for feedback.
+* HTML
+* CSS
+* JavaScript
+* Python
+
+## Website
+
+https://kiddoedu.org
+
+## Purpose
+
+Kiddo aims to help beginners understand programming concepts without the complexity of traditional documentation, while encouraging them to use official documentation as their primary reference.
+
+## Contact
+
+For feedback or suggestions, feel free to reach out through GitHub or email.
