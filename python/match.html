@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="../assests/icon.png" />
+  <meta name="description" content="Learn Python match statements (Python Docs 4.7) with beginner-friendly explanations. Understand literal patterns, capturing values, class patterns, __match_args__, guards, nested patterns, and sequence/mapping patterns, with examples and interview questions." /> 
+  <meta property="og:type" content="article" /> 
+  <meta property="og:title" content="Python match Statement Explained (Python Docs 4.7) | Kiddo" /> 
+  <meta property="og:description" content="The official Python match statement docs explained simply. Learn pattern matching, class patterns, guards, and nested patterns, with examples and interview questions." /> 
+  <meta property="og:url" content="https://kiddoedu.org/python/match-statement.html" /> 
+  <meta property="og:site_name" content="Kiddo" /> 
+  <meta property="og:image" content="https://kiddoedu.org/python/match-statement.png" /> 
+  <meta name="twitter:card" content="summary_large_image" /> 
+  <meta name="twitter:title" content="Python match Statement Explained (Python Docs 4.7) | Kiddo" /> 
+  <meta name="twitter:description" content="Beginner-friendly explanation of Python's match statement — pattern matching, class patterns, guards, and nested patterns." /> 
+  <meta name="twitter:image" content="https://kiddoedu.org/python/match-statement.png" /> 
+  <link rel="canonical" href="https://kiddoedu.org/python/match-statement.html" /> 
+  <title>Python match Statement Explained (Python Docs 4.7) | Pattern Matching &amp; case Blocks</title>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Python match Statement Explained (Python Docs 4.7)",
+    "description": "Beginner-friendly explanation of Python's match statement — literal patterns, capturing values, class patterns, __match_args__, guards, and sequence/mapping patterns, with examples and interview questions.",
+    "keywords": ["Python match statement","Python Docs 4.7","Python pattern matching","Python case statement","Python switch statement","__match_args__","Python structural pattern matching"],
+    "url": "https://kiddoedu.org/python/match-statement.html",
+    "datePublished": "2025-01-01",
+    "dateModified": "2026-08-20",
+    "author": { "@type": "Person", "name": "Palak Mishra" },
+    "publisher": { "@type": "Organization", "name": "Kiddo", "url": "https://kiddoedu.org" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://kiddoedu.org/python/match-statement.html" }
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESNWS8F9HE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ESNWS8F9HE');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f5f3ee; --surface: #ffffff; --surface2: #eceae4;
+      --text: #1a1814; --text-muted: #6b6760;
+      --accent: #e86c2f; --accent2: #3d5afe; --accent3: #00b894;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 4px 24px rgba(0,0,0,0.07);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
+      --radius: 16px; --radius-sm: 10px; --header-h: 70px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    body.dark {
+      --bg: #0f0e0c; --surface: #1c1a17; --surface2: #252320;
+      --text: #f0ede6; --text-muted: #918e87;
+      --accent: #ff7d3e; --accent2: #7986cb; --accent3: #55efc4;
+      --border: rgba(255,255,255,0.07);
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 999; width: 0%; transition: width 0.1s linear; }
+
+    header { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark header { background: rgba(15,14,12,0.82); }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; }
+    .logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
+    .logo span em { font-style: normal; color: var(--accent); }
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: color var(--transition), background var(--transition); }
+    nav a:hover { color: var(--text); background: var(--surface2); }
+    .theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background var(--transition), transform var(--transition); margin-left: 8px; }
+    .theme-btn:hover { transform: rotate(20deg); background: var(--surface); }
+
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 20px; height: var(--header-h); background: rgba(245,243,238,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: background var(--transition); }
+    body.dark .mobile-header { background: rgba(15,14,12,0.82); }
+    .mobile-right { display: flex; align-items: center; gap: 8px; }
+    .hamburger { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; position: relative; }
+    .menu-dropdown { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); padding: 8px; min-width: 160px; flex-direction: column; gap: 2px; }
+    .menu-dropdown.open { display: flex; }
+    .menu-dropdown a { display: block; font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; padding: 9px 14px; border-radius: 8px; transition: background var(--transition); }
+    .menu-dropdown a:hover { background: var(--surface2); }
+
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+
+    aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: calc(var(--header-h) + 20px); }
+    .aside-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    aside ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    aside ul li a { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background var(--transition), color var(--transition); line-height: 1.4; }
+    aside ul li a:hover { background: var(--surface2); color: var(--text); }
+    aside ul li a.active { background: rgba(232,108,47,0.1); color: var(--accent); font-weight: 600; }
+    aside ul li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; opacity: 0.5; margin-top: 6px; }
+
+    main { min-width: 0; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { opacity: 0.4; }
+    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .meta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); }
+    .meta-pill.green { background: rgba(0,184,148,0.1); color: var(--accent3); border-color: rgba(0,184,148,0.2); }
+    .meta-pill.blue { background: rgba(61,90,254,0.08); color: var(--accent2); border-color: rgba(61,90,254,0.2); }
+    .meta-pill.orange { background: rgba(232,108,47,0.08); color: var(--accent); border-color: rgba(232,108,47,0.2); }
+    .date-badge { font-size: 0.78rem; color: var(--text-muted); }
+
+    main h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+    .doc-ref { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; }
+    .doc-ref a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .doc-ref a:hover { text-decoration: underline; }
+    main h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; margin-top: 36px; margin-bottom: 14px; }
+    main h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 18px; margin-bottom: 8px; color: var(--text-muted); }
+    main p { font-size: 0.95rem; line-height: 1.78; color: var(--text); margin-bottom: 14px; }
+    main code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--accent); }
+    main ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    main ul li { font-size: 0.95rem; line-height: 1.6; padding-left: 20px; position: relative; color: var(--text); }
+    main ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
+
+    aside ul li { position: relative; }
+aside ul .submenu{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  margin:2px 0 2px 14px;
+  padding-left:10px;
+  border-left:1px solid var(--border);
+}
+aside ul .submenu li a{
+  font-size:0.8rem;
+  padding:6px 10px;
+}
+aside ul .submenu li a .dot{
+  width:4px;
+  height:4px;
+}
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px 26px; margin: 28px 0; }
+    .toc-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
+    .toc-grid a { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; transition: background var(--transition), color var(--transition); }
+    .toc-grid a:hover { background: var(--surface2); color: var(--text); }
+    .toc-num { font-size: 0.7rem; font-weight: 700; color: var(--accent); opacity: 0.8; min-width: 18px; }
+
+    .prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0 24px; }
+    .prop-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
+    .prop-card strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 4px; }
+    .prop-card span { font-size: 0.81rem; color: var(--text-muted); line-height: 1.45; display: block; }
+
+    .doc-block { background: rgba(0,184,148,0.05); border: 1px solid rgba(0,184,148,0.18); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; }
+    .doc-block-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 8px; display: block; }
+    .doc-block p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text); }
+    .doc-block code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.2); border-radius: 4px; padding: 1px 5px; color: var(--accent3); }
+
+    .note-box { background: rgba(61,90,254,0.06); border: 1px solid rgba(61,90,254,0.15); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .note-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .warn-box { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.2); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .warn-box code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0; font-size: 0.9rem; line-height: 1.6; }
+    .callout a { color: var(--accent2); text-decoration: none; font-weight: 500; }
+    .callout a:hover { text-decoration: underline; }
+
+    .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 26px; font-size: 0.875rem; }
+    .param-table th { text-align: left; padding: 8px 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+    .param-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); line-height: 1.5; vertical-align: top; }
+    .param-table tr:last-child td { border-bottom: none; }
+    .param-table tr:hover td { background: var(--surface2); }
+    .param-table td:last-child { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* VS Code dark code blocks */
+    .code-container { border-radius: var(--radius-sm); overflow: hidden; margin: 14px 0 24px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: #2d2d2d; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 8px; }
+    .code-header-left { display: flex; align-items: center; gap: 10px; }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .code-dot.red    { background: #ff5f57; }
+    .code-dot.yellow { background: #febc2e; }
+    .code-dot.green  { background: #28c840; }
+    .lang-tag { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Fira Code', monospace; }
+    .code-src { font-size: 0.68rem; color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 4px; font-weight: 600; letter-spacing: 0.04em; }
+    .copy-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); padding: 3px 10px; cursor: pointer; font-size: 0.72rem; font-family: 'DM Sans', sans-serif; transition: all 0.2s; position: relative; border-radius: 4px; }
+    .copy-btn:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.1); }
+    .tooltip { position: absolute; top: -28px; right: 0; background: #3a3a3a; color: #d4d4d4; padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+    .tooltip.show { opacity: 1; }
+    pre { margin: 0; padding: 20px; overflow-x: auto; font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.88rem; line-height: 1.7; background: #1e1e1e; white-space: pre; tab-size: 4; }
+    /* VS Code Dark+ token colours */
+    .py-kw   { color: #569cd6; }
+    .py-bi   { color: #dcdcaa; }
+    .py-str  { color: #ce9178; }
+    .py-num  { color: #b5cea8; }
+    .py-cmt  { color: #6a9955; font-style: italic; }
+    .py-punc { color: #d4d4d4; }
+    .py-var  { color: #9cdcfe; }
+    .py-out  { color: #4ec9b0; }
+
+    .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 26px; }
+    .vs-card { border-radius: var(--radius-sm); padding: 18px 20px; }
+    .vs-card.yes { background: rgba(0,184,148,0.07); border: 1px solid rgba(0,184,148,0.2); }
+    .vs-card.no  { background: rgba(232,108,47,0.06); border: 1px solid rgba(232,108,47,0.18); }
+    .vs-head { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+    .vs-card.yes .vs-head { color: var(--accent3); }
+    .vs-card.no  .vs-head { color: var(--accent); }
+    .vs-card ul { margin: 0; }
+    .vs-card ul li { font-size: 0.875rem; line-height: 1.55; color: var(--text); }
+
+    .mistake-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 26px; }
+    .mistake-item { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; align-items: flex-start; }
+    .mi-body strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 4px; }
+    .mi-body p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+    .mi-body code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .iq-list { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+    .iq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .iq-q { padding: 14px 18px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
+    .iq-badge { background: rgba(232,108,47,0.1); color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; padding: 2px 8px; flex-shrink: 0; margin-top: 2px; }
+    .iq-a { padding: 0 18px 14px 18px; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+    .iq-a code { font-family: 'Fira Code', monospace; font-size: 0.82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .checklist { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+    .check-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; }
+    .check-item div strong { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.87rem; display: block; margin-bottom: 2px; }
+    .check-item div p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin: 18px 0; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; padding: 14px 18px; text-align: left; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background var(--transition); line-height: 1.4; }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s ease; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; line-height: 1.72; color: var(--text-muted); padding: 0 18px; }
+    .faq-a.open { max-height: 320px; padding: 2px 18px 15px; }
+    .faq-a code { font-family: 'Fira Code', monospace; font-size: 0.85em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--accent); }
+
+    .author-strip { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; margin: 32px 0; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .author-info { font-size: 0.85rem; line-height: 1.5; }
+    .author-info strong { font-weight: 600; display: block; }
+    .author-info span { color: var(--text-muted); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 28px 40px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+    .footer-container p { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* Mobile "Next in Python Topics" mini-nav — replaces the full sidebar on small screens */
+    .mobile-topics-nav { display: none; }
+    .mobile-topics-nav summary { list-style: none; cursor: pointer; }
+    .mobile-topics-nav summary::-webkit-details-marker { display: none; }
+
+    @media (max-width: 768px) {
+      header { display: none; } .mobile-header { display: flex; }
+      .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
+      aside { display: none; } .toc-grid { grid-template-columns: 1fr; }
+      .vs-grid { grid-template-columns: 1fr; } .prop-grid { grid-template-columns: 1fr 1fr; }
+      footer { padding: 20px; } .footer-container { flex-direction: column; align-items: flex-start; }
+
+      .mobile-topics-nav {
+        display: block;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow);
+        margin-bottom: 24px;
+        overflow: hidden;
+      }
+      .mobile-topics-nav summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 14px 16px;
+        font-family: 'Syne', sans-serif;
+        font-weight: 700;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+        color: var(--text);
+      }
+      .mobile-topics-nav summary .mt-caret {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        transition: transform 0.2s ease;
+      }
+      .mobile-topics-nav[open] summary .mt-caret { transform: rotate(180deg); }
+      .mobile-topics-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 0 10px 10px;
+        border-top: 1px solid var(--border);
+      }
+      .mobile-topics-list li a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 10px;
+        margin-top: 6px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: none;
+      }
+      .mobile-topics-list li a:hover { background: var(--surface2); color: var(--text); }
+      .mobile-topics-list li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.5; flex-shrink: 0; }
+    }
+    @media (max-width: 480px) { main h1 { font-size: 1.6rem; } .prop-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <a class="logo" href="../index.html"><img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" /><span>Kid<em>do</em></span></a>
+  <nav><a href="../index.html">Home</a><a href="../info/about.html">About</a><a href="../info/contact.html">Contact</a><button class="theme-btn" id="desktopToggleTheme" title="Toggle theme">🌙</button></nav>
+</header>
+
+<div class="mobile-header">
+  <a class="logo" href="../index.html"><img src="../assests/logo.png" alt="Kiddo Logo" onerror="this.style.display='none'" /><span>Kid<em>do</em></span></a>
+  <div class="mobile-right"><button class="theme-btn" id="mobileToggleTheme" title="Toggle theme">🌙</button><button class="hamburger" id="hamburgerBtn">☰<div class="menu-dropdown" id="menuDropdown"><a href="../index.html">Home</a><a href="../info/about.html">About</a><a href="../info/contact.html">Contact</a></div></button></div>
+</div>
+
+<div class="page-wrap">
+  <aside>
+  <div class="aside-label">Python Topics</div>
+  <ul>
+    <li><a href="../python/py-intro.html"><span class="dot"></span>Introduction</a></li>
+    <li><a href="../python/user_input.html"><span class="dot"></span>User Input</a></li>
+    <li>
+      <a href="../python/strings.html"><span class="dot"></span>Strings</a>
+      <ul class="submenu">
+        <li><a href="../python/strings.html"><span class="dot"></span>Basics</a></li>
+        <li><a href="../python/advanced/strings-adv.html"><span class="dot"></span>Advanced</a></li>
+      </ul>
+    </li>
+    <li><a href="../python/if_statements.html"><span class="dot"></span>If Statements</a></li>
+    <li><a href="../python/for_loop.html"><span class="dot"></span>For Loop</a></li>
+    <li><a href="../python/break-continue-pass.html"><span class="dot"></span>break, continue &amp; pass</a></li>
+    <li><a href="../python/match.html" class="active"><span class="dot"></span>match Statement</a></li>
+    <li>
+      <a href="../python/functions.html"><span class="dot"></span>Functions</a>
+      <ul class="submenu">
+        <li><a href="../python/default-arguments.html"><span class="dot"></span>Default Argument Values</a></li>
+        <li><a href="../python/keyword-arguments.html"><span class="dot"></span>Keyword Arguments</a></li>
+        <li><a href="../python/special-parameters.html"><span class="dot"></span>Special Parameters</a></li>
+        <li><a href="../python/arbitrary-argument-lists.html"><span class="dot"></span>Arbitrary Argument Lists</a></li>
+        <li><a href="../python/lambda-functions.html"><span class="dot"></span>Lambda Functions</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="../python/list.html"><span class="dot"></span>Lists</a>
+      <ul class="submenu">
+        <li><a href="../python/list-stack-queue.html"><span class="dot"></span>Stack &amp; Queue</a></li>
+        <li><a href="../python/list-comp.html"><span class="dot"></span>List Comprehension</a></li>
+        <li><a href="../python/nested-list-comp.html"><span class="dot"></span>Nested List Comprehension</a></li>
+      </ul>
+    </li>
+    <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
+    <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
+    <li>
+      <a href="../python/sets.html"><span class="dot"></span>Sets</a>
+      <ul class="submenu">
+        <li><a href="../python/sets.html"><span class="dot"></span>Basics</a></li>
+        <li><a href="../python/advanced/sets-adv.html"><span class="dot"></span>Advanced</a></li>
+      </ul>
+    </li>
+    <li><a href="../python/looping-techniques.html"><span class="dot"></span>Looping Techniques</a></li>
+    <li><a href="../python/while_loop.html"><span class="dot"></span>While Loop</a></li>
+  </ul>
+
+  <div class="aside-label" style="margin-top:24px;">Mini Projects</div>
+  <ul>
+    <li><a href="../python/password.html"><span class="dot"></span>Password Generator</a></li>
+  </ul>
+</aside>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../python/py-intro.html">Python</a><span>›</span>
+      4.7 match Statements
+    </div>
+
+    <details class="mobile-topics-nav">
+      <summary>Next in Python Topics <span class="mt-caret">▾</span></summary>
+      <ul class="mobile-topics-list">
+        <li><a href="../python/functions.html"><span class="dot"></span>Functions</a></li>
+        <li><a href="../python/list.html"><span class="dot"></span>Lists</a></li>
+        <li><a href="../python/dictionary.html"><span class="dot"></span>Dictionaries</a></li>
+        <li><a href="../python/tuples.html"><span class="dot"></span>Tuples</a></li>
+        <li><a href="../python/sets.html"><span class="dot"></span>Sets</a></li>
+      </ul>
+    </details>
+
+    <h1>Python match Statement Explained (Python Docs 4.7) | Pattern Matching, case Blocks &amp; Class Patterns</h1>
+
+    <div class="doc-ref">
+      📖 Based on <a href="https://docs.python.org/3/tutorial/controlflow.html#match-statements" target="_blank" rel="noopener">Python 3 official docs §4.7</a> — explained like a friend, with extra examples added
+    </div>
+
+    <div class="meta-row">
+      <span class="meta-pill">Python</span>
+      <span class="meta-pill green">Beginner</span>
+      <span class="meta-pill blue">Control Flow</span>
+      <span class="meta-pill orange">Official Docs</span>
+      <span class="date-badge">Updated August 2026</span>
+    </div>
+
+    <p>This page explains the official Python <code>match</code> statement documentation (Python Docs §4.7) in simple language. A <code>match</code> statement compares a value against a series of patterns and runs whichever <code>case</code> block matches first — it looks a little like a <code>switch</code> statement from other languages, but it can do a lot more: it can peek inside tuples, class instances, lists, and dictionaries, and pull values straight out of them into variables.</p>
+    <p>By the end of this guide, you'll understand literal patterns, capturing values, matching class instances, guards, and the sequence/mapping patterns — plus the classic <code>Point</code> examples straight from the Python docs.</p>
+
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">In this guide</div>
+      <div class="toc-grid">
+        <a href="#what-is"><span class="toc-num">01</span>What is a match statement?</a>
+        <a href="#literals"><span class="toc-num">02</span>Basic literal patterns</a>
+        <a href="#or-patterns"><span class="toc-num">03</span>Combining patterns with |</a>
+        <a href="#capturing"><span class="toc-num">04</span>Capturing values from patterns</a>
+        <a href="#classes"><span class="toc-num">05</span>Matching class instances</a>
+        <a href="#match-args"><span class="toc-num">06</span>__match_args__ &amp; positional patterns</a>
+        <a href="#guards"><span class="toc-num">07</span>Guards with if</a>
+        <a href="#nested"><span class="toc-num">08</span>Nested patterns</a>
+        <a href="#sequences"><span class="toc-num">09</span>Sequence, mapping &amp; other features</a>
+        <a href="#mistakes"><span class="toc-num">10</span>Common mistakes</a>
+        <a href="#interview"><span class="toc-num">11</span>Interview questions</a>
+        <a href="#project"><span class="toc-num">12</span>Mini project</a>
+        <a href="#faq"><span class="toc-num">13</span>FAQs</a>
+      </div>
+    </nav>
+
+    <div class="section-divider"></div>
+
+    <!-- 01 -->
+    <h2 id="what-is">What is a match Statement? (Python Docs 4.7 Explained)</h2>
+    <p>A <code>match</code> statement takes a subject value and compares it against a series of <code>case</code> patterns, top to bottom. The first pattern that matches runs — and unlike a plain equality check, a pattern can also unpack the value and bind pieces of it to new variables at the same time.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>A match statement takes an expression and compares its value to successive patterns given as one or more case blocks. This is superficially similar to a switch statement in C, Java or JavaScript, but it's more similar to pattern matching in languages like Rust or Haskell. Only the first pattern that matches gets executed, and it can also extract components from the value into variables. If no case matches, none of the branches is executed.</p>
+    </div>
+
+    <div class="prop-grid">
+      <div class="prop-card"><strong>First match wins</strong><span>Patterns are checked top to bottom — only the first successful one runs</span></div>
+      <div class="prop-card"><strong>Can destructure</strong><span>A pattern can pull values out of tuples, objects, lists, and dicts</span></div>
+      <div class="prop-card"><strong>No match = no-op</strong><span>If nothing matches and there's no wildcard, none of the branches run</span></div>
+      <div class="prop-card"><strong>_ is the wildcard</strong><span>The underscore pattern matches anything and never fails</span></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 -->
+    <h2 id="literals">Basic Literal Patterns</h2>
+    <p>The simplest form of <code>match</code> just compares the subject against one or more literal values — numbers, strings, or constants.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">def</span> <span class="py-bi">http_error</span><span class="py-punc">(</span><span class="py-var">status</span><span class="py-punc">):</span>
+    <span class="py-kw">match</span> <span class="py-var">status</span><span class="py-punc">:</span>
+        <span class="py-kw">case</span> <span class="py-num">400</span><span class="py-punc">:</span>
+            <span class="py-kw">return</span> <span class="py-str">"Bad request"</span>
+        <span class="py-kw">case</span> <span class="py-num">404</span><span class="py-punc">:</span>
+            <span class="py-kw">return</span> <span class="py-str">"Not found"</span>
+        <span class="py-kw">case</span> <span class="py-num">418</span><span class="py-punc">:</span>
+            <span class="py-kw">return</span> <span class="py-str">"I'm a teapot"</span>
+        <span class="py-kw">case</span> <span class="py-var">_</span><span class="py-punc">:</span>
+            <span class="py-kw">return</span> <span class="py-str">"Something's wrong with the internet"</span></pre>
+    </div>
+
+    <div class="note-box">
+      The final <code>case _:</code> is the wildcard — from the Python docs, the "variable name" <code>_</code> acts as a wildcard and never fails to match. It's the closest thing <code>match</code> has to a <code>default</code> or final <code>else</code> branch.
+    </div>
+
+    <h4>Kiddo extra — matching an alter ego to a hero name</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">def</span> <span class="py-bi">secret_identity</span><span class="py-punc">(</span><span class="py-var">name</span><span class="py-punc">):</span>
+    <span class="py-kw">match</span> <span class="py-var">name</span><span class="py-punc">:</span>
+        <span class="py-kw">case</span> <span class="py-str">"Peter"</span><span class="py-punc">:</span>
+            <span class="py-kw">return</span> <span class="py-str">"Spider-Man"</span>
+        <span class="py-kw">case</span> <span class="py-str">"Harry"</span><span class="py-punc">:</span>
+            <span class="py-kw">return</span> <span class="py-str">"New Goblin"</span>
+        <span class="py-kw">case</span> <span class="py-var">_</span><span class="py-punc">:</span>
+            <span class="py-kw">return</span> <span class="py-str">"Just a regular civilian"</span>
+
+<span class="py-bi">print</span><span class="py-punc">(</span><span class="py-bi">secret_identity</span><span class="py-punc">(</span><span class="py-str">"Peter"</span><span class="py-punc">))</span>
+<span class="py-out"># Spider-Man</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 -->
+    <h2 id="or-patterns">Combining Several Literals with |</h2>
+    <p>Use <code>|</code> ("or") to match any one of several literals in a single <code>case</code>, instead of repeating the same result across multiple blocks.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">case</span> <span class="py-num">401</span> <span class="py-punc">|</span> <span class="py-num">403</span> <span class="py-punc">|</span> <span class="py-num">404</span><span class="py-punc">:</span>
+    <span class="py-kw">return</span> <span class="py-str">"Not allowed"</span></pre>
+    </div>
+
+    <h4>Kiddo extra — grouping allies together</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">match</span> <span class="py-var">name</span><span class="py-punc">:</span>
+    <span class="py-kw">case</span> <span class="py-str">"Harry"</span> <span class="py-punc">|</span> <span class="py-str">"MJ"</span> <span class="py-punc">|</span> <span class="py-str">"Norah"</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"A trusted ally"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-var">_</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Unknown to Peter"</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <h2 id="capturing">Capturing Values from Patterns</h2>
+    <p>Patterns can look like unpacking assignments and bind pieces of the subject to variables. This is what genuinely sets <code>match</code> apart from a simple <code>if/elif</code> chain — a pattern can both check <em>and</em> extract in one step.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-cmt"># point is an (x, y) tuple</span>
+<span class="py-kw">match</span> <span class="py-var">point</span><span class="py-punc">:</span>
+    <span class="py-kw">case</span> <span class="py-punc">(</span><span class="py-num">0</span><span class="py-punc">,</span> <span class="py-num">0</span><span class="py-punc">):</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Origin"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-punc">(</span><span class="py-num">0</span><span class="py-punc">,</span> <span class="py-var">y</span><span class="py-punc">):</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Y=</span><span class="py-var">{y}</span><span class="py-str">"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-punc">(</span><span class="py-var">x</span><span class="py-punc">,</span> <span class="py-num">0</span><span class="py-punc">):</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"X=</span><span class="py-var">{x}</span><span class="py-str">"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-punc">(</span><span class="py-var">x</span><span class="py-punc">,</span> <span class="py-var">y</span><span class="py-punc">):</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"X=</span><span class="py-var">{x}</span><span class="py-str">, Y=</span><span class="py-var">{y}</span><span class="py-str">"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-var">_</span><span class="py-punc">:</span>
+        <span class="py-kw">raise</span> <span class="py-bi">ValueError</span><span class="py-punc">(</span><span class="py-str">"Not a point"</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>Study that one carefully! The first pattern has two literals, and can be thought of as an extension of the literal pattern shown above. The next two patterns combine a literal and a variable, and the variable binds a value from the subject. The fourth pattern captures two values, conceptually similar to the unpacking assignment <code>(x, y) = point</code>.</p>
+    </div>
+
+    <h4>Kiddo extra — reading a (name, power level) pair</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-var">hero</span> <span class="py-punc">= (</span><span class="py-str">"Peter"</span><span class="py-punc">,</span> <span class="py-num">0</span><span class="py-punc">)</span>
+
+<span class="py-kw">match</span> <span class="py-var">hero</span><span class="py-punc">:</span>
+    <span class="py-kw">case</span> <span class="py-punc">(</span><span class="py-str">"Peter"</span><span class="py-punc">,</span> <span class="py-num">100</span><span class="py-punc">):</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Peak Spider-Man"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-punc">(</span><span class="py-var">name</span><span class="py-punc">,</span> <span class="py-num">0</span><span class="py-punc">):</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{name}</span><span class="py-str"> has no powers right now"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-punc">(</span><span class="py-var">name</span><span class="py-punc">,</span> <span class="py-var">level</span><span class="py-punc">):</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{name}</span><span class="py-str"> at power level </span><span class="py-var">{level}</span><span class="py-str">"</span><span class="py-punc">)</span>
+
+<span class="py-out"># Peter has no powers right now</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 -->
+    <h2 id="classes">Matching Class Instances</h2>
+    <p>If your data is structured as objects rather than tuples, <code>match</code> can use the class name like a constructor call and capture attributes straight into variables.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">class</span> <span class="py-bi">Point</span><span class="py-punc">:</span>
+    <span class="py-kw">def</span> <span class="py-bi">__init__</span><span class="py-punc">(</span><span class="py-var">self</span><span class="py-punc">,</span> <span class="py-var">x</span><span class="py-punc">,</span> <span class="py-var">y</span><span class="py-punc">):</span>
+        <span class="py-var">self</span><span class="py-punc">.</span><span class="py-var">x</span> <span class="py-punc">=</span> <span class="py-var">x</span>
+        <span class="py-var">self</span><span class="py-punc">.</span><span class="py-var">y</span> <span class="py-punc">=</span> <span class="py-var">y</span>
+
+<span class="py-kw">def</span> <span class="py-bi">where_is</span><span class="py-punc">(</span><span class="py-var">point</span><span class="py-punc">):</span>
+    <span class="py-kw">match</span> <span class="py-var">point</span><span class="py-punc">:</span>
+        <span class="py-kw">case</span> <span class="py-bi">Point</span><span class="py-punc">(</span><span class="py-kw">x</span><span class="py-punc">=</span><span class="py-num">0</span><span class="py-punc">,</span> <span class="py-kw">y</span><span class="py-punc">=</span><span class="py-num">0</span><span class="py-punc">):</span>
+            <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Origin"</span><span class="py-punc">)</span>
+        <span class="py-kw">case</span> <span class="py-bi">Point</span><span class="py-punc">(</span><span class="py-kw">x</span><span class="py-punc">=</span><span class="py-num">0</span><span class="py-punc">,</span> <span class="py-kw">y</span><span class="py-punc">=</span><span class="py-var">y</span><span class="py-punc">):</span>
+            <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Y=</span><span class="py-var">{y}</span><span class="py-str">"</span><span class="py-punc">)</span>
+        <span class="py-kw">case</span> <span class="py-bi">Point</span><span class="py-punc">(</span><span class="py-kw">x</span><span class="py-punc">=</span><span class="py-var">x</span><span class="py-punc">,</span> <span class="py-kw">y</span><span class="py-punc">=</span><span class="py-num">0</span><span class="py-punc">):</span>
+            <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"X=</span><span class="py-var">{x}</span><span class="py-str">"</span><span class="py-punc">)</span>
+        <span class="py-kw">case</span> <span class="py-bi">Point</span><span class="py-punc">():</span>
+            <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Somewhere else"</span><span class="py-punc">)</span>
+        <span class="py-kw">case</span> <span class="py-var">_</span><span class="py-punc">:</span>
+            <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Not a point"</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <div class="note-box">
+      A recommended way to read patterns, per the Python docs: look at them as an extended form of what you'd put on the left of an assignment, to see which variables get set to what. Only standalone names (like <code>y</code> above) are actually assigned — the keyword names (<code>x=</code>, <code>y=</code>) and the class name (<code>Point</code>) are never assigned to.
+    </div>
+
+    <h4>Kiddo extra — matching a SpiderPerson object</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">class</span> <span class="py-bi">SpiderPerson</span><span class="py-punc">:</span>
+    <span class="py-kw">def</span> <span class="py-bi">__init__</span><span class="py-punc">(</span><span class="py-var">self</span><span class="py-punc">,</span> <span class="py-var">name</span><span class="py-punc">,</span> <span class="py-var">universe</span><span class="py-punc">):</span>
+        <span class="py-var">self</span><span class="py-punc">.</span><span class="py-var">name</span> <span class="py-punc">=</span> <span class="py-var">name</span>
+        <span class="py-var">self</span><span class="py-punc">.</span><span class="py-var">universe</span> <span class="py-punc">=</span> <span class="py-var">universe</span>
+
+<span class="py-kw">def</span> <span class="py-bi">which_spiderverse</span><span class="py-punc">(</span><span class="py-var">hero</span><span class="py-punc">):</span>
+    <span class="py-kw">match</span> <span class="py-var">hero</span><span class="py-punc">:</span>
+        <span class="py-kw">case</span> <span class="py-bi">SpiderPerson</span><span class="py-punc">(</span><span class="py-kw">name</span><span class="py-punc">=</span><span class="py-str">"Peter"</span><span class="py-punc">,</span> <span class="py-kw">universe</span><span class="py-punc">=</span><span class="py-num">616</span><span class="py-punc">):</span>
+            <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Earth-616 Peter Parker"</span><span class="py-punc">)</span>
+        <span class="py-kw">case</span> <span class="py-bi">SpiderPerson</span><span class="py-punc">(</span><span class="py-kw">universe</span><span class="py-punc">=</span><span class="py-num">616</span><span class="py-punc">):</span>
+            <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Someone else from Earth-616"</span><span class="py-punc">)</span>
+        <span class="py-kw">case</span> <span class="py-bi">SpiderPerson</span><span class="py-punc">():</span>
+            <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"A Spider-Person from another universe"</span><span class="py-punc">)</span>
+        <span class="py-kw">case</span> <span class="py-var">_</span><span class="py-punc">:</span>
+            <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Not a Spider-Person at all"</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 -->
+    <h2 id="match-args">__match_args__ &amp; Positional Patterns</h2>
+    <p>Matching everything by keyword (<code>x=</code>, <code>y=</code>) works, but it's a little verbose. Setting <code>__match_args__</code> on a class lets you match those same attributes positionally instead.</p>
+
+    <div class="doc-block">
+      <span class="doc-block-label">From the Python docs</span>
+      <p>You can use positional parameters with some builtin classes that provide an ordering for their attributes (e.g. dataclasses). You can also define a specific position for attributes in patterns by setting the <code>__match_args__</code> special attribute in your classes. If it's set to ("x", "y"), the following patterns are all equivalent (and all bind the y attribute to the var variable): <code>Point(1, var)</code>, <code>Point(1, y=var)</code>, <code>Point(x=1, y=var)</code>, <code>Point(y=var, x=1)</code>.</p>
+    </div>
+
+    <h4>Kiddo extra — positional matching on SpiderPerson</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">class</span> <span class="py-bi">SpiderPerson</span><span class="py-punc">:</span>
+    <span class="py-var">__match_args__</span> <span class="py-punc">= (</span><span class="py-str">'name'</span><span class="py-punc">,</span> <span class="py-str">'universe'</span><span class="py-punc">)</span>
+    <span class="py-kw">def</span> <span class="py-bi">__init__</span><span class="py-punc">(</span><span class="py-var">self</span><span class="py-punc">,</span> <span class="py-var">name</span><span class="py-punc">,</span> <span class="py-var">universe</span><span class="py-punc">):</span>
+        <span class="py-var">self</span><span class="py-punc">.</span><span class="py-var">name</span> <span class="py-punc">=</span> <span class="py-var">name</span>
+        <span class="py-var">self</span><span class="py-punc">.</span><span class="py-var">universe</span> <span class="py-punc">=</span> <span class="py-var">universe</span>
+
+<span class="py-cmt"># These four patterns are all equivalent, thanks to __match_args__:</span>
+<span class="py-cmt">#   SpiderPerson("Peter", world)</span>
+<span class="py-cmt">#   SpiderPerson("Peter", universe=world)</span>
+<span class="py-cmt">#   SpiderPerson(name="Peter", universe=world)</span>
+<span class="py-cmt">#   SpiderPerson(universe=world, name="Peter")</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 -->
+    <h2 id="guards">Guards — Adding an if to a Pattern</h2>
+    <p>A guard is an extra <code>if</code> condition tacked onto a pattern. If the pattern matches but the guard is false, <code>match</code> moves on and tries the next <code>case</code> block instead.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">match</span> <span class="py-var">point</span><span class="py-punc">:</span>
+    <span class="py-kw">case</span> <span class="py-bi">Point</span><span class="py-punc">(</span><span class="py-var">x</span><span class="py-punc">,</span> <span class="py-var">y</span><span class="py-punc">)</span> <span class="py-kw">if</span> <span class="py-var">x</span> <span class="py-punc">==</span> <span class="py-var">y</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Y=X at </span><span class="py-var">{x}</span><span class="py-str">"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-bi">Point</span><span class="py-punc">(</span><span class="py-var">x</span><span class="py-punc">,</span> <span class="py-var">y</span><span class="py-punc">):</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Not on the diagonal"</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <div class="warn-box">
+      <strong>Value capture happens before the guard is checked.</strong> In the example above, <code>x</code> and <code>y</code> are bound from <code>point</code> first, and only then does Python evaluate <code>x == y</code>. If the guard fails, those bindings are discarded and the next <code>case</code> is tried from scratch.
+    </div>
+
+    <h4>Kiddo extra — a guard on universe number</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">match</span> <span class="py-var">hero</span><span class="py-punc">:</span>
+    <span class="py-kw">case</span> <span class="py-bi">SpiderPerson</span><span class="py-punc">(</span><span class="py-var">name</span><span class="py-punc">,</span> <span class="py-var">universe</span><span class="py-punc">)</span> <span class="py-kw">if</span> <span class="py-var">universe</span> <span class="py-punc">&gt;</span> <span class="py-num">1000</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{name}</span><span class="py-str"> is from a far-future universe"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-bi">SpiderPerson</span><span class="py-punc">(</span><span class="py-var">name</span><span class="py-punc">,</span> <span class="py-var">universe</span><span class="py-punc">):</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"</span><span class="py-var">{name}</span><span class="py-str"> is from universe </span><span class="py-var">{universe}</span><span class="py-str">"</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 -->
+    <h2 id="nested">Nested Patterns</h2>
+    <p>Patterns can nest arbitrarily deep — a list pattern can contain class patterns, which can contain their own nested patterns, and so on.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">class</span> <span class="py-bi">Point</span><span class="py-punc">:</span>
+    <span class="py-var">__match_args__</span> <span class="py-punc">= (</span><span class="py-str">'x'</span><span class="py-punc">,</span> <span class="py-str">'y'</span><span class="py-punc">)</span>
+    <span class="py-kw">def</span> <span class="py-bi">__init__</span><span class="py-punc">(</span><span class="py-var">self</span><span class="py-punc">,</span> <span class="py-var">x</span><span class="py-punc">,</span> <span class="py-var">y</span><span class="py-punc">):</span>
+        <span class="py-var">self</span><span class="py-punc">.</span><span class="py-var">x</span> <span class="py-punc">=</span> <span class="py-var">x</span>
+        <span class="py-var">self</span><span class="py-punc">.</span><span class="py-var">y</span> <span class="py-punc">=</span> <span class="py-var">y</span>
+
+<span class="py-kw">match</span> <span class="py-var">points</span><span class="py-punc">:</span>
+    <span class="py-kw">case</span> <span class="py-punc">[]:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"No points"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-punc">[</span><span class="py-bi">Point</span><span class="py-punc">(</span><span class="py-num">0</span><span class="py-punc">,</span> <span class="py-num">0</span><span class="py-punc">)]:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"The origin"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-punc">[</span><span class="py-bi">Point</span><span class="py-punc">(</span><span class="py-var">x</span><span class="py-punc">,</span> <span class="py-var">y</span><span class="py-punc">)]:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Single point </span><span class="py-var">{x}</span><span class="py-str">, </span><span class="py-var">{y}</span><span class="py-str">"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-punc">[</span><span class="py-bi">Point</span><span class="py-punc">(</span><span class="py-num">0</span><span class="py-punc">,</span> <span class="py-var">y1</span><span class="py-punc">),</span> <span class="py-bi">Point</span><span class="py-punc">(</span><span class="py-num">0</span><span class="py-punc">,</span> <span class="py-var">y2</span><span class="py-punc">)]:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">f"Two on the Y axis at </span><span class="py-var">{y1}</span><span class="py-str">, </span><span class="py-var">{y2}</span><span class="py-str">"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-var">_</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Something else"</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <div class="note-box">
+      Subpatterns can also be captured whole using <code>as</code> — from the Python docs, <code>case (Point(x1, y1), Point(x2, y2) as p2):</code> captures the second element of the input as <code>p2</code>, as long as the input is a sequence of exactly two points.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 09 -->
+    <h2 id="sequences">Sequence, Mapping &amp; Other Pattern Features</h2>
+    <p>A handful of extra rules round out how patterns work with sequences, dictionaries, and named constants.</p>
+
+    <table class="param-table">
+      <thead><tr><th>Feature</th><th>What it does</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>Sequence patterns</td><td>Match any sequence (but not strings or iterators) using tuple/list syntax</td><td><code>case [x, y]:</code></td></tr>
+        <tr><td>Extended unpacking</td><td>Capture "the rest" of a sequence, just like unpacking assignments</td><td><code>case [x, y, *rest]:</code></td></tr>
+        <tr><td>Mapping patterns</td><td>Capture specific keys from a dict — extra keys are ignored</td><td><code>case {"name": n, "universe": u}:</code></td></tr>
+        <tr><td>Dict rest capture</td><td>Capture remaining key/value pairs (<code>**_</code> isn't allowed — it'd be redundant)</td><td><code>case {"name": n, **rest}:</code></td></tr>
+        <tr><td>Capture with as</td><td>Bind a whole matched subpattern to a name</td><td><code>case Point() as p:</code></td></tr>
+        <tr><td>Singleton identity</td><td><code>True</code>, <code>False</code>, and <code>None</code> are compared by identity, not equality</td><td><code>case None:</code></td></tr>
+        <tr><td>Named constants</td><td>Use a dotted name so it's treated as a constant, not a new capture variable</td><td><code>case Color.RED:</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Python docs example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">from</span> <span class="py-var">enum</span> <span class="py-kw">import</span> <span class="py-bi">Enum</span>
+<span class="py-kw">class</span> <span class="py-bi">Color</span><span class="py-punc">(</span><span class="py-bi">Enum</span><span class="py-punc">):</span>
+    <span class="py-var">RED</span> <span class="py-punc">=</span> <span class="py-str">'red'</span>
+    <span class="py-var">GREEN</span> <span class="py-punc">=</span> <span class="py-str">'green'</span>
+    <span class="py-var">BLUE</span> <span class="py-punc">=</span> <span class="py-str">'blue'</span>
+
+<span class="py-var">color</span> <span class="py-punc">=</span> <span class="py-bi">Color</span><span class="py-punc">(</span><span class="py-bi">input</span><span class="py-punc">(</span><span class="py-str">"Enter your choice of 'red', 'blue' or 'green': "</span><span class="py-punc">))</span>
+
+<span class="py-kw">match</span> <span class="py-var">color</span><span class="py-punc">:</span>
+    <span class="py-kw">case</span> <span class="py-bi">Color</span><span class="py-punc">.</span><span class="py-var">RED</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"I see red!"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-bi">Color</span><span class="py-punc">.</span><span class="py-var">GREEN</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Grass is green"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-bi">Color</span><span class="py-punc">.</span><span class="py-var">BLUE</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"I'm feeling the blues :("</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <div class="warn-box">
+      <strong>Dotted names matter here.</strong> The Python docs are explicit that named constants must be written as dotted names (like <code>Color.RED</code>) to prevent them from being interpreted as new capture variables. Writing <code>case RED:</code> without the dot would instead create a variable named <code>RED</code> that matches anything — not what you want.
+    </div>
+
+    <h4>Kiddo extra — matching a threat level Enum</h4>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="code-header-left"><div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div><span class="lang-tag">Python</span><span class="code-src">Kiddo example</span></div>
+        <button class="copy-btn">Copy<div class="tooltip">Copied!</div></button>
+      </div>
+      <pre><span class="py-kw">from</span> <span class="py-var">enum</span> <span class="py-kw">import</span> <span class="py-bi">Enum</span>
+<span class="py-kw">class</span> <span class="py-bi">ThreatLevel</span><span class="py-punc">(</span><span class="py-bi">Enum</span><span class="py-punc">):</span>
+    <span class="py-var">LOW</span> <span class="py-punc">=</span> <span class="py-str">"low"</span>
+    <span class="py-var">HIGH</span> <span class="py-punc">=</span> <span class="py-str">"high"</span>
+
+<span class="py-kw">match</span> <span class="py-var">level</span><span class="py-punc">:</span>
+    <span class="py-kw">case</span> <span class="py-bi">ThreatLevel</span><span class="py-punc">.</span><span class="py-var">HIGH</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Suit up — this is a job for Spider-Man"</span><span class="py-punc">)</span>
+    <span class="py-kw">case</span> <span class="py-bi">ThreatLevel</span><span class="py-punc">.</span><span class="py-var">LOW</span><span class="py-punc">:</span>
+        <span class="py-bi">print</span><span class="py-punc">(</span><span class="py-str">"Peter can just go to class"</span><span class="py-punc">)</span></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 10 -->
+    <h2 id="mistakes">Common match Statement Mistakes</h2>
+    <div class="mistake-list">
+      <div class="mistake-item"><div class="mi-body"><strong>Forgetting the wildcard case</strong><p>Without a final <code>case _:</code>, if nothing matches, none of the branches run at all — silently. Always add a wildcard when you need a guaranteed fallback.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Writing a named constant without a dot</strong><p><code>case RED:</code> (no dot) creates a brand-new capture variable named <code>RED</code> that matches anything — it does not compare against an existing constant. Use a dotted name like <code>case Color.RED:</code> instead.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Expecting a sequence pattern to match a string</strong><p>Tuple and list patterns match arbitrary sequences, but the Python docs explicitly carve out an exception: they don't match iterators or strings, even though a string is technically iterable.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Putting a broad pattern before a specific one</strong><p><code>match</code> checks patterns top to bottom and stops at the first match. A general pattern like <code>Point()</code> placed above a more specific one like <code>Point(x=0, y=0)</code> will catch everything first, and the specific case never runs.</p></div></div>
+      <div class="mistake-item"><div class="mi-body"><strong>Using **_ in a mapping pattern</strong><p>Capturing the "rest" of a dict with <code>**rest</code> is fine, but <code>**_</code> specifically is disallowed — since you're discarding it anyway, it would be redundant and Python doesn't permit it.</p></div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 11 -->
+    <h2 id="interview">match Statement Interview Questions and Answers</h2>
+    <div class="iq-list">
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q1</span> How is Python's match statement different from a switch statement in other languages?</div><div class="iq-a">A <code>switch</code> statement typically only compares a value against literal constants. Python's <code>match</code> can do structural pattern matching — it can destructure tuples, class instances, lists, and dicts, binding pieces of the matched value into new variables at the same time it checks the pattern.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q2</span> What does the underscore (_) mean in a case pattern?</div><div class="iq-a">It's a wildcard pattern that matches anything and never fails. It's commonly used as the final <code>case _:</code> to provide a fallback, similar to a <code>default</code> branch in a switch statement.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q3</span> What is a guard clause in a match statement?</div><div class="iq-a">An extra <code>if</code> condition attached to a <code>case</code> pattern. Value capture happens first — if the pattern matches structurally but the guard evaluates to <code>False</code>, <code>match</code> moves on to try the next <code>case</code> block instead of running this one.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q4</span> What does __match_args__ do?</div><div class="iq-a">It's a special class attribute that defines which attributes can be matched positionally instead of by keyword. Setting <code>__match_args__ = ("x", "y")</code> lets you write <code>Point(1, 2)</code> instead of always having to write <code>Point(x=1, y=2)</code>.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q5</span> Why must named constants in patterns use dotted names?</div><div class="iq-a">A bare name in a pattern (like <code>RED</code>) is treated as a new capture variable that matches anything, not a comparison against an existing value. Writing it as a dotted name (like <code>Color.RED</code>) tells Python to treat it as a named constant to compare against, instead of creating a variable.</div></div>
+      <div class="iq-item"><div class="iq-q"><span class="iq-badge">Q6</span> Do sequence patterns match strings?</div><div class="iq-a">No. Even though a string is technically an iterable sequence of characters, the Python docs specifically exclude strings (and iterators in general) from matching tuple and list patterns — they only match arbitrary sequences like lists and tuples.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 12 -->
+    <h2 id="project">Mini Project — Build a Spider-Verse Threat Dispatcher</h2>
+    <p>A small project that uses <code>match</code> the way it's meant to be used — routing different shapes of incoming data to different handling logic, instead of a long chain of <code>if/elif</code> checks.</p>
+
+    <div class="checklist">
+      <div class="check-item"><div><strong>Model an incident report</strong><p>Represent each incoming alert as either a tuple <code>(location, threat_level)</code> or a small <code>Incident</code> class with <code>__match_args__</code> set for positional matching.</p></div></div>
+      <div class="check-item"><div><strong>Match on literal threat levels first</strong><p>Use literal patterns (or combined <code>|</code> patterns) to route the most common, well-known threat levels straight to a response.</p></div></div>
+      <div class="check-item"><div><strong>Add a guard for special cases</strong><p>Use an <code>if</code> guard to catch a specific combination, like a high threat level in a specific location — say, downtown Queens — that needs Spider-Man dispatched immediately.</p></div></div>
+      <div class="check-item"><div><strong>Fall back with a wildcard</strong><p>Always end with <code>case _:</code> so an unrecognized incident shape still gets logged instead of silently doing nothing.</p></div></div>
+    </div>
+
+    <div class="callout">
+      <strong>Extend it:</strong> swap the tuple for a list of <code>Incident</code> objects and add a nested sequence pattern like <code>case [Incident(level="high"), *rest]:</code> to react specifically to whichever incident comes in first.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 13 -->
+    <h2 id="faq">match Statement FAQ</h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is a match statement in Python? <span class="faq-icon">+</span></button><div class="faq-a">A control-flow statement that compares a subject value against a series of patterns written as <code>case</code> blocks, running the first one that matches. Beyond simple literal comparisons, it can also destructure tuples, objects, lists, and dictionaries.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Is Python's match statement the same as switch in other languages? <span class="faq-icon">+</span></button><div class="faq-a">Not exactly. It looks superficially similar, but Python's <code>match</code> is closer to structural pattern matching found in languages like Rust or Haskell — it can extract components from the matched value into variables, which a typical <code>switch</code> statement cannot do.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What happens if no case pattern matches? <span class="faq-icon">+</span></button><div class="faq-a">None of the branches run — the <code>match</code> statement simply falls through and execution continues after it. If you need a guaranteed fallback, add a wildcard <code>case _:</code> as the final pattern.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What does the underscore (_) pattern do? <span class="faq-icon">+</span></button><div class="faq-a">It's a wildcard that matches any value and never fails, without binding it to a variable. It's typically used as the last <code>case</code> to catch anything not handled by earlier patterns.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can you match against a class instance in Python? <span class="faq-icon">+</span></button><div class="faq-a">Yes. Write the class name followed by an argument list, similar to a constructor call — like <code>case Point(x=0, y=0):</code>. This checks that the value is an instance of that class and can capture its attributes into variables at the same time.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is a guard clause in a match case? <span class="faq-icon">+</span></button><div class="faq-a">An additional <code>if</code> condition added after a pattern, like <code>case Point(x, y) if x == y:</code>. The pattern must match structurally first, and then the guard must also evaluate to true, or <code>match</code> moves on to the next case.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What is __match_args__ used for? <span class="faq-icon">+</span></button><div class="faq-a">It lets a class define which attributes can be matched positionally rather than always requiring keyword syntax. Setting <code>__match_args__ = ("x", "y")</code> means <code>Point(1, 2)</code> and <code>Point(x=1, y=2)</code> behave identically in a pattern.</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Do True, False, and None get matched specially in patterns? <span class="faq-icon">+</span></button><div class="faq-a">Yes — unlike most literals, which are compared by equality, the singletons <code>True</code>, <code>False</code>, and <code>None</code> are compared by identity in a pattern, consistent with how they're normally compared elsewhere in Python.</div></div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="callout">
+      <strong>Related →</strong> <code>match</code> often replaces a long chain of comparisons — see <a href="../python/if_statements.html">If Statements</a> for the classic <code>if</code>/<code>elif</code>/<code>else</code> approach it's frequently compared against.
+    </div>
+
+    <div class="author-strip">
+      <div class="author-avatar">K</div>
+      <div class="author-info"><strong>Kiddo Documentation Team</strong><span>We simplify official documentation with beginner-friendly explanations, examples, interview questions, and practical insights.</span></div>
+    </div>
+
+    <div class="callout">
+      <strong>More Python topics →</strong><br><br>
+      <a href="../python/if_statements.html">If Statements</a> ·
+      <a href="../python/for_loop.html">For Loop</a> ·
+      <a href="../python/while_loop.html">While Loop</a> ·
+      <a href="../python/break-continue-pass.html">break, continue &amp; pass</a> ·
+      <a href="../python/functions.html">Functions (4.8)</a> ·
+      <a href="../python/list.html">Lists</a> ·
+      <a href="../python/dictionary.html">Dictionaries (5.5)</a> ·
+      <a href="../python/tuples.html">Tuples (5.3)</a> ·
+      <a href="../python/sets.html">Sets (5.4)</a> ·
+      <a href="../python/list-comp.html">List Comprehensions</a> ·
+      <a href="../python/nested-list-comp.html">Nested List Comprehensions</a> ·
+      <a href="../python/looping-techniques.html">Looping Techniques</a> ·
+      <a href="../python/keyword-arguments.html">Keyword Arguments</a> ·
+      <a href="../python/special-parameters.html">Special Parameters</a> ·
+      <a href="../python/strings.html">String Methods</a> ·
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2026 Kiddo. Built with ♥ for curious minds.</p>
+    <div class="footer-links"><a href="../info/privacy.html">Privacy</a><a href="../info/terms.html">Terms</a><a href="../info/contact.html">Contact</a></div>
+  </div>
+</footer>
+
+<script>
+  const desktopToggle = document.getElementById('desktopToggleTheme');
+  const mobileToggle  = document.getElementById('mobileToggleTheme');
+  const applyTheme = (dark) => {
+    document.body.classList.toggle('dark', dark);
+    const icon = dark ? '☀️' : '🌙';
+    if (desktopToggle) desktopToggle.textContent = icon;
+    if (mobileToggle)  mobileToggle.textContent  = icon;
+  };
+  applyTheme(localStorage.getItem('theme') === 'dark');
+  const toggleTheme = () => {
+    const isDark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  };
+  if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+  if (mobileToggle)  mobileToggle.addEventListener('click', toggleTheme);
+
+  const hamburger    = document.getElementById('hamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  hamburger?.addEventListener('click', (e) => { e.stopPropagation(); menuDropdown.classList.toggle('open'); });
+  document.addEventListener('click', () => menuDropdown?.classList.remove('open'));
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.querySelectorAll('.code-container').forEach(container => {
+    const btn = container.querySelector('.copy-btn');
+    const tip = container.querySelector('.tooltip');
+    const pre = container.querySelector('pre');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(pre.innerText.trim()).then(() => {
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 2000);
+      });
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans    = btn.nextElementSibling;
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+</script>
+</body>
+</html>
