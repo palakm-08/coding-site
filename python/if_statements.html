@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="../assests/icon.png" />
 
-<meta name="description" content="Learn Python if statements (Python Docs 4.1) with beginner-friendly explanations. Understand if, elif, else, nested if statements, comparison and logical operators, common mistakes, interview questions, and practical examples." />
+<meta name="description" content="Learn Python if statements (Python Docs 4.1) with beginner-friendly examples. Understand if, elif, else, nested conditions, comparison and logical operators, common mistakes, interview questions, and practical use cases." />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Python if Statements Explained (Python Docs 4.1) | Kiddo" />
   <meta property="og:description" content="Python if, elif, and else explained for beginners. Syntax, comparison operators, nested conditions, and real examples from the official Python docs." />
@@ -13,7 +13,7 @@
   <meta property="og:site_name" content="Kiddo" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://kiddoedu.org/python/if-statements.html" />
-<title>Python if Statements Explained (Python Docs 4.1) | if, elif, else, Nested if</title>
+<title>Python if Statement Explained (Python Docs 4.1) | if, elif, else &amp; Examples</title>
 
   <script type="application/ld+json">
   {
@@ -236,14 +236,69 @@ aside ul .submenu li a .dot{
     .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
     .footer-links a:hover { color: var(--accent); }
 
+    /* Mobile "Next in Python Topics" mini-nav — replaces the full sidebar on small screens */
+    .mobile-topics-nav { display: none; }
+    .mobile-topics-nav summary { list-style: none; cursor: pointer; }
+    .mobile-topics-nav summary::-webkit-details-marker { display: none; }
+
     @media (max-width: 768px) {
       header { display: none; }
       .mobile-header { display: flex; }
       .page-wrap { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
-      aside { position: static; }
+      aside { display: none; }
       .toc-grid { grid-template-columns: 1fr; }
       footer { padding: 20px; }
       .footer-container { flex-direction: column; align-items: flex-start; }
+
+      .mobile-topics-nav {
+        display: block;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow);
+        margin-bottom: 24px;
+        overflow: hidden;
+      }
+      .mobile-topics-nav summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 14px 16px;
+        font-family: 'Syne', sans-serif;
+        font-weight: 700;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+        color: var(--text);
+      }
+      .mobile-topics-nav summary .mt-caret {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        transition: transform 0.2s ease;
+      }
+      .mobile-topics-nav[open] summary .mt-caret { transform: rotate(180deg); }
+      .mobile-topics-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 0 10px 10px;
+        border-top: 1px solid var(--border);
+      }
+      .mobile-topics-list li a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 10px;
+        margin-top: 6px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: none;
+      }
+      .mobile-topics-list li a:hover { background: var(--surface2); color: var(--text); }
+      .mobile-topics-list li a .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.5; flex-shrink: 0; }
     }
     @media (max-width: 480px) { main h1 { font-size: 1.6rem; } }
   </style>
@@ -342,6 +397,17 @@ aside ul .submenu li a .dot{
       <a href="../python/py-intro.html">Python</a><span>›</span>
       4.1 if Statements
     </div>
+
+    <details class="mobile-topics-nav">
+      <summary>Next in Python Topics <span class="mt-caret">▾</span></summary>
+      <ul class="mobile-topics-list">
+        <li><a href="../python/for_loop.html"><span class="dot"></span>For Loop</a></li>
+        <li><a href="../python/break-continue-pass.html"><span class="dot"></span>break, continue &amp; pass</a></li>
+        <li><a href="../python/match.html"><span class="dot"></span>match Statement</a></li>
+        <li><a href="../python/functions.html"><span class="dot"></span>Functions</a></li>
+        <li><a href="../python/list.html"><span class="dot"></span>Lists</a></li>
+      </ul>
+    </details>
 
     <h1>Python if Statements Explained (Python Docs 4.1) | if, elif, else & Beginner Guide</h1>
 
@@ -481,7 +547,7 @@ By the end of this guide, you'll know how Python evaluates conditions, when to u
     </table>
 
     <div class="callout">
-      <strong>== vs is:</strong> use <code>==</code> to compare values, use <code>is</code> to check identity. <code>x == None</code> works but <code>x is None</code> is the correct Python idiom — <code>None</code> is a singleton, so identity comparison is more accurate and faster.
+      <strong>== vs is:</strong> use <code>==</code> to compare values and <code>is</code> to check object identity. For <code>None</code>, the recommended Python idiom is <code>x is None</code> because <code>None</code> is a singleton.
     </div>
 
     <div class="section-divider"></div>
@@ -588,7 +654,7 @@ By the end of this guide, you'll know how Python evaluates conditions, when to u
 <h4>Stretch goals</h4>
 <ul>
   <li>Reject the input and ask again if power level isn't between 1 and 100</li>
-  <li>Add a fifth tier for power level exactly 100 → "Reality-bending — proceed with caution"</li>
+  <li>Add a fifth tier for power level exactly 100 → "Reality-bending — proceed with caution" and place this condition before the 90+ check</li>
   <li>Use chained comparison (<code>60 <= power < 90</code>) instead of two separate conditions</li>
 </ul>
 
@@ -634,7 +700,7 @@ By the end of this guide, you'll know how Python evaluates conditions, when to u
   </div>
   <div class="iq-item">
     <div class="iq-q"><span class="iq-badge">Q2</span>What is the difference between == and is?</div>
-    <div class="iq-a"><code>==</code> compares values — it checks whether two objects have the same content. <code>is</code> checks identity — whether two variables point to the exact same object in memory. <code>a = [1, 2]; b = [1, 2]; a == b</code> is <code>True</code>, but <code>a is b</code> is <code>False</code> because they're two separate list objects. Use <code>is</code> only for <code>None</code>, <code>True</code>, and <code>False</code> — for everything else, use <code>==</code>.</div>
+    <div class="iq-a"><code>==</code> compares values — it checks whether two objects have the same content. <code>is</code> checks identity — whether two variables point to the exact same object in memory. <code>a = [1, 2]; b = [1, 2]; a == b</code> is <code>True</code>, but <code>a is b</code> is <code>False</code> because they're two separate list objects. Use <code>is</code> when you specifically need to test object identity. In everyday Python code, the most common use is checking for <code>None</code>, as in <code>x is None</code>. For value comparisons, use <code>==</code>.</div>
   </div>
   <div class="iq-item">
     <div class="iq-q"><span class="iq-badge">Q3</span>Can a Python if statement have multiple else blocks?</div>
